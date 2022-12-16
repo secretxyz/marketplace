@@ -20,7 +20,7 @@ body.cs-dark {
   }
 
   .cs-profile_box .cs-user_profile_link button,
-  .cs-accordians .cs-accordian_toggle {
+  .cs-accordions .cs-accordion_toggle {
     color: rgba($white, 0.8);
   }
 
@@ -28,7 +28,7 @@ body.cs-dark {
   .cs-isotop_filter.cs-style1,
   .cs-site_header,
   .cs-primary_color,
-  .cs-card.cs-style3 .cs-catd_meta,
+  .cs-card.cs-style3 .cs-card_meta_info,
   .cs-card.cs-style2 .cs-card_btn,
   .cs-card.cs-style1 .cs-card_title,
   .cs-search_input,
@@ -44,7 +44,7 @@ body.cs-dark {
   .cs-btn.cs-style2 svg,
   .cs-delete_btn,
   .cs-large_radio_in,
-  .cs-accordians .cs-accordian-body b,
+  .cs-accordions .cs-accordion-body b,
   .cs-nav .cs-nav_list .cs-mega-wrapper > li > a,
   .cs-bid_card b,
   .cs-bid_card .cs-bid_form_head,
@@ -95,7 +95,8 @@ body.cs-dark {
   .cs-large_radio_in,
   .cs-contact_card,
   .cs-contact_box,
-  .cs-modal_container_in {
+  .cs-modal_container_in,
+  .cs-collection_info_head {
     background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.2) 0%, rgba(63, 94, 251, 0.2) 100%);
   }
 

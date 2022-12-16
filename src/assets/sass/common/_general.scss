@@ -41,9 +41,9 @@
 }
 
 .cs-bg {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
 .cs-mp0 {
@@ -566,11 +566,11 @@
 }
 
 .cs-page_head {
-  padding: 70px 0 75px;
+  padding: 20px 0 20px;
   position: relative;
 
   .cs-page_title {
-    font-size: 58px;
+    font-size: 48px;
     margin-bottom: 5px;
   }
 
@@ -592,6 +592,10 @@
     bottom: 0;
     background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
   }
+}
+
+.cs-resource_page_head {
+  padding: 40px 0 40px !important;
 }
 
 .cs-contact_card_wrap {
@@ -884,7 +888,7 @@
 }
 
 .cs-filter_sidebar {
-  padding-top: 45px;
+  padding-top: 12px;
   background: $white;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
@@ -900,8 +904,19 @@
   min-height: 38px;
 }
 
+.cs-filter_toggle_body {
+  .cs-filter_subwidget {
+    padding: 12px 0 12px 12px;
+  }
+
+  .form-check {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .cs-filter_widget {
-  padding: 20px;
+  padding: 12px 20px;
 
   &:not(:last-child) {
     border: 0px solid;
@@ -937,6 +952,15 @@
     color: $accent;
   }
 
+  span {
+    display: flex;
+
+    .cs-filter_toggle_btn_subtitle {
+      margin-left: 6px;
+      font-weight: normal;
+    }
+  }
+
   .cs-arrow_icon {
     transition: inherit;
     transform: rotate(180deg);
@@ -950,7 +974,7 @@
 }
 
 .cs-filter_toggle_body {
-  padding-top: 22px;
+  padding-top: 12px;
 }
 
 .form-check-input:checked {
@@ -1024,6 +1048,14 @@
 
 .cs-search_widget {
   padding: 0 20px;
+
+  .cs-search {
+    width: 100%;
+  }
+}
+
+.cs-search_collection_widget {
+  padding: 0;
 
   .cs-search {
     width: 100%;
@@ -1243,6 +1275,40 @@
   }
 }
 
+.cs-collection_card {
+  position: relative;
+}
+
+.cs-collection_info_other {
+  position: absolute;
+  z-index: 2;
+  right: 25px;
+  top: 135px;
+  background-color: #080326;
+  border-radius: 10px;
+
+  .cs-collection_info_head {
+    padding: 4px 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    background-color: $white;
+    box-shadow: 4px 4px 10px rgba($black, 0.05);
+    border-radius: 10px;
+    line-height: 1.5em;
+  }
+
+  .cs-btn {
+    margin: 6px;
+    padding: 8px 12px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .cs-collection_img img {
   width: 100%;
   border-radius: 15px;
@@ -1287,6 +1353,7 @@
   .cs-btn.cs-style1 {
     border-radius: 5px;
     padding: 8px 12px;
+    margin-right: 4px;
   }
 }
 
@@ -1323,7 +1390,7 @@
   display: flex;
   justify-content: space-between;
   border-radius: inherit;
-  padding: 12px 20px 12px 0;
+  padding: 12px 12px 12px 0;
 
   li {
     flex: 1;
@@ -1730,7 +1797,7 @@
   }
 }
 
-.cs-prifile_wrap {
+.cs-profile_wrap {
   display: flex;
 }
 
@@ -2355,7 +2422,7 @@
     padding-left: 0px;
   }
 
-  .cs-prifile_wrap {
+  .cs-profile_wrap {
     flex-direction: column;
   }
 

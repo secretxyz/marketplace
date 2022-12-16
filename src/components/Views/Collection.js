@@ -1,260 +1,460 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect } from "react-router-dom";
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col } from 'reactstrap';
+import NftCard from './Card/NftCard';
 
-const db = {
-    // "thebearablebulls": {
-    //     name: "The Bearable Bulls",
-    //     description: "This is the Genesis NFT for Club XRPL NFTs and unlocks the most perks. Hand illustrated and randomly generated from over 200+ traits. From clean professional timid bulls, to extremely bullish and goofy, each randomly generated bull is unique and has its own personality. Only 10,000 Bearable Bull NFTs will be available, with 90% being held by holders already.",
-    //     supply: "-",
-    //     owners: "-",
-    //     floor_price: "-",
-    //     volume: "-",
-    //     thumbnail_image: "img/others/top_collection01.jpg",
-    //     cover_image: "img/bg/sample/bulls.png",
-    // },
-    "thebearableguys": {
-        name: "Bearableguy Club",
-        description: "Bearableguy Club #1 is the pre mint of our Bearableguy Club collection, containing 589 Unique Digital Art NFTs. Visit our website for more information.",
-        supply: "589",
-        owners: "239",
-        floor_price: 79.39,
-        volume: "23.5k",
-        thumbnail_image: "img/others/top_collection02.jpg",
-        cover_image: "img/bg/sample/bearableguys.png",
-        ranking_json1: "rarity/rarity1.json",
-        ranking_json2: "rarity/rarity2.json",
-		website: "https://bearableguy.club/",
-		twitter: "https://twitter.com/BearableguyClub",
-		discord: "https://discord.gg/clubxrpl"
+const NFTS = [
+    {
+        id: "0",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
     },
-    // "therichducks": {
-    //     name: "The Rich Ducks Crypto Club",
-    //     description: "A collection of 10,000 Rich Ducks who ignore the fud, and stay stuffing those bags! Over 200 traits, and various forms of bling make each duck unique! Collection curated in partnership with youtuber and musician XRPBagman. The Rich Ducks are a free mint triggered by holding a Bearable Bull NFT. Any remaining unclaimed supply will be available to the public via sale. Richest Ducks will have its own future utility, events, and future branding led by the Moon Commander XRP Bags after the public minting is complete.",
-    //     supply: "-",
-    //     owners: "-",
-    //     floor_price: "-",
-    //     volume: "-",
-    //     thumbnail_image: "img/others/top_collection06.jpg",
-    //     cover_image: "img/bg/sample/ducks.png",
-    // },
-    // "clubxbaes": {
-    //     name: "Club X Baes",
-    //     description: "The xBAE collection is the 3rd generative collection from Club X. Only 6900 Baes will be available. 40+ legendary characters. Core set randomly generated from over 150 unique traits. Good Baes, Bad Baes, Humans, Cyborgs, Aliens, there's a Bae for everyone.",
-    //     supply: "-",
-    //     owners: "-",
-    //     floor_price: "-",
-    //     volume: "-",
-    //     thumbnail_image: "img/others/top_collection03.jpg",
-    //     cover_image: "img/bg/sample/default.png",
-    // },
-    // "phoenixeggs": {
-    //     name: "Phoenix Eggs",
-    //     description: "Stunning procedurally generative 3d eggs. Created from several materials, patterns, and bases with each individual egg having its own identity. Phoenix Eggs aim to be a community and utility driven exploration on the XRPL.",
-    //     supply: "-",
-    //     owners: "-",
-    //     floor_price: "-",
-    //     volume: "-",
-    //     thumbnail_image: "img/others/top_collection04.jpg",
-    //     cover_image: "img/bg/sample/eggs.png",
-    // },
-    // "babyaperocketbrigade": {
-    //     name: "Baby Ape Rocket Brigade",
-    //     description: "More than a community, The Rocket Brigade aims to be a web3 universe. Baby Apes will exist in limited quantity on different blockchains featuring unique traits to each network. Each new adopted network represents a new planet in the universe.",
-    //     supply: "-",
-    //     owners: "-",
-    //     floor_price: "-",
-    //     volume: "-",
-    //     thumbnail_image: "img/others/top_collection05.jpg",
-    //     cover_image: "img/bg/sample/apes1.png",
-    // }
-}
+    {
+        id: "1",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "2",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "3",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "4",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "5",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "6",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "7",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "8",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "9",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "10",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "11",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "12",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "13",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "14",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    },
+    {
+        id: "15",
+        likes: "64",
+        image_url: "img/nfts/img9.png",
+        name: "BearableGuy #590",
+        bid_price: "390 XRP",
+        owner: {
+            name: "gallant j.",
+            picture_url: "img/avatar/avatar_14.png"
+        },
+    }
+];
+
+const ATTRIBUTES = [
+    {
+        trait_type: "Background",
+        values: [
+            { value: "Red", count: 3 },
+            { value: "Blue", count: 5 },
+            { value: "Yellow", count: 6 },
+            { value: "Green", count: 2 },
+        ]
+    },
+    {
+        trait_type: "Body",
+        values: [
+            { value: "Alberta", count: 3 },
+            { value: "Brown", count: 5 },
+            { value: "Grizzly", count: 6 },
+            { value: "Panda", count: 2 },
+        ]
+    }
+]
+
 class Collection extends Component {
     state = {
-        data: {}
+        nfts: NFTS,
+        attributes: ATTRIBUTES,
     }
 
     componentDidMount() {
-        const { match } = this.props;
-        const collection = match.params.collection;
-        this.setState({
-            data: db[collection]
-        })        
-    }
 
-    clickedFilter = e => {
-        e.preventDefault()
-        $(e.target).toggleClass('active');
-        $(e.target).parent().toggleClass('active');
     }
 
     render() {
-        const { data } = this.state;
-        if (data == null) {
-            return (
-                <Redirect to="/" />
-            );
-        }
+        let { nfts, attributes } = this.state;
         return (
             <ContentWrapper>
-                <section className="collection-breadcrumb-area">
-                    <div className="right-side">
-                    <ul className="collection-social">
-                        {data.twitter?<li>
-                            <a href={data.website} target="_blank">
-                                <i className="fab fi-sr-globe"></i>
-                            </a>
-                        </li>:<></>}
-                        {data.twitter?<li>
-                            <a href={data.twitter} target="_blank">
-                                <i className="fab fa-twitter"></i>
-                            </a>
-                        </li>:<></>}
-                        {data.discord?<li>
-                            <a href={data.discord} target="_blank">
-                                <i className="fab fa-discord"></i>
-                            </a>
-                        </li>:<></>}
-                    </ul>
-                    </div>
-                    <div className="cover" style={{ backgroundImage: `url(${data.cover_image})` }} />
-                    <div className="thumbnail" style={{ backgroundImage: `url(${data.thumbnail_image})` }} />
-                </section>
-                <div className="collection-metadata">
-                    <h3 className="title">{ data.name }</h3>
-                    <div className="summary row">
-                        <div className="summary-item col-lg-3 col-6">
-                            <h5 className="title">Items</h5>
-                            <p>{ data.supply }</p>
-                        </div>
-                        <div className="summary-item col-lg-3 col-6">
-                            <h5 className="title">Owners</h5>
-                            <p>{ data.owners }</p>
-                        </div>
-                        <div className="summary-item col-lg-3 col-6">
-                            <h5 className="title">Floor Price</h5>
-                            <p>${ data.floor_price } <span>USD</span></p>
-                        </div>
-                        <div className="summary-item col-lg-3 col-6">
-                            <h5 className="title">Trading Volume</h5>
-                            <p>${ data.volume } <span>USD</span></p>
-                        </div>
-                    </div>
-                    <div className="collection-description">
-                        <p>{ data.description }</p>
-                    </div>
-                </div>
-
-                {/* <!-- collections Section Start --> */}
-                <div className="collections-body-section pb-140">
+                <div className="cs-height_35 cs-height_lg_30"></div>
+                <div className="cs-bg" style={{ background: `url("img/page_head_bg.svg")` }}>
+                    <div className="cs-height_100 cs-height_lg_70"></div>
                     <div className="container">
-                        <div className="collections-body-inner">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-4">
-                                    <div className="collections-body-left">
-                                        <form>
-                                            <div className="collections-price-filter">
-                                                <select name="PriceFilter" defaultValue="LowHigh">
-                                                    <option value="LowHigh" >Rank: Low to High</option>
-                                                    <option value="HighLow">Rank: High to Low</option>
-                                                    {/* <option value="recentlyListed">Recently Listed</option>
-                                                    <option value="Favorited">Most Favorited</option>
-                                                    <option value="Favorited">Oldest</option> */}
-                                                </select>
-                                            </div>
-                                            {/* <div className="collections-filter-checkbox-collaps">
-                                                <div className="collapsible">
-                                                    <button type="button" onClick={ this.clickedFilter }>Background</button>
-                                                    <div className="content">
-                                                        <div className="collections-filter-checkbox">
-                                                            <label className="checkboxContainer">Blue <span>(23)</span>
-                                                                <input type="checkbox"/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        
-                                                        <div className="collections-filter-checkbox">
-                                                            <label className="checkboxContainer">Green <span>(13)</span>
-                                                                <input type="checkbox"/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        
-                                                        <div className="collections-filter-checkbox">
-                                                            <label className="checkboxContainer">Pink <span>(18)</span>
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        
-                                                        <div className="collections-filter-checkbox">
-                                                            <label className="checkboxContainer">Red <span>(24)</span>
-                                                                <input type="checkbox"/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        
-                                                        <div className="collections-filter-checkbox">
-                                                            <label className="checkboxContainer">Rainbow <span>(8)</span>
-                                                                <input type="checkbox"/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        
-                                                        <div className="collections-filter-checkbox">
-                                                            <label className="checkboxContainer">Yellow <span>(288)</span>
-                                                                <input type="checkbox"/>
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> */}
-                                        </form>
+                        <div className="cs-collection_card">
+                            <div className="cs-collection_img">
+                                <div className="cs-collection_info_other">
+                                    <div className="cs-collection_info_head">
+                                        <a className="cs-style1 cs-btn" href="#">
+                                            <span><i className="fas fa-redo fa-fw"></i></span>
+                                        </a>
+                                        {/* <a className="cs-style1 cs-btn" href="#">
+                                            <span><i className="fas fa-star fa-fw"></i></span>
+                                        </a> */}
+                                        <a className="cs-style1 cs-btn" href="#">
+                                            <span><i className="fas fa-share fa-fw"></i></span>
+                                        </a>
+                                        <a className="cs-style1 cs-btn" href="#">
+                                            <span><i className="fas fa-flag fa-fw"></i></span>
+                                        </a>
                                     </div>
                                 </div>
-                                <div className="col-lg-9 col-md-8">
-                                    <div className="collections-body-right">
-                                        <div className="row">
-                                            {
-                                                [...Array(589)].map((e, i) =>{
-                                                    return (
-                                                        <div key={i} className="col-lg-3 col-sm-6">
-                                                            <div className="collection-item">
-                                                                <div className="collection-item-thumb">
-                                                                    <img src={"rarity/nft/"+(i+1)+".png"} alt=""/>
-                                                                </div>
-                                                                <div className="collection-item-content">
-                                                                    <h5 className="title">
-                                                                        <a>#{i+1}</a> 
-                                                                        <span className="price">Rank {i+1}</span>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </div>                             
-                                                    );
-                                                })
-                                            }                                                        
+                                <img src="img/collections/collection_bg1.png" alt="Collection Details" />
+                            </div>
+                            <div className="cs-collection_bottom">
+                                <div className="cs-collection_avatar"><img src="img/collections/collection1.png" alt="Avatar" /></div>
+                                <div className="cs-collection_info">
+                                    <div className="cs-collection_info_in cs-white_bg">
+                                        <div className="cs-collection_info_left">
+                                            <h2 className="cs-collection_avatar_name">BearableGuyClub Loadstar II</h2>
+                                            <div className="cs-collection_user">@bearableguyclub <span>Created</span></div>
+                                            <a className="cs-btn cs-style1" href="#"><span><i className="fa fa-globe fa-fw"></i></span></a>
+                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-discord fa-fw"></i></span></a>
+                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-twitter fa-fw"></i></span></a>
+                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-youtube fa-fw"></i></span></a>
+                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-instagram fa-fw"></i></span></a>
+                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-reddit fa-fw"></i></span></a>
                                         </div>
-                                        {/* <div className="gamfi-navigation">
-                                            <ul>
-                                                <li><a href="collection"><span className="fas fa-angle-left"></span></a></li>
-                                                <li><a href="collection">1</a></li>
-                                                <li><a className="active" href="collection">2</a></li>
-                                                <li><a href="collection">3</a></li>
-                                                <li><a href="collection">4</a></li>
-                                                <li><a href="collection"><span className="fas fa-angle-right"></span></a></li>
-                                            </ul>
-                                        </div> */}
+                                        <div className="cs-collection_right">
+                                            <div className="cs-collection_list_wrap">
+                                                <ul className="cs-collection_list cs-white_bg cs-mp0">
+                                                    <li>
+                                                        <div className="cs-collection_list_title">Collection of</div>
+                                                        <div className="cs-collection_list_number">589</div>
+                                                    </li>
+                                                    <li>
+                                                        <div className="cs-collection_list_title">Owned by</div>
+                                                        <div className="cs-collection_list_number">312</div>
+                                                    </li>
+                                                    <li>
+                                                        <div className="cs-collection_list_title">Floor Price</div>
+                                                        <div className="cs-collection_list_number">392 XRP</div>
+                                                    </li>
+                                                    <li>
+                                                        <div className="cs-collection_list_title">Total Sales</div>
+                                                        <div className="cs-collection_list_number">59.6K XRP</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>        
-                {/* <!-- collections Section End --> */}
-
+                </div>
+                <div className="cs-height_30 cs-height_lg_20"></div>
+                <div className="container">
+                    <div className="cs-sidebar_frame cs-style1">
+                        <div className="cs-sidebar_frame_left">
+                            <div className="cs-filter_sidebar">
+                                <div className="cs-filter_widget">
+                                    <h2 className="cs-filter_toggle_btn">
+                                        Status
+                                        <span className="cs-arrow_icon">
+                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0.679688 0.96582L4.67969 4.96582L8.67969 0.96582" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </h2>
+                                    <div className="cs-filter_toggle_body">
+                                        <ul>
+                                            <li>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="checkbox" id="flexCheckChecked" checked />
+                                                    <label className="form-check-label" for="flexCheckChecked">Buy Now</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
+                                                    <label className="form-check-label" for="flexCheckDefault">In Auction</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="checkbox" id="flexCheckDefault1" />
+                                                    <label className="form-check-label" for="flexCheckDefault1">Looking to Sell</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="checkbox" id="flexCheckDefault2" />
+                                                    <label className="form-check-label" for="flexCheckDefault2">Has Offers</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="cs-filter_widget">
+                                    <h2 className="cs-filter_toggle_btn">
+                                        Price
+                                        <span className="cs-arrow_icon">
+                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0.679688 0.96582L4.67969 4.96582L8.67969 0.96582" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </h2>
+                                    <div className="cs-filter_toggle_body">
+                                        <div className="cs-price_form">
+                                            <form className="row row-15">
+                                                <div className="col-lg-12">
+                                                    <div className="cs-form_field_wrap cs-select_arrow">
+                                                        <select className="cs-form_field cs-field_sm">
+                                                            <option value="XRP">XRP</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="cs-height_15 cs-height_lg_15"></div>
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <div className="cs-form_field_wrap">
+                                                        <input type="text" className="cs-form_field cs-field_sm" placeholder="Min" />
+                                                    </div>
+                                                    <div className="cs-height_15 cs-height_lg_15"></div>
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <div className="cs-form_field_wrap">
+                                                        <input type="text" className="cs-form_field cs-field_sm" placeholder="Max" />
+                                                    </div>
+                                                    <div className="cs-height_10 cs-height_lg_10"></div>
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <input type="reset" className="cs-btn cs-style1 cs-color1 cs-btn_sm" value="Clear" />
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <button className="cs-btn cs-style1 cs-btn_sm"><span>Apply</span></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="cs-filter_widget">
+                                    <h2 className="cs-filter_toggle_btn">
+                                        Attributes
+                                        <span className="cs-arrow_icon">
+                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0.679688 0.96582L4.67969 4.96582L8.67969 0.96582" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </h2>
+                                    <div className="cs-filter_toggle_body">
+                                        {
+                                            attributes.map(attr => (
+                                                <div className="cs-filter_widget cs-filter_subwidget" key={attr.trait_type}>
+                                                    <h2 className="cs-filter_toggle_btn">
+                                                        <span>{attr.trait_type}<div className="cs-filter_toggle_btn_subtitle cs-ternary_color">{attr.values.length}</div></span>
+                                                        <span className="cs-arrow_icon">
+                                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M0.679688 0.96582L4.67969 4.96582L8.67969 0.96582" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                                                            </svg>
+                                                        </span>
+                                                    </h2>
+                                                    <div className="cs-filter_toggle_body">
+                                                        <ul>
+                                                            {attr.values.map(v => (
+                                                                <li key={v.value}>
+                                                                    <div className="form-check">
+                                                                        <div>
+                                                                            <input className="form-check-input" type="radio" name={attr.trait_type} id={v.value} />
+                                                                            <label className="form-check-label" for={v.value}>{v.value}</label>
+                                                                        </div>
+                                                                        <label className="form-check-label cs-ternary_color">{v.count}</label>
+                                                                    </div>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="cs-sidebar_frame_right">
+                            <div className="cs-filter_head">
+                                <div className="cs-filter_head_left">
+                                    <span className="cs-search_result cs-medium cs-ternary_color">29064886 Results</span>
+                                    <div className="cs-form_field_wrap">
+                                        <input type="text" className="cs-form_field cs-field_sm" placeholder="In Auction" />
+                                    </div>
+                                    <a href="#" className="cs-clear_btn">Clear All</a>
+                                </div>
+                                <div className="cs-filter_head_right">
+                                    <div className="cs-form_field_wrap cs-select_arrow">
+                                        <select className="cs-form_field cs-field_sm">
+                                            <option value="11">Sort By</option>
+                                            <option value="22">Last 7 days</option>
+                                            <option value="33">Last 30 days</option>
+                                            <option value="44">All time</option>
+                                        </select>
+                                    </div>
+                                    <div className="cs-form_field_wrap cs-select_arrow">
+                                        <select className="cs-form_field cs-field_sm">
+                                            <option value="1">Likes</option>
+                                            <option value="2">Most popular</option>
+                                            <option value="3">By price</option>
+                                            <option value="4">By published</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="cs-height_30 cs-height_lg_30"></div>
+                            <div className="row">
+                                {nfts.map(n => (
+                                    <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
+                                        <NftCard data={n} />
+                                        <div className="cs-height_20 cs-height_lg_20"></div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="cs-height_10 cs-height_lg_10"></div>
+                            <div className="text-center">
+                                <a href="#" className="cs-btn cs-style1 cs-btn_lg"><span>Load More</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ContentWrapper>
         );
     }

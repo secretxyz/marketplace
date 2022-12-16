@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------
-18. Accordian
+18. Accordion
 ----------------------------------------------------------------*/
-.cs-accordians {
-  .cs-accordian {
+.cs-accordions {
+  .cs-accordion {
     transition: all 0.3s ease;
 
     &:not(:last-child) {
@@ -11,7 +11,7 @@
 
     &.active {
 
-      .cs-accordian_toggle {
+      .cs-accordion_toggle {
         >* {
           transform: rotate(180deg);
         }
@@ -19,26 +19,26 @@
     }
   }
 
-  .cs-accordian_head {
+  .cs-accordion_head {
     cursor: pointer;
     position: relative;
     padding: 9px 35px 9px 0;
     &:hover {
-      .cs-accordian_toggle,
-      .cs-accordian_title {
+      .cs-accordion_toggle,
+      .cs-accordion_title {
         color: $accent;
       }
     }
   }
 
-  .cs-accordian_title {
+  .cs-accordion_title {
     font-size: 16px;
     font-weight: 500;
     margin: 0;
     transition: all 0.3s ease;
   }
 
-  .cs-accordian_toggle {
+  .cs-accordion_toggle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,7 @@
     }
   }
 
-  .cs-accordian-body {
+  .cs-accordion-body {
     padding-right: 35px;
     b {
       font-weight: 500;
@@ -72,7 +72,7 @@
   }
 }
 @media screen and (max-width: 575px) {
-  .cs-accordians .cs-accordian-body {
+  .cs-accordions .cs-accordion-body {
     br {
       display: none;
     }

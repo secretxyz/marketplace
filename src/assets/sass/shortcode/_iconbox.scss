@@ -5,13 +5,16 @@
   text-align: center;
   border-radius: 10px;
   padding: 50px 23px 45px;
+
   .cs-iconbox_title {
     font-size: 20px;
     margin-bottom: 20px;
   }
+
   .cs-iconbox_icon {
     margin-bottom: 25px;
   }
+
   &.cs-type1 {
     background-color: transparent;
     text-align: left;
@@ -24,14 +27,17 @@
   border-radius: 5px;
   text-align: center;
   padding: 35px 0 30px;
+
   .cs-iconbox_icon {
     margin-bottom: 15px;
   }
+
   .cs-iconbox_title {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 6px;
   }
+
   .cs-iconbox_subtitle {
     margin: 0;
   }
@@ -41,23 +47,30 @@
   padding: 30px;
   border-radius: 15px;
   transition: all 0.4s ease;
+
   &:hover {
     transform: translateY(-3px);
   }
+
   .cs-iconbox_img {
     margin-bottom: 20px;
   }
+
   .cs-iconbox_text {
     margin-bottom: 20px;
   }
+
   .cs-iconbox_btn {
     color: $accent;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    i, svg {
+
+    i,
+    svg {
       margin-left: 8px;
     }
+
     &:hover {
       text-decoration: underline;
       color: $accent;
@@ -72,11 +85,13 @@
   padding: 40px 15px 35px;
   border-radius: 15px;
   transition: all 0.3s ease;
+
   h3 {
     font-size: 18px;
     margin: 0;
     margin-top: 30px;
   }
+
   &:hover {
     transform: scale(1.02);
   }

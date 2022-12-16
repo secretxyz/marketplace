@@ -22,7 +22,7 @@
   | 9. Isotop Initialize
   | 10. Modal Video
   | 11. Tabs
-  | 12. Accordian
+  | 12. Accordion
   | 13. CountDown
   | 14. Mode Switcher
   |
@@ -53,7 +53,7 @@
     isotopInit();
     modalVideo();
     tabs();
-    accordian();
+    accordion();
     countDown();
     modeSwitcher();
     modal();
@@ -419,21 +419,21 @@
   }
 
   /*--------------------------------------------------------------
-    12. Accordian
+    12. Accordion
   --------------------------------------------------------------*/
-  function accordian() {
-    $('.cs-accordian').children('.cs-accordian-body').hide();
-    $('.cs-accordian.active').children('.cs-accordian-body').show();
-    $('.cs-accordian_head').on('click', function () {
+  function accordion() {
+    $('.cs-accordion').children('.cs-accordion-body').hide();
+    $('.cs-accordion.active').children('.cs-accordion-body').show();
+    $('.cs-accordion_head').on('click', function () {
       $(this)
-        .parent('.cs-accordian')
+        .parent('.cs-accordion')
         .siblings()
-        .children('.cs-accordian-body')
+        .children('.cs-accordion-body')
         .slideUp(250);
       $(this).siblings().slideDown(250);
-      /* Accordian Active Class */
-      $(this).parents('.cs-accordian').addClass('active');
-      $(this).parent('.cs-accordian').siblings().removeClass('active');
+      /* Accordion Active Class */
+      $(this).parents('.cs-accordion').addClass('active');
+      $(this).parent('.cs-accordion').siblings().removeClass('active');
     });
   }
 

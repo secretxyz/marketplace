@@ -29,12 +29,12 @@ class CollectionCard extends React.Component {
                 </a>
                 <div className="cs-card_info">
                     <h3 className="cs-card_small_title"><a href="collection-details.html">{data.name}</a></h3>
-                    <div className="cs-catd_meta">
-                        <a href="#" className="cs-catd_meta_item">
+                    <div className="cs-card_meta_info">
+                        <a href="#" className="cs-card_meta_info_item">
                             <i className="fas fa-list-ul fa-fw"></i>
                             <span>{data.nfts_count} Items</span>
                         </a>
-                        <a href="#" className="cs-catd_meta_item">
+                        <a href="#" className="cs-card_meta_info_item">
                             <i className="far fa-user fa-fw"></i>
                             <span>{data.owners}</span>
                         </a>

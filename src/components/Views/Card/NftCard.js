@@ -16,6 +16,9 @@ class NftCard extends React.Component {
 
         return (
             <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
+                <span className="cs-card_rare cs-primary_color">
+                    #1342
+                </span>
                 <span className="cs-card_like cs-primary_color">
                     <i className="fas fa-heart fa-fw"></i>
                     {data.likes}
@@ -28,7 +31,9 @@ class NftCard extends React.Component {
                         <img src={data.owner.picture_url} alt="Avatar" />
                         <span>{data.owner.name}</span>
                     </a>
-                    <h3 className="cs-card_title"><a href="#">{data.name}</a></h3>
+                    <h3 className="cs-card_title">
+                        <a href="#">{data.name}</a>
+                    </h3>
                     <div className="cs-card_price">Current Bid: <b className="cs-primary_color">{data.bid_price}</b></div>
                     <hr />
                     <div className="cs-card_footer">

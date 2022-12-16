@@ -23,7 +23,7 @@
 15. CTA
 16. Video Block
 17. Team
-18. Accordian
+18. Accordion
 19. Dark Mode
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
@@ -2483,7 +2483,7 @@ kbd {
   opacity: 0.8;
 }
 
-.cs-prifile_wrap {
+.cs-profile_wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3190,7 +3190,7 @@ kbd {
     padding-left: 0px;
   }
 
-  .cs-prifile_wrap {
+  .cs-profile_wrap {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -6391,7 +6391,7 @@ kbd {
   padding: 0 20px 15px;
 }
 
-.cs-card.cs-style3 .cs-catd_meta {
+.cs-card.cs-style3 .cs-card_meta_info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6403,7 +6403,7 @@ kbd {
   color: #050023;
 }
 
-.cs-card.cs-style3 .cs-catd_meta_item {
+.cs-card.cs-style3 .cs-card_meta_info_item {
   font-size: 14px;
   line-height: 1.6em;
   display: -webkit-box;
@@ -6414,7 +6414,7 @@ kbd {
   align-items: center;
 }
 
-.cs-card.cs-style3 .cs-catd_meta_item i {
+.cs-card.cs-style3 .cs-card_meta_info_item i {
   margin-right: 5px;
 }
 
@@ -7583,34 +7583,34 @@ kbd {
 }
 
 /*--------------------------------------------------------------
-18. Accordian
+18. Accordion
 ----------------------------------------------------------------*/
-.cs-accordians .cs-accordian {
+.cs-accordions .cs-accordion {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
-.cs-accordians .cs-accordian:not(:last-child) {
+.cs-accordions .cs-accordion:not(:last-child) {
   margin-bottom: 15px;
 }
 
-.cs-accordians .cs-accordian.active .cs-accordian_toggle>* {
+.cs-accordions .cs-accordion.active .cs-accordion_toggle>* {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
-.cs-accordians .cs-accordian_head {
+.cs-accordions .cs-accordion_head {
   cursor: pointer;
   position: relative;
   padding: 9px 35px 9px 0;
 }
 
-.cs-accordians .cs-accordian_head:hover .cs-accordian_toggle,
-.cs-accordians .cs-accordian_head:hover .cs-accordian_title {
+.cs-accordions .cs-accordion_head:hover .cs-accordion_toggle,
+.cs-accordions .cs-accordion_head:hover .cs-accordion_title {
   color: #3772ff;
 }
 
-.cs-accordians .cs-accordian_title {
+.cs-accordions .cs-accordion_title {
   font-size: 16px;
   font-weight: 500;
   margin: 0;
@@ -7618,7 +7618,7 @@ kbd {
   transition: all 0.3s ease;
 }
 
-.cs-accordians .cs-accordian_toggle {
+.cs-accordions .cs-accordion_toggle {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7636,21 +7636,21 @@ kbd {
   color: #050023;
 }
 
-.cs-accordians .cs-accordian_toggle>* {
+.cs-accordions .cs-accordion_toggle>* {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
-.cs-accordians .cs-accordian-body {
+.cs-accordions .cs-accordion-body {
   padding-right: 35px;
 }
 
-.cs-accordians .cs-accordian-body b {
+.cs-accordions .cs-accordion-body b {
   font-weight: 500;
   color: #050023;
 }
 
-.cs-accordians .cs-accordian-body p {
+.cs-accordions .cs-accordion-body p {
   margin: 0;
 }
 
@@ -7661,7 +7661,7 @@ kbd {
 }
 
 @media screen and (max-width: 575px) {
-  .cs-accordians .cs-accordian-body br {
+  .cs-accordions .cs-accordion-body br {
     display: none;
   }
 }
@@ -7689,7 +7689,7 @@ body.cs-dark .cs-collection_list_wrap {
 }
 
 body.cs-dark .cs-profile_box .cs-user_profile_link button,
-body.cs-dark .cs-accordians .cs-accordian_toggle {
+body.cs-dark .cs-accordions .cs-accordion_toggle {
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -7702,7 +7702,7 @@ body.cs-dark h6,
 body.cs-dark .cs-isotop_filter.cs-style1,
 body.cs-dark .cs-site_header,
 body.cs-dark .cs-primary_color,
-body.cs-dark .cs-card.cs-style3 .cs-catd_meta,
+body.cs-dark .cs-card.cs-style3 .cs-card_meta_info,
 body.cs-dark .cs-card.cs-style2 .cs-card_btn,
 body.cs-dark .cs-card.cs-style1 .cs-card_title,
 body.cs-dark .cs-search_input,
@@ -7718,7 +7718,7 @@ body.cs-dark .cs-btn.cs-style2 i,
 body.cs-dark .cs-btn.cs-style2 svg,
 body.cs-dark .cs-delete_btn,
 body.cs-dark .cs-large_radio_in,
-body.cs-dark .cs-accordians .cs-accordian-body b,
+body.cs-dark .cs-accordions .cs-accordion-body b,
 body.cs-dark .cs-nav .cs-nav_list .cs-mega-wrapper>li>a,
 body.cs-dark .cs-bid_card b,
 body.cs-dark .cs-bid_card .cs-bid_form_head,

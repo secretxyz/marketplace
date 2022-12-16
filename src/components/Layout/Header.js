@@ -41,10 +41,32 @@ class Header extends Component {
                                         <div className="cs-nav_in">
                                             <div className="cs-nav">
                                                 <ul className="cs-nav_list">
-                                                    <li><a href="index.html">Explorer</a></li>
+                                                    <li className="menu-item-has-children">
+                                                        <a href="index.html">Explorer</a>
+                                                        <ul>
+                                                            <li><a href="index.html">Collections</a></li>
+                                                            <li><a href="index_2.html">All NFTs</a></li>
+                                                            <li><a href="index_3.html">Raffles</a></li>
+                                                        </ul>
+                                                    </li>
                                                     <li><a href="how-it-works.html">Drops</a></li>
-                                                    <li><a href="contact.html">Stats</a></li>
-                                                    <li><a href="contact.html">Contact</a></li>
+                                                    <li className="menu-item-has-children">
+                                                        <a href="contact.html">Stats</a>
+                                                        <ul>
+                                                            <li><a href="index.html">Rankings</a></li>
+                                                            <li><a href="index_2.html">Activity</a></li>
+                                                            <li><a href="index_3.html">Leaderboards</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li className="menu-item-has-children">
+                                                        <a href="contact.html">Resources</a>
+                                                        <ul>
+                                                            <li><a href="index.html">Learn</a></li>
+                                                            <li><a href="index_2.html">Help Center</a></li>
+                                                            <li><a href="index_3.html">Partners</a></li>
+                                                            <li><a href="index_3.html">Blogs</a></li>
+                                                        </ul>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
