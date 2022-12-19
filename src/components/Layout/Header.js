@@ -22,7 +22,7 @@ class Header extends Component {
                     <div className="container-fluid">
                         <div className="cs-main_header_in">
                             <div className="cs-main_header_left">
-                                <a className="cs-site_branding" href="index.html"><img src="img/logo.png" alt="Logo" /></a>
+                                <a className="cs-site_branding" href="/"><img src="img/logo.png" alt="Logo" /></a>
                             </div>
                             <div className="cs-main_header_right">
                                 <div className="cs-search_wrap">
@@ -42,14 +42,14 @@ class Header extends Component {
                                             <div className="cs-nav">
                                                 <ul className="cs-nav_list">
                                                     <li className="menu-item-has-children">
-                                                        <a href="index.html">Explorer</a>
+                                                        <a href="/explorer-collections">Explorer</a>
                                                         <ul>
-                                                            <li><a href="index.html">Collections</a></li>
-                                                            <li><a href="index_2.html">All NFTs</a></li>
-                                                            <li><a href="index_3.html">Raffles</a></li>
+                                                            <li><a href="/explorer-collections">Collections</a></li>
+                                                            <li><a href="/explorer-nfts">All NFTs</a></li>
+                                                            <li><a href="/explorer-nfts">Raffles</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="how-it-works.html">Drops</a></li>
+                                                    <li><a href="/drop">Drops</a></li>
                                                     <li className="menu-item-has-children">
                                                         <a href="contact.html">Stats</a>
                                                         <ul>
@@ -171,7 +171,7 @@ class Header extends Component {
                                                     </div>
                                                 </div>
                                                 <ul>
-                                                    <li><a href="user-profile.html">My Profile</a></li>
+                                                    <li><a href="/profile">My Profile</a></li>
                                                     <li><a href="user-items.html">My Item</a></li>
                                                     <li><a href="user-wallet.html">My Wallet</a></li>
                                                     <li><a href="user-account-settings.html">Settings</a></li>

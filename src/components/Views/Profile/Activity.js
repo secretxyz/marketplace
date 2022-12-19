@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col } from "reactstrap";
+import ContentWrapper from '../../Layout/ContentWrapper';
 
 class Activity extends Component {
 	componentDidMount() {}

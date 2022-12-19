@@ -101,11 +101,11 @@ class LiveAuctions extends React.Component {
                         <h2 className="cs-section_title">Live Auctions</h2>
                     </div>
                     <div className="cs-section_right">
-                        <a href="collection.html" className="cs-btn cs-style1"><span>Explore More</span></a>
+                        <a href="/explorer-nfts" className="cs-btn cs-style1"><span>Explore More</span></a>
                     </div>
                 </div>
                 <div className="cs-height_20 cs-height_lg_20"></div>
-                <div className="cs-general_box_3">
+                <div className="cs-general_box_2">
                     <div className="cs-live_auction_slider cs-style1 cs-gap-30">
                         <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="2" data-lg-slides="2" data-add-slides="2">
                             <div className="cs-slider_wrapper">
@@ -131,7 +131,7 @@ class LiveAuctions extends React.Component {
                                 </svg>
                             </div>
                         </div>
-                        <div className="cs-pagination cs-style1 cs-hidden_desktop"></div>
+                        <div className="cs-pagination cs-style1"></div>
                     </div>
                 </div>
             </section>

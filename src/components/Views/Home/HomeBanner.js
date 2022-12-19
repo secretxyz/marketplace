@@ -4,12 +4,56 @@ import { withTranslation, Trans } from 'react-i18next';
 import $ from 'jquery';
 import "../../../assets/js/plugins/jquery.slick.min.js";
 
+const COLLECTIONS = [
+    {
+        id: "0",
+        name: "BearableGuyClub Loadstar II",
+        description: "NO AFFILIATION to the original bearableguy123 riddler we all love. BearableGuyClub is an NFT community that enjoys XRP researchers and riddlers.",
+        picture_url: "img/collections/collection1.png",
+        banner_picture_url: "img/collections/collection_bg1.png",
+        is_verified: true,
+        owners: 2024,
+        nfts_count: "5890",
+        total_volume: "859.8K XRP",
+        floor_price: "360 XRP"
+    },
+    {
+        id: "1",
+        name: "The Bearable Bulls",
+        description: "The Bearable Bulls are one of the first OG art collections on the XRP Ledger, and are the Genesis collection for Club XRPL. 10,000 completely original, hand-drawn characters by professional artists featuring over 200 illustrated and randomly generated traits. Collectors benefit from additional art-s...",
+        picture_url: "img/collections/collection2.gif",
+        banner_picture_url: "img/collections/collection_bg2.png",
+        is_verified: true,
+        owners: 4088,
+        nfts_count: "10K",
+        total_volume: "1.43M XRP",
+        floor_price: "197 XRP"
+    },
+    {
+        id: "2",
+        name: "XPunks",
+        description: "The XPUNK collection consists of 10,000 uniquely generated characters on a 24-by-24-pixel canvas. They are distinguished by their colorful traits and trademark X-mouth that represents their love for the XRPL.",
+        picture_url: "img/collections/collection3.png",
+        banner_picture_url: "img/collections/collection_bg3.png",
+        is_verified: true,
+        owners: 1869,
+        nfts_count: "10K",
+        total_volume: "2.11M XRP",
+        floor_price: "4192 XRP"
+    }
+]
+
 class HomeBanner extends React.Component {
+    state = {
+        collections: COLLECTIONS,
+    }
+
     componentDidMount() {
 
     }
 
     render() {
+        let { collections } = this.state;
         return (
             <section className="cs-hero cs-style3 cs-bg cs-center" style={{ backgroundImage: `url("img/hero_bg3.jpeg")` }}>
                 <div className="container-fluid">
@@ -19,8 +63,8 @@ class HomeBanner extends React.Component {
                                 <h1 className="cs-hero_title cs-white_color">The Best Beneficial Place to Collect , Buy and Sell XRPL NFT Marketplace</h1>
                                 <div className="cs-hero_subtitle cs-medium cs-white_color">Secure and secret NFTs for gaming, entertainment, metaverse and data <br />management time capsules.</div>
                                 <div className="cs-hero_btns">
-                                    <a href="explore-1.html" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
-                                    <a href="create-items.html" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>
+                                    <a href="/explorer-collections" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
+                                    <a href="/create" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>
                                 </div>
                             </div>
                         </div>
@@ -38,60 +82,26 @@ class HomeBanner extends React.Component {
                                                 slidesToScroll: 1,
                                                 arrows: false
                                             }}>
-                                            <div className="cs-slide">
-                                                <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
-                                                    <a href="collection-details.html" className="cs-card_thumb cs-zoom_effect">
-                                                        <img src="img/collections/collection_bg1.png" alt="Image" className="cs-zoom_item" />
-                                                    </a>
-                                                    <a href="#" className="cs-avatar cs-collection-avatar">
-                                                        <img src="img/collections/collection1.png" alt="Avatar" />
-                                                    </a>
-                                                    <div className="cs-card_info">
-                                                        <h3 className="cs-card_title"><a href="collection-details.html">BearableGuyClub Loadstar II</a></h3>
-                                                        <div className="cs-card_footer">
-                                                            <div className="cs-card_subtitle">
-                                                                <span>NO AFFILIATION to the original bearableguy123 riddler we all love. BearableGuyClub is an NFT community that enjoys XRP researchers and riddlers.</span>
+                                            {collections.map(c => (
+                                                <div className="cs-slide cs-slide-collection" key={c.id}>
+                                                    <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
+                                                        <a href={`/collection/${c.slug}`} className="cs-card_thumb cs-zoom_effect">
+                                                            <img src={c.banner_picture_url} alt="Image" className="cs-zoom_item" />
+                                                        </a>
+                                                        <a href={`/collection/${c.slug}`} className="cs-avatar cs-collection-avatar">
+                                                            <img src={c.picture_url} alt="Avatar" />
+                                                        </a>
+                                                        <div className="cs-card_info">
+                                                            <h3 className="cs-card_title"><a href={`/collection/${c.slug}`}>{c.name}</a></h3>
+                                                            <div className="cs-card_footer">
+                                                                <div className="cs-card_subtitle">
+                                                                    <span>{c.description}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="cs-slide cs-slide-collection">
-                                                <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
-                                                    <a href="collection-details.html" className="cs-card_thumb cs-zoom_effect">
-                                                        <img src="img/collections/collection_bg2.png" alt="Image" className="cs-zoom_item" />
-                                                    </a>
-                                                    <a href="#" className="cs-avatar cs-collection-avatar">
-                                                        <img src="img/collections/collection2.gif" alt="Avatar" />
-                                                    </a>
-                                                    <div className="cs-card_info">
-                                                        <h3 className="cs-card_title"><a href="collection-details.html">The Bearable Bulls</a></h3>
-                                                        <div className="cs-card_footer">
-                                                            <div className="cs-card_subtitle">
-                                                                <span>The Bearable Bulls are one of the first OG art collections on the XRP Ledger, and are the Genesis collection for Club XRPL. 10,000 completely original, hand-drawn characters by professional artists featuring over 200 illustrated and randomly generated traits. Collectors benefit from additional art-s...</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="cs-slide cs-slide-collection">
-                                                <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
-                                                    <a href="collection-details.html" className="cs-card_thumb cs-zoom_effect">
-                                                        <img src="img/collections/collection_bg3.png" alt="Image" className="cs-zoom_item" />
-                                                    </a>
-                                                    <a href="#" className="cs-avatar cs-collection-avatar">
-                                                        <img src="img/collections/collection3.png" alt="Avatar" />
-                                                    </a>
-                                                    <div className="cs-card_info">
-                                                        <h3 className="cs-card_title"><a href="collection-details.html">XPUNKS</a></h3>
-                                                        <div className="cs-card_footer">
-                                                            <div className="cs-card_subtitle">
-                                                                <span>The XPUNK collection consists of 10,000 uniquely generated characters on a 24-by-24-pixel canvas. They are distinguished by their colorful traits and trademark X-mouth that represents their love for the XRPL.</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            ))}
                                         </Slider>
                                     </div>
                                 </div>

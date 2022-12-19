@@ -16,10 +16,10 @@ class CollectionCard extends React.Component {
 
         return (
             <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
-                <a href="collection-details.html" className="cs-card_thumb cs-zoom_effect">
+                <a href={`/collection/${data.slug}`} className="cs-card_thumb cs-zoom_effect">
                     <img src={data.banner_picture_url} alt="Image" className="cs-zoom_item" />
                 </a>
-                <a href="#" className="cs-avatar">
+                <a href={`/collection/${data.slug}`} className="cs-avatar">
                     <img src={data.picture_url} alt="Avatar" />
                     {
                         data.is_verified ? <span className="cs-avatar_status">
@@ -28,16 +28,16 @@ class CollectionCard extends React.Component {
                     }
                 </a>
                 <div className="cs-card_info">
-                    <h3 className="cs-card_small_title"><a href="collection-details.html">{data.name}</a></h3>
+                    <h3 className="cs-card_small_title"><a href={`/collection/${data.slug}`}>{data.name}</a></h3>
                     <div className="cs-card_meta_info">
-                        <a href="#" className="cs-card_meta_info_item">
+                        <div className="cs-card_meta_info_item">
                             <i className="fas fa-list-ul fa-fw"></i>
                             <span>{data.nfts_count} Items</span>
-                        </a>
-                        <a href="#" className="cs-card_meta_info_item">
+                        </div>
+                        <div className="cs-card_meta_info_item">
                             <i className="far fa-user fa-fw"></i>
                             <span>{data.owners}</span>
-                        </a>
+                        </div>
                     </div>
                     <div className="cs-card_footer">
                         <div className="cs-left">

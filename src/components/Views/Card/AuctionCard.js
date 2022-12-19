@@ -23,6 +23,32 @@ class AuctionCard extends React.Component {
                 <a href="explore-details.html" className="cs-card_thumb cs-zoom_effect">
                     <img style={{ background: `url(${data.image_url})` }} alt="Image" className="cs-zoom_item" />
                 </a>
+                <div className="cs-countdown" data-countdate={data.schedule_end_date}>
+                    <div className="cs-countdown_item">
+                        <div className="cs-countdown_number">
+                            <div className="cs-count_days"></div>
+                        </div>
+                        <h3 className="cs-countdown_text">Days</h3>
+                    </div>
+                    <div className="cs-countdown_item">
+                        <div className="cs-countdown_number">
+                            <div className="cs-count_hours"></div>
+                        </div>
+                        <h3 className="cs-countdown_text">Hrs</h3>
+                    </div>
+                    <div className="cs-countdown_item">
+                        <div className="cs-countdown_number">
+                            <div className="cs-count_minutes"></div>
+                        </div>
+                        <h3 className="cs-countdown_text">Min</h3>
+                    </div>
+                    <div className="cs-countdown_item">
+                        <div className="cs-countdown_number">
+                            <div className="cs-count_seconds"></div>
+                        </div>
+                        <h3 className="cs-countdown_text">Sec</h3>
+                    </div>
+                </div>
                 <div className="cs-card_info">
                     <a href="#" className="cs-avatar cs-white_bg">
                         <div className="cs-avatar_images">
@@ -32,34 +58,9 @@ class AuctionCard extends React.Component {
                         </div>
                         <span>{data.bidders_count - data.bidders.length}+ <span>Place Bid</span></span>
                     </a>
-                    <div className="cs-height_10 cs-height_lg_10"></div>
-                    <div className="cs-countdown" data-countdate={data.schedule_end_date}>
-                        <div className="cs-countdown_item">
-                            <div className="cs-countdown_number">
-                                <div className="cs-count_days"></div>
-                            </div>
-                            <h3 className="cs-countdown_text">Days</h3>
-                        </div>
-                        <div className="cs-countdown_item">
-                            <div className="cs-countdown_number">
-                                <div className="cs-count_hours"></div>
-                            </div>
-                            <h3 className="cs-countdown_text">Hours</h3>
-                        </div>
-                        <div className="cs-countdown_item">
-                            <div className="cs-countdown_number">
-                                <div className="cs-count_minutes"></div>
-                            </div>
-                            <h3 className="cs-countdown_text">Min</h3>
-                        </div>
-                        <div className="cs-countdown_item">
-                            <div className="cs-countdown_number">
-                                <div className="cs-count_seconds"></div>
-                            </div>
-                            <h3 className="cs-countdown_text">Sec</h3>
-                        </div>
-                    </div>
-                    <h3 className="cs-card_title"><a href="explore-details.html">{data.name}</a></h3>
+                    <h3 className="cs-card_title">
+                        <a href="explore-details.html">{data.name}</a>
+                    </h3>
                     <div className="cs-card_price">Current Bid: <b className="cs-primary_color">{data.bid_price}</b></div>
                     <hr />
                     <div className="cs-card_footer">

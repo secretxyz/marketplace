@@ -20,11 +20,11 @@ class CollectionSimpleCard extends React.Component {
                     <div className="cs-card_left">
                         <div className="cs-card_media">
                             <h3 className='cs-card_number_right'>{Number(data.id) + 1}</h3>
-                            <div className="cs-card_img">
-                                <img src={data.picture_url} alt="Avatar" />
-                            </div>
+                            <a href={`/collection/${data.slug}`}  className="cs-card_img cs-zoom_effect">
+                                <img src={data.picture_url} alt="Avatar" className="cs-zoom_item"/>
+                            </a>
                             <div className="cs-card_media_right">
-                                <h3>{data.name}</h3>
+                                <h3><a href={`/collection/${data.slug}`}>{data.name}</a></h3>
                                 <div className="cs-card_media_details">
                                     <div className='cs-card_media_details_item'>
                                         <div className='cs-card_media_details_item_subtitle'>Volume:</div> {data.total_volume}

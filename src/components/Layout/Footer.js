@@ -41,11 +41,11 @@ class Footer extends Component {
                                     <div className="cs-footer_widget">
                                         <h2 className="cs-widget_title">Company</h2>
                                         <ul className="cs-widget_nav">
-                                            <li><a href="blog.html">Recent News</a></li>
-                                            <li><a href="how-it-works.html">How it Works</a></li>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact Us</a></li>
-                                            <li><a href="faq.html">Help Center & FAQ</a></li>
+                                            <li><a href="/about">Recent News</a></li>
+                                            <li><a href="/about">How it Works</a></li>
+                                            <li><a href="/about">About Us</a></li>
+                                            <li><a href="/about">Contact Us</a></li>
+                                            <li><a href="/faq">Help Center & FAQ</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -81,8 +81,8 @@ class Footer extends Component {
                         <div className="cs-footer_bottom_in">
                             <div className="cs-copyright">Copyright 2022. Created by BearableGuyClub.</div>
                             <ul className="cs-footer_menu">
-                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                <li><a href="terms-condition.html">Term & Condition</a></li>
+                                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                <li><a href="/terms-condition">Term & Condition</a></li>
                             </ul>
                         </div>
                     </div>

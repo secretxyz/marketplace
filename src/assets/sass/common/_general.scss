@@ -513,21 +513,29 @@
   display: flex;
   justify-content: space-between;
   text-align: center;
-  max-width: 280px;
+  max-width: 172px;
   width: 100%;
+  padding: 0 10px;
+  margin-left: 10px;
+  margin-top: -71px;
+  background-color: $accent;
+  position: relative;
+  border-radius: 10px;
 
   .cs-countdown_text {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.5em;
-    margin-bottom: 0;
+    // margin-bottom: 0;
     font-weight: 400;
+    position: relative;
+    margin-bottom: 0px;
   }
 
   .cs-countdown_number {
     width: 35px;
-    height: 30px;
+    height: 20px;
     margin: auto;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     line-height: 1.5em;
     display: flex;
@@ -543,25 +551,25 @@
       z-index: 1;
     }
 
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      height: 50%;
-      width: 100%;
-      background: linear-gradient(116.85deg, #FC466B 0%, #3F5EFB 100%);
-    }
+    // &::before,
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   left: 0;
+    //   height: 50%;
+    //   width: 100%;
+    //   background: linear-gradient(116.85deg, #FC466B 0%, #3F5EFB 100%);
+    // }
 
-    &::before {
-      top: 0;
-      border-radius: 4px 4px 0px 0px;
-    }
+    // &::before {
+    //   top: 0;
+    //   border-radius: 4px 4px 0px 0px;
+    // }
 
-    &::after {
-      bottom: 0;
-      border-radius: 0px 0px 4px 4px;
-    }
+    // &::after {
+    //   bottom: 0;
+    //   border-radius: 0px 0px 4px 4px;
+    // }
   }
 }
 
@@ -1864,15 +1872,19 @@
 
     svg,
     i {
+      width: 20px;
       margin-right: 15px;
+      text-align: center;
     }
 
     &:hover,
     &.active {
       background-color: $accent;
       color: #fff;
+      cursor: pointer;
     }
   }
+  
 }
 
 .cs-profile_right {

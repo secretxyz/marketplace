@@ -83,7 +83,7 @@ class TrendingCollections extends React.Component {
                             <h2 className="cs-section_title">Trending Collections</h2>
                         </div>
                         <div className="cs-section_right">
-                            <a href="collection.html" className="cs-btn cs-style1"><span>Explore More</span></a>
+                            <a href="/explorer-collections" className="cs-btn cs-style1"><span>Explore More</span></a>
                         </div>
                     </div>
                     <div className="cs-height_20 cs-height_lg_20"></div>
