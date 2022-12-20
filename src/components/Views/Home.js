@@ -10,6 +10,7 @@ import CollectionBanner from './Home/CollectionBanner';
 import TopSellers from './Home/TopSellers';
 
 import HomeBanner from './Home/HomeBanner';
+import FeaturedRaffles from './Home/FeaturedRaffles';
 import TrendingCollections from './Home/TrendingCollections';
 import TopCollections from './Home/TopCollections';
 import ExplorerCategory from './Home/ExplorerCategory';
@@ -30,6 +31,9 @@ class Home extends React.Component {
             <ContentWrapper>
                 <div className="cs-height_90 cs-height_lg_80"></div>
                 <HomeBanner />
+
+                <div className="cs-height_70 cs-height_lg_40"></div>
+                <FeaturedRaffles />
 
                 <div className="cs-height_70 cs-height_lg_40"></div>
                 <TrendingCollections />

@@ -1,6 +1,5 @@
 import React from 'react';
 import { withTranslation, Trans } from 'react-i18next';
-import CountLoader from '../../Common/CountLoader'
 import SlickLoader from '../../Common/SlickLoader'
 import AuctionCard from '../Card/AuctionCard';
 
@@ -88,7 +87,6 @@ class LiveAuctions extends React.Component {
     }
 
     componentDidMount() {
-        CountLoader('.cs-countdown');
         SlickLoader('.cs-live_auction_slider');
     }
 

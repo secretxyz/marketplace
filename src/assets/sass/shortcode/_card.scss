@@ -388,6 +388,11 @@
     padding: 0 10px;
     margin-top: -16px;
   }
+  
+  .cs-raffle_card_info {
+    padding: 0 10px;
+    margin-top: 4px;
+  }
 
   .cs-card_title {
     font-size: 16px;
@@ -463,6 +468,19 @@
     }
   }
 
+  .cs-card_btn_3 {
+    font-size: 14px;
+    line-height: 1.5em;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
   .cs-card_footer {
     display: flex;
     justify-content: space-between;
@@ -474,6 +492,10 @@
     >* {
       margin: 3px;
     }
+  }
+
+  .cs-card_footer_center {
+    justify-content: center;
   }
 
   &.cs-type1 {
