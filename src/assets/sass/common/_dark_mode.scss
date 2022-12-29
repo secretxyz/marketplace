@@ -9,7 +9,7 @@ body.cs-dark {
   .cs-form_field,
   .cs-select_arrow:before,
   .cs-form_field.cs-white_bg,
-  .cs-btn.cs-style2 > span,
+  .cs-btn.cs-style2>span,
   .cs-modal_container {
     background: #0f0935;
   }
@@ -20,11 +20,18 @@ body.cs-dark {
   }
 
   .cs-profile_box .cs-user_profile_link button,
-  .cs-accordions .cs-accordion_toggle {
+  .cs-accordions .cs-accordion_toggle,
+  .cs-single_details_list,
+  .cs-attr_trait_value {
     color: rgba($white, 0.8);
   }
 
-  h1, h2, h3, h4, h5, h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   .cs-isotop_filter.cs-style1,
   .cs-site_header,
   .cs-primary_color,
@@ -40,15 +47,15 @@ body.cs-dark {
   .url,
   .cs-text_box.cs-style2,
   .cs-profile_nav a,
-  .cs-btn.cs-style2 i, 
+  .cs-btn.cs-style2 i,
   .cs-btn.cs-style2 svg,
   .cs-delete_btn,
   .cs-large_radio_in,
   .cs-accordions .cs-accordion-body b,
-  .cs-nav .cs-nav_list .cs-mega-wrapper > li > a,
+  .cs-nav .cs-nav_list .cs-mega-wrapper>li>a,
   .cs-bid_card b,
   .cs-bid_card .cs-bid_form_head,
-  .cs-bid_input_group input {
+  .cs-bid_input_group input  {
     color: #fff;
   }
 
@@ -96,7 +103,8 @@ body.cs-dark {
   .cs-contact_card,
   .cs-contact_box,
   .cs-modal_container_in,
-  .cs-collection_info_head {
+  .cs-collection_info_head,
+  .cs-single_info_head {
     background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.2) 0%, rgba(63, 94, 251, 0.2) 100%);
   }
 
@@ -118,6 +126,7 @@ body.cs-dark {
     background-color: $white;
     color: $primary;
   }
+
   .cs-card_like,
   .cs-slider_arrows.cs-style2,
   .cs-slider_arrows.cs-style1 {
@@ -125,7 +134,8 @@ body.cs-dark {
   }
 
   .cs-cta.cs-style2 .cs-btn,
-  .cs-profile_nav a:hover, .cs-profile_nav a.active {
+  .cs-profile_nav a:hover,
+  .cs-profile_nav a.active {
     background-color: $accent;
     color: $white;
   }
@@ -137,6 +147,7 @@ body.cs-dark {
   .cs-upload_btn {
     background-color: $white;
     color: $primary;
+
     &:hover {
       color: $white;
       background-color: $accent;
@@ -150,32 +161,36 @@ body.cs-dark {
   .cs-form_field::placeholder {
     color: rgba($white, 0.45);
   }
-  
+
   .cs-form_field:-ms-input-placeholder {
     color: rgba($white, 0.45);
   }
-  
+
   .cs-form_field::-ms-input-placeholder {
     color: rgba($white, 0.45);
   }
 
-  .cs-munu_toggle span, 
-  .cs-munu_toggle span:before, 
-  .cs-munu_toggle span:after {
+  .cs-menu_toggle span,
+  .cs-menu_toggle span:before,
+  .cs-menu_toggle span:after {
     background-color: $white;
   }
-  .cs-toggle_active.cs-munu_toggle span {
+
+  .cs-toggle_active.cs-menu_toggle span {
     background-color: transparent;
   }
+
   .cs-media.cs-style1 .cs-media_icon {
     background: $white;
   }
+
   .cs-modal_overlay {
     background: rgba($black, 0.9);
   }
 }
+
 @media screen and (max-width: 1199px) {
-  body.cs-dark .cs-nav .cs-nav_list  {
+  body.cs-dark .cs-nav .cs-nav_list {
     background: #080326;
     border-color: rgba($white, 0.1);
   }

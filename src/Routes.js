@@ -16,6 +16,8 @@ const Home = lazy(() => import('./components/Views/Home'));
 const Collection = lazy(() => import('./components/Views/Collection'));
 const ExplorerCollections = lazy(() => import('./components/Views/ExplorerCollections'));
 const ExplorerNfts = lazy(() => import('./components/Views/ExplorerNfts'));
+const NftDetails = lazy(() => import('./components/Views/NftDetails'));
+const RaffleDetails = lazy(() => import('./components/Views/RaffleDetails'));
 const Drop = lazy(() => import('./components/Views/Drop'));
 const Ranking = lazy(() => import('./components/Views/Ranking'));
 const Activity = lazy(() => import('./components/Views/Activity'));
@@ -50,6 +52,8 @@ const Routes = ({ location }) => {
                                 <Route path="/collection/:collection" component={waitFor(Collection)} />
                                 <Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
                                 <Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
+                                <Route path="/nft" component={waitFor(NftDetails)} />
+                                <Route path="/raffle" component={waitFor(RaffleDetails)} />
                                 <Route path="/drop" component={waitFor(Drop)} />
                                 <Route path="/ranking" component={waitFor(Ranking)} />
                                 <Route path="/activity" component={waitFor(Activity)} />
@@ -61,7 +65,7 @@ const Routes = ({ location }) => {
                                 <Route path="/faq" component={waitFor(Faq)} />
                                 <Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
                                 <Route path="/terms-condition" component={waitFor(TermsCondition)} />
-                                
+
                                 <Route path="/" component={waitFor(Home)} />
 
                                 <Redirect to="/" />

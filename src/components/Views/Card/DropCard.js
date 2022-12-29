@@ -41,7 +41,7 @@ class DropCard extends React.Component {
                             </div>
                         </div>
                         <div className="cs-section_right">
-                            <a href="collection.html" className="cs-btn cs-style1"><span>View Drop</span></a>
+                            <a href="/collection/undefined" className="cs-btn cs-style1"><span>View Drop</span></a>
                         </div>
                     </div>
                 </div>

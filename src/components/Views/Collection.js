@@ -245,36 +245,45 @@ class Collection extends Component {
                                 <div className="cs-collection_avatar"><img src="img/collections/collection1.png" alt="Avatar" /></div>
                                 <div className="cs-collection_info">
                                     <div className="cs-collection_info_in cs-white_bg">
-                                        <div className="cs-collection_info_left">
-                                            <h2 className="cs-collection_avatar_name">BearableGuyClub Loadstar II</h2>
-                                            <div className="cs-collection_user">@bearableguyclub <span>Created</span></div>
-                                            <a className="cs-btn cs-style1" href="#"><span><i className="fa fa-globe fa-fw"></i></span></a>
-                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-discord fa-fw"></i></span></a>
-                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-twitter fa-fw"></i></span></a>
-                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-youtube fa-fw"></i></span></a>
-                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-instagram fa-fw"></i></span></a>
-                                            <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-reddit fa-fw"></i></span></a>
-                                        </div>
-                                        <div className="cs-collection_right">
-                                            <div className="cs-collection_list_wrap">
-                                                <ul className="cs-collection_list cs-white_bg cs-mp0">
-                                                    <li>
-                                                        <div className="cs-collection_list_title">Collection of</div>
-                                                        <div className="cs-collection_list_number">589</div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="cs-collection_list_title">Owned by</div>
-                                                        <div className="cs-collection_list_number">312</div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="cs-collection_list_title">Floor Price</div>
-                                                        <div className="cs-collection_list_number">392 XRP</div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="cs-collection_list_title">Total Sales</div>
-                                                        <div className="cs-collection_list_number">59.6K XRP</div>
-                                                    </li>
-                                                </ul>
+                                        <div className="row">
+                                            <div className="col-lg-5">
+                                                <div className="cs-collection_info_left">
+                                                    <h2 className="cs-collection_avatar_name">BearableGuyClub Loadstar II</h2>
+                                                    <div className="cs-collection_user">@bearableguyclub <span>Created</span></div>
+                                                    <a className="cs-btn cs-style1" href="#"><span><i className="fa fa-globe fa-fw"></i></span></a>
+                                                    <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-discord fa-fw"></i></span></a>
+                                                    <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-twitter fa-fw"></i></span></a>
+                                                    <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-youtube fa-fw"></i></span></a>
+                                                    <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-instagram fa-fw"></i></span></a>
+                                                    <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-reddit fa-fw"></i></span></a>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-7">
+                                                <div className="cs-collection_right">
+                                                    <div className="cs-collection_list_wrap">
+                                                        <ul className="cs-collection_list cs-white_bg cs-mp0">
+                                                            <li>
+                                                                <div className="cs-collection_list_title">Collection of</div>
+                                                                <div className="cs-collection_list_number">589</div>
+                                                            </li>
+                                                            <li>
+                                                                <div className="cs-collection_list_title">Owned by</div>
+                                                                <div className="cs-collection_list_number">312</div>
+                                                            </li>
+                                                            <li>
+                                                                <div className="cs-collection_list_title">Floor Price</div>
+                                                                <div className="cs-collection_list_number">392 XRP</div>
+                                                            </li>
+                                                            <li>
+                                                                <div className="cs-collection_list_title">Total Sales</div>
+                                                                <div className="cs-collection_list_number">59.6K XRP</div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="cs-collection_description">
+                                                NO AFFILIATION to the original bearableguy123 riddler we all love. BearableGuyClub is an NFT community that enjoys XRP researchers and riddlers.
                                             </div>
                                         </div>
                                     </div>
@@ -301,26 +310,26 @@ class Collection extends Component {
                                         <ul>
                                             <li>
                                                 <div className="form-check">
-                                                    <input className="form-check-input" type="checkbox" id="flexCheckChecked" checked />
-                                                    <label className="form-check-label" for="flexCheckChecked">Buy Now</label>
+                                                    <input className="form-check-input" type="checkbox" id="flexCheckChecked" defaultChecked />
+                                                    <label className="form-check-label" htmlFor="flexCheckChecked">Buy Now</label>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="form-check">
                                                     <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                                                    <label className="form-check-label" for="flexCheckDefault">In Auction</label>
+                                                    <label className="form-check-label" htmlFor="flexCheckDefault">In Auction</label>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="form-check">
                                                     <input className="form-check-input" type="checkbox" id="flexCheckDefault1" />
-                                                    <label className="form-check-label" for="flexCheckDefault1">Looking to Sell</label>
+                                                    <label className="form-check-label" htmlFor="flexCheckDefault1">Looking to Sell</label>
                                                 </div>
                                             </li>
                                             <li>
                                                 <div className="form-check">
                                                     <input className="form-check-input" type="checkbox" id="flexCheckDefault2" />
-                                                    <label className="form-check-label" for="flexCheckDefault2">Has Offers</label>
+                                                    <label className="form-check-label" htmlFor="flexCheckDefault2">Has Offers</label>
                                                 </div>
                                             </li>
                                         </ul>
@@ -396,7 +405,7 @@ class Collection extends Component {
                                                                     <div className="form-check">
                                                                         <div>
                                                                             <input className="form-check-input" type="radio" name={attr.trait_type} id={v.value} />
-                                                                            <label className="form-check-label" for={v.value}>{v.value}</label>
+                                                                            <label className="form-check-label" htmlFor={v.value}>{v.value}</label>
                                                                         </div>
                                                                         <label className="form-check-label cs-ternary_color">{v.count}</label>
                                                                     </div>

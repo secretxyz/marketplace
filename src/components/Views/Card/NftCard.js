@@ -23,7 +23,7 @@ class NftCard extends React.Component {
                     <i className="fas fa-heart fa-fw"></i>
                     {data.likes}
                 </span>
-                <a href="explore-details.html" className="cs-card_thumb cs-zoom_effect">
+                <a href="/nft/" className="cs-card_thumb cs-zoom_effect">
                     <img style={{ background: `url(${data.image_url})` }} alt="Image" className="cs-zoom_item" />
                 </a>
                 <div className="cs-card_info">

@@ -52,6 +52,13 @@
   padding: 0;
 }
 
+.cs-mp1 {
+  list-style-type: decimal;
+  padding: 0;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
 .cs-bold {
   font-weight: 700;
 }
@@ -455,12 +462,17 @@
 }
 
 .cs-general_box_4 {
-  padding: 20px 20px 15px;
+  padding: 20px 20px 16px;
   border-radius: 10px;
 }
 
 .cs-general_box_5 {
   padding: 22px 20px;
+  border-radius: 10px;
+}
+
+.cs-general_box_6 {
+  padding: 18px 20px;
   border-radius: 10px;
 }
 
@@ -505,8 +517,22 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
+.cs-grid_3 {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .cs-gap_30 {
   grid-gap: 30px;
+}
+
+.cs-gap_20 {
+  grid-gap: 20px;
+}
+
+.cs-gap_10 {
+  grid-gap: 10px;
 }
 
 .cs-countdown {
@@ -570,6 +596,62 @@
     //   bottom: 0;
     //   border-radius: 0px 0px 4px 4px;
     // }
+  }
+}
+
+.cs-countdown_style2 {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  max-width: 280px;
+  width: 100%;
+
+  .cs-countdown_text {
+    font-size: 14px;
+    line-height: 1.5em;
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+
+  .cs-countdown_number {
+    width: 35px;
+    height: 30px;
+    margin: auto;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
+    color: #fff;
+    position: relative;
+
+    >* {
+      position: relative;
+      z-index: 1;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 50%;
+      width: 100%;
+      background: linear-gradient(116.85deg, #FC466B 0%, #3F5EFB 100%);
+    }
+
+    &::before {
+      top: 0;
+      border-radius: 4px 4px 0px 0px;
+    }
+
+    &::after {
+      bottom: 0;
+      border-radius: 0px 0px 4px 4px;
+    }
   }
 }
 
@@ -908,7 +990,7 @@
 }
 
 .cs-form_field.cs-field_sm {
-  padding: 7px 15px;
+  padding: 6px 13px;
   min-height: 38px;
 }
 
@@ -1352,10 +1434,10 @@
 
 .cs-collection_info_in {
   border-radius: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // flex-wrap: wrap;
   padding: 25px 25px;
 
   .cs-btn.cs-style1 {
@@ -1373,6 +1455,12 @@
   span {
     color: $accent;
   }
+}
+
+.cs-collection_description {
+  font-size: 14px;
+  line-height: 1.6em;
+  margin-top: 10px;
 }
 
 .cs-collection_avatar_name {
@@ -1658,6 +1746,58 @@
   }
 }
 
+.cs-single_details_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+
+  li {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      color: $white;
+      font-weight: 600;
+    }
+
+    a span {
+      text-decoration: underline;
+    }
+
+    a span:hover {
+      color: $accent;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.cs-attr_field_wrap {
+  background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
+  border-radius: 5px;
+  padding: 1px;
+  font-size: 13px;
+
+  .cs-form_field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cs-attr_trait_type {
+    font-weight: 600;
+  }
+
+  .cs-attr_trait_percent {
+    color: $accent
+  }
+}
+
 .cs-activity_wrap {
   padding: 40px 50px;
   border-radius: 15px;
@@ -1701,6 +1841,11 @@
       &:hover {
         color: $accent;
       }
+    }
+
+    i {
+      margin-left: 8px;
+      color: $accent;
     }
   }
 
@@ -1749,6 +1894,16 @@
         width: 16px;
         height: 16px;
       }
+    }
+  }
+
+  .cs-activity_sub_right {
+    position: absolute;
+    right: 30px;
+    height: 52px;
+
+    i {
+      margin-left: 10px;
     }
   }
 }
@@ -1884,7 +2039,7 @@
       cursor: pointer;
     }
   }
-  
+
 }
 
 .cs-profile_right {
@@ -2160,7 +2315,7 @@
 .cs-tab_links.cs-style1 {
   display: flex;
   flex-wrap: wrap;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5em;
   border: 0px solid;
   border-image-slice: 1;
@@ -2168,7 +2323,7 @@
   border-image-source: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
 
   a {
-    padding: 6px 30px;
+    padding: 6px 25px;
     position: relative;
     display: inline-block;
 
@@ -2185,6 +2340,10 @@
     }
   }
 
+  .cs-tab-sm {
+    padding: 6px 16px;
+  }
+
   .active {
     a {
       &:after {
@@ -2197,7 +2356,7 @@
 .cs-author_card {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 18px 20px;
   border-radius: 10px;
 
   .cs-author_img {
@@ -2206,11 +2365,17 @@
     width: 42px;
     margin-right: 10px;
     border-radius: 50%;
+    position: relative;
 
     img {
       height: 100%;
       width: 100%;
       border-radius: inherit;
+    }
+
+    .cs-avatar_status {
+      top: 0px;
+      right: 0px;
     }
   }
 
@@ -2230,6 +2395,8 @@
 .cs-single_product_head {
   position: relative;
   min-height: 40px;
+  display: flex;
+  justify-content: space-between;
 
   .cs-card_like {
     font-size: 16px;
@@ -2240,8 +2407,8 @@
 
   h2 {
     font-size: 28px;
-    margin-bottom: 12px;
-    padding-right: 85px;
+    margin-bottom: 0px;
+    align-self: center;
   }
 
   p {
@@ -2250,6 +2417,63 @@
     font-weight: 500;
     margin: 0;
   }
+
+  .cs-single_info_head {
+    padding: 4px 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 10px rgba($black, 0.05);
+    border-radius: 10px;
+    line-height: 1.5em;
+    max-width: 160px;
+
+    .cs-btn {
+      margin: 6px;
+      padding: 8px 12px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.cs-single_asset {
+  border: 1px solid rgba(55, 114, 255, 0.3);
+  backdrop-filter: blur(250px);
+  border-radius: 15px;
+  padding: 15px;
+
+  .cs-asset_view {
+    position: relative;
+  }
+
+  img {
+    border-radius: inherit;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+}
+
+.cs-single_raffle_info {
+  border-radius: 10px;
+  flex: 1;
+}
+
+.cs-single_buy_area {
+  display: flex;
+
+  span {
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  .cs-btn {
+    align-self: center;
+  }
 }
 
 .cs-demo {
@@ -2257,7 +2481,6 @@
   backdrop-filter: blur(250px);
   border-radius: 15px;
   padding: 15px;
-  padding-bottom: 0;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -2661,6 +2884,13 @@
     }
   }
 
+  .cs-single_product_head {
+    display: block;
+
+    h2 {
+      margin-bottom: 15px;
+    }
+  }
 }
 
 @media screen and (max-width: 400px) {

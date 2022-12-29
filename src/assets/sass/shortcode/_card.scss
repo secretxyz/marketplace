@@ -227,25 +227,25 @@
       font-size: 14px;
       line-height: 1.6em;
     }
-  }
+  } 
+}
 
-  .cs-avatar_status {
-    display: block;
+.cs-avatar_status {
+  display: block;
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background-color: $accent;
+  top: 5px;
+  right: 5px;
+  border: 1px solid #fff;
+
+  .cs-check-icon {
+    font-size: 6pt;
     position: absolute;
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;
-    background-color: #21A85A;
-    top: 5px;
-    right: 5px;
-    border: 1px solid #fff;
-
-    .cs-check-icon {
-      font-size: 6pt;
-      position: absolute;
-      left: 2px;
-      top: 3px;
-    }
+    left: 2px;
+    top: 3px;
   }
 }
 
@@ -466,20 +466,7 @@
         opacity: 1;
       }
     }
-  }
-
-  .cs-card_btn_3 {
-    font-size: 14px;
-    line-height: 1.5em;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    i {
-      margin-right: 5px;
-    }
-  }
+  }  
 
   .cs-card_footer {
     display: flex;
@@ -514,6 +501,19 @@
     .cs-card_info {
       margin-top: 10px;
     }
+  }
+}
+
+.cs-card_btn_3 {
+  font-size: 14px;
+  line-height: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  i {
+    margin-left: 8px;
   }
 }
 
@@ -876,6 +876,10 @@
   .cs-grid_5 {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .cs-grid_3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -888,6 +892,10 @@
 
 @media screen and (max-width: 767px) {
   .cs-grid_5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-grid_3 {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -908,6 +916,10 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
+  .cs-grid_3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .cs-card.cs-style5 .cs-card_img {
     height: 46px;
     width: 46px;
@@ -918,3 +930,4 @@
     margin-right: 5px;
   }
 }
+

@@ -396,8 +396,8 @@
     }
   }
 
-  .cs-munu_toggle,
-  .cs-munu_dropdown_toggle {
+  .cs-menu_toggle,
+  .cs-menu_dropdown_toggle {
     display: none;
   }
   .cs-nav_list>.menu-item-has-children{
@@ -525,7 +525,7 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .cs-munu_dropdown_toggle {
+  .cs-menu_dropdown_toggle {
     position: absolute;
     height: 30px;
     width: 30px;
@@ -589,7 +589,7 @@
   }
 
   /*Mobile Menu Button*/
-  .cs-munu_toggle {
+  .cs-menu_toggle {
     display: inline-block;
     width: 32px;
     height: 27px;
@@ -634,7 +634,7 @@
     }
   }
 
-  .cs-site_header.cs-style1 .cs-munu_toggle {
+  .cs-site_header.cs-style1 .cs-menu_toggle {
     top: 50%;
     right: 0px;
     margin-top: -13px;
@@ -738,7 +738,7 @@
   .cs-main_header_right {
     padding-right: 40px;
   }
-  .cs-munu_toggle {
+  .cs-menu_toggle {
     width: 30px;
   }
 }

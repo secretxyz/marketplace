@@ -78,17 +78,17 @@
     2. Mobile Menu
   --------------------------------------------------------------*/
   function mainNav() {
-    $('.cs-nav').append('<span class="cs-munu_toggle"><span></span></span>');
+    $('.cs-nav').append('<span class="cs-menu_toggle"><span></span></span>');
     $('.menu-item-has-children').append(
-      '<span class="cs-munu_dropdown_toggle"></span>'
+      '<span class="cs-menu_dropdown_toggle"></span>'
     );
-    $('.cs-munu_toggle').on('click', function () {
+    $('.cs-menu_toggle').on('click', function () {
       $(this)
         .toggleClass('cs-toggle_active')
         .siblings('.cs-nav_list')
         .slideToggle();
     });
-    $('.cs-munu_dropdown_toggle').on('click', function () {
+    $('.cs-menu_dropdown_toggle').on('click', function () {
       $(this).toggleClass('active').siblings('ul').slideToggle();
       $(this).parent().toggleClass('active');
     });
