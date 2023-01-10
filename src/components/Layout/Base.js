@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Header from './Header'
-import Sidebar from './Sidebar'
 import Footer from './Footer'
 
-const Base = props => (
-    <div className="main-content">
-        <Header />
+import SocketLoader from '../Helpers/SocketHelper'
 
-        <main>
-            { props.children }
-        </main>
+const Base = (props) => {
+    useEffect(() => {
+        SocketLoader();
+    }, [])
 
-        <Footer />
-    </div>
-)
+    return (
+        <div className="main-content">
+            <Header />
+
+            <main>
+                {props.children}
+            </main>
+
+            <Footer />
+        </div>
+    )
+}
 
 export default Base;

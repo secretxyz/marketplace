@@ -111,13 +111,7 @@ class TopCollections extends React.Component {
     }
 
     componentDidMount() {
-        $('.cs-toggle_btn').on('click', function () {
-            $(this).parents('.cs-toggle_box').siblings().find('.cs-toggle_btn').removeClass('active').siblings('.cs-toggle_body').removeClass('active')
-            $(this)
-                .toggleClass('active')
-                .siblings('.cs-toggle_body')
-                .toggleClass('active');
-        });
+
     }
 
     render() {

@@ -1,20 +1,18 @@
 import React from 'react';
-import Slider from "react-slick";
-import { withTranslation, Trans } from 'react-i18next';
+import { withRouter } from "react-router-dom";
 import ContentWrapper from '../Layout/ContentWrapper';
-import { Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import BidBanner from './Home/BidBanner';
 import NewItems from './Home/NewItems';
 import CollectionBanner from './Home/CollectionBanner';
 import TopSellers from './Home/TopSellers';
+import Partners from './Home/Partners';
 
 import HomeBanner from './Home/HomeBanner';
 import FeaturedRaffles from './Home/FeaturedRaffles';
 import TrendingCollections from './Home/TrendingCollections';
 import TopCollections from './Home/TopCollections';
 import ExplorerCategory from './Home/ExplorerCategory';
-import Partners from './Home/Partners';
 import TrendingNfts from './Home/TrendingNfts';
 import LiveAuctions from './Home/LiveAuctions';
 
@@ -41,14 +39,8 @@ class Home extends React.Component {
                 <div className="cs-height_70 cs-height_lg_40"></div>
                 <TopCollections />
 
-                {/* <div className="cs-height_95 cs-height_lg_70"></div>
-                <TopSellers /> */}
-
-                {/* <div className="cs-height_70 cs-height_lg_40"></div>
-                <NewItems /> */}
-
                 <div className="cs-height_70 cs-height_lg_40"></div>
-                {/* <!-- Start Items & Auctions --> */}
+
                 <section>
                     <div className="container">
                         <div className="row">
@@ -64,9 +56,6 @@ class Home extends React.Component {
 
                 <div className="cs-height_70 cs-height_lg_40"></div>
                 <ExplorerCategory />
-
-                {/* <div className="cs-height_70 cs-height_lg_40"></div>
-                <Partners /> */}
 
                 <div className="cs-height_70 cs-height_lg_40"></div>
                 <section>
@@ -88,4 +77,4 @@ class Home extends React.Component {
     }
 }
 
-export default withTranslation('translations')(Home);
+export default withRouter(Home);

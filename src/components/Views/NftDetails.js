@@ -168,7 +168,7 @@ class NftDetails extends Component {
                                 </div>
                             </div>
                             <div className="cs-single_product_head">
-                                <p>On sale for <span class="cs-accent_color"><strong>1230 XRP</strong></span> · Highest bid ~ <span class="cs-accent_color"><strong>589 XRP</strong></span></p>
+                                <p>On sale for <span className="cs-accent_color"><strong>1230 XRP</strong></span> · Highest bid ~ <span className="cs-accent_color"><strong>589 XRP</strong></span></p>
                             </div>
                             <div className="row">
                                 <div className="col-xl-7">

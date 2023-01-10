@@ -27,4 +27,5 @@ export const APP_MEDIAQUERY = {
     'mobile': 480
 };
 
-export const BITHOMP_URL = "https://bithomp.com/explorer/"
+export const API_URL = "http://localhost:1337";
+export const BITHOMP_URL = "https://bithomp.com/explorer/";

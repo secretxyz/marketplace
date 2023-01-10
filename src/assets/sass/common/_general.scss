@@ -799,7 +799,6 @@
   left: 0;
   height: 100%;
   width: 100%;
-  cursor: zoom-out;
   background: rgba(0, 0, 0, 0.3);
 }
 
@@ -887,10 +886,28 @@
   }
 }
 
-.cs-history_title {
+.cs-modal_title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 15px;
+}
+
+.cs-modal_sign_area {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.cs-qr_img {
+  width: 200px;
+  height: 200px;
+  margin-top: 32px;
+  margin-bottom: 4px;
 }
 
 .cs-bid_card {
