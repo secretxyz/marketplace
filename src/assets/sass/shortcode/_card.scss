@@ -382,6 +382,11 @@
     span {
       margin-left: 5px;
     }
+
+    .cs-profile_avatar_oval {
+      height: 32px;
+      width: 32px;
+    }
   }
 
   .cs-card_info {
@@ -440,6 +445,8 @@
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 120px;
+    text-align: center;
 
     span {
       position: relative;
@@ -470,7 +477,7 @@
 
   .cs-card_footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     padding: 10px 0 10px;

@@ -32,11 +32,13 @@ export const getCurrentTime = () => {
 };
 
 export const getSummaryAddress = (addr) => {
-	return `${addr.substring(0, 8)}...${addr.substring(addr.length - 8, addr.length)}`;
+	if (addr)
+		return `${addr.substring(0, 8)}...${addr.substring(addr.length - 8, addr.length)}`;
 }
 
-export const getSummaryTxID = (addr) => {
-	return `${addr.substring(0, 12)}...${addr.substring(addr.length - 12, addr.length)}`;
+export const getSummaryTxID = (txid) => {
+	if (txid)
+		return `${txid.substring(0, 10)}...${txid.substring(txid.length - 10, txid.length)}`;
 }
 
 export const getAuthChannel = () => {

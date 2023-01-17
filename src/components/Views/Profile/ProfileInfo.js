@@ -1,84 +1,96 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import ContentWrapper from '../../Layout/ContentWrapper';
+import Avatar from "./Avatar";
 
-class ProfileInfo extends Component {
+const ProfileInfo = ({ profile }) => {
+    const [account, setAccount] = useState(profile);
 
-    componentDidMount() {
-
+    const updateProfile = () => {
+        console.log(account);
     }
 
-    render() {
-        return (
-            <ContentWrapper>
-                <form className="row">
-                    <div className="col-lg-6">
-                        <div className="cs-form_field_wrap">
-                            <input type="text" className="cs-form_field cs-white_bg" placeholder="e. g. ‘Edward Figaro’" />
+    const onChangeInfo = (event) => {
+        setAccount({
+            ...account,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    return (
+        <ContentWrapper>
+            <div className="row">
+                <div className="col-lg-6">
+                    <div className="cs-form_field_wrap">
+                        <input name="username" type="text" className="cs-form_field cs-white_bg"
+                            placeholder="Enter username" value={account?.username || ""} onChange={onChangeInfo} />
+                    </div>
+                    <div className="cs-height_25 cs-height_lg_25"></div>
+                    <div className="cs-form_field_wrap">
+                        <input name="slug" type="text" className="cs-form_field cs-white_bg"
+                            placeholder="Enter slug" value={account?.slug || ""} onChange={onChangeInfo} />
+                    </div>
+                    <div className="cs-height_25 cs-height_lg_25"></div>
+                    <div className="cs-form_field_wrap">
+                        <textarea name="bio" cols="30" rows="5" className="cs-form_field cs-white_bg"
+                            placeholder="Your bio..." value={account?.bio || ""} onChange={onChangeInfo}></textarea>
+                    </div>
+                    <div className="cs-height_20 cs-height_lg_20"></div>
+                    <div className="cs-edit_profile">
+                        <div className="cs-edit_profile_img">
+                            <Avatar className="cs-profile_avatar" {...{ name: account?.wallet, image: account?.picture_url }} />
                         </div>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
-                        <div className="cs-form_field_wrap">
-                            <input type="text" className="cs-form_field cs-white_bg" placeholder="e. g. ‘Edward Figaro’" />
-                        </div>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
-                        <div className="cs-form_field_wrap">
-                            <textarea cols="30" rows="5" placeholder="Your bio..." className="cs-form_field cs-white_bg"></textarea>
-                        </div>
-                        <div className="cs-height_20 cs-height_lg_20"></div>
-                        <div className="cs-edit_profile">
-                            <div className="cs-edit_profile_img"><img src="img/avatar/avatar_29.png" alt="" /></div>
-                            <div className="cs-edit_profile_right">
-                                <div className="cs-edit_profile_btns">
-                                    <a href="#" className="cs-upload_btn">Upload</a>
-                                    <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
-                                </div>
-                                <p>Images must be .png or .jpg format. Min size 200x200px (avatar)</p>
+                        <div className="cs-edit_profile_right">
+                            <div className="cs-edit_profile_btns">
+                                <a href="#" className="cs-upload_btn">Upload</a>
+                                <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
                             </div>
+                            <p>Images must be .png or .jpg format. Min size 200x200px (avatar)</p>
                         </div>
                     </div>
-                    <div className="col-lg-6">
-                        <div className="cs-height_0 cs-height_lg_25"></div>
-                        <div className="cs-form_field_wrap">
-                            <input type="text" className="cs-form_field cs-white_bg" placeholder="Username" />
-                        </div>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
-                        <div className="cs-form_field_wrap">
-                            <input type="text" className="cs-form_field cs-white_bg" placeholder="Custom Url" />
-                        </div>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
-                        <span className="cs-btn cs-style2 cs-btn_lg w-100">
-                            <span className="text-left">
-                                <i className="fab fa-facebook-f"></i>
-                                <span>Facebook</span>
-                                <input type="text" value="www.facebook.com/username" />
-                            </span>
-                        </span>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
-                        <span className="cs-btn cs-style2 cs-btn_lg w-100">
-                            <span className="text-left">
-                                <i className="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                                <input type="text" value="www.facebook.com/username" />
-                            </span>
-                        </span>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
-                        <span className="cs-btn cs-style2 cs-btn_lg w-100">
-                            <span className="text-left">
-                                <i className="fab fa-linkedin-in"></i>
-                                <span>Linkedin</span>
-                                <input type="text" value="www.facebook.com/username" />
-                            </span>
-                        </span>
-                        <div className="cs-height_25 cs-height_lg_25"></div>
+                </div>
+                <div className="col-lg-6">
+                    <div className="cs-form_field_wrap">
+                        <input name="email" type="email" className="cs-form_field cs-white_bg"
+                            placeholder="Enter email" value={account?.email || ""} onChange={onChangeInfo} />
                     </div>
-                    <div className="col-lg-12">
-                        <div className="cs-height_40 cs-height_lg_5"></div>
-                        <button className="cs-btn cs-style1 cs-btn_lg"><span>Update Profile</span></button>
-                    </div>
-                </form>
-            </ContentWrapper>
-        );
-    }
-
+                    <div className="cs-height_25 cs-height_lg_25"></div>
+                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                        <span className="text-left cs-social_input">
+                            <i className="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                            <input name="telegram_username" type="text"
+                                placeholder="Do not add full url, just handle" value={account?.telegram_username || ""} onChange={onChangeInfo} />
+                        </span>
+                    </span>
+                    <div className="cs-height_25 cs-height_lg_25"></div>
+                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                        <span className="text-left cs-social_input">
+                            <i className="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                            <input name="twitter_username" type="text"
+                                placeholder="Do not add full url, just handle" value={account?.twitter_username || ""} onChange={onChangeInfo} />
+                        </span>
+                    </span>
+                    <div className="cs-height_25 cs-height_lg_25"></div>
+                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                        <span className="text-left cs-social_input">
+                            <i className="fab fa-discord"></i>
+                            <span>Discord</span>
+                            <input name="discord_username" type="text"
+                                placeholder="Do not add full url, just handle" value={account?.discord_username || ""} onChange={onChangeInfo} />
+                        </span>
+                    </span>
+                    <div className="cs-height_25 cs-height_lg_25"></div>
+                </div>
+                <div className="col-lg-12">
+                    <div className="cs-height_40 cs-height_lg_5"></div>
+                    <button className="cs-btn cs-style1 cs-btn_lg" onClick={updateProfile}>
+                        <span>Update Profile</span>
+                    </button>
+                </div>
+            </div>
+        </ContentWrapper>
+    );
 }
 
 export default ProfileInfo;

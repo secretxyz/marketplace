@@ -1,6 +1,6 @@
+import React, { useEffect } from 'react';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
-import React, { useEffect } from 'react';
 import useConnectWallet from '../../hooks/useConnectWallet';
 import xummStore from '../../store/xumm.store';
 import accountStore from '../../store/account.store';
@@ -25,11 +25,12 @@ const modal = (start, cancel) => {
 }
 
 const close = () => {
-  $(".cs-modal_close").trigger("click");
+  $(".cs-modal_close").trigger("click");  
 }
 
 const ConnectModal = ({ }) => {
   const { startRequest, cancelRequest } = useConnectWallet();
+
   const { auth_token } = accountStore;
   useEffect(() => {
     modal(startRequest, cancelRequest);
@@ -37,9 +38,8 @@ const ConnectModal = ({ }) => {
 
   const { subscription, result } = xummStore;
   useEffect(() => {
-    let res = toJS(result);
-    if (res?.status) {
-      console.log("Received result...", res);
+    if (result?.status) {
+      console.log("Received result...", toJS(result));
       close();
     }
   }, [result])

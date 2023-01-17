@@ -7,11 +7,13 @@ const Avatar = (props) => {
                 <img src={props.image} alt="" />
             </div>
         )
-    } else {
+    } else if (props.name) {
         const config = genConfig(props.name);
         return (
             <NiceAvatar className={props.className} {...config} />
         );
+    } else {
+        return <></>;
     }
 }
 

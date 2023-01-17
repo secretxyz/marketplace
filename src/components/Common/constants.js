@@ -17,7 +17,8 @@ export const APP_COLORS = {
     'gray-dark': '#3a3f51',
     'gray': '#dde6e9',
     'gray-light': '#e4eaec',
-    'gray-lighter': '#edf1f2'
+    'gray-lighter': '#edf1f2',
+    'accent': '#3772ff',
 };
 
 export const APP_MEDIAQUERY = {

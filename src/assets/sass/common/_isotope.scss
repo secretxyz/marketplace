@@ -280,3 +280,21 @@
     width: 100%;
   }
 }
+
+.cs-isotop_filter_sell_option {
+  ul {
+    border-radius: 8px !important;
+    background: #0f0935 !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    min-height: 48px;
+    font-size: 14px;
+  }
+
+  button {
+    border-radius: 8px !important;
+    padding: 2px 3px !important;
+    min-width: 52px;
+  }
+}

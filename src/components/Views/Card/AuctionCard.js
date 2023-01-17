@@ -65,10 +65,10 @@ class AuctionCard extends React.Component {
                     <div className="cs-card_price">Current Bid: <b className="cs-primary_color">{data.bid_price}</b></div>
                     <hr />
                     <div className="cs-card_footer">
-                        <span className="cs-card_btn_1" data-modal="#history_1">
+                        {/* <span className="cs-card_btn_1" data-modal="#history_1">
                             <i className="fas fa-redo fa-fw"></i>
                             View History
-                        </span>
+                        </span> */}
                         <span className="cs-card_btn_2" data-modal="#bid_1"><span>Place Bid</span></span>
                     </div>
                 </div>

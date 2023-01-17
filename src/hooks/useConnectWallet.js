@@ -15,12 +15,13 @@ const useConnectWallet = () => {
                 signal: controller.signal
             })
 
-            // console.log(res.data);
+            console.log(res.data);
             if (res.data.status) {
-                setAuthToken(res.data.data.auth_token)
-                setAccount(res.data.data.account);
-                accountStore.setAuthToken(res.data.data.auth_token);
-                accountStore.setAccount(res.data.data.account);
+                const { auth_token, account } = res.data.data;
+                setAuthToken(auth_token)
+                setAccount(account);
+                accountStore.setAuthToken(auth_token);
+                accountStore.setAccount(account);
                 xummStore.setResult(res.data);
             }
         } catch (error) {

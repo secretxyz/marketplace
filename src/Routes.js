@@ -52,13 +52,14 @@ const Routes = ({ location }) => {
                                 <Route path="/collection/:collection" component={waitFor(Collection)} />
                                 <Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
                                 <Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
-                                <Route path="/nft" component={waitFor(NftDetails)} />
+                                <Route path="/nft/:tokenid" component={waitFor(NftDetails)} />
                                 <Route path="/raffle" component={waitFor(RaffleDetails)} />
                                 <Route path="/drop" component={waitFor(Drop)} />
                                 <Route path="/ranking" component={waitFor(Ranking)} />
                                 <Route path="/activity" component={waitFor(Activity)} />
 
-                                <Route path="/profile" component={waitFor(Profile)} />
+                                <Route path="/my-profile" component={waitFor(Profile)} />
+                                <Route path="/profile/:wallet" component={waitFor(Profile)} />
                                 <Route path="/create" component={waitFor(Create)} />
 
                                 <Route path="/about" component={waitFor(About)} />

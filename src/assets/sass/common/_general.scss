@@ -1,6 +1,26 @@
 /*--------------------------------------------------------------
 4. General
 ----------------------------------------------------------------*/
+div::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: rgba($white, 0.1);
+  border-radius: 10px;
+}
+
+div::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba($white, 0.1);
+}
+
+div::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: linear-gradient(116.85deg, #fc466b 0%, #3f5efb 100%);
+}
+
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -742,6 +762,22 @@
   background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
   border-radius: 1.6em;
   padding: 1px;
+}
+
+.cs-offer_form_field {
+  background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
+  border-radius: 8px;
+  padding: 1px;
+
+  .cs-offer_field_title {
+    font-size: 14px;
+    margin-left: 12px;
+  }
+
+  .cs-offer_field_description {
+    font-size: 12px;
+    margin-left: 12px;
+  }
 }
 
 .cs-form_field {
@@ -2411,7 +2447,6 @@
 
 .cs-single_product_head {
   position: relative;
-  min-height: 40px;
   display: flex;
   justify-content: space-between;
 
@@ -2584,7 +2619,7 @@
 
 @media screen and (max-width: 991px) {
   .cs-btn.cs-style1 {
-    padding: 8px 20px;
+    padding: 8px 12px !important;
   }
 
   .cs-section_heading.cs-style1,
@@ -2918,4 +2953,36 @@
   .cs-edit_profile p {
     font-size: 12px;
   }
+}
+
+.cs-loading {
+  display: flex;
+  justify-content: center;
+}
+
+.cs-cards_area {
+  overflow-y: scroll;
+  max-height: 1600px;
+}
+
+.cs-social_input {
+  display: flex;  
+  align-items: center;
+
+  i {
+    min-width: 20px;
+  }
+
+  input {
+    min-width: 320px;
+  }
+}
+
+.cs-profile_avatar {
+  height: 100%;
+  border-radius: 0% !important;
+}
+
+.cs-profile_avatar_oval {
+  height: 100%;
 }
