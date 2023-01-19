@@ -483,7 +483,23 @@ div::-webkit-scrollbar-thumb {
 
 .cs-general_box_4 {
   padding: 20px 20px 16px;
-  border-radius: 10px;
+  border-radius: 10px !important;
+  min-height: 87px;
+
+  li {
+    padding: 0px 0 0px 20px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cs-collection_list_title {
+    font-size: 14px;
+  }
+
+  .cs-collection_list_number {
+    font-size: 16px;
+  }
 }
 
 .cs-general_box_5 {
@@ -2506,6 +2522,7 @@ div::-webkit-scrollbar-thumb {
     border-radius: inherit;
     transition: all 0.3s ease;
     width: 100%;
+    min-height: 360px;
   }
 
 }

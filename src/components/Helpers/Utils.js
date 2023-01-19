@@ -11,6 +11,38 @@ export const mapOrder = (array, order, key) => {
 	return array;
 };
 
+export const getDateTimeWithFormat = (value) => {
+	const dt = new Date(value);
+	let dd = dt.getDate();
+	let mm = dt.getMonth() + 1;
+
+	const yyyy = dt.getFullYear();
+	if (dd < 10) {
+		dd = `0${dd}`;
+	}
+	if (mm < 10) {
+		mm = `0${mm}`;
+	}
+
+	let ap = "AM";
+	let hh = dt.getHours();
+	let m = dt.getMinutes();
+	if (hh < 10) {
+		hh = `0${hh}`;
+	}
+	if (hh > 12) {
+		hh = hh - 12;
+	}
+	if (hh >= 12) {
+		ap = "PM"
+	}
+	if (m < 10) {
+		m = `0${m}`;
+	}
+
+	return `${dd}/${mm}/${yyyy} ${hh}:${m} ${ap}`;
+};
+
 export const getDateWithFormat = () => {
 	const today = new Date();
 	let dd = today.getDate();
@@ -31,9 +63,21 @@ export const getCurrentTime = () => {
 	return `${now.getHours()}:${now.getMinutes()}`;
 };
 
+export const getSummaryUsername = (data) => {
+	if (data && data.username) {
+		return `@${data.username}`
+	}
+	return getSummaryAddress2(data.wallet);
+}
+
 export const getSummaryAddress = (addr) => {
 	if (addr)
 		return `${addr.substring(0, 8)}...${addr.substring(addr.length - 8, addr.length)}`;
+}
+
+export const getSummaryAddress2 = (addr) => {
+	if (addr)
+		return `${addr.substring(0, 8)}...`;
 }
 
 export const getSummaryTxID = (txid) => {

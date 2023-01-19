@@ -26,7 +26,7 @@ const Raffles = ({ accountId }) => {
             <div className="row cs-cards_area" onScroll={handleScroll}>
                 {items.map(n => (
                     <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                        <RaffleCard data={{ ...n.attributes, owner_id: accountId }} />
+                        <RaffleCard data={{ ...n.attributes }} />
                         <div className="cs-height_20 cs-height_lg_20"></div>
                     </div>
                 ))}

@@ -15,10 +15,10 @@ import { useProfile } from '../../hooks/useProfile';
 import { getAccount, getSummaryAddress } from '../Helpers/Utils';
 
 const NavComponents = {
+    "raffles": Raffles,
     "collected": Collected,
     "created": Created,
     "collections": Collections,
-    "raffles": Raffles,
     "offers-made": OffersMade,
     "offers-received": OffersReceived,
     "transfer": Transfer,
@@ -29,10 +29,15 @@ const NavComponents = {
 
 const NavMenus = [
     {
+        label: "Raffles",
+        icon: "fa-award",
+        key: "raffles",
+        isChecked: true
+    },
+    {
         label: "Collected",
         icon: "fa-list-ul",
-        key: "collected",
-        isChecked: true
+        key: "collected"
     },
     {
         label: "Created",
@@ -43,11 +48,6 @@ const NavMenus = [
         label: "Collections",
         icon: "fa-project-diagram",
         key: "collections"
-    },
-    {
-        label: "Raffles",
-        icon: "fa-award",
-        key: "raffles"
     },
     {
         label: "Offers Made",

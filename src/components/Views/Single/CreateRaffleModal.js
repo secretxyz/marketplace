@@ -9,29 +9,25 @@ const SellOptions = [
 	{ id: 4, label: "100%", isChecked: true },
 ];
 
-const CreateRaffleModal = ({ nft, refreshDetails }) => {
-	const { loading, created, createRaffle } = useRaffle();
+const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
+	const { creating, result, createRaffle } = useRaffle();
 	const [step, setStep] = useState(0);
 	const [raffle, setRaffle] = useState({ sell_option: 4 });
 	const [sellOptions, setSellOptions] = useState(SellOptions);
 	const [descriptions, setDescriptions] = useState({});
 
 	useEffect(() => {
-		if (created) {
-			setRaffle(created);
+		if (result) {
 			setStep(2);
-
-			// reload nft information
-			refreshDetails();
+			if (result.data) {
+				refreshDetails();
+			}
 		}
-	}, [created])
+	}, [result])
 
 	const close = () => {
 		$("#create_raffle_modal").removeClass("active");
-
-		setStep(0);
-		setRaffle({ sell_option: 4 })
-		setSellOptions(SellOptions);
+		closeModal();
 	}
 
 	const onChangeInfo = (event) => {
@@ -132,10 +128,12 @@ const CreateRaffleModal = ({ nft, refreshDetails }) => {
 							<h2 className="cs-modal_title">Connecting to XUMM wallet...</h2>
 							<div className="cs-height_10 cs-height_lg_10"></div>
 							We're waiting for your wallet to approve this action.
+							<div className="cs-height_5 cs-height_lg_5"></div>
 						</div> : <div>
-							<h2 className="cs-modal_title">Success</h2>
+							<h2 className="cs-modal_title">Result</h2>
 							<div className="cs-height_10 cs-height_lg_10"></div>
-							The NFT listed successfully.
+							<div>{result.message}</div>
+							<div className="cs-height_5 cs-height_lg_5"></div>
 						</div>}
 					</div>
 				</div>

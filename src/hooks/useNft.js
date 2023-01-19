@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
 export const useNft = (tokenid) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [nft, setNft] = useState();
 
     const fetchNftDetails = async (tokenid) => {

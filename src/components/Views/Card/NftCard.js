@@ -1,6 +1,7 @@
 import React from 'react';
-import { withTranslation, Trans } from 'react-i18next';
+import Avatar from "../Profile/Avatar";
 import { getAccount } from '../../Helpers/Utils';
+import { getSummaryAddress } from '../../Helpers/Utils';
 
 const NftCard = ({ data }) => {
     const nft_link = `/nft/${data.nft_tokenid}`;
@@ -43,8 +44,13 @@ const NftCard = ({ data }) => {
             </a>
             <div className="cs-card_info">
                 <a href={nft_link} className="cs-avatar cs-white_bg">
-                    {data.owner && <img src={data.owner.picture_url} alt="Avatar" />}
-                    {data.owner && <span>{data.owner.name}</span>}
+                    <Avatar className="cs-profile_avatar_oval"
+                        {...{
+                            name: data.owner?.data?.attributes?.wallet,
+                            image: data.owner?.data?.attributes?.picture_url
+                        }}
+                    />
+                    <span>{data.owner?.data?.attributes?.username ?? getSummaryAddress(data.owner?.data?.attributes?.wallet)}</span>
                 </a>
                 <h3 className="cs-card_title">
                     <a href={nft_link}>{data.name}</a>
