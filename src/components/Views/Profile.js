@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ContentWrapper from '../Layout/ContentWrapper';
 import Avatar from "./Profile/Avatar";
-import Collected from './Profile/Collected';
-import Created from './Profile/Created';
+import CollectedItems from './Profile/CollectedItems';
+import CreatedItems from './Profile/CreatedItems';
 import Collections from './Profile/Collections';
 import Raffles from './Profile/Raffles';
 import OffersMade from './Profile/OffersMade';
@@ -16,8 +16,8 @@ import { getAccount, getSummaryAddress } from '../Helpers/Utils';
 
 const NavComponents = {
     "raffles": Raffles,
-    "collected": Collected,
-    "created": Created,
+    "collected": CollectedItems,
+    "created": CreatedItems,
     "collections": Collections,
     "offers-made": OffersMade,
     "offers-received": OffersReceived,
@@ -166,7 +166,12 @@ const Profile = (props) => {
                         </div>
                     </div>
                     <div className="cs-profile_right">
-                        <div className="cs-height_25 cs-height_lg_25"></div>
+                        {/* {profile?.bio && <div className="cs-profile_bio">
+                            <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
+                                {profile.bio}
+                            </div>
+                        </div>} */}
+                        <div className="cs-height_15 cs-height_lg_10"></div>
                         <ContentComponent accountId={accountId} profile={profile} />
                     </div>
                 </div>

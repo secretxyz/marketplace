@@ -8,7 +8,7 @@ export const useFeaturedRaffle = () => {
     const fetch = async () => {
         setLoading(true);
         const res = await SecretApi.getFeaturedRaffles();
-        setItems(res.data);
+        setItems(res?.data);
         setLoading(false);
     }
 

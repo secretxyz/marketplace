@@ -63,6 +63,13 @@ export const getCurrentTime = () => {
 	return `${now.getHours()}:${now.getMinutes()}`;
 };
 
+export const getImageLink = (url) => {
+	if (url.startsWith("ipfs://")) {
+		return `https://ipfs.io/ipfs/${url.substring(7)}`;
+	}
+	return url;
+}
+
 export const getSummaryUsername = (data) => {
 	if (data && data.username) {
 		return `@${data.username}`

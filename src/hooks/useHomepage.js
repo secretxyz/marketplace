@@ -8,7 +8,7 @@ export const useBannerCollections = () => {
     const getBannerCollections = async () => {
         setLoading(true);
         const res = await SecretApi.getBannerCollections();
-        setCollections(res.data);
+        setCollections(res?.data || []);
         setLoading(false);
     }
 

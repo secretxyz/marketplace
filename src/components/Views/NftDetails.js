@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import ContentWrapper from "../Layout/ContentWrapper";
 import CountLoader from "../Common/CountLoader";
 
@@ -8,8 +8,7 @@ import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
 import { useNft } from "../../hooks/useNft";
-import { useEffect, useState } from "react";
-import { getAccount, getSummaryAddress, isLoggedIn } from "../Helpers/Utils";
+import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn } from "../Helpers/Utils";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
 import BuyTicketModal from "./Single/BuyTicketModal";
 import PageLoader from "../Common/PageLoader";
@@ -109,8 +108,12 @@ const NftDetails = (props) => {
         return raffler?.id == getAccount()?.id;
     }
 
+    const isWinner = () => {
+        return winner?.id == getAccount()?.id;
+    }
+
     const getBuySellView = () => {
-        if (isLoggedIn() && getAccount().id == nft?.owner.id) {
+        if (isLoggedIn() && getAccount().id == nft?.owner?.id) {
             return <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
@@ -153,66 +156,130 @@ const NftDetails = (props) => {
         }
 
         if (raffle) {
-            return <div className="row">
-                <div className="col-xl-7">
-                    {isRaffleOwner() ? <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
-                        <li>
-                            <div className="cs-collection_list_title">Possible Earning</div>
-                            <div className="cs-collection_list_number">{
-                                Number(raffle.ticket_price * raffle.reserved_count * (100 - raffle.raffle_fee) / 100).toFixed(2)
-                            } XRP</div>
-                        </li>
-                        <li>
-                            <div className="cs-collection_list_title">Selling Option</div>
-                            <div className="cs-collection_list_number">{25 * raffle.sell_option}%</div>
-                        </li>
-                        <li>
-                            <div className="cs-collection_list_title">Raffle Fee ({raffle.raffle_fee}%)</div>
-                            <div className="cs-collection_list_number">{
-                                Number(raffle.ticket_price * raffle.reserved_count * raffle.raffle_fee / 100).toFixed(2)
-                            } XRP</div>
-                        </li>
-                    </ul> : <div className="cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-grid_5 cs-gap_20">
-                        <span>Reserve Tickets</span>
-                        <div className="cs-form_field_wrap">
-                            <input name="ticket_count" type="number" className="cs-form_field" placeholder="1" value={ticket.ticket_count || ""} onChange={onChangeTicketInfo} />
-                        </div>
-                        <a className="cs-btn cs-style1 cs-btn_lg text-center" onClick={onClickBuyTickets}><span>Buy</span></a>
-                    </div>}
-                    <div className="cs-height_20 cs-height_lg_20"></div>
-                </div>
-                <div className="col-xl-5">
-                    <div className="cs-general_box_4 cs-box_shadow cs-white_bg cs-center">
-                        <div className="cs-countdown_style2" data-countdate={raffle.raffle_end_datetime}>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_days"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Days</h3>
+            if (raffle.status == "active") {
+                return <div className="row">
+                    <div className="col-xl-7">
+                        {isRaffleOwner() ? <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
+                            <li>
+                                <div className="cs-collection_list_title">Possible Earning</div>
+                                <div className="cs-collection_list_number">{
+                                    Number(raffle.ticket_price * raffle.reserved_count * (100 - raffle.raffle_fee) / 100).toFixed(2)
+                                } XRP</div>
+                            </li>
+                            <li>
+                                <div className="cs-collection_list_title">Selling Option</div>
+                                <div className="cs-collection_list_number">{25 * raffle.sell_option}%</div>
+                            </li>
+                            <li>
+                                <div className="cs-collection_list_title">Raffle Fee ({raffle.raffle_fee}%)</div>
+                                <div className="cs-collection_list_number">{
+                                    Number(raffle.ticket_price * raffle.reserved_count * raffle.raffle_fee / 100).toFixed(2)
+                                } XRP</div>
+                            </li>
+                        </ul> : <div className="cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-grid_5 cs-gap_20">
+                            <span>Reserve Tickets</span>
+                            <div className="cs-form_field_wrap">
+                                <input name="ticket_count" type="number" className="cs-form_field" placeholder="1" value={ticket.ticket_count || ""} onChange={onChangeTicketInfo} />
                             </div>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_hours"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Hours</h3>
-                            </div>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_minutes"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Min</h3>
-                            </div>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_seconds"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Sec</h3>
-                            </div>
-                        </div>
+                            <a className="cs-btn cs-style1 cs-btn_lg text-center" onClick={onClickBuyTickets}><span>Buy</span></a>
+                        </div>}
+                        <div className="cs-height_20 cs-height_lg_20"></div>
                     </div>
-                    <div className="cs-height_20 cs-height_lg_20"></div>
+                    <div className="col-xl-5">
+                        <div className="cs-general_box_4 cs-box_shadow cs-white_bg cs-center">
+                            <div className="cs-countdown_style2" data-countdate={raffle.raffle_end_datetime}>
+                                <div className="cs-countdown_item">
+                                    <div className="cs-countdown_number">
+                                        <div className="cs-count_days"></div>
+                                    </div>
+                                    <h3 className="cs-countdown_text">Days</h3>
+                                </div>
+                                <div className="cs-countdown_item">
+                                    <div className="cs-countdown_number">
+                                        <div className="cs-count_hours"></div>
+                                    </div>
+                                    <h3 className="cs-countdown_text">Hours</h3>
+                                </div>
+                                <div className="cs-countdown_item">
+                                    <div className="cs-countdown_number">
+                                        <div className="cs-count_minutes"></div>
+                                    </div>
+                                    <h3 className="cs-countdown_text">Min</h3>
+                                </div>
+                                <div className="cs-countdown_item">
+                                    <div className="cs-countdown_number">
+                                        <div className="cs-count_seconds"></div>
+                                    </div>
+                                    <h3 className="cs-countdown_text">Sec</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
                 </div>
-            </div>
+            } else if (raffle.status == "canceling") {
+                return <div className="row">
+                    <div className="col-xl-7">
+                        {isRaffleOwner() ? <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                            <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickBuyTickets}>
+                                <span>Draw NFT</span>
+                            </a>
+                        </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
+                            <li>
+                                <div className="cs-collection_list_title">Raffle Status</div>
+                                <div className="cs-collection_list_number">Expired</div>
+                            </li>
+                            <li>
+                                <div className="cs-collection_list_title">Refund Tickets</div>
+                                <div className="cs-collection_list_number">{Number(raffle.ticket_price * raffle.reserved_count)} XRP</div>
+                            </li>
+                        </ul>}
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                    <div className="col-xl-5">
+                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                            <div>
+                                <p>Raffle Ended on:</p>
+                                <h3>{getDateTimeWithFormat(raffle?.raffle_end_datetime)}</h3>
+                            </div>
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                </div>
+            } else if (raffle.status == "raffling") {
+                return <div className="row">
+                    <div className="col-xl-7">
+                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-winner_box">
+                            <i className="fas fa-crown fa-fw"></i>
+                            <span className="cs-winner_title">RAFFLE WINNER</span>
+                            <div className="cs-author_img">
+                                <Avatar className="cs-profile_avatar_oval" {...{ name: winner?.wallet, image: winner?.picture_url }} />
+                            </div>
+                            <div>
+                                <p className="cs-winner_text">
+                                    <a href={`/profile/${winner?.wallet}`}>@{winner?.username || "Unknown"}</a>
+                                    {winner?.verified && <i className="fas fa-id-card"></i>}
+                                    {winner?.twitter_username && <i className="fab fa-twitter fa-fw"></i>}
+                                    {/* <i className="fas fa-medal"></i> */}
+                                </p>
+                                <div className="cs-white_color_8">{getSummaryAddress(winner?.wallet)}</div>
+                            </div>
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                    <div className="col-xl-5">
+                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                            {isWinner() ? <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickBuyTickets}>
+                                <span>Draw Prize</span>
+                            </a> : <div>
+                                <p>Raffle Ended on:</p>
+                                <h3>{getDateTimeWithFormat(raffle?.raffle_end_datetime)}</h3>
+                            </div>}
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                </div>
+            }
         }
 
         if (nft?.activity?.type == "auction") {
@@ -390,7 +457,6 @@ const NftDetails = (props) => {
                             </div>
                         </div>
                         {getBuySellView()}
-                        <div className="cs-height_10 cs-height_lg_10"></div>
                         {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} />}
                         {nft && !raffle && <NftInfoTabs />}
                         <div className="cs-height_30 cs-height_lg_30"></div>

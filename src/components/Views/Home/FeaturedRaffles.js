@@ -2,18 +2,23 @@ import React, { useEffect } from 'react';
 import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
 import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
+import { useState } from 'react';
 
 const FeaturedRaffles = () => {
+    const [hidden, setHidden] = useState(false);
     const { loading, items } = useFeaturedRaffle();
 
     useEffect(() => {
         if (items.length > 0) {
             SlickLoader('.cs-raffle_nft_slider');
+        } else {
+            setHidden(true);
         }
     }, [items])
 
     return (
-        <section>
+        <section hidden={hidden}>
+            <div className="cs-height_70 cs-height_lg_40"></div>
             <div className="container">
                 <div className="cs-section_heading cs-style2">
                     <div className="cs-section_left">

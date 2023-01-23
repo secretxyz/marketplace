@@ -47,7 +47,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">Do you have to mint an NFT to sell it?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -60,7 +60,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">How much does the average NFT sell for?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -73,7 +73,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">What kind of NFTs sell best?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -86,7 +86,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">How to make money with NFTs as a beginner?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -99,7 +99,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">Who owns the most expensive NFT?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -140,7 +140,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">How do I get started in NFT?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -158,7 +158,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">How much does the average NFT sell for?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -171,7 +171,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">What kind of NFTs sell best?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -184,7 +184,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">How to make money with NFTs as a beginner?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>
@@ -197,7 +197,7 @@ class Faq extends Component {
                                             <h2 className="cs-accordion_title">Who owns the most expensive NFT?</h2>
                                             <span className="cs-accordion_toggle">
                                                 <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M1.62109 0.750977L6.95443 6.08431L12.2878 0.750977" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </span>
                                         </div>

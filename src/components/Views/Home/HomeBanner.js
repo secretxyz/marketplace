@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from "react-slick";
-import { withTranslation, Trans } from 'react-i18next';
 import { useBannerCollections } from '../../../hooks/useHomepage';
-import { useState } from 'react';
+import { getImageLink } from "../../Helpers/Utils";
 
 const HomeBanner = () => {
     const { loading, collections } = useBannerCollections();
@@ -29,7 +28,7 @@ const HomeBanner = () => {
                                     <Slider
                                         ref={c => (setSlider(c))}
                                         {...{
-                                            autoplay: false,
+                                            autoplay: true,
                                             autoplaySpeed: 3000,
                                             speed: 600,
                                             slidesToShow: 1,
@@ -39,11 +38,11 @@ const HomeBanner = () => {
                                         {collections.map(c => (
                                             <div className="cs-slide cs-slide-collection" key={c.id}>
                                                 <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
-                                                    <a href={`/collection/${c.attributes?.slug}`} className="cs-card_thumb cs-zoom_effect">
-                                                        <img src={c.attributes?.banner_picture_url} alt="Image" className="cs-zoom_item" />
+                                                    <a href={`/collection/${c.attributes?.slug}`} className="cs-card_thumb cs-zoom_effect ">
+                                                        <img src={c.attributes?.banner_picture_url} alt="Image" className="cs-zoom_item cs-height_150 cs-height_lg_150" />
                                                     </a>
                                                     <a href={`/collection/${c.attributes?.slug}`} className="cs-avatar cs-collection-avatar">
-                                                        <img src={c.attributes?.picture_url} alt="Avatar" />
+                                                        <img src={getImageLink(c.attributes?.picture_url)} alt="Avatar" />
                                                     </a>
                                                     <div className="cs-card_info">
                                                         <h3 className="cs-card_title"><a href={`/collection/${c.attributes?.slug}`}>{c.attributes?.name}</a></h3>

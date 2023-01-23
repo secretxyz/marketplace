@@ -29,8 +29,7 @@ class Home extends React.Component {
             <ContentWrapper>
                 <div className="cs-height_90 cs-height_lg_80"></div>
                 <HomeBanner />
-
-                <div className="cs-height_70 cs-height_lg_40"></div>
+                
                 <FeaturedRaffles />
 
                 <div className="cs-height_70 cs-height_lg_40"></div>

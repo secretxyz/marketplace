@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
+import { observer } from 'mobx-react';
 import BeatLoader from "react-spinners/BeatLoader";
-import { APP_COLORS } from "../../Common/constants"
 import ContentWrapper from '../../Layout/ContentWrapper';
 import NftCard from '../Card/NftCard';
-import { useCreatedItems } from '../../../hooks/useProfile';
+import { APP_COLORS } from "../../Common/constants"
+import { useCollectedItems } from '../../../hooks/useProfile';
 
-const Created = ({ accountId }) => {
-    const { loading, items, fetchNext } = useCreatedItems();
+const CollectedItems = ({ accountId }) => {
+    const { loading, items, fetchNext } = useCollectedItems();
 
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -23,10 +24,10 @@ const Created = ({ accountId }) => {
 
     return (
         <ContentWrapper>
-            <div className="row">
+            <div className="row cs-cards_area" onScroll={handleScroll}>
                 {items.map(n => (
                     <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                        <NftCard data={{ ...n.attributes, owner_id: accountId }} />
+                        <NftCard data={{ ...n.attributes }} />
                         <div className="cs-height_20 cs-height_lg_20"></div>
                     </div>
                 ))}
@@ -37,4 +38,4 @@ const Created = ({ accountId }) => {
     );
 }
 
-export default Created;
+export default CollectedItems;

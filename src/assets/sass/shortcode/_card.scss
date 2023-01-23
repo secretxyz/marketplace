@@ -121,8 +121,6 @@
     img {
       border-radius: inherit;
       width: 100%;
-      min-height: 100px;
-      max-height: 160px;
       object-fit: cover;
     }
   }
@@ -148,6 +146,10 @@
     align-items: center;
     justify-content: center;
     color: $ternary;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
     i {
       color: #21A85A;

@@ -23,66 +23,6 @@ export const useProfile = () => {
     }
 }
 
-export const useCollectedItems = () => {
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const page = useRef(0);
-
-    const fetchCollectedItems = async (id, page) => {
-        setLoading(true);
-        const res = await SecretApi.getCollected(id, page);
-        setItems([...items, ...res.data]);
-        setLoading(false);
-    }
-
-    const fetchNext = (accountId, pageNumber) => {
-        if (accountId) {
-            if (!pageNumber) {
-                page.current = page.current + 1;
-            } else {
-                page.current = pageNumber;
-            }
-            fetchCollectedItems(accountId, page.current);
-        }
-    }
-
-    return {
-        items,
-        loading,
-        fetchNext
-    }
-}
-
-export const useCreatedItems = () => {
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const page = useRef(0);
-
-    const fetchCreatedItems = async (id, page) => {
-        setLoading(true);
-        const res = await SecretApi.getCreated(id, page);
-        setItems([...items, ...res.data]);
-        setLoading(false);
-    }
-
-    const fetchNext = (accountId, pageNumber) => {
-        if (accountId) {
-            if (!pageNumber) {
-                page.current = page.current + 1;
-            } else {
-                page.current = pageNumber;
-            }
-            fetchCreatedItems(accountId, page.current);
-        }
-    }
-
-    return {
-        items,
-        loading,
-        fetchNext
-    }
-}
-
 export const useRaffleItems = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -113,6 +53,95 @@ export const useRaffleItems = () => {
     }
 }
 
+export const useCollectedItems = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const page = useRef(0);
+
+    const fetchCollectedItems = async (id, page) => {
+        setLoading(true);
+        const res = await SecretApi.getCollected(id, page);
+        setItems([...items, ...res.data]);
+        setLoading(false);
+    }
+
+    const fetchNext = (accountId, pageNumber) => {
+        if (accountId) {
+            if (!pageNumber) {
+                page.current = page.current + 1;
+            } else {
+                page.current = pageNumber;
+            }
+            fetchCollectedItems(accountId, page.current);
+        }
+    }
+
+    return {
+        items,
+        loading,
+        fetchNext
+    }
+}
+
+export const useCreatedItems = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const page = useRef(0);
+
+    const fetchCreatedItems = async (id, page) => {
+        setLoading(true);
+        const res = await SecretApi.getCreated(id, page);
+        setItems([...items, ...res.data]);
+        setLoading(false);
+    }
+
+    const fetchNext = (accountId, pageNumber) => {
+        if (accountId) {
+            if (!pageNumber) {
+                page.current = page.current + 1;
+            } else {
+                page.current = pageNumber;
+            }
+            fetchCreatedItems(accountId, page.current);
+        }
+    }
+
+    return {
+        items,
+        loading,
+        fetchNext
+    }
+}
+
+export const useCreatedCollections = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const page = useRef(0);
+
+    const fetchCreatedItems = async (issuer, page) => {
+        setLoading(true);
+        const res = await SecretApi.getCreatedCollections(issuer, page);
+        setItems([...items, ...res.data]);
+        setLoading(false);
+    }
+
+    const fetchNext = (issuer, pageNumber) => {
+        if (issuer) {
+            if (!pageNumber) {
+                page.current = page.current + 1;
+            } else {
+                page.current = pageNumber;
+            }
+            fetchCreatedItems(issuer, page.current);
+        }
+    }
+
+    return {
+        items,
+        loading,
+        fetchNext
+    }
+}
 
 export const useProfileInfo = () => {
     const [loading, setLoading] = useState(false);

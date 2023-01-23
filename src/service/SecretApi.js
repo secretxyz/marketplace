@@ -1,4 +1,5 @@
 import axios from "axios";
+import { active } from "d3";
 import { getAuthToken, setAccount, setAuthToken } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
 
@@ -48,16 +49,24 @@ class SecretApi {
         let params = {
             "pagination[page]": page,
             "pagination[pageSize]": pageSize || this.pageSize,
+            "populate[nfts][count]": true
         };
 
         if (category === "trending") {
-
+            params = {
+                ...params,
+                "sort[daily_volume]": "desc",
+            }
         } else if (category === "top") {
-
+            params = {
+                ...params,
+                "sort[total_volume]": "desc",
+            }
         } else {
             params = {
                 ...params,
                 "filters[category]": category,
+                "sort[total_volume]": "desc",
             }
         }
         try {
@@ -76,6 +85,8 @@ class SecretApi {
                     "pagination[page]": 1,
                     "pagination[pageSize]": 10,
                     "filters[homepage_banner]": true,
+                    "filters[status]": "active",
+                    "sort[raffle_end_datetime]": "asc",
                     "populate[raffler]": true,
                     "populate[nft]": true,
                 }
@@ -170,6 +181,22 @@ class SecretApi {
         }
     }
 
+    async getCreatedCollections(issuer, page) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/collections`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "filters[issuer]": issuer
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async getRaffles(id, page) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
@@ -177,6 +204,8 @@ class SecretApi {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "filters[raffler]": id,
+                    "sort[status]": "asc",
+                    "sort[raffle_end_datetime]": "asc",
                     "populate[nft]": true,
                     "populate[raffler]": true,
                 }
@@ -189,7 +218,7 @@ class SecretApi {
     }
 
     // NftDetails
-    
+
     async getNftWithTokenID(tokenid) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nft/${tokenid}`);
@@ -250,6 +279,33 @@ class SecretApi {
         }
     }
 
+    // Collection
+    async getCollectionWithSlug(slug) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/collection/${slug}`);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async getCollectionNfts(collectionId, page, params) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nfts`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "filters[collection]": collectionId,
+                    "populate[owner]": true,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
 }
 
 

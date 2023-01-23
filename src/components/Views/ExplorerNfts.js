@@ -259,26 +259,26 @@ class ExplorerNfts extends Component {
 										<ul>
 											<li>
 												<div className="form-check">
-													<input className="form-check-input" type="checkbox" id="flexCheckChecked" checked />
-													<label className="form-check-label" for="flexCheckChecked">Buy Now</label>
+													<input className="form-check-input" type="checkbox" id="flexCheckChecked" />
+													<label className="form-check-label" htmlFor="flexCheckChecked">Buy Now</label>
 												</div>
 											</li>
 											<li>
 												<div className="form-check">
 													<input className="form-check-input" type="checkbox" id="flexCheckDefault" />
-													<label className="form-check-label" for="flexCheckDefault">In Auction</label>
+													<label className="form-check-label" htmlFor="flexCheckDefault">In Auction</label>
 												</div>
 											</li>
 											<li>
 												<div className="form-check">
 													<input className="form-check-input" type="checkbox" id="flexCheckDefault1" />
-													<label className="form-check-label" for="flexCheckDefault1">Looking to Sell</label>
+													<label className="form-check-label" htmlFor="flexCheckDefault1">Looking to Sell</label>
 												</div>
 											</li>
 											<li>
 												<div className="form-check">
 													<input className="form-check-input" type="checkbox" id="flexCheckDefault2" />
-													<label className="form-check-label" for="flexCheckDefault2">Has Offers</label>
+													<label className="form-check-label" htmlFor="flexCheckDefault2">Has Offers</label>
 												</div>
 											</li>
 										</ul>
@@ -341,8 +341,8 @@ class ExplorerNfts extends Component {
 												<input type="text" className="cs-search_input" placeholder="Search" />
 												<button className="cs-search_btn">
 													<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round" />
-														<path d="M17.5 18L13.875 14.375" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round" />
+														<path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
+														<path d="M17.5 18L13.875 14.375" stroke="currentColor" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
 													</svg>
 												</button>
 											</form>

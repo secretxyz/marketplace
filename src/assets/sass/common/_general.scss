@@ -5,14 +5,14 @@ div::-webkit-scrollbar-track,
 div::-webkit-scrollbar-track {
   box-shadow: none;
   -webkit-box-shadow: none;
-  background-color: rgba($white, 0.1);
+  background-color: rgba($white, 0);
   border-radius: 10px;
 }
 
 div::-webkit-scrollbar,
 div::-webkit-scrollbar {
   width: 6px;
-  background-color: rgba($white, 0.1);
+  background-color: rgba($white, 0);
 }
 
 div::-webkit-scrollbar-thumb,
@@ -510,6 +510,35 @@ div::-webkit-scrollbar-thumb {
 .cs-general_box_6 {
   padding: 18px 20px;
   border-radius: 10px;
+}
+
+.cs-winner_box {
+  background: linear-gradient(116.85deg, rgba(252, 70, 107, 1) 0%, rgba(63, 94, 251, 1) 100%) !important;
+  border-radius: 10px !important;
+  min-height: 87px;
+  color: white !important;
+  display: flex;
+  justify-content: center;
+
+  .cs-winner_title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 8px 0 8px;
+  }
+
+  .cs-winner_text {
+    font-weight: 700;
+    color: white !important;
+
+    a:hover {
+      color: white !important;
+    }
+
+    i {
+      margin-left: 8px;
+    }
+  }
 }
 
 .cs-primary_color {
@@ -1471,6 +1500,8 @@ div::-webkit-scrollbar-thumb {
 .cs-collection_img img {
   width: 100%;
   border-radius: 15px;
+  height: 293px;
+  object-fit: cover;
 }
 
 .cs-collection_avatar {
@@ -1489,7 +1520,7 @@ div::-webkit-scrollbar-thumb {
 
 .cs-collection_bottom {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 25px;
   margin-top: -100px;
 }
@@ -1507,7 +1538,7 @@ div::-webkit-scrollbar-thumb {
   // align-items: center;
   // justify-content: space-between;
   // flex-wrap: wrap;
-  padding: 25px 25px;
+  padding: 17px 25px;
 
   .cs-btn.cs-style1 {
     border-radius: 5px;
@@ -1530,6 +1561,10 @@ div::-webkit-scrollbar-thumb {
   font-size: 14px;
   line-height: 1.6em;
   margin-top: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .cs-collection_avatar_name {
@@ -2522,7 +2557,6 @@ div::-webkit-scrollbar-thumb {
     border-radius: inherit;
     transition: all 0.3s ease;
     width: 100%;
-    min-height: 360px;
   }
 
 }
@@ -2960,6 +2994,14 @@ div::-webkit-scrollbar-thumb {
       margin-bottom: 15px;
     }
   }
+
+  .cs-collection_img img {
+    height: 78px;
+  }
+
+  .cs-collection_info_other {
+    right: 0px;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -2973,17 +3015,18 @@ div::-webkit-scrollbar-thumb {
 }
 
 .cs-loading {
-  display: flex;
+  display: flex !important;
   justify-content: center;
 }
 
 .cs-cards_area {
   overflow-y: scroll;
-  max-height: 1600px;
+  min-height: 280px;
+  max-height: 1200px;
 }
 
 .cs-social_input {
-  display: flex;  
+  display: flex;
   align-items: center;
 
   i {

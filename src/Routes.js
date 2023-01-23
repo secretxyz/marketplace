@@ -49,7 +49,7 @@ const Routes = ({ location }) => {
                     <div>
                         <Suspense fallback={<PageLoader />}>
                             <Switch location={location}>
-                                <Route path="/collection/:collection" component={waitFor(Collection)} />
+                                <Route path="/collection/:slug" component={waitFor(Collection)} />
                                 <Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
                                 <Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
                                 <Route path="/nft/:tokenid" component={waitFor(NftDetails)} />
