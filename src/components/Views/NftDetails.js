@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { observer } from 'mobx-react';
 import ContentWrapper from "../Layout/ContentWrapper";
 import CountLoader from "../Common/CountLoader";
-
 import Avatar from "./Profile/Avatar";
 import SimilarItems from './Single/SimilarItems';
 import AboutTab from "./Single/AboutTab";
@@ -14,10 +14,16 @@ import BuyTicketModal from "./Single/BuyTicketModal";
 import PageLoader from "../Common/PageLoader";
 import RaffleInfoTabs from "./Single/RaffleInfoTabs";
 import NftInfoTabs from "./Single/NftInfoTabs";
+import ConnectModal from "../Common/ConnectModal";
+import accountStore from "../../store/account.store";
+import DrawNftModal from "./Single/DrawNftModal";
+import DrawPrizeModal from "./Single/DrawPrizeModal";
 
 const NftDetails = (props) => {
-    const { tokenid } = props.match.params;
-    const { loading, nft, fetchNftDetails } = useNft(tokenid);
+    const { auth_token } = accountStore;
+    const { tokenid, raffleid } = props.match.params;
+
+    const { loading, nft, fetchNftDetails } = useNft(tokenid, raffleid);
 
     const [raffle, setRaffle] = useState();
     const [raffler, setRaffler] = useState();
@@ -26,8 +32,11 @@ const NftDetails = (props) => {
     const [owner, setOwner] = useState();
     const [ticket, setTicket] = useState({});
 
+    const [connecting, setConnecting] = useState(false);
     const [raffling, setRaffling] = useState(false);
     const [ticketing, setTicketing] = useState(false);
+    const [drawing, setDrawing] = useState(false);
+    const [prizing, setPrizing] = useState(false);
 
     const initPage = () => {
         CountLoader('.cs-countdown_style2');
@@ -44,9 +53,17 @@ const NftDetails = (props) => {
     }
 
     useEffect(() => {
+        if (auth_token) {
+            fetchNftDetails(tokenid, raffleid);
+        }
+    }, [auth_token]);
+
+    useEffect(() => {
         setRaffle(nft?.raffles[0] || null);
         setCollection(nft?.collection);
         setOwner(nft?.owner);
+
+        initPage();
     }, [nft])
 
     useEffect(() => {
@@ -113,7 +130,7 @@ const NftDetails = (props) => {
     }
 
     const getBuySellView = () => {
-        if (isLoggedIn() && getAccount().id == nft?.owner?.id) {
+        if (isLoggedIn() && getAccount().id == nft?.owner?.id && !raffle) {
             return <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
@@ -124,13 +141,13 @@ const NftDetails = (props) => {
                                 </a>
                             </div>
                             <div className="col-4">
-                                <a href="#" className="cs-btn cs-style1 cs-btn_lg w-100 text-center">
-                                    <span>Create Offer</span>
+                                <a href="#" className="cs-btn cs-style2 cs-btn_lg w-100 text-center">
+                                    <span>List at OnXRP</span>
                                 </a>
                             </div>
                             <div className="col-4">
-                                <a href="#" className="cs-btn cs-style1 cs-btn_lg w-100 text-center">
-                                    <span>Create Auction</span>
+                                <a href="#" className="cs-btn cs-style2 cs-btn_lg w-100 text-center">
+                                    <span>List at XRP.cafe</span>
                                 </a>
                             </div>
                         </div>
@@ -144,9 +161,9 @@ const NftDetails = (props) => {
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
                         <div className="row">
                             <div className="col-12 cs-center">
-                                <a href="#" className="cs-btn cs-style1 cs-btn_lg w-50 text-center">
+                                <button className="cs-btn cs-style1 cs-btn_lg w-50 text-center" onClick={() => { onConnectWallet() }}>
                                     <span>Connect Wallet</span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -221,7 +238,7 @@ const NftDetails = (props) => {
                 return <div className="row">
                     <div className="col-xl-7">
                         {isRaffleOwner() ? <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
-                            <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickBuyTickets}>
+                            <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickDrawNft}>
                                 <span>Draw NFT</span>
                             </a>
                         </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
@@ -269,12 +286,52 @@ const NftDetails = (props) => {
                     </div>
                     <div className="col-xl-5">
                         <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
-                            {isWinner() ? <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickBuyTickets}>
+                            {isWinner() ? <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickDrawPrize}>
                                 <span>Draw Prize</span>
                             </a> : <div>
                                 <p>Raffle Ended on:</p>
                                 <h3>{getDateTimeWithFormat(raffle?.raffle_end_datetime)}</h3>
                             </div>}
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                </div>
+            } else {
+                return <div className="row">
+                    <div className="col-xl-7">
+                        {winner ? <div className="cs-author_card cs-white_bg cs-box_shadow cs-winner_box">
+                            <i className="fas fa-crown fa-fw"></i>
+                            <span className="cs-winner_title">RAFFLE WINNER</span>
+                            <div className="cs-author_img">
+                                <Avatar className="cs-profile_avatar_oval" {...{ name: winner?.wallet, image: winner?.picture_url }} />
+                            </div>
+                            <div>
+                                <p className="cs-winner_text">
+                                    <a href={`/profile/${winner?.wallet}`}>@{winner?.username || "Unknown"}</a>
+                                    {winner?.verified && <i className="fas fa-id-card"></i>}
+                                    {winner?.twitter_username && <i className="fab fa-twitter fa-fw"></i>}
+                                    {/* <i className="fas fa-medal"></i> */}
+                                </p>
+                                <div className="cs-white_color_8">{getSummaryAddress(winner?.wallet)}</div>
+                            </div>
+                        </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
+                            <li>
+                                <div className="cs-collection_list_title">Raffle Status</div>
+                                <div className="cs-collection_list_number">Expired</div>
+                            </li>
+                            <li>
+                                <div className="cs-collection_list_title">Refund Tickets</div>
+                                <div className="cs-collection_list_number">{Number(raffle.ticket_price * raffle.reserved_count)} XRP</div>
+                            </li>
+                        </ul>}
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                    <div className="col-xl-5">
+                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                            <div>
+                                <p>Raffle Ended on:</p>
+                                <h3>{getDateTimeWithFormat(raffle?.raffle_end_datetime)}</h3>
+                            </div>
                         </div>
                         <div className="cs-height_15 cs-height_lg_15"></div>
                     </div>
@@ -379,6 +436,36 @@ const NftDetails = (props) => {
         }
     }
 
+    useEffect(() => {
+        if (connecting) {
+            $("#connect_modal").toggleClass("active");
+        }
+    }, [connecting])
+
+    const onConnectWallet = () => {
+        setConnecting(true);
+    }
+
+    useEffect(() => {
+        if (drawing) {
+            $("#draw_nft_modal").toggleClass("active");
+        }
+    }, [drawing])
+
+    const onClickDrawNft = () => {
+        setDrawing(true);
+    }
+
+    useEffect(() => {
+        if (prizing) {
+            $("#draw_prize_modal").toggleClass("active");
+        }
+    }, [prizing])
+
+    const onClickDrawPrize = () => {
+        setPrizing(true);
+    }
+
     return (
         loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_140 cs-height_lg_120"></div>
@@ -458,7 +545,7 @@ const NftDetails = (props) => {
                         </div>
                         {getBuySellView()}
                         {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} />}
-                        {nft && !raffle && <NftInfoTabs />}
+                        {nft && !raffle && <NftInfoTabs tokenid={tokenid} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>
                 </div>
@@ -467,16 +554,23 @@ const NftDetails = (props) => {
             </div>
             <div className="cs-height_70 cs-height_lg_70"></div>
 
+            {connecting && <ConnectModal
+                closeModal={() => { setConnecting(false) }} />}
             {raffling && <CreateRaffleModal nft={nft}
-                refreshDetails={() => fetchNftDetails(tokenid)}
-                closeModal={() => { setRaffling(false); }}
-            />}
+                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                closeModal={() => { setRaffling(false) }} />}
             {ticketing && <BuyTicketModal ticket={ticket}
-                refreshDetails={() => { fetchNftDetails(tokenid); }}
-                closeModal={() => { setTicketing(false); }}
-            />}
+                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                closeModal={() => { setTicketing(false) }} />}
+            {drawing && <DrawNftModal raffleId={raffle?.id}
+                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                closeModal={() => { setDrawing(false) }} />}
+            {prizing && <DrawPrizeModal raffleId={raffle?.id}
+                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                closeModal={() => { setPrizing(false) }} />}
+
         </ContentWrapper >
     );
 }
 
-export default NftDetails;
+export default observer(NftDetails);

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
@@ -63,5 +64,81 @@ export const useRaffleTransactions = () => {
         transactions,
         loading,
         fetchNext
+    }
+}
+
+export const useRaffleHistory = () => {
+    const [history, setHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const page = useRef(0);
+
+    const fetchRaffleHistory = async (tokenid, page) => {
+        setLoading(true);
+        const res = await SecretApi.getRafflesWithTokenId(tokenid, page);
+        setHistory([...history, ...res.data]);
+        setLoading(false);
+    }
+
+    const fetchNext = (tokenid, pageNumber) => {
+        if (tokenid) {
+            if (!pageNumber) {
+                page.current = page.current + 1;
+            } else {
+                page.current = pageNumber;
+            }
+            fetchRaffleHistory(tokenid, page.current);
+        }
+    }
+
+    return {
+        history,
+        loading,
+        fetchNext
+    }
+}
+
+export const useDrawNft = (raffleId) => {
+    const [loading, setLoading] = useState(true);
+    const [result, setResult] = useState();
+
+    const drawNft = async () => {
+        setLoading(true);
+        const res = await SecretApi.drawNftWithRaffleId(raffleId);
+        setResult(res);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        if (raffleId) {
+            drawNft();
+        }
+    }, [])
+
+    return {
+        loading,
+        result
+    }
+}
+
+export const useDrawPrize = (raffleId) => {
+    const [loading, setLoading] = useState(true);
+    const [result, setResult] = useState();
+
+    const drawPrize = async () => {
+        setLoading(true);
+        const res = await SecretApi.drawPrizeWithRaffleId(raffleId);
+        setResult(res);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        if (raffleId) {
+            drawPrize();
+        }
+    }, [])
+
+    return {
+        loading,
+        result
     }
 }

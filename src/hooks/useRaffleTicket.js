@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
 export const useRaffleTicket = () => {
-    const [creating, setCreating] = useState(false);
+    const [creating, setCreating] = useState(true);
     const [result, setResult] = useState();
 
     const createRaffleTicket = async (data) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useRaffle } from '../../../hooks/useRaffle';
+import { getDateTimeWithFormat } from '../../Helpers/Utils';
 
 const SellOptions = [
 	{ id: 1, label: "25%", isChecked: false },
@@ -14,20 +15,22 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	const [step, setStep] = useState(0);
 	const [raffle, setRaffle] = useState({ sell_option: 4 });
 	const [sellOptions, setSellOptions] = useState(SellOptions);
-	const [descriptions, setDescriptions] = useState({});
+	const [descriptions, setDescriptions] = useState({
+		total_ticket_price: "Possible earning 0 XRP",
+		ticket_count: "0 XRP per Ticket",
+		raffle_duration: `Raffle will end ${getDateTimeWithFormat(new Date())}`
+	});
 
 	useEffect(() => {
 		if (result) {
 			setStep(2);
-			if (result.data) {
-				refreshDetails();
-			}
 		}
 	}, [result])
 
 	const close = () => {
 		$("#create_raffle_modal").removeClass("active");
 		closeModal();
+		refreshDetails();
 	}
 
 	const onChangeInfo = (event) => {
@@ -39,10 +42,24 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 
 		switch (name) {
 			case "total_ticket_price":
+				setDescriptions({
+					...descriptions,
+					total_ticket_price: `Possible earning ${(Number(event.target.value) * 0.95).toFixed(2)} XRP`
+				})
 				break;
 			case "ticket_count":
+				setDescriptions({
+					...descriptions,
+					ticket_count: `${(Number(raffle.total_ticket_price) / Number(event.target.value)).toFixed(2)} XRP per Ticket`
+				})
 				break;
 			case "raffle_duration":
+				let dt = new Date();
+				dt.setDate(new Date().getDate() + Number(event.target.value));
+				setDescriptions({
+					...descriptions,
+					raffle_duration: `Raffle will end ${getDateTimeWithFormat(dt)}`
+				})
 				break;
 		}
 	}
@@ -76,7 +93,13 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 					</div>
 					<div className="cs-modal">
 						{step == 0 ? <div>
-							<h2 className="cs-modal_title">Create Raffle</h2>
+							<div className="cs-modal_header">
+								<h2 className="cs-modal_title">Create Raffle</h2>
+								<div className="form-check form-switch cs-offer_form_switch">
+									<input className="form-check-input" type="checkbox" id="mode_switch" />
+									<label className="form-check-label" htmlFor="mode_switch">Feature Option</label>
+								</div>
+							</div>
 							<div className="cs-height_10 cs-height_lg_10"></div>
 							<div className="row">
 								<div className="col-lg-6">
@@ -84,20 +107,20 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 										<span className="cs-offer_field_title">Total Ticket Price</span>
 										<input name="total_ticket_price" type="number" className="cs-form_field cs-white_bg"
 											placeholder="Enter price" value={raffle?.total_ticket_price || ""} onChange={onChangeInfo} />
-										<span className="cs-offer_field_description">Possible earning (USD) $58,900</span>
+										<span className="cs-offer_field_description">{descriptions["total_ticket_price"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 									<div className="cs-offer_form_field">
 										<span className="cs-offer_field_title">Ticket Count</span>
 										<input name="ticket_count" type="number" className="cs-form_field cs-white_bg"
 											placeholder="Enter count" value={raffle?.ticket_count || ""} onChange={onChangeInfo} />
-										<span className="cs-offer_field_description">10 XRP per Ticket</span>
+										<span className="cs-offer_field_description">{descriptions["ticket_count"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 								</div>
 								<div className="col-lg-6">
 									<div className="cs-offer_form_field">
-										<span className="cs-offer_field_title">Selling Option ⓘ</span>
+										<span className="cs-offer_field_title">Minimum Sales ⓘ</span>
 										<div className="cs-isotop_filter cs-style1 cs-center cs-isotop_filter_sell_option">
 											<ul className="cs-mp0 cs-center">
 												{
@@ -116,7 +139,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 										<span className="cs-offer_field_title">Raffle Duration</span>
 										<input name="raffle_duration" type="number" className="cs-form_field cs-white_bg"
 											placeholder="Enter duration" value={raffle?.raffle_duration || ""} onChange={onChangeInfo} />
-										<span className="cs-offer_field_description">Raffle will end 28 Aug,2022 10:50PM</span>
+										<span className="cs-offer_field_description">{descriptions["raffle_duration"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 								</div>

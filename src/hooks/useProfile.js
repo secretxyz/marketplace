@@ -2,16 +2,15 @@ import { useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
 export const useProfile = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [accountId, setAccountId] = useState();
     const [profile, setProfile] = useState();
 
     const fetchProfile = async (wallet) => {
         setLoading(true);
         const res = await SecretApi.getProfileInfo(wallet);
-        const { id, attributes } = res.data[0] || {};
-        setAccountId(id);
-        setProfile(attributes);
+        setAccountId(res.data?.id);
+        setProfile(res.data);
         setLoading(false);
     }
 
@@ -25,12 +24,12 @@ export const useProfile = () => {
 
 export const useRaffleItems = () => {
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const page = useRef(0);
 
     const fetchRaffleItems = async (id, page) => {
         setLoading(true);
-        const res = await SecretApi.getRaffles(id, page);
+        const res = await SecretApi.getRaffleItems(id, page);
         setItems([...items, ...res.data]);
         setLoading(false);
     }
@@ -43,6 +42,36 @@ export const useRaffleItems = () => {
                 page.current = pageNumber;
             }
             fetchRaffleItems(accountId, page.current);
+        }
+    }
+
+    return {
+        items,
+        loading,
+        fetchNext
+    }
+}
+
+export const useRaffleTicketItems = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const page = useRef(0);
+
+    const fetchRaffleTicketItems = async (id, page) => {
+        setLoading(true);
+        const res = await SecretApi.getRaffleTicketItems(id, page);
+        setItems([...items, ...res.data]);
+        setLoading(false);
+    }
+
+    const fetchNext = (accountId, pageNumber) => {
+        if (accountId) {
+            if (!pageNumber) {
+                page.current = page.current + 1;
+            } else {
+                page.current = pageNumber;
+            }
+            fetchRaffleTicketItems(accountId, page.current);
         }
     }
 
@@ -144,6 +173,42 @@ export const useCreatedCollections = () => {
 }
 
 export const useProfileInfo = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [result, setResult] = useState();
 
+
+}
+
+export const useProfileOther = () => {
+    const [loading, setLoading] = useState(true);
+    const [result, setResult] = useState();
+
+    const refresh = async (accountId) => {
+        setLoading(true);
+        const res = await SecretApi.refreshProfile(accountId);
+        setResult(res);
+        setLoading(false);
+    }
+
+    const like = async (accountId) => {
+        setLoading(true);
+        const res = await SecretApi.likeProfile(accountId);
+        setResult(res);
+        setLoading(false);
+    }
+
+    const report = async (accountId) => {
+        setLoading(true);
+        const res = await SecretApi.reportProfile(accountId);
+        setResult(res);
+        setLoading(false);
+    }
+
+    return {
+        loading,
+        result,
+        refresh,
+        like,
+        report,
+    }
 }

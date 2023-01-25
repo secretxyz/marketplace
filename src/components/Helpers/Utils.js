@@ -58,12 +58,69 @@ export const getDateWithFormat = () => {
 	return `${dd}.${mm}.${yyyy}`;
 };
 
+export const getDifferenceTime = (dt) => {
+	const end = new Date(dt);
+	const today = new Date();
+
+	let diff;
+	if (today.getTime() > end.getTime()) {
+		diff = new Date(today.getTime() - end.getTime());
+	} else {
+		diff = new Date(end.getTime() - today.getTime());
+	}
+
+
+	const yyyy = diff.getUTCFullYear() - 1970;
+	const mm = diff.getUTCMonth();
+	const dd = diff.getUTCDate() - 1;
+	const hh = diff.getUTCHours();
+	const m = diff.getUTCMinutes();
+	const ss = diff.getUTCSeconds();
+
+	if (today.getTime() > end.getTime()) {
+		if (yyyy > 0) {
+			return `${yyyy} Yrs ${mm} Months ago`;
+		}
+		if (mm > 0) {
+			return `${mm} Months ${dd} Days ago`;
+		}
+		if (dd > 0) {
+			return `${dd} Days ${hh} Hrs ago`;
+		}
+		if (hh > 0) {
+			return `${hh} Hrs ${m} Mins ago`;
+		}
+		if (m > 0) {
+			return `${m} Mins ${ss} Secs ago`;
+		}
+	} else {
+		if (yyyy > 0) {
+			return `in ${yyyy} Yrs ${mm} Months`;
+		}
+		if (mm > 0) {
+			return `in ${mm} Months ${dd} Days`;
+		}
+		if (dd > 0) {
+			return `in ${dd} Days ${hh} Hrs`;
+		}
+		if (hh > 0) {
+			return `in ${hh} Hrs ${m} Mins`;
+		}
+		if (m > 0) {
+			return `in ${m} Mins ${ss} Secs`;
+		}
+	}
+}
+
 export const getCurrentTime = () => {
 	const now = new Date();
 	return `${now.getHours()}:${now.getMinutes()}`;
 };
 
 export const getImageLink = (url) => {
+	if (!url){
+		return "img/cover-photo.jpeg";
+	}
 	if (url.startsWith("ipfs://")) {
 		return `https://ipfs.io/ipfs/${url.substring(7)}`;
 	}
@@ -161,3 +218,32 @@ export const setAccount = (account) => {
 		console.log(error);
 	}
 };
+
+export const getRaffleStatus = (status) => {
+	switch (status) {
+		case "active":
+			return "Live";
+		case "canceling":
+			return "Cancelling";
+		case "canceled":
+			return "Cancelled";
+		case "raffling":
+		case "raffled":
+			return "Completed";
+	}
+}
+
+export const getTicketStatus = (status) => {
+	switch (status) {
+		case "active":
+			return <p className="badge bg-success">Live</p>
+		case "winner":
+			return <p className="badge bg-warning text-dark">
+				<i className="fas fa-crown fa-fw"></i> Winner
+			</p>
+		case "canceled":
+			return <p className="badge bg-danger">Cancelled</p>
+		case "raffled":
+			return <p className="badge bg-primary">Completed</p>
+	}
+}

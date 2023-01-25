@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useRaffleTicket } from '../../../hooks/useRaffleTicket';
+import { useDrawPrize } from '../../../hooks/useRaffle';
 
-const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
-    const { creating, result, createRaffleTicket } = useRaffleTicket();
+const DrawPrizeModal = ({ raffleId, refreshDetails, closeModal }) => {
+    const { loading, result } = useDrawPrize(raffleId);
     const [step, setStep] = useState(0);
 
     useEffect(() => {
@@ -12,17 +12,13 @@ const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
     }, [result])
 
     const close = () => {
-        $("#buy_ticket_modal").removeClass("active");
+        $("#draw_prize_modal").removeClass("active");
         closeModal();
         refreshDetails();
     }
 
-    useEffect(() => {
-        createRaffleTicket(ticket);
-    }, [])
-
     return (
-        <div className="cs-modal_wrap" id="buy_ticket_modal">
+        <div className="cs-modal_wrap" id="draw_prize_modal">
             <div className="cs-modal_overlay"></div>
             <div className="cs-modal_container">
                 <div className="cs-modal_container_in">
@@ -50,4 +46,4 @@ const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
     );
 }
 
-export default BuyTicketModal;
+export default DrawPrizeModal;

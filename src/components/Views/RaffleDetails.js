@@ -185,7 +185,7 @@ class RaffleDetails extends Component {
                                                     <div className="cs-collection_list_number">3 XRP</div>
                                                 </li>
                                                 <li>
-                                                    <div className="cs-collection_list_title">Tickets Remaining</div>
+                                                    <div className="cs-collection_list_title">Tickets Sold</div>
                                                     <div className="cs-collection_list_number">35 / 50</div>
                                                 </li>
                                             </ul>

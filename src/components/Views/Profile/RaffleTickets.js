@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import BeatLoader from "react-spinners/BeatLoader";
+import { useRaffleTicketItems } from '../../../hooks/useProfile';
 import { APP_COLORS } from "../../Common/constants"
 import ContentWrapper from '../../Layout/ContentWrapper';
-import RaffleCard from '../Card/RaffleCard';
-import { useRaffleItems } from '../../../hooks/useProfile';
+import RaffleTicketCard from '../Card/RaffleTicketCard';
 
-const Raffles = ({ accountId }) => {
-    const { loading, items, fetchNext } = useRaffleItems();
+const RaffleTickets = ({ accountId }) => {
+    const { loading, items, fetchNext } = useRaffleTicketItems();
 
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if (bottom) {
+            console.log("bottom...");
             fetchNext(accountId);
         }
     }
@@ -23,18 +24,15 @@ const Raffles = ({ accountId }) => {
 
     return (
         <ContentWrapper>
-            <div className="row cs-cards_area" onScroll={handleScroll}>
+            <ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
                 {items.map(n => (
-                    <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                        <RaffleCard data={{ id: n.id, ...n.attributes }} />
-                        <div className="cs-height_20 cs-height_lg_20"></div>
-                    </div>
+                    <RaffleTicketCard data={n.attributes} key={n.id} />
                 ))}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
                 {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
-            </div>
+            </ul>
         </ContentWrapper>
     );
 }
 
-export default Raffles;
+export default RaffleTickets;

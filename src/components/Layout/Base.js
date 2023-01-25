@@ -12,6 +12,7 @@ const Base = (props) => {
 
     return (
         <div className="main-content">
+
             <Header />
 
             <main>
@@ -19,6 +20,11 @@ const Base = (props) => {
             </main>
 
             <Footer />
+
+            
+            {/* <div className="cs-modal_overlay">
+                Loading...
+            </div> */}
         </div>
     )
 }

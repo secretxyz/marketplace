@@ -6,9 +6,9 @@ const CollectionCard = ({ data }) => {
     const nfts_count = collection.nfts?.data?.attributes?.count;
 
     return (
-        <div className="cs-card cs-style3 cs-box_shadow cs-white_bg">
+        <div className="cs-card cs-style3 cs-box_shadow cs-white_bg cs-collection_card">
             <a href={`/collection/${collection?.slug}`} className="cs-card_thumb cs-zoom_effect">
-                <img src={collection?.banner_picture_url} alt="Image" className="cs-zoom_item cs-height_100 cs-height_lg_100" />
+                <img src={getImageLink(collection?.banner_picture_url)} alt="Image" className="cs-zoom_item cs-height_100 cs-height_lg_100" />
             </a>
             <a href={`/collection/${collection?.slug}`} className="cs-avatar">
                 <img src={getImageLink(collection?.picture_url)} alt="Avatar" />

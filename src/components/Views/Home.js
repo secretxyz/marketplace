@@ -15,6 +15,7 @@ import TopCollections from './Home/TopCollections';
 import ExplorerCategory from './Home/ExplorerCategory';
 import TrendingNfts from './Home/TrendingNfts';
 import LiveAuctions from './Home/LiveAuctions';
+import HomeBanner2 from './Home/HomeBanner2';
 
 // const slider = React.useRef(null)
 
@@ -28,8 +29,8 @@ class Home extends React.Component {
         return (
             <ContentWrapper>
                 <div className="cs-height_90 cs-height_lg_80"></div>
-                <HomeBanner />
-                
+                <HomeBanner2 />
+
                 <FeaturedRaffles />
 
                 <div className="cs-height_70 cs-height_lg_40"></div>

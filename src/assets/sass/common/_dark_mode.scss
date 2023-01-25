@@ -105,6 +105,7 @@ body.cs-dark {
   .cs-contact_box,
   .cs-modal_container_in,
   .cs-collection_info_head,
+  .cs-profile_info_head,
   .cs-single_info_head {
     background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.2) 0%, rgba(63, 94, 251, 0.2) 100%);
   }
@@ -186,7 +187,7 @@ body.cs-dark {
   }
 
   .cs-modal_overlay {
-    background: rgba($black, 0.9);
+    background: rgba($black, 0.7);
   }
 }
 

@@ -21,6 +21,26 @@ div::-webkit-scrollbar-thumb {
   background-image: linear-gradient(116.85deg, #fc466b 0%, #3f5efb 100%);
 }
 
+ul::-webkit-scrollbar-track,
+ul::-webkit-scrollbar-track {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: rgba($white, 0);
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar,
+ul::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba($white, 0);
+}
+
+ul::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: linear-gradient(116.85deg, #fc466b 0%, #3f5efb 100%);
+}
+
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -158,7 +178,7 @@ div::-webkit-scrollbar-thumb {
   font-weight: 500;
   background-color: $accent;
   border-radius: 1.6em;
-  padding: 8px 25px;
+  padding: 8px 16px;
   position: relative;
   border: none;
   outline: none;
@@ -604,7 +624,7 @@ div::-webkit-scrollbar-thumb {
   display: flex;
   justify-content: space-between;
   text-align: center;
-  max-width: 156px;
+  max-width: 142px;
   width: 100%;
   padding: 0 8px;
   margin-left: 10px;
@@ -623,7 +643,7 @@ div::-webkit-scrollbar-thumb {
   }
 
   .cs-countdown_number {
-    width: 35px;
+    width: 30px;
     height: 20px;
     margin: auto;
     font-size: 14px;
@@ -641,26 +661,6 @@ div::-webkit-scrollbar-thumb {
       position: relative;
       z-index: 1;
     }
-
-    // &::before,
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   left: 0;
-    //   height: 50%;
-    //   width: 100%;
-    //   background: linear-gradient(116.85deg, #FC466B 0%, #3F5EFB 100%);
-    // }
-
-    // &::before {
-    //   top: 0;
-    //   border-radius: 4px 4px 0px 0px;
-    // }
-
-    // &::after {
-    //   bottom: 0;
-    //   border-radius: 0px 0px 4px 4px;
-    // }
   }
 }
 
@@ -825,6 +825,14 @@ div::-webkit-scrollbar-thumb {
   }
 }
 
+.cs-offer_form_switch {
+  margin-left: 8px;
+
+  .form-check-label {
+    font-size: 14px;
+  }
+}
+
 .cs-form_field {
   background-color: $gray;
   width: 100%;
@@ -880,7 +888,6 @@ div::-webkit-scrollbar-thumb {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
 }
 
 .cs-modal_container {
@@ -965,6 +972,11 @@ div::-webkit-scrollbar-thumb {
     border-radius: 50%;
     background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
   }
+}
+
+.cs-modal_header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .cs-modal_title {
@@ -1928,6 +1940,8 @@ div::-webkit-scrollbar-thumb {
 
   .cs-activity_posted_by {
     margin-top: 5px;
+    display: flex;
+    align-items: flex-end;
   }
 
   .cs-activity_text {
@@ -1951,6 +1965,10 @@ div::-webkit-scrollbar-thumb {
       margin-left: 8px;
       color: $accent;
     }
+  }
+
+  .cs-activity_status {
+    margin-left: 6px;
   }
 
   .cs-activity_icon {
@@ -2009,6 +2027,11 @@ div::-webkit-scrollbar-thumb {
     i {
       margin-left: 10px;
     }
+  }
+
+  .cs-activity_left {
+    position: absolute;
+    right: 20px;
   }
 }
 
@@ -3045,4 +3068,88 @@ div::-webkit-scrollbar-thumb {
 
 .cs-profile_avatar_oval {
   height: 100%;
+}
+
+.cs-profile_info_other {
+  position: absolute;
+  z-index: 2;
+  right: 25px;
+  top: 25px;
+  background-color: #080326;
+  border-radius: 10px;
+
+  .cs-profile_info_head {
+    padding: 4px 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    background-color: $white;
+    box-shadow: 4px 4px 10px rgba($black, 0.05);
+    border-radius: 10px;
+    line-height: 1.5em;
+  }
+
+  .cs-btn {
+    margin: 6px;
+    padding: 8px 12px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.cs-sale_end_item {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: 142px;
+  width: 100%;
+  padding: 0 8px;
+  margin-left: 10px;
+  margin-top: -58px;
+  background-color: #3772ff;
+  position: relative;
+  border-radius: 10px;
+
+  .cs-sale_end_text1 {
+    font-size: 12px;
+    line-height: 1.5em;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
+  .cs-sale_end_text2 {
+    height: 20px;
+    margin: auto;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5em;
+  }
+}
+
+.cs-ticket_image {
+  width: 78px;
+  height: 78px;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.cs-raffle_ticket {
+  h4 {
+    font-size: 22px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+.cs-winner_border {
+  border: solid 2px #ffc107;
+}
+
+.cs-btn_small_text {
+  margin-left: 4px;
+  font-size: 14px;
 }

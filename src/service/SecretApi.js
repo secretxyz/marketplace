@@ -26,6 +26,8 @@ class SecretApi {
             accountStore.setAuthToken(null);
             accountStore.setAccount(null);
         }
+
+        return { message: err.message }
     }
 
     // Homepage
@@ -78,6 +80,25 @@ class SecretApi {
         }
     }
 
+
+    async getRafflesWithTokenId(tokenid, page) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffles`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "filters[nft_tokenid]": tokenid,
+                    "sort[raffle_end_datetime]": "desc",
+                    "populate[raffler]": true,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async getFeaturedRaffles() {
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
@@ -122,6 +143,16 @@ class SecretApi {
 
     // Profile page
     async refreshProfile(id) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/account/refresh/${id}`);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async likeProfile(id) {
 
     }
 
@@ -131,12 +162,7 @@ class SecretApi {
 
     async getProfileInfo(wallet) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/accounts`, {
-                params: {
-                    "filters[wallet]": wallet,
-                },
-                timeout: this.timeout,
-            });
+            const res = await axios.get(`${this.baseUrl}/api/account/${wallet}`);
             return res.data;
         } catch (error) {
             console.log(error);
@@ -197,15 +223,15 @@ class SecretApi {
         }
     }
 
-    async getRaffles(id, page) {
+    async getRaffleItems(id, page) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "filters[raffler]": id,
-                    "sort[status]": "asc",
-                    "sort[raffle_end_datetime]": "asc",
+                    // "sort[status]": "asc",
+                    "sort[raffle_end_datetime]": "desc",
                     "populate[nft]": true,
                     "populate[raffler]": true,
                 }
@@ -217,11 +243,31 @@ class SecretApi {
         }
     }
 
+    async getRaffleTicketItems(id, page) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffle-tickets`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "filters[buyer]": id,
+                    "sort[createdAt]": "desc",
+                    // "sort[raffle_end_datetime]": "desc",
+                    "populate[raffle][populate][nft]": true,
+                    "populate[raffle][populate][raffler]": true,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     // NftDetails
 
-    async getNftWithTokenID(tokenid) {
+    async getNftWithTokenID(tokenid, raffleid) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenid}`);
+            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenid}?raffleid=${raffleid}`);
             return res.data;
         } catch (error) {
             console.log(error);
@@ -243,7 +289,10 @@ class SecretApi {
     async createRaffleTicket(data) {
         // console.log(data);
         try {
-            const res = await axios.post(`${this.baseUrl}/api/raffle-ticket`, data, { headers: this.headers() })
+            const res = await axios.post(`${this.baseUrl}/api/raffle-ticket`,
+                data,
+                { headers: this.headers() }
+            )
             return res.data;
         } catch (error) {
             this.handleError(error);
@@ -276,6 +325,28 @@ class SecretApi {
         } catch (error) {
             console.log(error);
             return null;
+        }
+    }
+
+    async drawNftWithRaffleId(id) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffle/draw-nft/${id}`,
+                { headers: this.headers() }
+            )
+            return res.data;
+        } catch (error) {
+            return this.handleError(error);
+        }
+    }
+
+    async drawPrizeWithRaffleId(id) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffle/draw-prize/${id}`,
+                { headers: this.headers() }
+            )
+            return res.data;
+        } catch (error) {
+            return this.handleError(error);
         }
     }
 

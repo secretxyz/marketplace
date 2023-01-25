@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useDrawNft } from '../../../hooks/useRaffle';
 import { useRaffleTicket } from '../../../hooks/useRaffleTicket';
 
-const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
-    const { creating, result, createRaffleTicket } = useRaffleTicket();
+const DrawNftModal = ({ raffleId, refreshDetails, closeModal }) => {
+    const { loading, result } = useDrawNft(raffleId);
     const [step, setStep] = useState(0);
 
     useEffect(() => {
@@ -12,17 +13,13 @@ const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
     }, [result])
 
     const close = () => {
-        $("#buy_ticket_modal").removeClass("active");
+        $("#draw_nft_modal").removeClass("active");
         closeModal();
         refreshDetails();
     }
 
-    useEffect(() => {
-        createRaffleTicket(ticket);
-    }, [])
-
     return (
-        <div className="cs-modal_wrap" id="buy_ticket_modal">
+        <div className="cs-modal_wrap" id="draw_nft_modal">
             <div className="cs-modal_overlay"></div>
             <div className="cs-modal_container">
                 <div className="cs-modal_container_in">
@@ -50,4 +47,4 @@ const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
     );
 }
 
-export default BuyTicketModal;
+export default DrawNftModal;

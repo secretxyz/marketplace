@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
-
 import ConnectModal from "../Common/ConnectModal"
 import accountStore from '../../store/account.store';
 import { setAccount, setAuthToken, getSummaryAddress } from '../Helpers/Utils';
@@ -58,23 +57,26 @@ const mainNav = () => {
 
 const Header = () => {
 	const { auth_token, account } = accountStore;
-
 	useEffect(() => {
-		// console.log(account);
 		mainNav();
 	}, [auth_token]);
-
-
-
-	const onConnectWallet = () => {
-
-	}
 
 	const onLogout = () => {
 		setAuthToken(null);
 		setAccount(null);
 		accountStore.setAuthToken(null);
 		accountStore.setAccount(null);
+	}
+
+	const [connecting, setConnecting] = useState(false);
+	useEffect(() => {
+		if (connecting) {
+			$("#connect_modal").toggleClass("active");
+		}
+	}, [connecting])
+
+	const onConnectWallet = () => {
+		setConnecting(true);
 	}
 
 	return (
@@ -243,15 +245,16 @@ const Header = () => {
 											</div>
 										</div>
 									</div> : <></>}
-									{!auth_token ? <button className="cs-btn cs-style1" data-modal="#connect_modal"
-										onClick={() => onConnectWallet()}><span>Connect Wallet</span></button> : <></>}
+									{!auth_token ? <button className="cs-btn cs-style1" onClick={() => { onConnectWallet() }}>
+										<span>Connect Wallet</span>
+									</button> : <></>}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<ConnectModal />
+			{connecting && <ConnectModal closeModal={() => { setConnecting(false) }} />}
 		</header>
 	);
 }
