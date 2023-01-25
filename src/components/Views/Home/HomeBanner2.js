@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Slider from "react-slick";
-import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
+import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
+import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
 
 const HomeBanner2 = () => {
     const { loading, items } = useFeaturedRaffle();
-    const [slider, setSlider] = useState();
+
+    useEffect(() => {
+        if (items.length > 0) {
+            SlickLoader('.cs-raffle_banner_slider');
+        }
+    }, [items])
 
     return (
-        <section className="cs-hero cs-style3 cs-bg cs-center" style={{ backgroundImage: `url("img/hero_bg3.jpeg")` }}>
+        <section className="cs-hero cs-style4 cs-bg cs-center" style={{ backgroundImage: `url("img/hero_bg3.jpeg")` }}>
             <div className="container-fluid">
                 <div className="cs-hero_in">
                     <div className="cs-hero_in_left">
@@ -22,44 +27,31 @@ const HomeBanner2 = () => {
                         </div>
                     </div>
                     <div className="cs-hero_in_right">
-                        <div className="cs-slider cs-style1 cs-gap-20">
-                            <div className="cs-slider_container">
+                        <div className="cs-raffle_banner_slider cs-style1 cs-gap-20">
+                            <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600"  data-center="1" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3" data-lg-slides="3" data-add-slides="3">
                                 <div className="cs-slider_wrapper" >
-                                    <Slider
-                                        ref={c => (setSlider(c))}
-                                        {...{
-                                            autoplay: true,
-                                            autoplaySpeed: 3000,
-                                            speed: 600,
-                                            slidesToShow: 2,
-                                            slidesToScroll: 1,
-                                            arrows: false,
-                                            centerMode: true,
-                                            centerPadding: '80px'
-                                        }}>
-                                        {items.map(n => (
-                                            <div className="cs-slide" key={n.id}>
-                                                <RaffleCard data={{ id: n.id, ...n.attributes }} hiddenStatus={true} />
-                                            </div>
-                                        ))}
-                                    </Slider>
+                                    {items.map(n => (
+                                        <div className="cs-slide" key={n.id}>
+                                            <RaffleCard data={{ id: n.id, ...n.attributes }} hiddenStatus={true} />
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                             <div className="cs-slider_arrows cs-style1 cs-center cs-hidden_mobile">
-                                <div className="cs-left_arrow cs-center cs-box_shadow slick-arrow" onClick={() => slider.slickPrev()}>
+                                <div className="cs-left_arrow cs-center cs-box_shadow">
                                     <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13.0269 7.55957H0.817552" stroke="currentColor" strokeWidth="1.16474" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M6.92188 1.45508L0.817222 7.55973L6.92188 13.6644" stroke="currentColor" strokeWidth="1.16474" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </div>
-                                <div className="cs-right_arrow cs-center cs-box_shadow slick-arrow" onClick={() => slider.slickNext()}>
+                                <div className="cs-right_arrow cs-center cs-box_shadow">
                                     <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.816895 7.55957H13.0262" stroke="currentColor" strokeWidth="1.16474" strokeLinecap="round" strokeLinejoin="round" />
                                         <path d="M6.92188 1.45508L13.0265 7.55973L6.92188 13.6644" stroke="currentColor" strokeWidth="1.16474" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </div>
                             </div>
-                            <div className="cs-pagination cs-style1"></div>
+                            <div className="cs-pagination cs-style1" hidden></div>
                         </div>
                     </div>
                 </div>

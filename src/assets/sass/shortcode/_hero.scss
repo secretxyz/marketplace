@@ -176,17 +176,16 @@
 }
 
 .cs-hero.cs-style4 {
-  min-height: 700px;
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   .cs-hero_text {
-    background: linear-gradient(90.41deg, rgba(255, 255, 255, 0.05) -0.38%, rgba(255, 255, 255, 0) 99.66%);
+    background: linear-gradient(93.48deg, rgba(63, 94, 251, 0.5) 2.71%, rgba(63, 94, 251, 0) 101.72%);
+    border-radius: 25px;
     border-radius: 25px;
     padding: 50px;
-    max-width: 850px;
   }
   .cs-hero_title {
-    font-size: 58px;
+    font-size: 48px;
     margin-bottom: 25px;
   }
   .cs-hero_subtitle {
@@ -196,8 +195,34 @@
   }
   .cs-hero_in {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+  }
+  .cs-hero_img {
+    padding-left: 50px;
+    flex: 1;
+    text-align: right;
+  }
+  .cs-hero_category_title {
+    font-size: 18px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    border: 0px solid;
+    border-image-slice: 1;
+    border-bottom-width: 1px;
+    border-image-source: linear-gradient(116.85deg, rgba(252, 70, 107, 0.4) 0%, rgba(63, 94, 251, 0.4) 100%);
+  }
+  .cs-card.cs-style1 {
+    background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.5) 0%, rgba(63, 94, 251, 0.5) 100%);
+  }
+  .cs-card.cs-style1 .cs-card_title {
+    color: #fff;
+  }
+  .cs-hero_categories {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
   }
   .cs-hero_in_left {
     width: 55%;
