@@ -138,7 +138,7 @@ const Profile = (props) => {
     }, [result])
 
     return (
-        profile ? <ContentWrapper>
+        loading || submitting ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_100 cs-height_lg_70"></div>
             <div className="container">
                 <div className="cs-cover_photo cs-bg" style={{ background: `url("img/cover-photo.jpeg")` }}>
@@ -200,7 +200,7 @@ const Profile = (props) => {
                 </div>
             </div>
             <div className="cs-height_70 cs-height_lg_40"></div>
-        </ContentWrapper> : <PageLoader />
+        </ContentWrapper>
     );
 }
 

@@ -180,7 +180,7 @@ export const useProfileInfo = () => {
 }
 
 export const useProfileOther = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [result, setResult] = useState();
 
     const refresh = async (accountId) => {
