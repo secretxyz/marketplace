@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
-import { useBannerCollections } from '../../../hooks/useHomepage';
-import { getImageLink } from "../../Helpers/Utils";
+import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
+import RaffleCard from '../Card/RaffleCard';
 
 const HomeBanner2 = () => {
-    const { loading, collections } = useBannerCollections();
+    const { loading, items } = useFeaturedRaffle();
     const [slider, setSlider] = useState();
 
     return (
@@ -22,10 +22,27 @@ const HomeBanner2 = () => {
                         </div>
                     </div>
                     <div className="cs-hero_in_right">
-                        <div className="cs-slider cs-style1">
+                        <div className="cs-slider cs-style1 cs-gap-20">
                             <div className="cs-slider_container">
                                 <div className="cs-slider_wrapper" >
-
+                                    <Slider
+                                        ref={c => (setSlider(c))}
+                                        {...{
+                                            autoplay: true,
+                                            autoplaySpeed: 3000,
+                                            speed: 600,
+                                            slidesToShow: 2,
+                                            slidesToScroll: 1,
+                                            arrows: false,
+                                            centerMode: true,
+                                            centerPadding: '80px'
+                                        }}>
+                                        {items.map(n => (
+                                            <div className="cs-slide" key={n.id}>
+                                                <RaffleCard data={{ id: n.id, ...n.attributes }} hiddenStatus={true} />
+                                            </div>
+                                        ))}
+                                    </Slider>
                                 </div>
                             </div>
                             <div className="cs-slider_arrows cs-style1 cs-center cs-hidden_mobile">

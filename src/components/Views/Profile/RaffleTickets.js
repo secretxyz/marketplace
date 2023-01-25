@@ -24,7 +24,7 @@ const RaffleTickets = ({ accountId }) => {
 
     return (
         <ContentWrapper>
-            <ul className="cs-activity_list cs-mp0 cs-cards_area cs-raffle_tickets_area" onScroll={handleScroll}>
+            <ul className={`cs-activity_list cs-mp0 cs-cards_area ${!items.length && `cs-raffle_tickets_area`}`} onScroll={handleScroll}>
                 {items.map(n => (
                     <RaffleTicketCard data={n.attributes} key={n.id} />
                 ))}

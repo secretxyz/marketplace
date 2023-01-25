@@ -59,6 +59,7 @@ const Routes = ({ location }) => {
                                 <Route path="/ranking" component={waitFor(Ranking)} />
                                 <Route path="/activity" component={waitFor(Activity)} />
 
+                                <Route path="/my-profile/:menu" component={waitFor(Profile)} />
                                 <Route path="/my-profile" component={waitFor(Profile)} />
                                 <Route path="/profile/:wallet" component={waitFor(Profile)} />
                                 <Route path="/create" component={waitFor(Create)} />

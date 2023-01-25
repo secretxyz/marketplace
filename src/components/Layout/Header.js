@@ -228,20 +228,22 @@ const Header = () => {
 												</div>
 											</div>
 											<ul>
-												<li><a href="/my-profile">My Profile</a></li>
-												<li><a href="user-items.html">My Item</a></li>
-												<li><a href="user-wallet.html">My Wallet</a></li>
-												<li><a href="user-account-settings.html">Settings</a></li>
+												<li><a href="/my-profile/raffles">My Raffles</a></li>
+												<li><a href="/my-profile/raffle-tickets">My Tickets</a></li>
+												<li><a href="/my-profile/collected">My Items</a></li>
+												<li><a href="/my-profile/profile-info">My Profile</a></li>
 												{/* <li>
 													<div className="form-check form-switch">
 														<input className="form-check-input" type="checkbox" id="mode_switch" />
 														<label className="form-check-label" htmlFor="mode_switch">Night Mode</label>
 													</div>
 												</li> */}
-												<li><a className="cs-btn" onClick={() => onLogout()}>Logout</a></li>
+												{/* <li><a className="cs-btn" onClick={() => onLogout()}>Logout</a></li> */}
 											</ul>
 											<div className="text-center">
-												<a href="create-items.html" className="cs-btn cs-style1"><span>Create</span></a>
+												<a className="cs-btn cs-style1" onClick={() => onLogout()}>
+													<span>Logout</span>
+												</a>
 											</div>
 										</div>
 									</div> : <></>}

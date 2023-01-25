@@ -105,8 +105,8 @@ class SecretApi {
                 params: {
                     "pagination[page]": 1,
                     "pagination[pageSize]": 10,
-                    "filters[homepage_banner]": true,
-                    "filters[status]": "active",
+                    // "filters[homepage_banner]": true,
+                    // "filters[status]": "active",
                     "sort[raffle_end_datetime]": "asc",
                     "populate[raffler]": true,
                     "populate[nft]": true,

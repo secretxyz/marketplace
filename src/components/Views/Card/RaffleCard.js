@@ -23,9 +23,9 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 <i className="fas fa-heart fa-fw"></i>
                 {nft.likes}
             </span>}
-            <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
+            <div className="cs-card_thumb cs-zoom_effect">
                 <img style={{ background: `url(${data.nft?.data?.attributes?.picture_url})` }} alt="Image" className="cs-zoom_item" />
-            </a>
+            </div>
             {
                 data.status == "active" ? <div className="cs-countdown" data-countdate={data.raffle_end_datetime}>
                     <div className="cs-countdown_item">

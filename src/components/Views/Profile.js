@@ -35,13 +35,13 @@ const NavMenus = [
         label: "Raffles",
         icon: "fa-award",
         key: "raffles",
-        isChecked: false
+        isChecked: true
     },
     {
         label: "Raffle Tickets",
         icon: "fa-ticket-alt",
         key: "raffle-tickets",
-        isChecked: true
+        isChecked: false
     },
     {
         label: "Collected",
@@ -93,9 +93,10 @@ const NavMenus = [
 ]
 
 const Profile = (props) => {
+    const { menu } = props.match.params;
     const { loading: submitting, result, refresh, like, report } = useProfileOther();
     const [navMenus, setNavMenus] = useState(NavMenus);
-    const selectedMenu = navMenus.find(menu => menu.isChecked);
+    const selectedMenu = navMenus.find(m => m.isChecked);
 
     const ContentComponent = NavComponents[selectedMenu.key];
 
@@ -108,12 +109,27 @@ const Profile = (props) => {
             return { ...m, isChecked: false };
         })
         setNavMenus(menus);
+
+        // change url
+        if (menu) {
+            window.history.replaceState(null, null, "/my-profile")
+        }
     };
 
     const { loading, accountId, profile, fetchProfile } = useProfile();
     const { wallet } = props.match.params;
 
     useEffect(() => {
+        if (menu) {
+            let menus = navMenus.map(m => {
+                if (m.key === menu) {
+                    return { ...m, isChecked: true };
+                }
+                return { ...m, isChecked: false };
+            })
+            setNavMenus(menus);
+        }
+
         fetchProfile(wallet || getAccount().wallet);
     }, [])
 

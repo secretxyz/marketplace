@@ -141,12 +141,12 @@ const NftDetails = (props) => {
                                 </a>
                             </div>
                             <div className="col-4">
-                                <a href="#" className="cs-btn cs-style2 cs-btn_lg w-100 text-center">
+                                <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                     <span>List at OnXRP</span>
                                 </a>
                             </div>
                             <div className="col-4">
-                                <a href="#" className="cs-btn cs-style2 cs-btn_lg w-100 text-center">
+                                <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                     <span>List at XRP.cafe</span>
                                 </a>
                             </div>
@@ -396,12 +396,16 @@ const NftDetails = (props) => {
     const getOwnerView = () => {
         let user = raffle ? raffler : owner;
         return <div className="cs-author_card cs-white_bg cs-box_shadow">
-            <div className="cs-author_img">
-                <Avatar className="cs-profile_avatar_oval" {...{ name: user?.wallet, image: user?.picture_url }} />
-            </div>
+            <a href={`/profile/${user?.wallet}`} target="_blank">
+                <div className="cs-author_img">
+                    <Avatar className="cs-profile_avatar_oval" {...{ name: user?.wallet, image: user?.picture_url }} />
+                </div>
+            </a>
             <div className="cs-author_right">
                 <h3>{raffle ? "Raffled by" : "Owned by"}</h3>
-                <p>{user?.username ? `@${user?.username}` : getSummaryAddress(user?.wallet)}</p>
+                <a href={`/profile/${user?.wallet}`} target="_blank">
+                    <p>{user?.username ? `@${user?.username}` : getSummaryAddress(user?.wallet)}</p>
+                </a>
             </div>
         </div>
     }
@@ -530,9 +534,15 @@ const NftDetails = (props) => {
                         <div className="row">
                             <div className="col-xl-7">
                                 <div className="cs-author_card cs-white_bg cs-box_shadow">
-                                    <div className="cs-author_img"><img src={collection?.picture_url} alt="" /></div>
+                                    <a href={`/collection/${collection.slug}`} target="_blank">
+                                        <div className="cs-author_img">
+                                            <img src={collection?.picture_url} alt="" />
+                                        </div>
+                                    </a>
                                     <div className="cs-author_right">
-                                        <h3>{collection?.name}</h3>
+                                        <a href={`/collection/${collection.slug}`} target="_blank">
+                                            <h3>{collection?.name}</h3>
+                                        </a>
                                         <p>created by {collection?.creator ? `@${collection?.creator.name}` : getSummaryAddress(collection?.issuer)}</p>
                                     </div>
                                 </div>
