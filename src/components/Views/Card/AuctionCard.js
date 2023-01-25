@@ -69,7 +69,7 @@ class AuctionCard extends React.Component {
                             <i className="fas fa-redo fa-fw"></i>
                             View History
                         </span> */}
-                        <span className="cs-card_btn_2" data-modal="#bid_1"><span>Place Bid</span></span>
+                        <span className="cs-btn cs-style1 cs-card_btn_3" data-modal="#bid_1"><span>Place Bid</span></span>
                     </div>
                 </div>
             </div>

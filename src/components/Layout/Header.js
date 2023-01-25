@@ -105,11 +105,11 @@ const Header = () => {
 										<div className="cs-nav">
 											<ul className="cs-nav_list">
 												<li className="menu-item-has-children">
-													<a href="/explorer-collections">Explorer</a>
+													<a href="/explorer-raffles">Explorer</a>
 													<ul>
 														<li><a href="/explorer-collections">Collections</a></li>
 														<li><a href="/explorer-nfts">All NFTs</a></li>
-														<li><a href="/explorer-nfts">Raffles</a></li>
+														<li><a href="/explorer-raffles">Raffles</a></li>
 													</ul>
 												</li>
 												<li><a href="/drop">Drops</a></li>

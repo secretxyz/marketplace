@@ -2,6 +2,41 @@ import { useEffect } from "react";
 import { useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
+export const useRaffles = () => {
+    const [loading, setLoading] = useState(true);
+    const [raffles, setRaffles] = useState([]);
+    const page = useRef(0);
+
+    const fetchRaffles = async (page, filters, reset) => {
+        setLoading(true);
+        const res = await SecretApi.getRafflesWithFilters(page, filters);
+        if (reset) {
+            setRaffles(res.data);
+        } else {
+            setRaffles([...nfts, ...res.data]);
+        }
+        setLoading(false);
+    }
+
+    const fetchNext = (pageNumber, filters) => {
+        let reset;
+        if (!pageNumber) {
+            page.current = page.current + 1;
+            reset = false;
+        } else {
+            page.current = pageNumber;
+            reset = true;
+        }
+        fetchRaffles(page.current, filters, reset);
+    }
+
+    return {
+        raffles,
+        loading,
+        fetchNext
+    }
+}
+
 export const useRaffle = () => {
     const [creating, setCreating] = useState(false);
     const [result, setResult] = useState();

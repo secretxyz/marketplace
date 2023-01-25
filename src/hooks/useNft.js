@@ -2,6 +2,42 @@ import { useEffect } from "react";
 import { useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
+export const useNfts = () => {
+    const [loading, setLoading] = useState(true);
+    const [nfts, setNfts] = useState([]);
+    const page = useRef(0);
+
+    const fetchNfts = async (page, filters, reset) => {
+        setLoading(true);
+        const res = await SecretApi.getNftsWithFilters(page, filters);
+        if (reset) {
+            setNfts(res.data);
+        } else {
+            setNfts([...nfts, ...res.data]);
+        }
+        setLoading(false);
+    }
+
+    const fetchNext = (pageNumber, filters) => {
+        let reset;
+        if (!pageNumber) {
+            page.current = page.current + 1;
+            reset = false;
+        } else {
+            page.current = pageNumber;
+            reset = true;
+        }
+        fetchNfts(page.current, filters, reset);
+    }
+
+    return {
+        nfts,
+        loading,
+        fetchNext
+    }
+}
+
+
 export const useNft = (tokenid, raffleid) => {
     const [loading, setLoading] = useState(true);
     const [nft, setNft] = useState();

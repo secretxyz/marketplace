@@ -80,6 +80,43 @@ class SecretApi {
         }
     }
 
+    async getRafflesWithFilters(page, category) {
+        let filters;
+        switch (category) {
+            case 0:
+                filters = { "filters[status]": "active" };
+                break;
+            case 1:
+                filters = {
+                    "filters[status]": "active",
+                    "sort[raffle_end_datetime]": "desc"
+                };
+                break;
+            case 2:
+                filters = {
+                    "filters[status][$in]": ["canceling", "canceled", "raffling", "raffled"],
+                    "sort[raffle_end_datetime]": "desc",
+                };
+                break;
+        }
+
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffles`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "sort[raffle_end_datetime]": "asc",
+                    "populate[raffler]": true,
+                    "populate[nft]": true,
+                    ...filters,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
 
     async getRafflesWithTokenId(tokenid, page) {
         try {
@@ -264,6 +301,23 @@ class SecretApi {
     }
 
     // NftDetails
+
+    async getNftsWithFilters(page, filters) {
+        // To Do: implement filters
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nfts`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "populate[owner]": true,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
 
     async getNftWithTokenID(tokenid, raffleid) {
         try {

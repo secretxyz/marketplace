@@ -75,7 +75,9 @@ const ExplorerCollections = () => {
 			<div className="cs-height_20 cs-height_lg_20"></div>
 			<div className="container cs-cards_area" onScroll={handleScroll}>
 				<div className="cs-grid_5 cs-gap_30" >
-					{collections.map(c => (<CollectionCard data={c} key={c.id} />))}
+					{collections.map(c => (
+						<CollectionCard data={c} key={c.id} />
+					))}
 				</div>
 				<div className="cs-height_20 cs-height_lg_20"></div>
 				<BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />

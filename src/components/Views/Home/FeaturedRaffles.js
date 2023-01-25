@@ -23,10 +23,10 @@ const FeaturedRaffles = () => {
             <div className="container">
                 <div className="cs-section_heading cs-style2">
                     <div className="cs-section_left">
-                        <h2 className="cs-section_title">Featured Raffles</h2>
+                        <h2 className="cs-section_title">Featured Ending Soon</h2>
                     </div>
                     <div className="cs-section_right">
-                        <a href="/explorer-nfts" className="cs-btn cs-style1"><span>Explore More</span></a>
+                        <a href="/explorer-raffles" className="cs-btn cs-style1"><span>Explore More</span></a>
                     </div>
                 </div>
                 <div className="cs-height_20 cs-height_lg_20"></div>
