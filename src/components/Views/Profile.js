@@ -93,7 +93,7 @@ const NavMenus = [
 ]
 
 const Profile = (props) => {
-    const { menu } = props.match.params;
+    const { wallet, menu } = props.match.params;
     const { loading: submitting, result, refresh, like, report } = useProfileOther();
     const [navMenus, setNavMenus] = useState(NavMenus);
     const selectedMenu = navMenus.find(m => m.isChecked);
@@ -117,10 +117,22 @@ const Profile = (props) => {
     };
 
     const { loading, accountId, profile, fetchProfile } = useProfile();
-    const { wallet } = props.match.params;
+
+    useEffect(() => {
+        if (accountId === 0) {
+            window.location.replace("/");
+        }
+    }, [accountId]);
 
     useEffect(() => {
         if (menu) {
+            // check menu validation
+            var valid = navMenus.filter(m => { return m.key === menu });
+            if (!valid.length) {
+                window.location.replace("/my-profile");
+                return;
+            }
+
             let menus = navMenus.map(m => {
                 if (m.key === menu) {
                     return { ...m, isChecked: true };

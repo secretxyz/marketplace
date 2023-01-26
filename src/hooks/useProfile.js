@@ -9,8 +9,8 @@ export const useProfile = () => {
     const fetchProfile = async (wallet) => {
         setLoading(true);
         const res = await SecretApi.getProfileInfo(wallet);
-        setAccountId(res.data?.id);
-        setProfile(res.data);
+        setAccountId(res?.data?.id || 0);
+        setProfile(res?.data);
         setLoading(false);
     }
 

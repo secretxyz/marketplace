@@ -21,7 +21,6 @@ class AccountStore {
     }
 
     setAccount(data) {
-        console.log("setAccount:", data);
         this.account = data;
     }
 }

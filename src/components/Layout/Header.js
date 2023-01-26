@@ -66,6 +66,7 @@ const Header = () => {
 		setAccount(null);
 		accountStore.setAuthToken(null);
 		accountStore.setAccount(null);
+		window.location.replace("/");
 	}
 
 	const [connecting, setConnecting] = useState(false);

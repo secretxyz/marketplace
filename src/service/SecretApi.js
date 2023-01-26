@@ -18,7 +18,6 @@ class SecretApi {
 
     handleError(error) {
         let err = error?.response?.data?.error;
-        console.log(err);
         if (err?.message === "WrongToken") {
             // logout
             setAuthToken(null);
@@ -26,7 +25,6 @@ class SecretApi {
             accountStore.setAuthToken(null);
             accountStore.setAccount(null);
         }
-
         return { message: err.message }
     }
 
