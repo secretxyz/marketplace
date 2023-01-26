@@ -71,6 +71,40 @@ export const useNft = (tokenid, raffleid) => {
     }
 }
 
+export const useNftOther = () => {
+    const [loading, setLoading] = useState(false);
+    const [result, setResult] = useState();
+
+    const refresh = async (tokenid) => {
+        setLoading(true);
+        const res = await SecretApi.refreshNft(tokenid);
+        setResult(res);
+        setLoading(false);
+    }
+
+    const like = async (tokenid) => {
+        setLoading(true);
+        const res = await SecretApi.likeNft(tokenid);
+        setResult(res);
+        setLoading(false);
+    }
+
+    const report = async (tokenid) => {
+        setLoading(true);
+        const res = await SecretApi.reportNft(tokenid);
+        setResult(res);
+        setLoading(false);
+    }
+
+    return {
+        loading,
+        result,
+        refresh,
+        like,
+        report,
+    }
+}
+
 export const useCollectionNfts = () => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);

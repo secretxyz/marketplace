@@ -418,6 +418,24 @@ class SecretApi {
         }
     }
 
+    async refreshNft(id) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nft/refresh/${id}`);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async likeNft(id) {
+
+    }
+
+    async reportNft(id) {
+
+    }
+
     // Collection
     async getCollectionWithSlug(slug) {
         try {

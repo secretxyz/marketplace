@@ -7,7 +7,7 @@ import SimilarItems from './Single/SimilarItems';
 import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
-import { useNft } from "../../hooks/useNft";
+import { useNft, useNftOther } from "../../hooks/useNft";
 import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink } from "../Helpers/Utils";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
 import BuyTicketModal from "./Single/BuyTicketModal";
@@ -24,6 +24,7 @@ const NftDetails = (props) => {
     const { tokenid, raffleid } = props.match.params;
 
     const { loading, nft, fetchNftDetails } = useNft(tokenid, raffleid);
+    const { loading: submitting, result, refresh, like, report } = useNftOther();
 
     const [raffle, setRaffle] = useState();
     const [raffler, setRaffler] = useState();
@@ -62,8 +63,6 @@ const NftDetails = (props) => {
         setRaffle(nft?.raffles[0] || null);
         setCollection(nft?.collection);
         setOwner(nft?.owner);
-
-        initPage();
     }, [nft])
 
     useEffect(() => {
@@ -74,9 +73,13 @@ const NftDetails = (props) => {
             nft: { id: nft?.id },
             raffle: { id: raffle?.id }
         })
-
-        initPage();
     }, [raffle])
+
+    useEffect(() => {
+        if (!loading) {
+            initPage();
+        }
+    }, [loading])
 
     const getRafflePriceView = () => {
         return raffle && <div>
@@ -470,8 +473,30 @@ const NftDetails = (props) => {
         setPrizing(true);
     }
 
+    const onClickRefresh = () => {
+        refresh(tokenid);
+    }
+
+    const onClickLike = () => {
+        console.log("liking...");
+    }
+
+    const onClickShare = () => {
+        console.log("sharing...");
+    }
+
+    const onClickReport = () => {
+        console.log("sharing...");
+    }
+
+    useEffect(() => {
+        if (result) {
+            fetchNftDetails(tokenid);
+        }
+    }, [result])
+
     return (
-        loading ? <PageLoader /> : <ContentWrapper>
+        loading || submitting ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_140 cs-height_lg_120"></div>
             <div className="container">
                 <div className="row">
@@ -517,13 +542,13 @@ const NftDetails = (props) => {
                         <div className="cs-single_product_head">
                             <h2>{nft?.name}</h2>
                             <div className="cs-single_info_head">
-                                <a className="cs-style1 cs-btn" href="#">
+                                <a className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                     <span><i className="fas fa-redo fa-fw"></i></span>
                                 </a>
-                                <a className="cs-style1 cs-btn" href="#">
+                                <a className="cs-style1 cs-btn" onClick={onClickShare}>
                                     <span><i className="fas fa-share fa-fw"></i></span>
                                 </a>
-                                <a className="cs-style1 cs-btn" href="#">
+                                <a className="cs-style1 cs-btn" onClick={onClickReport}>
                                     <span><i className="fas fa-flag fa-fw"></i></span>
                                 </a>
                             </div>
