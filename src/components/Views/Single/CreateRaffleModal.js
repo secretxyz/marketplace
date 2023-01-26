@@ -19,7 +19,7 @@ const Steps = {
 const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	const { creating, result, createRaffle } = useRaffle();
 	const [step, setStep] = useState(Steps.Creating);
-	const [raffle, setRaffle] = useState({ sell_option: 4 });
+	const [raffle, setRaffle] = useState({ total_ticket_price: "", ticket_count: "", raffle_duration: "", sell_option: 4 });
 	const [sellOptions, setSellOptions] = useState(SellOptions);
 	const [descriptions, setDescriptions] = useState({
 		total_ticket_price: "Possible earning 0 XRP",
@@ -57,7 +57,8 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 			case "total_ticket_price":
 				setDescriptions({
 					...descriptions,
-					total_ticket_price: `Possible earning ${(value * 0.95).toFixed(2)} XRP`
+					total_ticket_price: `Possible earning ${(value * 0.95).toFixed(2)} XRP`,
+					ticket_count: `${(value / Number(raffle.ticket_count)).toFixed(2)} XRP per Ticket`
 				})
 				break;
 			case "ticket_count":
@@ -78,9 +79,9 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	}
 
 	const onClickSubmit = () => {
-		if (raffle.total_ticket_price < 1 ||
-			raffle.ticket_count < 1 ||
-			raffle.raffle_duration < 1) {
+		if (Number(raffle.total_ticket_price) < 1 ||
+			Number(raffle.ticket_count) < 1 ||
+			Number(raffle.raffle_duration) < 1) {
 			return;
 		}
 
