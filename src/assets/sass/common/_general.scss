@@ -1520,6 +1520,7 @@ ul::-webkit-scrollbar-thumb {
   width: 200px;
   height: 200px;
   flex: none;
+  border-radius: 0% !important;
 
   img {
     border-radius: 15px;
@@ -3080,6 +3081,14 @@ ul::-webkit-scrollbar-thumb {
 .cs-profile_avatar {
   height: 100%;
   border-radius: 0% !important;
+
+  img {
+    border-radius: 15px;
+    border: 5px solid $white;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 .cs-profile_avatar_oval {
@@ -3153,7 +3162,7 @@ ul::-webkit-scrollbar-thumb {
   margin-right: 16px;
 }
 
-.cs-raffle_tickets_area{
+.cs-raffle_tickets_area {
   display: flex;
   justify-content: center;
   flex-direction: column;

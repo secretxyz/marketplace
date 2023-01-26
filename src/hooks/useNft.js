@@ -71,6 +71,7 @@ export const useNft = (tokenid, raffleid) => {
 export const useCollectionNfts = () => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
 
@@ -78,15 +79,20 @@ export const useCollectionNfts = () => {
         setLoading(true);
         const res = await SecretApi.getCollectionNfts(collectionId, page, params);
         setNfts([...nfts, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (collectionId, pageNumber, params) => {
         if (collectionId) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchNfts(collectionId, page.current, params);
         }

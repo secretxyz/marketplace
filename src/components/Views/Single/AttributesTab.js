@@ -8,9 +8,9 @@ const AttributesTab = ({ attributes }) => {
                     {attributes?.map((attr, idx) => (
                         <div className="cs-attr_field_wrap" key={idx}>
                             <div className="cs-form_field cs-field_sm">
-                                <span className="cs-attr_trait_type">{attr.trait_type}</span>
+                                <span className="cs-attr_trait_type">{attr.key}</span>
                                 <span className="cs-attr_trait_value">{attr.value}</span>
-                                <span className="cs-attr_trait_percent">{attr.percentage}% has this trait</span>
+                                <span className="cs-attr_trait_percent">{Number(attr.rarity_percentage).toFixed(2)}% has this trait</span>
                             </div>
                         </div>
                     ))}

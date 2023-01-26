@@ -5,6 +5,7 @@ import SecretApi from "../service/SecretApi";
 export const useRaffles = () => {
     const [loading, setLoading] = useState(true);
     const [raffles, setRaffles] = useState([]);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchRaffles = async (page, filters, reset) => {
@@ -15,15 +16,20 @@ export const useRaffles = () => {
         } else {
             setRaffles([...nfts, ...res.data]);
         }
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (pageNumber, filters) => {
         let reset;
         if (!pageNumber) {
+            if (ended) return;
             page.current = page.current + 1;
             reset = false;
         } else {
+            setEnded(false);
             page.current = pageNumber;
             reset = true;
         }
@@ -75,21 +81,27 @@ export const useRaffleBuyers = () => {
 export const useRaffleTransactions = () => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchRaffleTransactions = async (id, page) => {
         setLoading(true);
         const res = await SecretApi.getRaffleTransactions(id, page);
         setTransactions([...transactions, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (raffleId, pageNumber) => {
         if (raffleId) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchRaffleTransactions(raffleId, page.current);
         }
@@ -105,21 +117,27 @@ export const useRaffleTransactions = () => {
 export const useRaffleHistory = () => {
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchRaffleHistory = async (tokenid, page) => {
         setLoading(true);
         const res = await SecretApi.getRafflesWithTokenId(tokenid, page);
         setHistory([...history, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (tokenid, pageNumber) => {
         if (tokenid) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchRaffleHistory(tokenid, page.current);
         }

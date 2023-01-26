@@ -404,7 +404,7 @@ const NftDetails = (props) => {
             <div className="cs-author_right">
                 <h3>{raffle ? "Raffled by" : "Owned by"}</h3>
                 <a href={`/profile/${user?.wallet}`} target="_blank">
-                    <p>{user?.username ? `@${user?.username}` : getSummaryAddress(user?.wallet)}</p>
+                    <p>{user?.username ? `@${user?.username.trimStart()}` : getSummaryAddress(user?.wallet)}</p>
                 </a>
             </div>
         </div>
@@ -508,7 +508,7 @@ const NftDetails = (props) => {
                                     creator_fee: nft?.transfer_fee,
                                     ipfs_url: nft?.ipfs_url
                                 }} />
-                                <AttributesTab {...{ attributes: nft?.attributes || [] }} />
+                                <AttributesTab {...{ attributes: nft?.nft_attributes || [] }} />
                             </div>
                         </div>
                     </div>
@@ -534,13 +534,13 @@ const NftDetails = (props) => {
                         <div className="row">
                             <div className="col-xl-7">
                                 <div className="cs-author_card cs-white_bg cs-box_shadow">
-                                    <a href={`/collection/${collection.slug}`} target="_blank">
+                                    <a href={`/collection/${collection?.slug}`} target="_blank">
                                         <div className="cs-author_img">
                                             <img src={collection?.picture_url} alt="" />
                                         </div>
                                     </a>
                                     <div className="cs-author_right">
-                                        <a href={`/collection/${collection.slug}`} target="_blank">
+                                        <a href={`/collection/${collection?.slug}`} target="_blank">
                                             <h3>{collection?.name}</h3>
                                         </a>
                                         <p>created by {collection?.creator ? `@${collection?.creator.name}` : getSummaryAddress(collection?.issuer)}</p>

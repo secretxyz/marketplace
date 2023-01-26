@@ -25,21 +25,27 @@ export const useProfile = () => {
 export const useRaffleItems = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchRaffleItems = async (id, page) => {
         setLoading(true);
         const res = await SecretApi.getRaffleItems(id, page);
         setItems([...items, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (accountId, pageNumber) => {
         if (accountId) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchRaffleItems(accountId, page.current);
         }
@@ -55,21 +61,27 @@ export const useRaffleItems = () => {
 export const useRaffleTicketItems = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchRaffleTicketItems = async (id, page) => {
         setLoading(true);
         const res = await SecretApi.getRaffleTicketItems(id, page);
         setItems([...items, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (accountId, pageNumber) => {
         if (accountId) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchRaffleTicketItems(accountId, page.current);
         }
@@ -121,21 +133,27 @@ export const useCollectedItems = () => {
 export const useCreatedItems = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchCreatedItems = async (id, page) => {
         setLoading(true);
         const res = await SecretApi.getCreated(id, page);
         setItems([...items, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (accountId, pageNumber) => {
         if (accountId) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchCreatedItems(accountId, page.current);
         }
@@ -151,21 +169,27 @@ export const useCreatedItems = () => {
 export const useCreatedCollections = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchCreatedItems = async (issuer, page) => {
         setLoading(true);
         const res = await SecretApi.getCreatedCollections(issuer, page);
         setItems([...items, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (issuer, pageNumber) => {
         if (issuer) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchCreatedItems(issuer, page.current);
         }
