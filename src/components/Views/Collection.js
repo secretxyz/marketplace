@@ -72,7 +72,7 @@ const Collection = (props) => {
                                     </a>
                                 </div>
                             </div>
-                            <img src={collection?.banner_picture_url} alt="Collection Details" />
+                            <img src={collection?.banner_picture_url || "img/cover-photo.jpeg"} alt="Collection Details" />
                         </div>
                         <div className="cs-collection_bottom">
                             <div className="cs-collection_avatar">
