@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getAuthChannel, setAuthToken, setAccount } from "../components/Helpers/Utils";
-import { API_URL } from "../components/Common/constants";
 import xummStore from "../store/xumm.store";
 import accountStore from "../store/account.store";
+import SecretApi from "../service/SecretApi";
 
 const useConnectWallet = () => {
     let controller = new AbortController();
@@ -11,7 +11,7 @@ const useConnectWallet = () => {
     const startRequest = async () => {
         console.log("connect wallet requested...");
         try {
-            let res = await axios.get(`${API_URL}/api/connect-wallet/${getAuthChannel()}`, {
+            let res = await axios.get(`${SecretApi.baseUrl}/api/connect-wallet/${getAuthChannel()}`, {
                 signal: controller.signal
             })
 

@@ -6,7 +6,7 @@ import xummStore from "../../store/xumm.store";
 import SecretApi from "../../service/SecretApi";
 
 
-const socket = io(API_URL);
+const socket = io(SecretApi.baseUrl);
 
 const SocketLoader = async () => {
     // request auth channel
