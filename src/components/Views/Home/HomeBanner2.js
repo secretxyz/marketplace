@@ -4,7 +4,7 @@ import RaffleCard from '../Card/RaffleCard';
 import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
 
 const HomeBanner2 = () => {
-    const { loading, items } = useFeaturedRaffle();
+    const { loading, items } = useFeaturedRaffle(0);
 
     useEffect(() => {
         if (items.length > 0) {

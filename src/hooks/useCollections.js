@@ -5,6 +5,7 @@ import SecretApi from "../service/SecretApi";
 export const useCollections = () => {
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchCollections = async (page, pageSize, category, reset) => {
@@ -15,15 +16,20 @@ export const useCollections = () => {
         } else {
             setCollections([...collections, ...res.data]);
         }
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (pageNumber, pageSize, category) => {
         let reset;
         if (!pageNumber) {
+            if (ended) return;
             page.current = page.current + 1;
             reset = false;
         } else {
+            setEnded(false);
             page.current = pageNumber;
             reset = true;
         }

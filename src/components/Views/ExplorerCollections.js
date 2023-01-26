@@ -30,10 +30,8 @@ const ExplorerCollections = () => {
 	}, [category])
 
 	const handleScroll = (e) => {
-		console.log(e.target.scrollHeight - e.target.scrollTop, e.target.clientHeight);
 		const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
 		if (bottom) {
-			// console.log("scrolling...");
 			fetchNext(0, 25, category);
 		}
 	}

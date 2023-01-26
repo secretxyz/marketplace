@@ -85,21 +85,27 @@ export const useRaffleTicketItems = () => {
 export const useCollectedItems = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchCollectedItems = async (id, page) => {
         setLoading(true);
         const res = await SecretApi.getCollected(id, page);
         setItems([...items, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (accountId, pageNumber) => {
         if (accountId) {
             if (!pageNumber) {
+                if (ended) return;
                 page.current = page.current + 1;
             } else {
                 page.current = pageNumber;
+                setEnded(false);
             }
             fetchCollectedItems(accountId, page.current);
         }

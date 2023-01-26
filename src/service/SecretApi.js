@@ -136,17 +136,24 @@ class SecretApi {
         }
     }
 
-    async getFeaturedRaffles() {
+    async getFeaturedRaffles(category) {
+        let filters;
+        if (!category) {
+            filters = { "filters[homepage_banner]": true };
+        }else{
+            filters = { "filters[featured]": true };
+        }
+
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
                 params: {
                     "pagination[page]": 1,
                     "pagination[pageSize]": 10,
-                    // "filters[homepage_banner]": true,
-                    // "filters[status]": "active",
+                    "filters[status]": "active",
                     "sort[raffle_end_datetime]": "asc",
                     "populate[raffler]": true,
                     "populate[nft]": true,
+                    ...filters
                 }
             });
             return res.data;

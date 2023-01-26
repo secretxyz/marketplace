@@ -5,6 +5,7 @@ import SecretApi from "../service/SecretApi";
 export const useNfts = () => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
+    const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
     const fetchNfts = async (page, filters, reset) => {
@@ -15,15 +16,20 @@ export const useNfts = () => {
         } else {
             setNfts([...nfts, ...res.data]);
         }
+        if (!res.data?.length) {
+            setEnded(true);
+        }
         setLoading(false);
     }
 
     const fetchNext = (pageNumber, filters) => {
         let reset;
         if (!pageNumber) {
+            if (ended) return;
             page.current = page.current + 1;
             reset = false;
         } else {
+            setEnded(false);
             page.current = pageNumber;
             reset = true;
         }

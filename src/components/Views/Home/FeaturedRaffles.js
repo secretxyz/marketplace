@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const FeaturedRaffles = () => {
     const [hidden, setHidden] = useState(false);
-    const { loading, items } = useFeaturedRaffle();
+    const { loading, items } = useFeaturedRaffle(1);
 
     useEffect(() => {
         if (items.length > 0) {
