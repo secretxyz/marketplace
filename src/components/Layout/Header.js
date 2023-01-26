@@ -5,9 +5,9 @@ import accountStore from '../../store/account.store';
 import { setAccount, setAuthToken, getSummaryAddress } from '../Helpers/Utils';
 
 const mainNav = () => {
-	$('.cs-nav').append('<span className="cs-menu_toggle"><span></span></span>');
+	$('.cs-nav').append('<span class="cs-menu_toggle"><span></span></span>');
 	$('.menu-item-has-children').append(
-		'<span className="cs-menu_dropdown_toggle"></span>'
+		'<span class="cs-menu_dropdown_toggle"></span>'
 	);
 	$('.cs-menu_toggle').on('click', function () {
 		$(this)

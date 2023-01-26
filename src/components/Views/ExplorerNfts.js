@@ -12,7 +12,7 @@ const Filters = [
 ];
 
 const ExplorerNfts = () => {
-	const { loading, nfts, fetchNext } = useNfts();
+	const { loading, nfts, meta, fetchNext } = useNfts();
 	const [filters, setFilters] = useState(Filters);
 
 	const handleScroll = (e) => {
@@ -173,7 +173,7 @@ const ExplorerNfts = () => {
 					<div className="cs-sidebar_frame_right">
 						<div className="cs-filter_head">
 							<div className="cs-filter_head_left">
-								<span className="cs-search_result cs-medium cs-ternary_color">29064886 Results</span>
+								<span className="cs-search_result cs-medium cs-ternary_color">{meta?.pagination?.total} Results</span>
 								<div className="cs-form_field_wrap">
 									<input type="text" className="cs-form_field cs-field_sm" placeholder="In Auction" />
 								</div>

@@ -543,7 +543,9 @@ const NftDetails = (props) => {
                                         <a href={`/collection/${collection?.slug}`} target="_blank">
                                             <h3>{collection?.name}</h3>
                                         </a>
-                                        <p>created by {collection?.creator ? `@${collection?.creator.name}` : getSummaryAddress(collection?.issuer)}</p>
+                                        <p>created by <a href={`/profile/${collection?.issuer}`}>
+                                            <span>{collection?.creator ? `@${collection?.creator.name}` : getSummaryAddress(collection?.issuer)}</span>
+                                        </a></p>
                                     </div>
                                 </div>
                                 <div className="cs-height_15 cs-height_lg_15"></div>

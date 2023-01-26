@@ -5,6 +5,7 @@ import SecretApi from "../service/SecretApi";
 export const useNfts = () => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
+    const [meta, setMeta] = useState();
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
@@ -16,6 +17,7 @@ export const useNfts = () => {
         } else {
             setNfts([...nfts, ...res.data]);
         }
+        setMeta(res.meta);
         if (!res.data?.length) {
             setEnded(true);
         }
@@ -37,8 +39,9 @@ export const useNfts = () => {
     }
 
     return {
-        nfts,
         loading,
+        nfts,
+        meta,
         fetchNext
     }
 }
@@ -71,6 +74,7 @@ export const useNft = (tokenid, raffleid) => {
 export const useCollectionNfts = () => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
+    const [meta, setMeta] = useState();
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
@@ -79,6 +83,7 @@ export const useCollectionNfts = () => {
         setLoading(true);
         const res = await SecretApi.getCollectionNfts(collectionId, page, params);
         setNfts([...nfts, ...res.data]);
+        setMeta(res.meta);
         if (!res.data?.length) {
             setEnded(true);
         }
@@ -101,6 +106,7 @@ export const useCollectionNfts = () => {
     return {
         loading,
         nfts,
+        meta,
         fetchNext
     }
 }

@@ -118,7 +118,7 @@ export const getCurrentTime = () => {
 };
 
 export const getImageLink = (url) => {
-	if (!url){
+	if (!url) {
 		return "img/cover-photo.jpeg";
 	}
 	if (url.startsWith("ipfs://")) {
@@ -246,4 +246,19 @@ export const getTicketStatus = (status) => {
 		case "raffled":
 			return <p className="badge bg-primary">Completed</p>
 	}
+}
+
+export const getNumberFormat1 = (value) => {
+	if (!value) {
+		return 0;
+	}
+
+	let v = Number(value);
+	if (v > 10000) {
+		return `${(v / 1000).toFixed(2)}K`;
+	}
+	if (v > 1000000) {
+		return `${(v / 1000000).toFixed(2)}M`;
+	}
+	return v;
 }

@@ -6,6 +6,7 @@ import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
 import NftCard from './Card/NftCard';
 import { APP_COLORS } from "../Common/constants"
+import { getImageLink, getNumberFormat1, getSummaryAddress } from '../Helpers/Utils';
 
 const ATTRIBUTES = [
     {
@@ -31,7 +32,7 @@ const ATTRIBUTES = [
 const Collection = (props) => {
     const { slug } = props.match.params;
     const { loading, collection } = useCollection(slug);
-    const { loading: nftsLoading, nfts, fetchNext } = useCollectionNfts();
+    const { loading: nftsLoading, nfts, meta, fetchNext } = useCollectionNfts();
     const [attributes, setAttributes] = useState(ATTRIBUTES);
 
     const handleScroll = (e) => {
@@ -57,16 +58,16 @@ const Collection = (props) => {
                         <div className="cs-collection_img">
                             <div className="cs-collection_info_other">
                                 <div className="cs-collection_info_head">
-                                    <a className="cs-style1 cs-btn" href="#">
+                                    <a className="cs-style1 cs-btn">
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
-                                    <a className="cs-style1 cs-btn" href="#">
+                                    <a className="cs-style1 cs-btn">
                                         <span><i className="fas fa-star fa-fw"></i></span>
                                     </a>
-                                    <a className="cs-style1 cs-btn" href="#">
+                                    <a className="cs-style1 cs-btn">
                                         <span><i className="fas fa-share fa-fw"></i></span>
                                     </a>
-                                    <a className="cs-style1 cs-btn" href="#">
+                                    <a className="cs-style1 cs-btn">
                                         <span><i className="fas fa-flag fa-fw"></i></span>
                                     </a>
                                 </div>
@@ -74,20 +75,38 @@ const Collection = (props) => {
                             <img src={collection?.banner_picture_url} alt="Collection Details" />
                         </div>
                         <div className="cs-collection_bottom">
-                            <div className="cs-collection_avatar"><img src={collection?.picture_url} alt="Collection" /></div>
+                            <div className="cs-collection_avatar">
+                                <img src={getImageLink(collection?.picture_url)} alt="Collection" />
+                            </div>
                             <div className="cs-collection_info">
                                 <div className="cs-collection_info_in cs-white_bg">
                                     <div className="row">
                                         <div className="col-lg-5">
                                             <div className="cs-collection_info_left">
                                                 <h2 className="cs-collection_avatar_name">{collection?.name}</h2>
-                                                <div className="cs-collection_user">@bearableguyclub <span>Created</span></div>
-                                                <a className="cs-btn cs-style1" href="#"><span><i className="fa fa-globe fa-fw"></i></span></a>
-                                                <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-discord fa-fw"></i></span></a>
-                                                <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-twitter fa-fw"></i></span></a>
-                                                <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-youtube fa-fw"></i></span></a>
-                                                <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-instagram fa-fw"></i></span></a>
-                                                <a className="cs-btn cs-style1" href="#"><span><i className="fab fa-reddit fa-fw"></i></span></a>
+                                                <div className="cs-collection_user">
+                                                    <span>created by</span> <a href={`/profile/${collection?.issuer}`}>
+                                                        {collection?.creator ? `@${collection?.creator.name}` : getSummaryAddress(collection?.issuer)}
+                                                    </a>
+                                                </div>
+                                                {collection?.website_url && <a className="cs-btn cs-style1" href={collection?.website_url} target="_blank">
+                                                    <span><i className="fa fa-globe fa-fw"></i></span>
+                                                </a>}
+                                                {collection?.discord_url && <a className="cs-btn cs-style1" href={collection?.discord_url} target="_blank">
+                                                    <span><i className="fab fa-discord fa-fw"></i></span>
+                                                </a>}
+                                                {collection?.twitter_url && <a className="cs-btn cs-style1" href={collection?.twitter_url} target="_blank">
+                                                    <span><i className="fab fa-twitter fa-fw"></i></span>
+                                                </a>}
+                                                {collection?.youtube_url && <a className="cs-btn cs-style1" href={collection?.youtube_url} target="_blank">
+                                                    <span><i className="fab fa-youtube fa-fw"></i></span>
+                                                </a>}
+                                                {collection?.instagram_url && <a className="cs-btn cs-style1" href={collection?.instagram_url} target="_blank">
+                                                    <span><i className="fab fa-instagram fa-fw"></i></span>
+                                                </a>}
+                                                {collection?.reddit_url && <a className="cs-btn cs-style1" href={collection?.reddit_url} target="_blank">
+                                                    <span><i className="fab fa-reddit fa-fw"></i></span>
+                                                </a>}
                                             </div>
                                         </div>
                                         <div className="col-lg-7">
@@ -100,15 +119,15 @@ const Collection = (props) => {
                                                         </li>
                                                         <li>
                                                             <div className="cs-collection_list_title">Owned by</div>
-                                                            <div className="cs-collection_list_number">312</div>
+                                                            <div className="cs-collection_list_number">{collection.owners || 0}</div>
                                                         </li>
                                                         <li>
                                                             <div className="cs-collection_list_title">Floor Price</div>
-                                                            <div className="cs-collection_list_number">392 XRP</div>
+                                                            <div className="cs-collection_list_number">{getNumberFormat1(collection.floor_price)} XRP</div>
                                                         </li>
                                                         <li>
                                                             <div className="cs-collection_list_title">Total Sales</div>
-                                                            <div className="cs-collection_list_number">59.6K XRP</div>
+                                                            <div className="cs-collection_list_number">{getNumberFormat1(collection.total_volume)} XRP</div>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -255,11 +274,11 @@ const Collection = (props) => {
                     <div className="cs-sidebar_frame_right">
                         <div className="cs-filter_head">
                             <div className="cs-filter_head_left">
-                                <span className="cs-search_result cs-medium cs-ternary_color">29064886 Results</span>
+                                <span className="cs-search_result cs-medium cs-ternary_color">{meta?.pagination?.total} Results</span>
                                 <div className="cs-form_field_wrap">
                                     <input type="text" className="cs-form_field cs-field_sm" placeholder="In Auction" />
                                 </div>
-                                <a href="#" className="cs-clear_btn">Clear All</a>
+                                <a className="cs-clear_btn">Clear All</a>
                             </div>
                             <div className="cs-filter_head_right">
                                 <div className="cs-form_field_wrap cs-select_arrow">
