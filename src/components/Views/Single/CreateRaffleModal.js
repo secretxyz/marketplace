@@ -10,9 +10,15 @@ const SellOptions = [
 	{ id: 4, label: "100%", isChecked: true },
 ];
 
+const Steps = {
+	Creating: 0,
+	Waiting: 1,
+	Completed: 2,
+}
+
 const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	const { creating, result, createRaffle } = useRaffle();
-	const [step, setStep] = useState(0);
+	const [step, setStep] = useState(Steps.Creating);
 	const [raffle, setRaffle] = useState({ sell_option: 4 });
 	const [sellOptions, setSellOptions] = useState(SellOptions);
 	const [descriptions, setDescriptions] = useState({
@@ -20,42 +26,49 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		ticket_count: "0 XRP per Ticket",
 		raffle_duration: `Raffle will end ${getDateTimeWithFormat(new Date())}`
 	});
+	const [featured, setFeatured] = useState(false);
 
 	useEffect(() => {
 		if (result) {
-			setStep(2);
+			setStep(Steps.Completed);
 		}
 	}, [result])
 
 	const close = () => {
 		$("#create_raffle_modal").removeClass("active");
 		closeModal();
-		refreshDetails();
+		if (step == Steps.Completed) {
+			refreshDetails();
+		}
 	}
 
 	const onChangeInfo = (event) => {
 		let name = event.target.name;
+		let value = Number(event.target.value);
+		if (value < 0) {
+			value = 0
+		}
 		setRaffle({
 			...raffle,
-			[name]: event.target.value
+			[name]: value
 		});
 
 		switch (name) {
 			case "total_ticket_price":
 				setDescriptions({
 					...descriptions,
-					total_ticket_price: `Possible earning ${(Number(event.target.value) * 0.95).toFixed(2)} XRP`
+					total_ticket_price: `Possible earning ${(value * 0.95).toFixed(2)} XRP`
 				})
 				break;
 			case "ticket_count":
 				setDescriptions({
 					...descriptions,
-					ticket_count: `${(Number(raffle.total_ticket_price) / Number(event.target.value)).toFixed(2)} XRP per Ticket`
+					ticket_count: `${(Number(raffle.total_ticket_price) / value).toFixed(2)} XRP per Ticket`
 				})
 				break;
 			case "raffle_duration":
 				let dt = new Date();
-				dt.setDate(new Date().getDate() + Number(event.target.value));
+				dt.setDate(new Date().getDate() + value);
 				setDescriptions({
 					...descriptions,
 					raffle_duration: `Raffle will end ${getDateTimeWithFormat(dt)}`
@@ -65,9 +78,15 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	}
 
 	const onClickSubmit = () => {
-		let data = { ...raffle, nft }
+		if (raffle.total_ticket_price < 1 ||
+			raffle.ticket_count < 1 ||
+			raffle.raffle_duration < 1) {
+			return;
+		}
+
+		let data = { ...raffle, nft, featured }
 		createRaffle(data)
-		setStep(1);
+		setStep(Steps.Waiting);
 	};
 
 	const onSellOption = id => {
@@ -81,6 +100,10 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		setSellOptions(options);
 	};
 
+	const onChangeFeatured = () => {
+		setFeatured(!featured);
+	}
+
 	return (
 		<div className="cs-modal_wrap" id="create_raffle_modal">
 			<div className="cs-modal_overlay"></div>
@@ -92,11 +115,11 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 						</svg>
 					</div>
 					<div className="cs-modal">
-						{step == 0 ? <div>
+						{step == Steps.Creating ? <div>
 							<div className="cs-modal_header">
 								<h2 className="cs-modal_title">Create Raffle</h2>
 								<div className="form-check form-switch cs-offer_form_switch">
-									<input className="form-check-input" type="checkbox" id="mode_switch" />
+									<input className="form-check-input" type="checkbox" id="mode_switch" checked={featured} onChange={onChangeFeatured} />
 									<label className="form-check-label" htmlFor="mode_switch">Feature Option</label>
 								</div>
 							</div>
@@ -106,14 +129,14 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									<div className="cs-offer_form_field">
 										<span className="cs-offer_field_title">Total Ticket Price</span>
 										<input name="total_ticket_price" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter price" value={raffle?.total_ticket_price || ""} onChange={onChangeInfo} />
+											placeholder="Enter price" value={raffle?.total_ticket_price || ""} onChange={onChangeInfo} min={1} />
 										<span className="cs-offer_field_description">{descriptions["total_ticket_price"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 									<div className="cs-offer_form_field">
 										<span className="cs-offer_field_title">Ticket Count</span>
 										<input name="ticket_count" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter count" value={raffle?.ticket_count || ""} onChange={onChangeInfo} />
+											placeholder="Enter count" value={raffle?.ticket_count || ""} onChange={onChangeInfo} min={1} />
 										<span className="cs-offer_field_description">{descriptions["ticket_count"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
@@ -138,7 +161,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									<div className="cs-offer_form_field">
 										<span className="cs-offer_field_title">Raffle Duration</span>
 										<input name="raffle_duration" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter duration" value={raffle?.raffle_duration || ""} onChange={onChangeInfo} />
+											placeholder="Enter duration" value={raffle?.raffle_duration || ""} onChange={onChangeInfo} min={1} />
 										<span className="cs-offer_field_description">{descriptions["raffle_duration"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
@@ -147,7 +170,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 							<a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickSubmit}>
 								<span>Submit</span>
 							</a>
-						</div> : step == 1 ? <div>
+						</div> : step == Steps.Waiting ? <div>
 							<h2 className="cs-modal_title">Connecting to XUMM wallet...</h2>
 							<div className="cs-height_10 cs-height_lg_10"></div>
 							We're waiting for your wallet to approve this action.

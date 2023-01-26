@@ -207,7 +207,16 @@ class SecretApi {
         }
     }
 
-    async updateProfile() {
+    async updateProfile(data) {
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/account/update-me`, data, {
+                headers: this.headers()
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     }
 
     async getCollected(id, page) {

@@ -153,6 +153,11 @@ const Profile = (props) => {
         fetchProfile(wallet || getAccount().wallet);
     }, [result])
 
+
+    const refreshProfile = () => {
+        fetchProfile(wallet || getAccount().wallet);
+    }
+
     return (
         loading || submitting ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_100 cs-height_lg_70"></div>
@@ -211,7 +216,7 @@ const Profile = (props) => {
                             </div>
                         </div>} */}
                         <div className="cs-height_15 cs-height_lg_10"></div>
-                        <ContentComponent accountId={accountId} profile={profile} />
+                        <ContentComponent accountId={accountId} profile={profile} refresh={refreshProfile} />
                     </div>
                 </div>
             </div>

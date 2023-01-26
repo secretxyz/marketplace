@@ -173,10 +173,21 @@ export const useCreatedCollections = () => {
 }
 
 export const useProfileInfo = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [result, setResult] = useState();
 
+    const update = async (data) => {
+        setLoading(true);
+        const res = await SecretApi.updateProfile(data);
+        setResult(res);
+        setLoading(false);
+    }
 
+    return {
+        loading,
+        result,
+        update
+    }
 }
 
 export const useProfileOther = () => {

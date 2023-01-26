@@ -2201,6 +2201,21 @@ ul::-webkit-scrollbar-thumb {
   }
 }
 
+.cs-edit_profile_banner_img {
+  height: 90px;
+  width: 180px;
+  margin-right: 25px;
+  flex: none;
+  border-radius: 10px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
 .cs-upload_btn {
   padding: 6px 22px;
   display: inline-block;

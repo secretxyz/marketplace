@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useProfileInfo } from '../../../hooks/useProfile';
 import ContentWrapper from '../../Layout/ContentWrapper';
 import Avatar from "./Avatar";
 
-const ProfileInfo = ({ profile }) => {
+const ProfileInfo = ({ profile, refresh }) => {
     const [account, setAccount] = useState(profile);
+    const { loading, result, update } = useProfileInfo();
 
     const updateProfile = () => {
-        console.log(account);
+        update(account);
     }
 
     const onChangeInfo = (event) => {
@@ -15,6 +17,12 @@ const ProfileInfo = ({ profile }) => {
             [event.target.name]: event.target.value
         });
     }
+
+    useEffect(() => {
+        if (result) {
+            refresh();
+        }
+    }, [result])
 
     return (
         <ContentWrapper>
@@ -35,31 +43,14 @@ const ProfileInfo = ({ profile }) => {
                             placeholder="Your bio..." value={account?.bio || ""} onChange={onChangeInfo}></textarea>
                     </div>
                     <div className="cs-height_20 cs-height_lg_20"></div>
-                    <div className="cs-edit_profile">
-                        <div className="cs-edit_profile_img">
-                            <Avatar className="cs-profile_avatar" {...{ name: account?.wallet, image: account?.picture_url }} />
-                        </div>
-                        <div className="cs-edit_profile_right">
-                            <div className="cs-edit_profile_btns">
-                                <a href="#" className="cs-upload_btn">Upload</a>
-                                <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
-                            </div>
-                            <p>Images must be .png or .jpg format. Min size 200x200px (avatar)</p>
-                        </div>
-                    </div>
                 </div>
                 <div className="col-lg-6">
-                    <div className="cs-form_field_wrap">
-                        <input name="email" type="email" className="cs-form_field cs-white_bg"
-                            placeholder="Enter email" value={account?.email || ""} onChange={onChangeInfo} />
-                    </div>
-                    <div className="cs-height_25 cs-height_lg_25"></div>
                     <span className="cs-btn cs-style2 cs-btn_lg w-100">
                         <span className="text-left cs-social_input">
-                            <i className="fab fa-telegram"></i>
-                            <span>Telegram</span>
-                            <input name="telegram_username" type="text"
-                                placeholder="Do not add full url, just handle" value={account?.telegram_username || ""} onChange={onChangeInfo} />
+                            <i className="fab fa-discord"></i>
+                            <span>Discord</span>
+                            <input name="discord_username" type="text"
+                                placeholder="Do not add full url, just handle" value={account?.discord_username || ""} onChange={onChangeInfo} />
                         </span>
                     </span>
                     <div className="cs-height_25 cs-height_lg_25"></div>
@@ -74,13 +65,50 @@ const ProfileInfo = ({ profile }) => {
                     <div className="cs-height_25 cs-height_lg_25"></div>
                     <span className="cs-btn cs-style2 cs-btn_lg w-100">
                         <span className="text-left cs-social_input">
-                            <i className="fab fa-discord"></i>
-                            <span>Discord</span>
-                            <input name="discord_username" type="text"
-                                placeholder="Do not add full url, just handle" value={account?.discord_username || ""} onChange={onChangeInfo} />
+                            <i className="fab fa-telegram"></i>
+                            <span>Telegram</span>
+                            <input name="telegram_username" type="text"
+                                placeholder="Do not add full url, just handle" value={account?.telegram_username || ""} onChange={onChangeInfo} />
+                        </span>
+                    </span><div className="cs-height_25 cs-height_lg_25"></div>
+                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                        <span className="text-left cs-social_input">
+                            <i className="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                            <input name="facebook_username" type="text"
+                                placeholder="Do not add full url, just handle" value={account?.facebook_username || ""} onChange={onChangeInfo} />
                         </span>
                     </span>
-                    <div className="cs-height_25 cs-height_lg_25"></div>
+                    <div className="cs-height_30 cs-height_lg_30"></div>
+
+                </div>
+                <div className="col-lg-6">
+                    <div className="cs-edit_profile">
+                        <div className="cs-edit_profile_img">
+                            <Avatar className="cs-profile_avatar" {...{ name: account?.wallet, image: account?.picture_url }} />
+                        </div>
+                        <div className="cs-edit_profile_right">
+                            <div className="cs-edit_profile_btns">
+                                <a className="cs-upload_btn">Upload</a>
+                                <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
+                            </div>
+                            <p>Images must be .png or .jpg format. Min size 200x200px (avatar)</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-lg-6">
+                    <div className="cs-edit_profile">
+                        <div className="cs-edit_profile_banner_img">
+                            <img src={account.banner_picture_url || "img/cover-photo.jpeg"} />
+                        </div>
+                        <div className="cs-edit_profile_right">
+                            <div className="cs-edit_profile_btns">
+                                <a className="cs-upload_btn">Upload</a>
+                                <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
+                            </div>
+                            <p>Images must be .png or .jpg format. Min size 1400x400px (avatar)</p>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-lg-12">
                     <div className="cs-height_40 cs-height_lg_5"></div>

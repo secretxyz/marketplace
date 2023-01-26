@@ -30,7 +30,7 @@ const HomeBanner2 = () => {
                         <div className="cs-raffle_banner_slider cs-style1 cs-gap-20">
                             <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600"  data-center="1" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3" data-lg-slides="3" data-add-slides="3">
                                 <div className="cs-slider_wrapper" >
-                                    {items.map(n => (
+                                    {items?.map(n => (
                                         <div className="cs-slide" key={n.id}>
                                             <RaffleCard data={{ id: n.id, ...n.attributes }} hiddenStatus={true} />
                                         </div>
