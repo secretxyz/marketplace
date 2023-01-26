@@ -9,10 +9,10 @@ import { useCollectedItems } from '../../../hooks/useProfile';
 const CollectedItems = ({ accountId }) => {
     const { loading, items, fetchNext } = useCollectedItems();
 
-    const handleScroll = (e) => {
+    const handleScroll = async (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if (bottom) {
-            fetchNext(accountId);
+            await fetchNext(accountId);
         }
     }
 

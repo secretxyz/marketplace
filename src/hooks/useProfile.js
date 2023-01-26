@@ -110,7 +110,7 @@ export const useCollectedItems = () => {
         setLoading(false);
     }
 
-    const fetchNext = (accountId, pageNumber) => {
+    const fetchNext = async (accountId, pageNumber) => {
         if (accountId) {
             if (!pageNumber) {
                 if (ended) return;
@@ -119,7 +119,7 @@ export const useCollectedItems = () => {
                 page.current = pageNumber;
                 setEnded(false);
             }
-            fetchCollectedItems(accountId, page.current);
+            await fetchCollectedItems(accountId, page.current);
         }
     }
 
