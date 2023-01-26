@@ -2,8 +2,8 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 import { getAuthChannel, setAuthChannel } from "./Utils";
-import { API_URL } from "../Common/constants";
 import xummStore from "../../store/xumm.store";
+import SecretApi from "../../service/SecretApi";
 
 
 const socket = io(API_URL);
@@ -11,7 +11,7 @@ const socket = io(API_URL);
 const SocketLoader = async () => {
     // request auth channel
     if (!getAuthChannel()) {
-        let res = await axios.get(`${API_URL}/api/auth`)
+        let res = await axios.get(`${SecretApi.baseUrl}/api/auth`)
         setAuthChannel(res.data.token);
     }
 
