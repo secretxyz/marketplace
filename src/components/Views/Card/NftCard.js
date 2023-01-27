@@ -44,7 +44,7 @@ const NftCard = ({ data }) => {
                 <img style={{ background: `url(${data.picture_url})` }} alt="Image" className="cs-zoom_item" />
             </a>
             <div className="cs-card_info">
-                <a href={nft_link} className="cs-avatar cs-white_bg">
+                <a href={nft_link} className="cs-avatar cs-white_bg cs-box_shadow">
                     <Avatar className="cs-profile_avatar_oval" {...{ name: owner.wallet, image: owner.picture_url }} />
                     <span>{owner.username ?? getSummaryAddress(owner.wallet)}</span>
                 </a>

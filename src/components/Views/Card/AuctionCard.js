@@ -51,7 +51,7 @@ class AuctionCard extends React.Component {
                     </div>
                 </div>
                 <div className="cs-card_info">
-                    <a href="#" className="cs-avatar cs-white_bg">
+                    <a href="#" className="cs-avatar cs-white_bg cs-box_shadow">
                         <div className="cs-avatar_images">
                             {data.bidders.map((b, k) => (
                                 <img src={b.picture_url} alt="Avatar" key={k} />
