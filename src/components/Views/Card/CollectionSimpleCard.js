@@ -1,5 +1,5 @@
 import React from 'react';
-import { getImageLink } from "../../Helpers/Utils";
+import { getImageLink, getNumberFormat1 } from "../../Helpers/Utils";
 
 const CollectionSimpleCard = ({ data, id }) => {
     const collection = data.attributes;
@@ -19,11 +19,11 @@ const CollectionSimpleCard = ({ data, id }) => {
                             <div className="cs-card_media_details">
                                 <div className='cs-card_media_details_item'>
                                     <div className='cs-card_media_details_item_subtitle'>Volume:</div>
-                                    {collection?.total_volume || 0} XRP
+                                    {getNumberFormat1(collection?.total_volume)} XRP
                                 </div>
                                 <div className='cs-card_media_details_item'>
                                     <div className='cs-card_media_details_item_subtitle'>Floor Price:</div>
-                                    {collection?.floor_price || 0} XRP
+                                    {getNumberFormat1(collection?.floor_price)} XRP
                                 </div>
                             </div>
                         </div>
@@ -31,8 +31,8 @@ const CollectionSimpleCard = ({ data, id }) => {
                 </div>
                 <div className="cs-card_right">
                     <ul className="cs-mp0">
-                        <li><i className="fas fa-list-ul fa-fw"></i> {nfts_count || 0} </li>
-                        <li><i className="far fa-user fa-fw"></i> {collection?.owners || 0} </li>
+                        <li><i className="fas fa-list-ul fa-fw"></i> {getNumberFormat1(nfts_count)} </li>
+                        <li><i className="far fa-user fa-fw"></i> {getNumberFormat1(collection?.owners)} </li>
                     </ul>
                 </div>
             </div>

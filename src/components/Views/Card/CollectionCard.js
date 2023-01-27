@@ -1,5 +1,5 @@
 import React from 'react';
-import { getImageLink } from "../../Helpers/Utils";
+import { getImageLink, getNumberFormat1 } from "../../Helpers/Utils";
 
 const CollectionCard = ({ data }) => {
     const collection = data.attributes;
@@ -23,7 +23,7 @@ const CollectionCard = ({ data }) => {
                 <div className="cs-card_meta_info">
                     <div className="cs-card_meta_info_item">
                         <i className="fas fa-list-ul fa-fw"></i>
-                        <span>{nfts_count || 0} Items</span>
+                        <span>{getNumberFormat1(nfts_count)} Items</span>
                     </div>
                     <div className="cs-card_meta_info_item">
                         <i className="far fa-user fa-fw"></i>
