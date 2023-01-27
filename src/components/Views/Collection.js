@@ -51,7 +51,7 @@ const Collection = (props) => {
     return (
         loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_35 cs-height_lg_30"></div>
-            <div className="cs-bg" style={{ background: `url("img/page_head_bg.svg")` }}>
+            <div className="cs-bg" style={{ background: `url("img/page_head_bg.png")` }}>
                 <div className="cs-height_100 cs-height_lg_70"></div>
                 <div className="container">
                     <div className="cs-collection_card">

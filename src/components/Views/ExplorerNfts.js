@@ -41,7 +41,7 @@ const ExplorerNfts = () => {
 	return (
 		<ContentWrapper>
 			<div className="cs-height_90 cs-height_lg_80"></div>
-			<section className="cs-page_head cs-bg" style={{ background: `url("img/page_head_bg.svg")` }}>
+			<section className="cs-page_head cs-bg" style={{ background: `url("img/page_head_bg.png")` }}>
 				<div className="container">
 					<div className="text-center">
 						<h1 className="cs-page_title">Explore NFTs</h1>
