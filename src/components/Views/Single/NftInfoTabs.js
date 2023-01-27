@@ -70,7 +70,7 @@ const NftInfoTabs = ({ tokenid }) => {
                 </ul>
             </div>
             <div className="cs-height_20 cs-height_lg_20"></div>
-            <div className="cs-tab_content">
+            <div className="cs-tab_content cs-tab_nft_info_content" onScroll={handleScroll}>
                 <div id="history" className="cs-tab active">
                     <ul className="cs-activity_list cs-mp0">
                         {history.map(h => (

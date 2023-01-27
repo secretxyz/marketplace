@@ -2459,6 +2459,16 @@ ul::-webkit-scrollbar-thumb {
   }
 }
 
+.cs-tab_nft_detail_content {
+  max-height: 322px;
+  overflow-y: scroll;
+}
+
+.cs-tab_nft_info_content {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
 .cs-tab_links.cs-style1 {
   display: flex;
   flex-wrap: wrap;
@@ -3193,5 +3203,5 @@ ul::-webkit-scrollbar-thumb {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 300px;
+  max-width: 290px;
 }

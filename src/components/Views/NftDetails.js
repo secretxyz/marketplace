@@ -523,7 +523,7 @@ const NftDetails = (props) => {
                                 </ul>
                             </div>
                             <div className="cs-height_20 cs-height_lg_20"></div>
-                            <div className="cs-tab_content">
+                            <div className="cs-tab_content cs-tab_nft_detail_content">
                                 <AboutTab {...{ description: nft?.description }} />
                                 <DetailsTab {...{
                                     issuer: collection?.issuer,
