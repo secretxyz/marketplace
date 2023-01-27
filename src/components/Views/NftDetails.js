@@ -104,7 +104,11 @@ const NftDetails = (props) => {
                                 </li>
                                 <li>
                                     <div className="cs-collection_list_title">
-                                        {raffle?.reserved_count == raffle?.ticket_count ? <span className="text-danger">Sold Out</span> : <span>Tickets Sold ({Number(raffle?.reserved_count / raffle?.ticket_count * 100).toFixed(0)}%)</span>}
+                                        {raffle?.reserved_count == raffle?.ticket_count ? <span className="text-danger">
+                                            <strong>Sold Out</strong>
+                                        </span> : <span>
+                                            Tickets Sold ({Number(raffle?.reserved_count / raffle?.ticket_count * 100).toFixed(0)}%)
+                                        </span>}
                                     </div>
                                     <div className="cs-collection_list_number">{raffle?.reserved_count} / {raffle?.ticket_count}</div>
                                 </li>
