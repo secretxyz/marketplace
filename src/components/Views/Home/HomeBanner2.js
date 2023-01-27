@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
 import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
+import { isLoggedIn } from '../../Helpers/Utils';
 
 const HomeBanner2 = () => {
     const { loading, items } = useFeaturedRaffle(0);
@@ -21,14 +22,14 @@ const HomeBanner2 = () => {
                             <h1 className="cs-hero_title cs-white_color">The Best Beneficial Place to Collect , Buy and Sell XRPL NFT Marketplace</h1>
                             <div className="cs-hero_subtitle cs-medium cs-white_color">Secure and secret NFTs for gaming, entertainment, metaverse and data <br />management time capsules.</div>
                             <div className="cs-hero_btns">
-                                <a href="/explorer-collections" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
-                                <a href="/create" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>
+                                <a href="/explorer-raffles" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
+                                {isLoggedIn() && <a href="/my-profile/collected" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>}
                             </div>
                         </div>
                     </div>
                     <div className="cs-hero_in_right">
                         <div className="cs-raffle_banner_slider cs-style1 cs-gap-20">
-                            <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600"  data-center="1" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3" data-lg-slides="3" data-add-slides="3">
+                            <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="1" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3" data-lg-slides="3" data-add-slides="3">
                                 <div className="cs-slider_wrapper" >
                                     {items?.map(n => (
                                         <div className="cs-slide" key={n.id}>
