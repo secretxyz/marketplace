@@ -3188,3 +3188,10 @@ ul::-webkit-scrollbar-thumb {
   margin-left: 4px;
   font-size: 14px;
 }
+
+.cs-activity_row_text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}

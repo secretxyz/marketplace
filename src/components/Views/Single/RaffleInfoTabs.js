@@ -38,7 +38,7 @@ const RaffleTxRow = ({ data }) => {
                     <Avatar className="cs-activity_avatar" {...{ name: buyer.wallet, image: buyer.picture_url }} />
                 </a>
                 <div className="cs-activity_right">
-                    <p className="cs-activity_text">
+                    <p className="cs-activity_text cs-activity_row_text">
                         Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></p>
                     <p className="cs-activity_posted_by">{getDateTimeWithFormat(ticket.createdAt)}</p>
                 </div>

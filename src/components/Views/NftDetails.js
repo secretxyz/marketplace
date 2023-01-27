@@ -187,7 +187,7 @@ const NftDetails = (props) => {
                                 } XRP</div>
                             </li>
                             <li>
-                                <div className="cs-collection_list_title">Selling Option</div>
+                                <div className="cs-collection_list_title">Reserve to Sales</div>
                                 <div className="cs-collection_list_number">{25 * raffle.sell_option}%</div>
                             </li>
                             <li>
