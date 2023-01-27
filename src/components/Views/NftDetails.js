@@ -32,7 +32,7 @@ const NftDetails = (props) => {
     const [winner, setWinner] = useState();
     const [collection, setCollection] = useState();
     const [owner, setOwner] = useState();
-    const [ticket, setTicket] = useState({});
+    const [ticket, setTicket] = useState({ ticket_count: 0 });
 
     const [connecting, setConnecting] = useState(false);
     const [raffling, setRaffling] = useState(false);
@@ -206,7 +206,7 @@ const NftDetails = (props) => {
                         </ul> : <div className="cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-grid_5 cs-gap_20">
                             <span>Reserve Tickets</span>
                             <div className="cs-form_field_wrap">
-                                <input name="ticket_count" type="number" className="cs-form_field" placeholder="1" value={ticket.ticket_count || ""} onChange={onChangeTicketInfo} min={1} />
+                                <input name="ticket_count" type="number" className="cs-form_field" placeholder="0" value={ticket.ticket_count || ""} onChange={onChangeTicketInfo} min={1} />
                             </div>
                             <a className="cs-btn cs-style1 cs-btn_lg text-center" onClick={onClickBuyTickets}><span>Buy</span></a>
                         </div>}
@@ -450,6 +450,10 @@ const NftDetails = (props) => {
     }, [raffling])
 
     const onClickBuyTickets = () => {
+        if (Number(ticket.ticket_count) < 1) {
+            return
+        }
+
         setTicketing(true);
     }
 
