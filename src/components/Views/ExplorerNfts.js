@@ -16,8 +16,8 @@ const ExplorerNfts = () => {
 	const [filters, setFilters] = useState(Filters);
 
 	const handleScroll = (e) => {
-		const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-		if (bottom) {
+		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
+        if (bottom < 1) {
 			fetchNext(0);
 		}
 	}

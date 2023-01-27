@@ -9,9 +9,8 @@ const RaffleTickets = ({ accountId }) => {
     const { loading, items, fetchNext } = useRaffleTicketItems();
 
     const handleScroll = (e) => {
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (bottom) {
-            console.log("bottom...");
+        const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
+        if (bottom < 1) {
             fetchNext(accountId);
         }
     }

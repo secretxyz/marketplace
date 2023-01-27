@@ -4,7 +4,7 @@ import { getAuthToken, setAccount, setAuthToken } from "../components/Helpers/Ut
 import accountStore from "../store/account.store";
 
 class SecretApi {
-    baseUrl = process.env.NODE_ENV == "production" ? "https://secretmarket.xyz:2096" : "http://localhost:1337";
+    baseUrl = process.env.NODE_ENV == "production" ? "https://secretmarket.xyz:2096" : "http://192.168.1.20:1337";
     timeout = 30000;
     pageSize = 20;
 

@@ -10,8 +10,8 @@ const CollectedItems = ({ accountId }) => {
     const { loading, items, fetchNext } = useCollectedItems();
 
     const handleScroll = async (e) => {
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (bottom) {
+        const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
+        if (bottom < 1) {
             await fetchNext(accountId);
         }
     }

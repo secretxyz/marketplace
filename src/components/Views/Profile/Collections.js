@@ -7,8 +7,8 @@ const Collections = ({ profile }) => {
     const { loading, items, fetchNext } = useCreatedCollections();
 
     const handleScroll = (e) => {
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (bottom) {
+        const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
+        if (bottom < 1) {
             fetchNext(profile.wallet);
         }
     }
