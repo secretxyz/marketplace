@@ -489,7 +489,7 @@
 
 @media screen and (max-width: 1560px) {
   .cs-site_header.cs-style1 .cs-main_header_right > *:not(:last-child) {
-    margin-right: 30px;
+    margin-right: 24px;
 }
 .cs-nav .cs-nav_list .cs-mega-wrapper {
   right: 0;
@@ -512,11 +512,11 @@
     font-size: 14px;
   }
 }
-@media screen and (max-width: 1270px) {
-  .cs-header_btns > .cs-btn {
-    display: none;
-  }
-}
+// @media screen and (max-width: 1270px) {
+//   .cs-header_btns > .cs-btn {
+//     display: none;
+//   }
+// }
 @media screen and (max-width: 1380px) {
   .cs-site_header_full_width .container {
     max-width: 100%;
@@ -736,7 +736,7 @@
     margin-left: 10px;
   }
   .cs-main_header_right {
-    padding-right: 40px;
+    padding-right: 32px;
   }
   .cs-menu_toggle {
     width: 30px;
