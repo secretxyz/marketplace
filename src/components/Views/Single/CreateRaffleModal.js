@@ -120,7 +120,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 							<div className="cs-modal_header">
 								<h2 className="cs-modal_title">Create Raffle</h2>
 								<div className="form-check form-switch cs-offer_form_switch">
-									<input className="form-check-input" type="checkbox" id="mode_switch" checked={featured} onChange={onChangeFeatured} />
+									<input className="form-check-input" type="checkbox" checked={featured} onChange={onChangeFeatured} />
 									<label className="form-check-label" htmlFor="mode_switch">Feature Option</label>
 								</div>
 							</div>

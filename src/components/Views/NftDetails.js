@@ -89,7 +89,7 @@ const NftDetails = (props) => {
                 <div className="col-xl-12">
                     <div className="cs-single_raffle_info">
                         <div className="cs-collection_list_wrap">
-                            <ul className="cs-collection_list cs-white_bg cs-mp0">
+                            <ul className="cs-collection_list cs-white_bg cs-box_shadow cs-mp0">
                                 <li>
                                     <div className="cs-collection_list_title">NFT Floor Price</div>
                                     <div className="cs-collection_list_number">{collection?.floor_price} XRP</div>
@@ -548,7 +548,7 @@ const NftDetails = (props) => {
                                     <li><a href="#Attributes">Attributes</a></li>
                                 </ul>
                             </div>
-                            <div className="cs-height_20 cs-height_lg_20"></div>
+                            <div className="cs-height_10 cs-height_lg_10"></div>
                             <div className="cs-tab_content cs-tab_nft_detail_content">
                                 <AboutTab {...{ description: nft?.description }} />
                                 <DetailsTab {...{
@@ -567,7 +567,7 @@ const NftDetails = (props) => {
                         <div className="cs-height_0 cs-height_lg_40"></div>
                         <div className="cs-single_product_head">
                             <h2>{nft?.name}</h2>
-                            <div className="cs-single_info_head">
+                            <div className="cs-single_info_head cs-box_shadow">
                                 <a className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                     <span><i className="fas fa-redo fa-fw"></i></span>
                                 </a>

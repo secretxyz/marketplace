@@ -175,7 +175,7 @@ const Profile = (props) => {
             <div className="cs-height_100 cs-height_lg_70"></div>
             <div className="container">
                 <div className="cs-cover_photo cs-bg" style={{ background: `url(${profile?.banner_picture_url || "img/cover-photo.jpeg"})` }}>
-                    <div className="cs-profile_info_other">
+                    <div className="cs-profile_info_other cs-box_shadow">
                         <div className="cs-profile_info_head">
                             <a className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                 <span><i className="fas fa-redo fa-fw"></i></span>

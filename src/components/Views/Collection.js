@@ -56,7 +56,7 @@ const Collection = (props) => {
                 <div className="container">
                     <div className="cs-collection_card">
                         <div className="cs-collection_img">
-                            <div className="cs-collection_info_other">
+                            <div className="cs-collection_info_other cs-box_shadow">
                                 <div className="cs-collection_info_head">
                                     <a className="cs-style1 cs-btn">
                                         <span><i className="fas fa-redo fa-fw"></i></span>
@@ -78,7 +78,7 @@ const Collection = (props) => {
                             <div className="cs-collection_avatar">
                                 <img src={getImageLink(collection?.picture_url)} alt="Collection" />
                             </div>
-                            <div className="cs-collection_info">
+                            <div className="cs-collection_info cs-box_shadow">
                                 <div className="cs-collection_info_in cs-white_bg">
                                     <div className="row">
                                         <div className="col-lg-5">
@@ -112,7 +112,7 @@ const Collection = (props) => {
                                         <div className="col-lg-7">
                                             <div className="cs-collection_right">
                                                 <div className="cs-collection_list_wrap">
-                                                    <ul className="cs-collection_list cs-white_bg cs-mp0">
+                                                    <ul className="cs-collection_list cs-white_bg cs-box_shadow cs-mp0">
                                                         <li>
                                                             <div className="cs-collection_list_title">Collection of</div>
                                                             <div className="cs-collection_list_number">{collection?.nfts.count}</div>

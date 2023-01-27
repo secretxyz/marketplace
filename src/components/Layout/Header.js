@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import ConnectModal from "../Common/ConnectModal"
 import accountStore from '../../store/account.store';
-import { setAccount, setAuthToken, getSummaryAddress } from '../Helpers/Utils';
+import { setAccount, setAuthToken, getSummaryAddress, getThemeMode, setThemeMode, setTheme } from '../Helpers/Utils';
 
 const mainNav = () => {
 	$('.cs-nav').append('<span class="cs-menu_toggle"><span></span></span>');
@@ -57,6 +57,7 @@ const mainNav = () => {
 
 const Header = () => {
 	const { auth_token, account } = accountStore;
+	const [mode, setMode] = useState(getThemeMode());
 	useEffect(() => {
 		mainNav();
 	}, [auth_token]);
@@ -78,6 +79,15 @@ const Header = () => {
 
 	const onConnectWallet = () => {
 		setConnecting(true);
+	}
+
+	useEffect(() => {
+		setTheme();
+	}, [mode]);
+
+	const onChangeMode = () => {
+		setMode(!mode);
+		setThemeMode(!mode);
 	}
 
 	return (
@@ -233,12 +243,12 @@ const Header = () => {
 												<li><a href="/my-profile/raffle-tickets">My Tickets</a></li>
 												<li><a href="/my-profile/collected">My NFTs</a></li>
 												<li><a href="/my-profile/profile-info">My Profile</a></li>
-												{/* <li>
+												<li>
 													<div className="form-check form-switch">
-														<input className="form-check-input" type="checkbox" id="mode_switch" />
-														<label className="form-check-label" htmlFor="mode_switch">Night Mode</label>
+														<input className="form-check-input" type="checkbox" checked={mode} onChange={onChangeMode} />
+														<label className="form-check-label" htmlFor="mode_switch">Light Mode</label>
 													</div>
-												</li> */}
+												</li>
 												{/* <li><a className="cs-btn" onClick={() => onLogout()}>Logout</a></li> */}
 											</ul>
 											<div className="text-center">

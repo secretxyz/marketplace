@@ -116,7 +116,7 @@ ul::-webkit-scrollbar-thumb {
 }
 
 .cs-box_shadow {
-  box-shadow: 2px 2px 15px rgba($black, 0.05);
+  box-shadow: 2px 2px 15px rgba($black, 0.06);
 }
 
 .cs-gray_bg {
@@ -491,7 +491,7 @@ ul::-webkit-scrollbar-thumb {
 
 .cs-general_box_2 {
   padding: 37px 65px;
-  background-color: $white;
+  background: linear-gradient(116.85deg, rgba(252, 70, 107, 0.15) 0%, rgba(63, 94, 251, 0.15) 100%);
   border-radius: 15px;
 }
 
@@ -641,10 +641,10 @@ ul::-webkit-scrollbar-thumb {
   .cs-countdown_text {
     font-size: 12px;
     line-height: 1.5em;
-    // margin-bottom: 0;
     font-weight: 400;
     position: relative;
     margin-bottom: 0px;
+    color: $white;
   }
 
   .cs-countdown_number {
@@ -893,6 +893,7 @@ ul::-webkit-scrollbar-thumb {
   left: 0;
   height: 100%;
   width: 100%;
+  background: rgba($black, 0.7);
 }
 
 .cs-modal_container {
@@ -1498,7 +1499,6 @@ ul::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: space-between;
     background-color: $white;
-    box-shadow: 4px 4px 10px rgba($black, 0.05);
     border-radius: 10px;
     line-height: 1.5em;
   }
@@ -1943,6 +1943,7 @@ ul::-webkit-scrollbar-thumb {
 }
 
 .cs-activity_list {
+  padding: 6px;
   li {
     &:not(:last-child) {
       margin-bottom: 15px;
@@ -2489,6 +2490,7 @@ ul::-webkit-scrollbar-thumb {
 .cs-tab_nft_detail_content {
   max-height: 322px;
   overflow-y: scroll;
+  padding: 6px;
 }
 
 .cs-tab_nft_info_content {
@@ -2572,7 +2574,6 @@ ul::-webkit-scrollbar-thumb {
   p {
     margin: 0;
     line-height: 1.3em;
-    color: $ternary;
   }
 }
 
@@ -2606,7 +2607,7 @@ ul::-webkit-scrollbar-thumb {
     font-size: 12px;
     display: flex;
     justify-content: space-between;
-    box-shadow: 4px 4px 10px rgba($black, 0.05);
+    background-color: $white;
     border-radius: 10px;
     line-height: 1.5em;
     max-width: 160px;
@@ -3185,6 +3186,7 @@ ul::-webkit-scrollbar-thumb {
     font-weight: 400;
     text-align: center;
     margin-bottom: 0px;
+    color: rgba($white, 0.8);
   }
 
   .cs-sale_end_text2 {
@@ -3193,6 +3195,7 @@ ul::-webkit-scrollbar-thumb {
     font-size: 13px;
     font-weight: bold;
     line-height: 1.5em;
+    color: $white;
   }
 }
 

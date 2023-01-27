@@ -4,10 +4,12 @@ import Header from './Header'
 import Footer from './Footer'
 
 import SocketLoader from '../Helpers/SocketHelper'
+import { setTheme } from '../Helpers/Utils';
 
 const Base = (props) => {
     useEffect(() => {
         SocketLoader();
+        setTheme();
     }, [])
 
     return (
@@ -21,7 +23,7 @@ const Base = (props) => {
 
             <Footer />
 
-            
+
             {/* <div className="cs-modal_overlay">
                 Loading...
             </div> */}

@@ -257,6 +257,7 @@
     position: absolute;
     left: 2px;
     top: 3px;
+    color: $white;
   }
 }
 
@@ -299,12 +300,18 @@
     font-size: 32px;
     font-weight: bold;
     margin: 10px 0 4px 0 !important;
+    color: $white;
   }
 
   .cs-drop_card_subtitle {
     font-size: 16px;
     font-weight: bolder;
     margin: 0 0 4px 0 !important;
+    color: rgba($white, 0.8);
+  }
+
+  .cs-drop_card_meta_info {
+    color: $white !important;
   }
 
   .cs-card_meta_info_items {
@@ -607,7 +614,6 @@
       .cs-card_media_details_item_subtitle {
         font-weight: 500;
         font-size: 14px;
-        color: rgba(255, 255, 255, 0.45);
         margin: 0;
         padding-right: 5px;
       }

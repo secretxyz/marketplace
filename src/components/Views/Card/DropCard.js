@@ -29,7 +29,7 @@ class DropCard extends React.Component {
                     <div className='cs-drop_card_subtitle'>
                         By @bearableguyclub
                     </div>
-                    <div className="cs-card_meta_info">
+                    <div className="cs-card_meta_info cs-drop_card_meta_info">
                         <div className="cs-card_meta_info_items">
                             <div className="cs-card_meta_info_item">
                                 <i className="fas fa-list-ul fa-fw"></i>

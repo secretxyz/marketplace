@@ -14,6 +14,10 @@ body.cs-dark {
     background: #0f0935;
   }
 
+  .cs-preloader {
+    background: #080326;
+  }
+
   .cs-collection_info,
   .cs-collection_list_wrap {
     background-color: #080326;
@@ -55,7 +59,7 @@ body.cs-dark {
   .cs-nav .cs-nav_list .cs-mega-wrapper>li>a,
   .cs-bid_card b,
   .cs-bid_card .cs-bid_form_head,
-  .cs-bid_input_group input  {
+  .cs-bid_input_group input {
     color: #fff;
   }
 
@@ -70,7 +74,8 @@ body.cs-dark {
   .cs-contact_card .cs-contact_text,
   .cs-bid_card,
   .cs-media.cs-style1 .cs-media_subtitle,
-  .cs-modal_text {
+  .cs-modal_text,
+  .cs-card_media_details_item_subtitle {
     color: rgba($white, 0.45);
   }
 

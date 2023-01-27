@@ -11,7 +11,7 @@ const RaffleTicketCard = ({ data }) => {
 
     return (
         <li>
-            <div className={`cs-activity cs-white_bg cs-type1 cs-raffle_ticket ${data.status == "winner" && "cs-winner_border"}`}>
+            <div className={`cs-activity cs-white_bg cs-type1 cs-raffle_ticket cs-box_shadow ${data.status == "winner" && "cs-winner_border"}`}>
                 <a href={`/nft/${nft?.nft_tokenid}/${data?.raffle?.data?.id}`} target="_blank">
                     <img className="cs-ticket_image" src={nft.picture_url} />
                 </a>

@@ -12,7 +12,7 @@ const RaffleHistoryRow = ({ data }) => {
 
     return (
         <li>
-            <div className="cs-activity cs-white_bg cs-type1">
+            <div className="cs-activity cs-box_shadow cs-white_bg cs-type1">
                 <div className="cs-activity_avatar">
                     <Avatar className="cs-activity_avatar" {...{ name: raffler.wallet, image: raffler.picture_url }} />
                 </div>
@@ -69,7 +69,7 @@ const NftInfoTabs = ({ tokenid }) => {
                     {/* <li><a href="#activities">Activities</a></li> */}
                 </ul>
             </div>
-            <div className="cs-height_20 cs-height_lg_20"></div>
+            <div className="cs-height_10 cs-height_lg_10"></div>
             <div className="cs-tab_content cs-tab_nft_info_content" onScroll={handleScroll}>
                 <div id="history" className="cs-tab active">
                     <ul className="cs-activity_list cs-mp0">

@@ -8,7 +8,7 @@ import { useState } from "react";
 const RaffleBuyerRow = ({ data }) => {
     return (
         <li>
-            <div className="cs-activity cs-white_bg cs-type1">
+            <div className="cs-activity cs-white_bg cs-box_shadow cs-type1">
                 <a className="cs-activity_avatar" href={`/profile/${data.wallet}`} target="_blank">
                     <Avatar className="cs-activity_avatar" {...{ name: data.wallet, image: data.picture_url }} />
                 </a>
@@ -34,7 +34,7 @@ const RaffleTxRow = ({ data }) => {
     const buyer = data?.attributes?.buyer?.data?.attributes;
     return (
         <li>
-            <div className={`cs-activity cs-white_bg cs-type1 ${ticket.status == "winner" && "cs-winner_border"}`}>
+            <div className={`cs-activity cs-white_bg cs-box_shadow cs-type1 ${ticket.status == "winner" && "cs-winner_border"}`}>
                 <div className="cs-activity_icon cs-center cs-gray_bg cs-accent_color cs-activity_number">
                     {data.number}
                 </div>
@@ -94,7 +94,7 @@ const RaffleInfoTabs = ({ raffleId, reservedCount }) => {
                             <li><a className="cs-tab-sm" href="#transactions">Transactions ({transactions.length})</a></li>
                         </ul>
                     </div>
-                    <div className="cs-height_20 cs-height_lg_20"></div>
+                    <div className="cs-height_10 cs-height_lg_10"></div>
                     <div className="cs-tab_content cs-tab_nft_info_content" onScroll={handleScroll}>
                         <div id="participants" className="cs-tab active">
                             <ul className="cs-activity_list cs-mp0">

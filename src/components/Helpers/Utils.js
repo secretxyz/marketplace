@@ -265,3 +265,25 @@ export const getNumberFormat1 = (value) => {
 	}
 	return v;
 }
+
+export const getThemeMode = () => {
+	let mode = localStorage.getItem("mode");
+	if (!mode || mode == "false") {
+		return false;
+	}
+	return true;
+}
+
+export const setThemeMode = (mode) => {
+	localStorage.setItem("mode", mode);
+}
+
+export const setTheme = () => {
+	// set theme
+	let mode = getThemeMode();
+	if (mode) {
+		document.body.classList.remove("cs-dark");
+	} else {
+		document.body.classList.add("cs-dark");
+	}
+}
