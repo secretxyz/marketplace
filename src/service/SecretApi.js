@@ -82,12 +82,13 @@ class SecretApi {
         let filters;
         switch (category) {
             case 0:
-                filters = { "filters[status]": "active" };
+                filters = {
+                    "filters[status]": "active"
+                };
                 break;
             case 1:
                 filters = {
                     "filters[status]": "active",
-                    "sort[raffle_end_datetime]": "desc"
                 };
                 break;
             case 2:
@@ -138,7 +139,7 @@ class SecretApi {
         let filters;
         if (!category) {
             filters = { "filters[homepage_banner]": true };
-        }else{
+        } else {
             filters = { "filters[featured]": true };
         }
 

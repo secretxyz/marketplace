@@ -90,10 +90,10 @@ const NftDetails = (props) => {
                     <div className="cs-single_raffle_info">
                         <div className="cs-collection_list_wrap">
                             <ul className="cs-collection_list cs-white_bg cs-box_shadow cs-mp0">
-                                <li>
+                                {/* <li>
                                     <div className="cs-collection_list_title">NFT Floor Price</div>
-                                    <div className="cs-collection_list_number">{collection?.floor_price} XRP</div>
-                                </li>
+                                    <div className="cs-collection_list_number">{collection?.floor_price || 0} XRP</div>
+                                </li> */}
                                 <li>
                                     <div className="cs-collection_list_title">Total Ticket Price</div>
                                     <div className="cs-collection_list_number">{raffle?.total_ticket_price} XRP</div>
@@ -249,12 +249,12 @@ const NftDetails = (props) => {
                     <div className="col-xl-7">
                         {isRaffleOwner() ? <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
                             <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickDrawNft}>
-                                <span>Draw NFT</span>
+                                <span>Claim NFT</span>
                             </a>
                         </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
                             <li>
                                 <div className="cs-collection_list_title">Raffle Status</div>
-                                <div className="cs-collection_list_number">Expired</div>
+                                <div className="cs-collection_list_number">Cancelled</div>
                             </li>
                             <li>
                                 <div className="cs-collection_list_title">Refund Tickets</div>
@@ -335,7 +335,7 @@ const NftDetails = (props) => {
                         </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
                             <li>
                                 <div className="cs-collection_list_title">Raffle Status</div>
-                                <div className="cs-collection_list_number">Expired</div>
+                                <div className="cs-collection_list_number">Cancelled</div>
                             </li>
                             <li>
                                 <div className="cs-collection_list_title">Refund Tickets</div>

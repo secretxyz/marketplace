@@ -201,10 +201,10 @@ const Profile = (props) => {
                                 </div>
                                 <h3 className="cs-profile_title">{profile?.username}</h3>
                                 <div className="cs-name">{profile?.slug ?? getSummaryAddress(profile?.wallet)}</div>
-                                <ul className="cs-profile_meta cs-mp0">
+                                {/* <ul className="cs-profile_meta cs-mp0">
                                     <li>Followers (560)</li>
                                     <li>Following (56)</li>
-                                </ul>
+                                </ul> */}
                             </div>
                             <div className="cs-height_30 cs-height_lg_30"></div>
                             <ul className="cs-profile_nav cs-mp0">
