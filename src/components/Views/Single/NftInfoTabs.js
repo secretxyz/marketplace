@@ -8,7 +8,7 @@ import { getDateTimeWithFormat, getSummaryUsername, getTicketStatus } from "../.
 const RaffleHistoryRow = ({ data }) => {
     const raffle = data?.attributes;
     const raffler = raffle?.raffler?.data.attributes;
-    console.log(raffler);
+    // console.log(raffler);
 
     return (
         <li>
