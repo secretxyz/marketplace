@@ -108,18 +108,18 @@ const Header = () => {
 												<li className="menu-item-has-children">
 													<a href="/explorer-raffles">Explorer</a>
 													<ul>
-														<li><a href="/explorer-collections">Collections</a></li>
-														<li><a href="/explorer-nfts">All NFTs</a></li>
 														<li><a href="/explorer-raffles">Raffles</a></li>
+														<li><a href="/explorer-collections">Collections</a></li>
+														<li><a href="/explorer-nfts">NFTs</a></li>
 													</ul>
 												</li>
 												<li><a href="/drop">Drops</a></li>
 												<li className="menu-item-has-children">
 													<a href="contact.html">Stats</a>
 													<ul>
-														<li><a href="index.html">Rankings</a></li>
-														<li><a href="index_2.html">Activity</a></li>
-														<li><a href="index_3.html">Leaderboards</a></li>
+														<li><a href="/rankings">Rankings</a></li>
+														<li><a href="/activity">Activity</a></li>
+														<li><a href="/leaderboards">Leaderboards</a></li>
 													</ul>
 												</li>
 												<li className="menu-item-has-children">

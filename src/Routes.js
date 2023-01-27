@@ -51,6 +51,7 @@ const Routes = ({ location }) => {
                         <Suspense fallback={<PageLoader />}>
                             <Switch location={location}>
                                 <Route path="/collection/:slug" component={waitFor(Collection)} />
+                                <Route path="/explorer-collections/:menu" component={waitFor(ExplorerCollections)} />
                                 <Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
                                 <Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
                                 <Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />

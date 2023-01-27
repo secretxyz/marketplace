@@ -18,7 +18,7 @@ class ExplorerCategory extends React.Component {
                         <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="2" data-sm-slides="3" data-md-slides="4" data-lg-slides="5" data-add-slides="6">
                             <div className="cs-slider_wrapper">
                                 <div className="cs-slide">
-                                    <a href="#" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
+                                    <a href="/explorer-collections/art" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
                                         <span className="cs-avatar"><img src="img/avatar/avatar_38.png" alt="Avatar" /></span>
                                         <div className="cs-card_info">
                                             <h3 className="cs-card_title">Art</h3>
@@ -26,7 +26,7 @@ class ExplorerCategory extends React.Component {
                                     </a>
                                 </div>
                                 <div className="cs-slide">
-                                    <a href="#" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
+                                    <a href="/explorer-collections/music" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
                                         <span className="cs-avatar"><img src="img/avatar/avatar_39.png" alt="Avatar" /></span>
                                         <div className="cs-card_info">
                                             <h3 className="cs-card_title">Music</h3>
@@ -34,7 +34,7 @@ class ExplorerCategory extends React.Component {
                                     </a>
                                 </div>
                                 <div className="cs-slide">
-                                    <a href="#" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
+                                    <a href="/explorer-collections/video" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
                                         <span className="cs-avatar"><img src="img/avatar/avatar_40.png" alt="Avatar" /></span>
                                         <div className="cs-card_info">
                                             <h3 className="cs-card_title">Video</h3>
@@ -42,7 +42,7 @@ class ExplorerCategory extends React.Component {
                                     </a>
                                 </div>
                                 <div className="cs-slide">
-                                    <a href="#" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
+                                    <a href="/explorer-collections/fashion" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
                                         <span className="cs-avatar"><img src="img/avatar/avatar_41.png" alt="Avatar" /></span>
                                         <div className="cs-card_info">
                                             <h3 className="cs-card_title">Fashion</h3>
@@ -50,7 +50,7 @@ class ExplorerCategory extends React.Component {
                                     </a>
                                 </div>
                                 <div className="cs-slide">
-                                    <a href="#" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
+                                    <a href="/explorer-collections/sports" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
                                         <span className="cs-avatar"><img src="img/avatar/avatar_42.png" alt="Avatar" /></span>
                                         <div className="cs-card_info">
                                             <h3 className="cs-card_title">Sports</h3>
@@ -58,7 +58,7 @@ class ExplorerCategory extends React.Component {
                                     </a>
                                 </div>
                                 <div className="cs-slide">
-                                    <a href="#" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
+                                    <a href="/explorer-collections/collectibles" className="cs-card cs-style6 cs-box_shadow cs-white_bg text-center">
                                         <span className="cs-avatar"><img src="img/avatar/avatar_43.png" alt="Avatar" /></span>
                                         <div className="cs-card_info">
                                             <h3 className="cs-card_title">Collectibles</h3>

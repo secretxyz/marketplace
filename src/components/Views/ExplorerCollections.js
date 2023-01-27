@@ -6,23 +6,41 @@ import { APP_COLORS } from "../Common/constants"
 import { useCollections } from "../../hooks/useCollections";
 
 const Filters = [
-	{ id: 0, label: "Trending", isChecked: true },
-	{ id: 1, label: "Top", isChecked: false },
-	{ id: 2, label: "Art", isChecked: false },
-	{ id: 3, label: "Music", isChecked: false },
-	{ id: 4, label: "Video", isChecked: false },
-	{ id: 5, label: "Fashion", isChecked: false },
-	{ id: 6, label: "Sports", isChecked: false },
-	{ id: 7, label: "Collectibles", isChecked: false }
+	{ id: 0, label: "Trending", isChecked: true, key: "trending" },
+	{ id: 1, label: "Top", isChecked: false, key: "top" },
+	{ id: 2, label: "Art", isChecked: false, key: "art" },
+	{ id: 3, label: "Music", isChecked: false, key: "music" },
+	{ id: 4, label: "Video", isChecked: false, key: "video" },
+	{ id: 5, label: "Fashion", isChecked: false, key: "fashion" },
+	{ id: 6, label: "Sports", isChecked: false, key: "sports" },
+	{ id: 7, label: "Collectibles", isChecked: false, key: "collectibles" }
 ];
 
-const ExplorerCollections = () => {
+const ExplorerCollections = (props) => {
+	const { menu } = props.match.params;
 	const { loading, collections, fetchNext } = useCollections();
 	const [filters, setFilters] = useState(Filters);
 	const [category, setCategory] = useState("trending");
 
 	useEffect(() => {
-		fetchNext(1, 25, category);
+		if (menu) {
+			var valid = filters.filter(m => { return m.key === menu });
+            if (!valid.length) {
+                window.location.replace("/explorer-collections");
+                return;
+            }
+
+			let menus = filters.map(m => {
+				if (m.key === menu) {
+					return { ...m, isChecked: true };
+				}
+				return { ...m, isChecked: false };
+			})
+			setFilters(menus);
+			fetchNext(1, 25, menu);
+		} else {
+			fetchNext(1, 25, category);
+		}
 	}, [])
 
 	useEffect(() => {
@@ -31,7 +49,7 @@ const ExplorerCollections = () => {
 
 	const handleScroll = (e) => {
 		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
-        if (bottom < 1) {
+		if (bottom < 1) {
 			fetchNext(0, 25, category);
 		}
 	}
@@ -46,6 +64,11 @@ const ExplorerCollections = () => {
 			return { ...f, isChecked: false };
 		})
 		setFilters(options);
+
+		// change url
+		if (menu) {
+            window.history.replaceState(null, null, "/explorer-collections")
+        }
 	};
 
 	return (
