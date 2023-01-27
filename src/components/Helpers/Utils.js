@@ -121,6 +121,9 @@ export const getImageLink = (url) => {
 	if (!url) {
 		return "img/cover-photo.jpeg";
 	}
+	if (url.startsWith("ipfs://ipfs/")) {
+		return `https://ipfs.io/${url.substring(7)}`;
+	}
 	if (url.startsWith("ipfs://")) {
 		return `https://ipfs.io/ipfs/${url.substring(7)}`;
 	}
