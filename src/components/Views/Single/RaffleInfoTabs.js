@@ -35,12 +35,10 @@ const RaffleTxRow = ({ data }) => {
     return (
         <li>
             <div className={`cs-activity cs-white_bg cs-type1 ${ticket.status == "winner" && "cs-winner_border"}`}>
-                <div className="cs-activity_text">
-                    <div className="cs-activity_number">
-                        {data.number}
-                    </div>
+                <div className="cs-activity_icon cs-center cs-gray_bg cs-accent_color cs-activity_number">
+                    {data.number}
                 </div>
-                <a className="cs-activity_avatar" href={`/profile/${buyer.wallet}`} target="_blank">
+                <a className="cs-activity_avatar cs-activity_tx_avatar" href={`/profile/${buyer.wallet}`} target="_blank">
                     <Avatar className="cs-activity_avatar" {...{ name: buyer.wallet, image: buyer.picture_url }} />
                 </a>
                 <div className="cs-activity_right">

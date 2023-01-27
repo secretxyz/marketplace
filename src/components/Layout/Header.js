@@ -231,7 +231,7 @@ const Header = () => {
 											<ul>
 												<li><a href="/my-profile/raffles">My Raffles</a></li>
 												<li><a href="/my-profile/raffle-tickets">My Tickets</a></li>
-												<li><a href="/my-profile/collected">My Items</a></li>
+												<li><a href="/my-profile/collected">My NFTs</a></li>
 												<li><a href="/my-profile/profile-info">My Profile</a></li>
 												{/* <li>
 													<div className="form-check form-switch">
