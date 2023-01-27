@@ -35,7 +35,7 @@ const RaffleHistoryRow = ({ data }) => {
                         </p>
                     </div>
                 </div>
-                <a className="cs-btn cs-style1 cs-card_btn_3">
+                <a href={`/nft/${raffle.nft_tokenid}/${data.id}`} className="cs-btn cs-style1 cs-card_btn_3">
                     <span>View</span>
                 </a>
             </div>
