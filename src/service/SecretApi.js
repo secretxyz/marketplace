@@ -83,6 +83,7 @@ class SecretApi {
         switch (category) {
             case 0:
                 filters = {
+                    "filters[featured]": true,
                     "filters[status]": "active"
                 };
                 break;
