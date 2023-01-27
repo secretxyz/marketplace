@@ -545,6 +545,7 @@ ul::-webkit-scrollbar-thumb {
     font-weight: 700;
     text-align: center;
     padding: 0 8px 0 8px;
+    width: 120px;
   }
 
   .cs-winner_text {
@@ -1640,6 +1641,10 @@ ul::-webkit-scrollbar-thumb {
   font-weight: 700;
   line-height: 1.5em;
   color: $primary;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 118px;
 }
 
 .cs-collection_list_title {
@@ -1983,6 +1988,10 @@ ul::-webkit-scrollbar-thumb {
       margin-left: 8px;
       color: $accent;
     }
+  }
+
+  .cs-activity_number {
+    margin-right: 10px;
   }
 
   .cs-activity_status {

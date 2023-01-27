@@ -3,6 +3,7 @@ import Avatar from "../Profile/Avatar";
 import { useRaffleBuyers, useRaffleTransactions } from "../../../hooks/useRaffle";
 import { getSummaryAddress, getSummaryUsername, getDateTimeWithFormat } from "../../Helpers/Utils";
 import { BITHOMP_URL } from "../../Common/constants";
+import { useState } from "react";
 
 const RaffleBuyerRow = ({ data }) => {
     return (
@@ -33,14 +34,21 @@ const RaffleTxRow = ({ data }) => {
     const buyer = data?.attributes?.buyer?.data?.attributes;
     return (
         <li>
-            <div className="cs-activity cs-white_bg cs-type1">
+            <div className={`cs-activity cs-white_bg cs-type1 ${ticket.status == "winner" && "cs-winner_border"}`}>
+                <div className="cs-activity_text">
+                    <div className="cs-activity_number">
+                        {data.number}
+                    </div>
+                </div>
                 <a className="cs-activity_avatar" href={`/profile/${buyer.wallet}`} target="_blank">
                     <Avatar className="cs-activity_avatar" {...{ name: buyer.wallet, image: buyer.picture_url }} />
                 </a>
                 <div className="cs-activity_right">
                     <p className="cs-activity_text cs-activity_row_text">
                         Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></p>
-                    <p className="cs-activity_posted_by">{getDateTimeWithFormat(ticket.createdAt)}</p>
+                    <p className="cs-activity_text">
+                        {getDateTimeWithFormat(ticket.createdAt)}
+                    </p>
                 </div>
                 <a href={`${BITHOMP_URL}${ticket.create_tx_hash}`} className="cs-activity_icon cs-center cs-gray_bg cs-accent_color" target="_blank">
                     <i className="fas fa-arrow-right"></i>
@@ -50,9 +58,10 @@ const RaffleTxRow = ({ data }) => {
     );
 }
 
-const RaffleInfoTabs = ({ raffleId }) => {
+const RaffleInfoTabs = ({ raffleId, reservedCount }) => {
     const { buyers, fetchRaffleBuyers } = useRaffleBuyers();
     const { loading, transactions, fetchNext } = useRaffleTransactions();
+    const [txs, setTxs] = useState([]);
 
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -60,6 +69,15 @@ const RaffleInfoTabs = ({ raffleId }) => {
             fetchNext(raffleId);
         }
     }
+
+    useEffect(() => {
+        let sum = 0;
+        let txs = transactions.map(t => {
+            sum += t.attributes.ticket_count;
+            return { ...t, number: reservedCount - sum + 1 }
+        })
+        setTxs(txs);
+    }, [transactions])
 
     useEffect(() => {
         if (raffleId) {
@@ -89,7 +107,7 @@ const RaffleInfoTabs = ({ raffleId }) => {
                         </div>
                         <div id="transactions" className="cs-tab">
                             <ul className="cs-activity_list cs-mp0">
-                                {transactions.map(tx => (
+                                {txs.map(tx => (
                                     <RaffleTxRow data={tx} key={tx.id} />
                                 ))}
                             </ul>

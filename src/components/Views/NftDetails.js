@@ -18,6 +18,7 @@ import ConnectModal from "../Common/ConnectModal";
 import accountStore from "../../store/account.store";
 import DrawNftModal from "./Single/DrawNftModal";
 import DrawPrizeModal from "./Single/DrawPrizeModal";
+import { BITHOMP_URL } from "../Common/constants";
 
 const NftDetails = (props) => {
     const { auth_token } = accountStore;
@@ -102,7 +103,9 @@ const NftDetails = (props) => {
                                     <div className="cs-collection_list_number">{raffle?.ticket_price} XRP</div>
                                 </li>
                                 <li>
-                                    <div className="cs-collection_list_title">Tickets Sold ({Number(raffle?.reserved_count / raffle?.ticket_count * 100).toFixed(0)}%)</div>
+                                    <div className="cs-collection_list_title">
+                                        {raffle?.reserved_count == raffle?.ticket_count ? <span className="text-danger">Sold Out</span> : <span>Tickets Sold ({Number(raffle?.reserved_count / raffle?.ticket_count * 100).toFixed(0)}%)</span>}
+                                    </div>
                                     <div className="cs-collection_list_number">{raffle?.reserved_count} / {raffle?.ticket_count}</div>
                                 </li>
                             </ul>
@@ -199,7 +202,7 @@ const NftDetails = (props) => {
                         </ul> : <div className="cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-grid_5 cs-gap_20">
                             <span>Reserve Tickets</span>
                             <div className="cs-form_field_wrap">
-                                <input name="ticket_count" type="number" className="cs-form_field" placeholder="1" value={ticket.ticket_count || ""} onChange={onChangeTicketInfo} />
+                                <input name="ticket_count" type="number" className="cs-form_field" placeholder="1" value={ticket.ticket_count || ""} onChange={onChangeTicketInfo} min={1} />
                             </div>
                             <a className="cs-btn cs-style1 cs-btn_lg text-center" onClick={onClickBuyTickets}><span>Buy</span></a>
                         </div>}
@@ -288,14 +291,22 @@ const NftDetails = (props) => {
                         <div className="cs-height_15 cs-height_lg_15"></div>
                     </div>
                     <div className="col-xl-5">
-                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
-                            {isWinner() ? <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickDrawPrize}>
+                        {isWinner() ? <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                            <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickDrawPrize}>
                                 <span>Draw Prize</span>
-                            </a> : <div>
-                                <p>Raffle Ended on:</p>
-                                <h3>{getDateTimeWithFormat(raffle?.raffle_end_datetime)}</h3>
-                            </div>}
-                        </div>
+                            </a>
+                        </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
+                            <li>
+                                <div className="cs-collection_list_title">Verify Hash</div>
+                                <div className="cs-collection_list_number">
+                                    <a href={`${BITHOMP_URL}/${raffle?.payment_tx_hash}`} target="_blank">{raffle?.payment_tx_hash}</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="cs-collection_list_title">Lucky Number</div>
+                                <div className="cs-collection_list_number">{raffle?.lucky_number}</div>
+                            </li>
+                        </ul>}
                         <div className="cs-height_15 cs-height_lg_15"></div>
                     </div>
                 </div>
@@ -330,12 +341,23 @@ const NftDetails = (props) => {
                         <div className="cs-height_15 cs-height_lg_15"></div>
                     </div>
                     <div className="col-xl-5">
-                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                        {winner ? <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
+                            <li>
+                                <div className="cs-collection_list_title">Verify Hash</div>
+                                <div className="cs-collection_list_number">
+                                    <a href={`${BITHOMP_URL}/${raffle?.payment_tx_hash}`} target="_blank">{raffle?.payment_tx_hash}</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="cs-collection_list_title">Lucky Number</div>
+                                <div className="cs-collection_list_number">{raffle?.lucky_number}</div>
+                            </li>
+                        </ul> : <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
                             <div>
                                 <p>Raffle Ended on:</p>
                                 <h3>{getDateTimeWithFormat(raffle?.raffle_end_datetime)}</h3>
                             </div>
-                        </div>
+                        </div>}
                         <div className="cs-height_15 cs-height_lg_15"></div>
                     </div>
                 </div>
@@ -581,7 +603,7 @@ const NftDetails = (props) => {
                             </div>
                         </div>
                         {getBuySellView()}
-                        {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} />}
+                        {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} />}
                         {nft && !raffle && <NftInfoTabs tokenid={tokenid} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>
