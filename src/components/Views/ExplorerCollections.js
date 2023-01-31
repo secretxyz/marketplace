@@ -49,7 +49,6 @@ const ExplorerCollections = (props) => {
 
 	const handleScroll = (e) => {
 		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
-		console.log(bottom);
 		if (bottom <= 1) {
 			fetchNext(0, 25, category);
 		}

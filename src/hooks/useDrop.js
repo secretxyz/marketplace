@@ -14,7 +14,7 @@ export const useDrops = () => {
         if (reset) {
             setDrops(res.data);
         } else {
-            setDrops([...collections, ...res.data]);
+            setDrops([...drops, ...res.data]);
         }
         if (!res.data?.length) {
             setEnded(true);

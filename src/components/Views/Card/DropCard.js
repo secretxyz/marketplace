@@ -23,8 +23,8 @@ const DropCard = ({ data, category }) => {
                 <div className="cs-iconbox_img">
                     <img src={`${SecretApi.baseUrl}${picture_url}`} alt="Avatar" />
 
-                    {category == "upcoming" || category == "active" ? <div className="cs-countdown_style2"
-                        data-countdate={category == "upcoming" ? data.mint_start_datetime : data.mint_end_datetime}>
+                    {category == "upcoming" ? <div className="cs-countdown_style2"
+                        data-countdate={data.mint_start_datetime}>
                         <div className="cs-countdown_item">
                             <div className="cs-countdown_number">
                                 <div className="cs-count_days"></div>
