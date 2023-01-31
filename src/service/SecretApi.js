@@ -478,6 +478,7 @@ class SecretApi {
         } else if (category == "active") {
             params = {
                 "sort[mint_end_datetime]": "asc",
+                "filters[mint_start_datetime][$lte]": new Date(),
                 "filters[mint_end_datetime][$gte]": new Date(),
             }
         } else if (category == "past") {
