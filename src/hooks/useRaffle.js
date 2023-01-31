@@ -14,7 +14,7 @@ export const useRaffles = () => {
         if (reset) {
             setRaffles(res.data);
         } else {
-            setRaffles([...nfts, ...res.data]);
+            setRaffles([...raffles, ...res.data]);
         }
         if (!res.data?.length) {
             setEnded(true);
