@@ -3,7 +3,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import ContentWrapper from "../Layout/ContentWrapper";
 import CollectionCard from './Card/CollectionCard'
 import { APP_COLORS } from "../Common/constants"
-import { useCollections } from "../../hooks/useCollections";
+import { useCollections } from "../../hooks/useCollection";
 
 const Filters = [
 	{ id: 0, label: "Trending", isChecked: true, key: "trending" },
@@ -58,7 +58,7 @@ const ExplorerCollections = (props) => {
 	const onFilter = id => {
 		let options = filters.map(f => {
 			if (f.id === id) {
-				setCategory(f.label.toLowerCase());
+				setCategory(f.key);
 				return { ...f, isChecked: true };
 			}
 			return { ...f, isChecked: false };

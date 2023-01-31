@@ -1,53 +1,44 @@
 import React from 'react';
 import { withTranslation, Trans } from 'react-i18next';
+import SecretApi from '../../../service/SecretApi';
 
-class DropCard extends React.Component {
+const DropCard = ({ data }) => {
 
-    state = {
-        data: this.props.data
-    }
-
-    componentDidMount() {
-
-    }
-
-    render() {
-        let { data } = this.state;
-
-        return (
-            <div className="cs-card cs-style3 cs-drop_card cs-box_shadow cs-white_bg">
-                <div className="cs-card_thumb cs-zoom_effect">
-                    <img src={data.banner_picture_url} alt="Image" className="cs-zoom_item" />
+    return (
+        <div className="cs-card cs-style3 cs-drop_card cs-box_shadow cs-white_bg">
+            <div className="cs-card_thumb cs-zoom_effect">
+                <img src={`${SecretApi.baseUrl}${data.banner_picture_url?.data?.attributes?.url}`} alt="Image" className="cs-zoom_item" />
+            </div>
+            <div className="cs-drop_card_info cs-box_shadow cs-white_bg">
+                <div className="cs-iconbox_img">
+                    <img src={`${SecretApi.baseUrl}${data.picture_url?.data?.attributes?.url}`} alt="Avatar" />
                 </div>
-                <div className="cs-drop_card_info cs-box_shadow cs-white_bg">
-                    <div className="cs-iconbox_img">
-                        <img src={data.picture_url} alt="Avatar" />
-                    </div>
-                    <h1 className='cs-drop_card_title'>
-                        {data.name}
-                    </h1>
-                    <div className='cs-drop_card_subtitle'>
-                        By @bearableguyclub
-                    </div>
-                    <div className="cs-card_meta_info cs-drop_card_meta_info">
-                        <div className="cs-card_meta_info_items">
-                            <div className="cs-card_meta_info_item">
-                                <i className="fas fa-list-ul fa-fw"></i>
-                                <span>{data.nfts_count} Items</span>
-                            </div>
-                            <div className="cs-card_meta_info_item">
-                                <i className="fas fa-coins fa-fw"></i>
-                                <span>{data.floor_price}</span>
-                            </div>
+                <h1 className='cs-drop_card_title'>
+                    {data.name}
+                </h1>
+                <div className='cs-drop_card_subtitle'>
+                    By @bearableguyclub
+                </div>
+                <div className="cs-card_meta_info cs-drop_card_meta_info">
+                    <div className="cs-card_meta_info_items">
+                        <div className="cs-card_meta_info_item">
+                            <i className="fas fa-list-ul fa-fw"></i>
+                            <span>{data.total_supply} Items</span>
                         </div>
-                        <div className="cs-section_right">
-                            <a href="/collection/undefined" className="cs-btn cs-style1"><span>View Drop</span></a>
+                        <div className="cs-card_meta_info_item">
+                            <i className="fas fa-coins fa-fw"></i>
+                            <span>{data.mint_price} {data.mint_currency_unit}</span>
                         </div>
+                    </div>
+                    <div className="cs-section_right">
+                        <a href={data.website_url} className="cs-btn cs-style1" target="_blank">
+                            <span>View Drop</span>
+                        </a>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
-export default withTranslation('translations')(DropCard);
+export default DropCard;

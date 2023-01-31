@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { observer } from 'mobx-react';
 import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
 import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
 import { isLoggedIn } from '../../Helpers/Utils';
+import accountStore from '../../../store/account.store';
 
 const HomeBanner2 = () => {
+    const { auth_token } = accountStore;
     const { loading, items } = useFeaturedRaffle(0);
 
     useEffect(() => {
@@ -19,11 +22,14 @@ const HomeBanner2 = () => {
                 <div className="cs-hero_in">
                     <div className="cs-hero_in_left">
                         <div className="cs-hero_text">
-                            <h1 className="cs-hero_title cs-white_color">The Best Beneficial Place to Collect , Buy and Sell XRPL NFT Marketplace</h1>
-                            <div className="cs-hero_subtitle cs-medium cs-white_color">Secure and secret NFTs for gaming, entertainment, metaverse and data <br />management time capsules.</div>
+                            <h1 className="cs-hero_title cs-white_color">Welcome to SecretMarket - The XRP Ledger's biggest secret.</h1>
+                            <div className="cs-hero_subtitle cs-medium cs-white_color">
+                                Quickly trade NFTs on multiple marketplaces and enter or create raffles for unique digital assets.
+                                Join the exciting world of NFT trading and raffles on SecretMarket now!
+                            </div>
                             <div className="cs-hero_btns">
                                 <a href="/explorer-raffles" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
-                                {isLoggedIn() && <a href="/my-profile/collected" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>}
+                                {auth_token && <a href="/my-profile/collected" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>}
                             </div>
                         </div>
                     </div>
@@ -61,4 +67,4 @@ const HomeBanner2 = () => {
     );
 }
 
-export default HomeBanner2;
+export default observer(HomeBanner2);

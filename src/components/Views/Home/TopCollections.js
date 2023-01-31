@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useCollections } from '../../../hooks/useCollections';
+import { useCollections } from '../../../hooks/useCollection';
 import CollectionSimpleCard from '../Card/CollectionSimpleCard';
 
 const TopCollections = () => {

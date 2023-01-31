@@ -465,6 +465,39 @@ class SecretApi {
             return null;
         }
     }
+
+    // Drops
+
+    async getDrops(page, category) {
+        let params;
+        if (category == "active") {
+            params = {
+                "sort[mint_start_datetime]": "desc",
+                "filters[mint_end_datetime][$gte]": new Date(),
+            }
+        } else if (category == "past") {
+            params = {
+                "sort[mint_end_datetime]": "asc",
+                "filters[mint_end_datetime][$lte]": new Date(),
+            }
+        }
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/drops`, {
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "populate[picture_url]": true,
+                    "populate[banner_picture_url]": true,
+                    "populate[creator]": true,
+                    ...params
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
 }
 
 

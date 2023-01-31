@@ -139,7 +139,6 @@ const Header = () => {
 												<li className="menu-item-has-children">
 													<a href="contact.html">Resources</a>
 													<ul>
-														<li><a href="index.html">Learn</a></li>
 														<li><a href="index_2.html">Help Center</a></li>
 														<li><a href="index_3.html">Partners</a></li>
 														<li><a href="index_3.html">Blogs</a></li>

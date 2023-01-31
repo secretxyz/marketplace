@@ -1,6 +1,6 @@
 import React from 'react';
 import CollectionCard from '../Card/CollectionCard'
-import { useCollections } from '../../../hooks/useCollections';
+import { useCollections } from '../../../hooks/useCollection';
 import { useEffect } from 'react';
 
 const TrendingCollections = () => {

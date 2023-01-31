@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BeatLoader from "react-spinners/BeatLoader";
-import { useCollection } from '../../hooks/useCollections';
+import { useCollection } from '../../hooks/useCollection';
 import { useCollectionNfts } from '../../hooks/useNft';
 import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
