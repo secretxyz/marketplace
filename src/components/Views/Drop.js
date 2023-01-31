@@ -6,8 +6,9 @@ import { APP_COLORS } from "../Common/constants"
 import { useDrops } from "../../hooks/useDrop";
 
 const Filters = [
-	{ id: 1, label: "Active & Upcoming", isChecked: true, key: "active" },
-	{ id: 2, label: "Past", isChecked: false, key: "past" },
+	{ id: 1, label: "Upcoming", isChecked: false, key: "upcoming" },
+	{ id: 2, label: "Active", isChecked: true, key: "active" },
+	{ id: 3, label: "Past", isChecked: false, key: "past" },
 ];
 
 const Drop = () => {
@@ -69,7 +70,7 @@ const Drop = () => {
 			<div className="container cs-cards_area" onScroll={handleScroll}>
 				{drops.map(c => (
 					<div key={c.id} >
-						<DropCard data={c.attributes} />
+						<DropCard data={c.attributes} category={category} />
 						<div className="cs-height_20 cs-height_lg_20"></div>
 					</div>
 				))}

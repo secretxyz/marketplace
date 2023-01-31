@@ -61,9 +61,15 @@ const NftDetails = (props) => {
     }, [auth_token]);
 
     useEffect(() => {
-        setRaffle(nft?.raffles[0] || null);
+        if (!nft) {
+            window.location.replace("/");
+            return;
+        }
         setCollection(nft?.collection);
         setOwner(nft?.owner);
+        if (nft?.raffles) {
+            setRaffle(nft.raffles[0] || null);
+        }
     }, [nft])
 
     useEffect(() => {

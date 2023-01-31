@@ -470,9 +470,14 @@ class SecretApi {
 
     async getDrops(page, category) {
         let params;
-        if (category == "active") {
+        if (category == "upcoming") {
             params = {
                 "sort[mint_start_datetime]": "desc",
+                "filters[mint_start_datetime][$gte]": new Date(),
+            }
+        } else if (category == "active") {
+            params = {
+                "sort[mint_end_datetime]": "asc",
                 "filters[mint_end_datetime][$gte]": new Date(),
             }
         } else if (category == "past") {

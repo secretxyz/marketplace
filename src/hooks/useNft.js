@@ -49,7 +49,7 @@ export const useNfts = () => {
 
 export const useNft = (tokenid, raffleid) => {
     const [loading, setLoading] = useState(true);
-    const [nft, setNft] = useState();
+    const [nft, setNft] = useState({});
 
     const fetchNftDetails = async (tokenid, raffleid) => {
         setLoading(true);

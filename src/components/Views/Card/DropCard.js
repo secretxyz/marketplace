@@ -1,24 +1,62 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { withTranslation, Trans } from 'react-i18next';
 import SecretApi from '../../../service/SecretApi';
+import CountLoader from '../../Common/CountLoader';
+import { getSummaryUsername } from '../../Helpers/Utils';
 
-const DropCard = ({ data }) => {
+const DropCard = ({ data, category }) => {
+    const picture_url = data.picture_url?.data?.attributes?.url;
+    const banner_picture_url = data.banner_picture_url?.data?.attributes?.url;
+    const creator = data.creator?.data?.attributes;
+
+    useEffect(() => {
+        CountLoader(".cs-countdown_style2");
+    }, []);
 
     return (
         <div className="cs-card cs-style3 cs-drop_card cs-box_shadow cs-white_bg">
             <div className="cs-card_thumb cs-zoom_effect">
-                <img src={`${SecretApi.baseUrl}${data.banner_picture_url?.data?.attributes?.url}`} alt="Image" className="cs-zoom_item" />
+                <img src={`${SecretApi.baseUrl}${banner_picture_url}`} alt="Image" className="cs-zoom_item" />
             </div>
             <div className="cs-drop_card_info cs-box_shadow cs-white_bg">
                 <div className="cs-iconbox_img">
-                    <img src={`${SecretApi.baseUrl}${data.picture_url?.data?.attributes?.url}`} alt="Avatar" />
+                    <img src={`${SecretApi.baseUrl}${picture_url}`} alt="Avatar" />
+
+                    {category == "upcoming" || category == "active" ? <div className="cs-countdown_style2"
+                        data-countdate={category == "upcoming" ? data.mint_start_datetime : data.mint_end_datetime}>
+                        <div className="cs-countdown_item">
+                            <div className="cs-countdown_number">
+                                <div className="cs-count_days"></div>
+                            </div>
+                            <h3 className="cs-countdown_text">Days</h3>
+                        </div>
+                        <div className="cs-countdown_item">
+                            <div className="cs-countdown_number">
+                                <div className="cs-count_hours"></div>
+                            </div>
+                            <h3 className="cs-countdown_text">Hrs</h3>
+                        </div>
+                        <div className="cs-countdown_item">
+                            <div className="cs-countdown_number">
+                                <div className="cs-count_minutes"></div>
+                            </div>
+                            <h3 className="cs-countdown_text">Min</h3>
+                        </div>
+                        <div className="cs-countdown_item">
+                            <div className="cs-countdown_number">
+                                <div className="cs-count_seconds"></div>
+                            </div>
+                            <h3 className="cs-countdown_text">Sec</h3>
+                        </div>
+                    </div> : <div></div>}
                 </div>
                 <h1 className='cs-drop_card_title'>
                     {data.name}
                 </h1>
-                <div className='cs-drop_card_subtitle'>
-                    By @bearableguyclub
-                </div>
+                {creator && <div className='cs-drop_card_subtitle'>
+                    By {getSummaryUsername(creator)}
+                </div>}
                 <div className="cs-card_meta_info cs-drop_card_meta_info">
                     <div className="cs-card_meta_info_items">
                         <div className="cs-card_meta_info_item">
