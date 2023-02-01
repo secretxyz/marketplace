@@ -6,13 +6,13 @@ import RaffleCard from '../Card/RaffleCard';
 import { useSimilarNfts } from '../../../hooks/useNft';
 
 const SimilarItems = ({ tokenid, collection }) => {
-    const { loading, nfts: raffleItems } = useSimilarNfts(tokenid, collection.id);
+    const { loading, nfts } = useSimilarNfts(tokenid, collection.id);
 
     useEffect(() => {
-        if (raffleItems.length > 0) {
+        if (nfts.length > 0) {
             SlickLoader('.cs-trend_nft_slider');
         }
-    }, [raffleItems])
+    }, [nfts])
 
     return (
         <section>
@@ -29,7 +29,7 @@ const SimilarItems = ({ tokenid, collection }) => {
                 <div className="cs-trend_nft_slider cs-style1 cs-gap-30">
                     <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="4" data-lg-slides="5" data-add-slides="5">
                         <div className="cs-slider_wrapper">
-                            {raffleItems?.map(n => (
+                            {nfts.length && nfts.map(n => (
                                 <div className="cs-slide" key={n.id}>
                                     <RaffleCard data={
                                         {

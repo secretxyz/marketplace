@@ -76,7 +76,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 </div>
                 <hr />
                 <div className="cs-card_footer cs-card_footer_center">
-                    <a href={raffle_link} className="cs-btn cs-style1 cs-card_btn_3" target="_blank">
+                    <a href={raffle_link} className="cs-btn cs-style1 cs-card_btn_3">
                         <span>View Raffle</span>
                         {!hiddenStatus && <span className="cs-btn_small_text"> ({getRaffleStatus(data.status)})</span>}
                     </a>
