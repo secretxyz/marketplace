@@ -100,10 +100,10 @@ const NftDetails = (props) => {
                                     <div className="cs-collection_list_title">NFT Floor Price</div>
                                     <div className="cs-collection_list_number">{collection?.floor_price || 0} XRP</div>
                                 </li> */}
-                                <li>
+                                {isRaffleOwner() && <li>
                                     <div className="cs-collection_list_title">Total Raffle Price</div>
                                     <div className="cs-collection_list_number">{raffle?.total_ticket_price} XRP</div>
-                                </li>
+                                </li>}
                                 <li>
                                     <div className="cs-collection_list_title">Ticket Price</div>
                                     <div className="cs-collection_list_number">{raffle?.ticket_price} XRP</div>

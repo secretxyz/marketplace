@@ -129,10 +129,10 @@ export const getImageLink = (url) => {
 		return "img/cover-photo.jpeg";
 	}
 	if (url.startsWith("ipfs://ipfs/")) {
-		return `https://ipfs.io/${url.substring(7)}`;
+		return `https://ipfs.bithomp.com/image/${url.substring(12)}`;
 	}
 	if (url.startsWith("ipfs://")) {
-		return `https://ipfs.io/ipfs/${url.substring(7)}`;
+		return `https://ipfs.bithomp.com/image/${url.substring(7)}`;
 	}
 	return url;
 }
