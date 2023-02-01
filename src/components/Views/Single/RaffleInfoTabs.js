@@ -118,11 +118,12 @@ const RaffleInfoTabs = ({ raffleId, reservedCount }) => {
                 <div className="cs-white_bg cs-box_shadow cs-general_box_5">
                     <h5>Terms & Conditions</h5>
                     <ul>
-                        <li className="cs-mp1">Here's a guide to buy into raffles.</li>
-                        <li className="cs-mp1">All NFT prizes are held by raffle in escrow and can be claimed by the winner or creator once the draw is done.</li>
+                        <li className="cs-mp1">Once raffle is complete or cancelled, all NFT prizes can be claimed by the winner or creator once complete.</li>
                         <li className="cs-mp1">Raffle tickets cannot be refunded once bought.</li>
                         <li className="cs-mp1">Raffle tickets will not be refunded if you did not win the raffle.</li>
                         <li className="cs-mp1">You can only buy 20% of total tickets.</li>
+                        <li className="cs-mp1">Do not enter raffles from multiple wallets, repeat offenders will be banned from the platform.</li>
+                        <li className="cs-mp1">Do not purchase tickets to your own hosted raffle.</li>
                     </ul>
                 </div>
                 <div className="cs-height_20 cs-height_lg_20"></div>

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Avatar from "../Profile/Avatar";
 import CountLoader from '../../Common/CountLoader';
-import { getAccount, getDateTimeWithFormat, getDifferenceTime } from '../../Helpers/Utils';
-import { getSummaryAddress, getSummaryUsername, getTicketStatus } from '../../Helpers/Utils';
+import { isBeforeThanNow, getDifferenceTime, getSummaryUsername, getTicketStatus } from '../../Helpers/Utils';
 
 const RaffleTicketCard = ({ data }) => {
     const raffle = data?.raffle?.data?.attributes;
@@ -21,7 +20,7 @@ const RaffleTicketCard = ({ data }) => {
                         <p className="cs-activity_text">Raffled by <a href={`/profile/${raffler?.wallet}`} target="_blank">{getSummaryUsername(raffler)}</a></p>
                     </div>
                     <div className="col-xl-3">
-                        <p className="cs-activity_text"><span>Raffle Ended</span></p>
+                        <p className="cs-activity_text"><span>{isBeforeThanNow(raffle.raffle_end_datetime) ? "Raffle Ended" : "Raffle Ends"}</span></p>
                         <p className="cs-activity_text">{getDifferenceTime(raffle.raffle_end_datetime)}</p>
                         {getTicketStatus(data.status)}
                     </div>

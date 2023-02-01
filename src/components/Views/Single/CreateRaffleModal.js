@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import { observer } from 'mobx-react';
 import { useRaffle } from '../../../hooks/useRaffle';
 import { getDateTimeWithFormat } from '../../Helpers/Utils';
@@ -27,6 +29,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		raffle_duration: `Raffle will end ${getDateTimeWithFormat(new Date())}`
 	});
 	const [featured, setFeatured] = useState(false);
+	const [agreed, setAgreed] = useState(false);
 
 	useEffect(() => {
 		if (result) {
@@ -57,7 +60,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 			case "total_ticket_price":
 				setDescriptions({
 					...descriptions,
-					total_ticket_price: `Possible earning ${(value * 0.95).toFixed(2)} XRP`,
+					total_ticket_price: `Possible earning ${(value * (raffle.sell_option / 4) * 0.9411).toFixed(2)} XRP`,
 					ticket_count: `${(value / Number(raffle.ticket_count)).toFixed(2)} XRP per Ticket`
 				})
 				break;
@@ -94,6 +97,10 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		let options = sellOptions.map(f => {
 			if (f.id === id) {
 				setRaffle({ ...raffle, sell_option: f.id });
+				setDescriptions({
+					...descriptions,
+					total_ticket_price: `Possible earning ${(raffle.total_ticket_price * (f.id / 4) * 0.9411).toFixed(2)} XRP`,
+				})
 				return { ...f, isChecked: true };
 			}
 			return { ...f, isChecked: false };
@@ -103,6 +110,10 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 
 	const onChangeFeatured = () => {
 		setFeatured(!featured);
+	}
+
+	const onChangeSettingAgree = () => {
+		setAgreed(!agreed);
 	}
 
 	return (
@@ -121,14 +132,22 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 								<h2 className="cs-modal_title">Create Raffle</h2>
 								<div className="form-check form-switch cs-offer_form_switch">
 									<input className="form-check-input" type="checkbox" checked={featured} onChange={onChangeFeatured} />
-									<label className="form-check-label" htmlFor="mode_switch">Feature Option</label>
+									<label id="feature_option" className="form-check-label cs-cursor_pointer" htmlFor="mode_switch">Feature Option ⓘ</label>
 								</div>
+								<ReactTooltip
+									anchorId="feature_option"
+									place="bottom"
+									className="cs-modal_tooltip"
+									content={<div>You have chosen the Featured Raffle option.<br />
+										This carries a NON-REFUNDABLE 20 XRP fee, regardless of the raffle outcome. <br />
+										To confirm first sign the 20 XRP payment followed by the Raffle Confirmation Accept Offer.</div>}
+								/>
 							</div>
 							<div className="cs-height_10 cs-height_lg_10"></div>
 							<div className="row">
 								<div className="col-lg-6">
 									<div className="cs-offer_form_field">
-										<span className="cs-offer_field_title">Total Ticket Price</span>
+										<span className="cs-offer_field_title">Total Raffle Price</span>
 										<input name="total_ticket_price" type="number" className="cs-form_field cs-white_bg"
 											placeholder="Enter price" value={raffle?.total_ticket_price || ""} onChange={onChangeInfo} min={1} />
 										<span className="cs-offer_field_description">{descriptions["total_ticket_price"]}</span>
@@ -144,7 +163,17 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 								</div>
 								<div className="col-lg-6">
 									<div className="cs-offer_form_field">
-										<span className="cs-offer_field_title">Minimum Sales ⓘ</span>
+										<span id="minimum_sales" className="cs-offer_field_title cs-cursor_pointer">Minimum Sales ⓘ</span>
+										<ReactTooltip
+											anchorId="minimum_sales"
+											place="bottom"
+											className="cs-modal_tooltip"
+											content={<div>
+												This is the % of raffle entries to confirm your raffle. <br />
+												Once a raffle is confirmed it CANNOT be canceled and the NFT will be transferred to a winner regardless of any future entries. <br />
+												If raffle is not confirmed, and does not reach the minimum entries, your raffle will be canceled and NFT transferred back to your account.
+											</div>}
+										/>
 										<div className="cs-isotop_filter cs-style1 cs-center cs-isotop_filter_sell_option">
 											<ul className="cs-mp0 cs-center">
 												{
@@ -160,7 +189,12 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 									<div className="cs-offer_form_field">
-										<span className="cs-offer_field_title">Raffle Duration</span>
+										<span id="raffle_duration" className="cs-offer_field_title">Raffle Duration</span>
+										{/* <ReactTooltip
+											anchorId="raffle_duration"
+											place="bottom"
+											content="Duration to enter raffle"
+										/> */}
 										<input name="raffle_duration" type="number" className="cs-form_field cs-white_bg"
 											placeholder="Enter duration" value={raffle?.raffle_duration || ""} onChange={onChangeInfo} min={1} />
 										<span className="cs-offer_field_description">{descriptions["raffle_duration"]}</span>
@@ -168,9 +202,14 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									<div className="cs-height_15 cs-height_lg_10"></div>
 								</div>
 							</div>
-							<a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickSubmit}>
+							<div className="form-check">
+								<input className="form-check-input" type="checkbox" id="flexCheckAgree" onChange={onChangeSettingAgree} checked={agreed} />
+								<label className="form-check-label" htmlFor="flexCheckAgree">Please review your raffle settings. Raffles cannot be cancelled unless timer ends and reserve is not met. No exceptions!</label>
+							</div>
+							<div className="cs-height_15 cs-height_lg_15"></div>
+							<button className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickSubmit} disabled={!agreed}>
 								<span>Submit</span>
-							</a>
+							</button>
 						</div> : step == Steps.Waiting ? <div>
 							<h2 className="cs-modal_title">Connecting to XUMM wallet...</h2>
 							<div className="cs-height_10 cs-height_lg_10"></div>

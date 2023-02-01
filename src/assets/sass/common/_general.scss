@@ -95,7 +95,7 @@ ul::-webkit-scrollbar-thumb {
 .cs-mp1 {
   list-style-type: decimal;
   padding: 0;
-  font-size: 15px;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
@@ -186,7 +186,7 @@ ul::-webkit-scrollbar-thumb {
   transition: all 0.3s ease;
 
   &.cs-btn_lg {
-    padding: 10px 30px;
+    padding: 10px 25px;
   }
 
   &.cs-btn_sm {
@@ -199,7 +199,13 @@ ul::-webkit-scrollbar-thumb {
     z-index: 1;
   }
 
-  &:after {
+
+  &:disabled {
+    background: gray !important;
+    opacity: 0.5;
+  }
+
+  &:after:enabled {
     content: '';
     position: absolute;
     height: 100%;
@@ -213,7 +219,7 @@ ul::-webkit-scrollbar-thumb {
     opacity: 0;
   }
 
-  &:hover {
+  &:hover:enabled {
     color: #fff;
 
     // background-color: transparent;
@@ -274,7 +280,7 @@ ul::-webkit-scrollbar-thumb {
 
   &.cs-btn_lg {
     >span {
-      padding: 12px 25px;
+      padding: 10px 25px;
     }
   }
 
@@ -822,12 +828,17 @@ ul::-webkit-scrollbar-thumb {
   .cs-offer_field_title {
     font-size: 14px;
     margin-left: 12px;
+    cursor: default;
   }
 
   .cs-offer_field_description {
     font-size: 12px;
     margin-left: 12px;
   }
+}
+
+.cs-cursor_pointer {
+  cursor: pointer !important;
 }
 
 .cs-offer_form_switch {
@@ -884,6 +895,10 @@ ul::-webkit-scrollbar-thumb {
   &.active {
     opacity: 1;
     visibility: visible;
+  }
+
+  .form-check-label {
+    font-size: 14px;
   }
 }
 
@@ -1932,8 +1947,19 @@ ul::-webkit-scrollbar-thumb {
     font-weight: 600;
   }
 
+  .cs-attr_trait_value {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
   .cs-attr_trait_percent {
-    color: $accent
+    color: $accent;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 }
 
@@ -1944,6 +1970,7 @@ ul::-webkit-scrollbar-thumb {
 
 .cs-activity_list {
   padding: 6px;
+
   li {
     &:not(:last-child) {
       margin-bottom: 15px;
@@ -2968,7 +2995,7 @@ ul::-webkit-scrollbar-thumb {
   }
 
   .cs-modal_container_in {
-    padding: 30px;
+    padding: 60px 30px 30px 30px;
     min-height: inherit;
   }
 
@@ -3012,7 +3039,7 @@ ul::-webkit-scrollbar-thumb {
   }
 
   .cs-btn.cs-style2.cs-btn_lg span {
-    padding: 12px 15px;
+    padding: 8px 10px;
   }
 
   .cs-form_btns>* {
@@ -3239,4 +3266,9 @@ ul::-webkit-scrollbar-thumb {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 280px;
+}
+
+.cs-modal_tooltip {
+  max-width: 340px;
+  z-index: 10;
 }

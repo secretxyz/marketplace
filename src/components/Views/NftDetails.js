@@ -101,12 +101,16 @@ const NftDetails = (props) => {
                                     <div className="cs-collection_list_number">{collection?.floor_price || 0} XRP</div>
                                 </li> */}
                                 <li>
-                                    <div className="cs-collection_list_title">Total Ticket Price</div>
+                                    <div className="cs-collection_list_title">Total Raffle Price</div>
                                     <div className="cs-collection_list_number">{raffle?.total_ticket_price} XRP</div>
                                 </li>
                                 <li>
                                     <div className="cs-collection_list_title">Ticket Price</div>
                                     <div className="cs-collection_list_number">{raffle?.ticket_price} XRP</div>
+                                </li>
+                                <li>
+                                    <div className="cs-collection_list_title">Reserve to Sales</div>
+                                    <div className="cs-collection_list_number">{raffle?.sell_option * 25} %</div>
                                 </li>
                                 <li>
                                     <div className="cs-collection_list_title">
@@ -605,7 +609,7 @@ const NftDetails = (props) => {
                                             <h3 className="cs-nft_details_collection_name">{collection?.name}</h3>
                                         </a>
                                         <p>created by <a href={`/profile/${collection?.issuer}`}>
-                                            <span>{collection?.creator ? `@${collection?.creator.name}` : getSummaryAddress(collection?.issuer)}</span>
+                                            <span>{collection?.creator ? `@${collection?.creator.username.trimStart()}` : getSummaryAddress(collection?.issuer)}</span>
                                         </a></p>
                                     </div>
                                 </div>

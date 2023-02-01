@@ -58,6 +58,13 @@ export const getDateWithFormat = () => {
 	return `${dd}.${mm}.${yyyy}`;
 };
 
+export const isBeforeThanNow = (dt) => {
+	const end = new Date(dt);
+	const today = new Date();
+
+	return today.getTime() > end.getTime();
+}
+
 export const getDifferenceTime = (dt) => {
 	const end = new Date(dt);
 	const today = new Date();
