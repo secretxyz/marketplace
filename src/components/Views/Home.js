@@ -42,9 +42,8 @@ class Home extends React.Component {
                 <div className="cs-height_70 cs-height_lg_40"></div>
                 <TopCollections />
 
-                <div className="cs-height_70 cs-height_lg_40"></div>
-
-                <section>
+                {/* <section>
+                    <div className="cs-height_70 cs-height_lg_40"></div>
                     <div className="container">
                         <div className="row">
                             <div className="col-xl-6">
@@ -55,7 +54,7 @@ class Home extends React.Component {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 <div className="cs-height_70 cs-height_lg_40"></div>
                 <ExplorerCategory />

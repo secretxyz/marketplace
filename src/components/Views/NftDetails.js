@@ -544,9 +544,9 @@ const NftDetails = (props) => {
                         <div className="cs-single_asset">
                             <div className="cs-asset_view">
                                 <img src={nft?.picture_url} alt="" />
-                                <span className="cs-card_rare cs-primary_color">
+                                {/* <span className="cs-card_rare cs-primary_color">
                                     #{nft?.rarity}
-                                </span>
+                                </span> */}
                                 <span className="cs-card_like cs-primary_color cs-box_shadow">
                                     <i className="fas fa-heart fa-fw"></i>
                                     {nft?.likes}

@@ -33,9 +33,9 @@ const NftCard = ({ data }) => {
 
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
-            {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
+            {/* {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
                 #{data.rarity_rank}
-            </span>}
+            </span>} */}
             {data?.likes && <span className="cs-card_like cs-primary_color">
                 <i className="fas fa-heart fa-fw"></i>
                 {data.likes}

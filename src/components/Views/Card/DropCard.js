@@ -68,14 +68,14 @@ const DropCard = ({ data, category }) => {
                             <span>{data.mint_price} {data.mint_currency_unit}</span>
                         </div>
                     </div>
-                    <div className="cs-section_right">
+                    {category != "upcoming" && <div className="cs-section_right">
                         <a href={data.website_url} className="cs-btn cs-style1" target="_blank">
                             <span>View Drop</span>
                         </a>
-                    </div>
+                    </div>}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

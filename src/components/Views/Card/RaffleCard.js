@@ -16,9 +16,9 @@ const RaffleCard = ({ data, hiddenStatus }) => {
 
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
-            {nft?.rarity_rank && <span className="cs-card_rare cs-primary_color">
+            {/* {nft?.rarity_rank && <span className="cs-card_rare cs-primary_color">
                 #{nft.rarity_rank}
-            </span>}
+            </span>} */}
             {nft?.likes && <span className="cs-card_like cs-primary_color">
                 <i className="fas fa-heart fa-fw"></i>
                 {nft.likes}
