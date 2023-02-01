@@ -307,7 +307,7 @@ const NftDetails = (props) => {
                     <div className="col-xl-5">
                         {isWinner() ? <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
                             <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickDrawPrize}>
-                                <span>Draw Prize</span>
+                                <span>Claim Prize</span>
                             </a>
                         </div> : <ul className="cs-collection_list  cs-white_bg cs-box_shadow cs-general_box_4 cs-single_buy_area cs-mp0">
                             <li>
@@ -627,7 +627,7 @@ const NftDetails = (props) => {
                     </div>
                 </div>
                 <div className="cs-height_30 cs-height_lg_30"></div>
-                <SimilarItems />
+                {collection && <SimilarItems tokenid={nft.nft_tokenid} collection={collection} />}
             </div>
             <div className="cs-height_70 cs-height_lg_70"></div>
 

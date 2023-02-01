@@ -145,13 +145,14 @@ export const useCollectionNfts = () => {
     }
 }
 
-export const useSimilarNfts = (tokenid, collection) => {
+export const useSimilarNfts = (tokenid, collectionid) => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
+    const [ended, setEnded] = useState(false);
 
     const fetchNfts = async () => {
         setLoading(true);
-        let res = await SecretApi.getSimilarNfts(tokenid, collection.id);
+        let res = await SecretApi.getSimilarNfts(tokenid, collectionid, 10, false);
         setNfts(res.data);
         setLoading(false);
     }
@@ -159,6 +160,20 @@ export const useSimilarNfts = (tokenid, collection) => {
     useEffect(async () => {
         await fetchNfts();
     }, [])
+
+    useEffect(async () => {
+        if (ended) return;
+        setEnded(true);
+
+        if (nfts.length < 10) {
+            setLoading(true);
+            let res = await SecretApi.getSimilarNfts(tokenid, collectionid, 10 - nfts.length, true);
+            if (res?.data) {
+                setNfts([...nfts, ...res.data]);
+            }
+            setLoading(false);
+        }
+    }, [nfts])
 
     return {
         loading,

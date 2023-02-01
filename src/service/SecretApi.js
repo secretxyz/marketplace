@@ -335,6 +335,39 @@ class SecretApi {
         }
     }
 
+    async getSimilarNfts(tokenid, collectionid, pageSize, reverse) {
+        let params = {
+            "pagination[page]": 1,
+            "pagination[pageSize]": pageSize,
+            "filters[nft_tokenid][$ne]": tokenid,
+            "populate[raffles][filters][status]": "active",
+            "populate[raffles][populate][raffler]": true,
+            "populate[owner]": true,
+            "filters[raffles][status]": "active",
+        }
+
+        if (!reverse) {
+            params = {
+                ...params,
+                "filters[collection]": collectionid,
+            }
+        } else {
+            params = {
+                ...params,
+                "filters[collection][id][$ne]": collectionid,
+            }
+        }
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nfts`, {
+                params
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async getNftWithTokenID(tokenid, raffleid) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nft/${tokenid}?raffleid=${raffleid}`);

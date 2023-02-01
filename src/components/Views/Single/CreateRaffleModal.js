@@ -138,9 +138,8 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									anchorId="feature_option"
 									place="bottom"
 									className="cs-modal_tooltip"
-									content={<div>You have chosen the Featured Raffle option.<br />
-										This carries a NON-REFUNDABLE 20 XRP fee, regardless of the raffle outcome. <br />
-										To confirm first sign the 20 XRP payment followed by the Raffle Confirmation Accept Offer.</div>}
+									content={<div>Selecting this option will host your raffle under the featured section. 
+										This option cost is 20 XRP and is non refundable regardless of outcome.</div>}
 								/>
 							</div>
 							<div className="cs-height_10 cs-height_lg_10"></div>
@@ -168,11 +167,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 											anchorId="minimum_sales"
 											place="bottom"
 											className="cs-modal_tooltip"
-											content={<div>
-												This is the % of raffle entries to confirm your raffle. <br />
-												Once a raffle is confirmed it CANNOT be canceled and the NFT will be transferred to a winner regardless of any future entries. <br />
-												If raffle is not confirmed, and does not reach the minimum entries, your raffle will be canceled and NFT transferred back to your account.
-											</div>}
+											content={<div>This is the minimum tickets that must sell in order for the raffle to trigger at the end of the countdown.</div>}
 										/>
 										<div className="cs-isotop_filter cs-style1 cs-center cs-isotop_filter_sell_option">
 											<ul className="cs-mp0 cs-center">

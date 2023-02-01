@@ -40,7 +40,7 @@ export const getDateTimeWithFormat = (value) => {
 		m = `0${m}`;
 	}
 
-	return `${dd}/${mm}/${yyyy} ${hh}:${m} ${ap}`;
+	return `${mm}/${dd}/${yyyy} ${hh}:${m} ${ap}`;
 };
 
 export const getDateWithFormat = () => {
@@ -55,7 +55,7 @@ export const getDateWithFormat = () => {
 	if (mm < 10) {
 		mm = `0${mm}`;
 	}
-	return `${dd}.${mm}.${yyyy}`;
+	return `${mm}/${dd}/${yyyy}`;
 };
 
 export const isBeforeThanNow = (dt) => {
