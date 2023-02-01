@@ -155,8 +155,10 @@ export const useSimilarNfts = (tokenid, collectionid) => {
         let res1;
         if (res?.data?.length < 10) {
             res1 = await SecretApi.getSimilarNfts(tokenid, collectionid, 10 - res.data.length, true);
+            setNfts([...res?.data, ...res1?.data]);
+        } else {
+            setNfts(res.data);
         }
-        setNfts([...res?.data, ...res1?.data]);
         setLoading(false);
     }
 
