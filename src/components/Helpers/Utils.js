@@ -24,7 +24,7 @@ export const getMarketplaceByWallet = (destination, nft_tokenid) => {
 	}
 
 	if (destination.wallet == XRPCAFE_BROKER) {
-		return <a href={`${XRPCAFE_URL}/${nft_tokenid}`} target="_blank"><span>at xrp.Cafe</span></a>;
+		return <a href={`${XRPCAFE_URL}/${nft_tokenid}`} target="_blank"><span>at xrp.cafe</span></a>;
 	}
 
 	return <a href={`profile/${destination.wallet}`} target="_blank"><span>to {getSummaryUsername(destination)}</span></a>;
@@ -302,10 +302,10 @@ export const getNumberFormat1 = (value) => {
 
 export const getThemeMode = () => {
 	let mode = localStorage.getItem("mode");
-	if (!mode || mode == "false") {
-		return false;
+	if (mode == "true") {
+		return true;
 	}
-	return true;
+	return false;
 }
 
 export const setThemeMode = (mode) => {
@@ -313,8 +313,10 @@ export const setThemeMode = (mode) => {
 }
 
 export const setTheme = (mode) => {
+	if (!mode) {
+		mode = false;
+	}
 	// set theme
-	setThemeMode(mode);
 	if (mode) {
 		document.body.classList.remove("cs-dark");
 	} else {

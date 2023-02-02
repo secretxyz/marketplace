@@ -87,6 +87,7 @@ const Header = () => {
 	}, [mode]);
 
 	const onChangeMode = () => {
+		setThemeMode(!mode);
 		setMode(!mode);
 	}
 

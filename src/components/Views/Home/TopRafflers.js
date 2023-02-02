@@ -40,7 +40,7 @@ const TopRafflers = () => {
                 <div className="cs-height_45 cs-height_lg_45"></div>
                 <div className="row">
                     {rafflers.map(n => {
-                        return <div className="col-xl-3 col-lg-4 col-md-6" id={n.id}>
+                        return <div className="col-xl-3 col-lg-4 col-md-6" key={n.id}>
                             <RafflerCard data={n} />
                             <div className="cs-height_30 cs-height_lg_30"></div>
                         </div>
