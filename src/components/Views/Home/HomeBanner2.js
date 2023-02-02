@@ -29,7 +29,7 @@ const HomeBanner2 = () => {
                             </div>
                             <div className="cs-hero_btns">
                                 <a href="/explorer-raffles" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
-                                {auth_token && <a href="/my-profile/collected" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>}
+                                {auth_token && <a href="/my-profile/collected" className="cs-hero_btn cs-style1 cs-color1"><span>Let's Start</span></a>}
                             </div>
                         </div>
                     </div>

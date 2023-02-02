@@ -341,6 +341,22 @@
   color: white;
 }
 
+.cs-card_featured {
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  top: 20px;
+  background-color: $red;
+  font-size: 12px;
+  line-height: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 1.6em;
+  padding: 2px 7px;
+  color: white;
+}
+
+
 .cs-card_like {
   position: absolute;
   z-index: 2;
