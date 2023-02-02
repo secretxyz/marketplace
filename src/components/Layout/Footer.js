@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         <footer className="cs-footer cs-style1">
             <div className="cs-footer_bg"></div>
-            <div className="cs-height_80"></div>
+            <div className="cs-height_80 cs-height_lg_10"></div>
             <div className="container cs-footer_main">
                 <div className="row">
                     <div className="col-lg-8">
