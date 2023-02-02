@@ -65,9 +65,9 @@ class Home extends React.Component {
                         <div className="cs-cta cs-style1 cs-bg" style={{ backgroundImage: `url("img/general/cta_bg.jpeg")` }}>
                             <div className="cs-cta_img"><img src="img/general/cta.svg" alt="Image" /></div>
                             <div className="cs-cta_right">
-                                <h2 className="cs-cta_title cs-white_color_8">Create, Sell well & Collect your Best NFTs with us Very Fast</h2>
-                                <div className="cs-cta_subtitle cs-white_color_8">What’s Different Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has Lorsum is simply dummy text of the printing and </div>
-                                <a href="connect-wallet.html" className="cs-btn cs-style1 cs-btn_lg"><span>Connect Wallet</span></a>
+                                <h2 className="cs-cta_title cs-white_color_8">Build Your XRPL-Based Private Minting Solution</h2>
+                                <div className="cs-cta_subtitle cs-white_color_8">Leverage the power of XRPL for your private minting needs with our development services. Our team will work with you to create a customized, secure, and efficient platform that meets your unique requirements. Start realizing the full potential of XRPL-based private minting today.</div>
+                                <a href="/contact-us" className="cs-btn cs-style1 cs-btn_lg"><span>Contact Us</span></a>
                             </div>
                         </div>
                     </div>

@@ -25,10 +25,10 @@ const ExplorerCollections = (props) => {
 	useEffect(() => {
 		if (menu) {
 			var valid = filters.filter(m => { return m.key === menu });
-            if (!valid.length) {
-                window.location.replace("/explorer-collections");
-                return;
-            }
+			if (!valid.length) {
+				window.location.replace("/explorer-collections");
+				return;
+			}
 
 			let menus = filters.map(m => {
 				if (m.key === menu) {
@@ -49,7 +49,7 @@ const ExplorerCollections = (props) => {
 
 	const handleScroll = (e) => {
 		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
-		if (bottom <= 1) {
+		if (bottom <= 1 && !loading) {
 			fetchNext(0, 25, category);
 		}
 	}
@@ -67,8 +67,8 @@ const ExplorerCollections = (props) => {
 
 		// change url
 		if (menu) {
-            window.history.replaceState(null, null, "/explorer-collections")
-        }
+			window.history.replaceState(null, null, "/explorer-collections")
+		}
 	};
 
 	return (

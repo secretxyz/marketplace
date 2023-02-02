@@ -49,7 +49,7 @@ const NftInfoTabs = ({ tokenid }) => {
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
-        if (bottom <= 1) {
+        if (bottom <= 1 && !loading) {
             fetchNext(tokenid);
         }
     }
@@ -82,7 +82,7 @@ const NftInfoTabs = ({ tokenid }) => {
                 </div>
                 <div id="offers" className="cs-tab">
                     <ul className="cs-activity_list cs-mp0">
-                        
+
                     </ul>
                 </div>
             </div>

@@ -62,11 +62,9 @@ const Footer = () => {
                                 </button>
                             </form>
                             <div className="cs-footer_social_btns">
-                                <a href="#"><i className="fab fa-discord fa-fw"></i></a>
-                                <a href="#"><i className="fab fa-twitter fa-fw"></i></a>
-                                <a href="#"><i className="fab fa-linkedin-in fa-fw"></i></a>
-                                <a href="#"><i className="fab fa-whatsapp fa-fw"></i></a>
-                                <a href="#"><i className="fab fa-github fa-fw"></i></a>
+                                <a href="https://bearableguy.club" target="_blank"><i className="fas fa-mask fa-fw"></i></a>
+                                <a href="https://twitter.com/BearableguyClub" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
+                                <a href="https://discord.gg/VnNGWAAj3Q" target="_blank"><i className="fab fa-discord fa-fw"></i></a>
                             </div>
                         </div>
                     </div>
