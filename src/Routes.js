@@ -27,6 +27,7 @@ const Profile = lazy(() => import('./components/Views/Profile'));
 
 const About = lazy(() => import('./components/Views/Resource/About'));
 const Faq = lazy(() => import('./components/Views/Resource/Faq'));
+const ProvablyFair = lazy(() => import('./components/Views/Resource/ProvablyFair'));
 const PrivacyPolicy = lazy(() => import('./components/Views/Resource/PrivacyPolicy'));
 const TermsCondition = lazy(() => import('./components/Views/Resource/TermsCondition'));
 
@@ -69,6 +70,7 @@ const Routes = ({ location }) => {
 
                                 <Route path="/about" component={waitFor(About)} />
                                 <Route path="/faq" component={waitFor(Faq)} />
+                                <Route path="/provably-fair" component={waitFor(ProvablyFair)} />
                                 <Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
                                 <Route path="/terms-condition" component={waitFor(TermsCondition)} />
 

@@ -4,16 +4,20 @@
 .cs-single_post {
   font-size: 18px;
   line-height: 1.7em;
+
   h2 {
     margin-bottom: 15px;
   }
+
   .cs-post_avatar {
     margin-bottom: 35px;
   }
+
   img {
     border-radius: 10px;
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
   }
+
   .cs-post_avatar .cs-post_avatar_img img {
     margin: 0;
   }
@@ -22,11 +26,16 @@
     padding-left: 50px;
     list-style: disc;
     margin-bottom: 30px;
+
     li {
       &:not(:last-child) {
         margin-bottom: 10px;
       }
     }
+  }
+
+  span {
+    font-size: 14px;
   }
 }
 
@@ -96,15 +105,19 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  > .comment {
+
+  >.comment {
     padding: 0px 0px 30px;
     margin-bottom: 0px;
+
     &:last-child {
       margin-bottom: 0;
     }
   }
+
   .children {
     padding-top: 30px;
+
     .comment {
       &:not(:first-child) {
         border-width: 1px 0 0;
@@ -180,8 +193,8 @@
   color: $accent;
 }
 
-.comment-list .comment-meta + p,
-.comment-list .comment-meta + p + p {
+.comment-list .comment-meta+p,
+.comment-list .comment-meta+p+p {
   margin-bottom: 0;
 }
 
@@ -197,9 +210,11 @@
   align-items: center;
   color: $accent;
   line-height: inherit;
+
   svg {
     margin-left: 7px;
   }
+
   &:hover {
     opacity: 0.8;
   }
@@ -231,16 +246,20 @@
     font-size: 16px;
     line-height: 1.5em;
   }
+
   .cs-single_post h2 {
     font-size: 30px;
   }
+
   .cs-single_post ul li:not(:last-child) {
     margin-bottom: 5px;
   }
+
   #respond {
     padding: 40px 30px;
     border-radius: 15px;
   }
+
   .comment-list ol.children {
     padding-left: 25px;
   }

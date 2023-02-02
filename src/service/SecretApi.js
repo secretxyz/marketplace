@@ -55,6 +55,22 @@ class SecretApi {
         }
     }
 
+    async getFaqs() {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/faqs`, {
+                params: {
+                    "sort[category]": "asc",
+                    "sort[number]": "asc",
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+
     async getCollections(page, pageSize, category) {
         let params = {
             "pagination[page]": page,

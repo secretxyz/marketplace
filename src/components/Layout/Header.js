@@ -131,7 +131,6 @@ const Header = () => {
 												<li className="menu-item-has-children">
 													<a href="contact.html">Stats</a>
 													<ul>
-														<li><a href="/rankings">Rankings</a></li>
 														<li><a href="/activity">Activity</a></li>
 														<li><a href="/leaderboards">Leaderboards</a></li>
 													</ul>
@@ -139,9 +138,9 @@ const Header = () => {
 												<li className="menu-item-has-children">
 													<a href="contact.html">Resources</a>
 													<ul>
-														<li><a href="index_2.html">Help Center</a></li>
-														<li><a href="index_3.html">Partners</a></li>
-														<li><a href="index_3.html">Blogs</a></li>
+														<li><a href="/provably-fair">Provably Fair</a></li>
+														<li><a href="/about">Contact Us</a></li>
+														<li><a href="/faq">FAQ</a></li>
 													</ul>
 												</li>
 											</ul>

@@ -42,11 +42,9 @@ const Footer = () => {
                                 <div className="cs-footer_widget">
                                     <h2 className="cs-widget_title">Secret Labs</h2>
                                     <ul className="cs-widget_nav">
-                                        <li><a href="/about">Partners</a></li>
-                                        <li><a href="/about">How to Verify</a></li>
-                                        <li><a href="/about">About Us</a></li>
+                                        <li><a href="/provably-fair">Provably Fair</a></li>
                                         <li><a href="/about">Contact Us</a></li>
-                                        <li><a href="/faq">Help Center & FAQ</a></li>
+                                        <li><a href="/faq">FAQ</a></li>
                                     </ul>
                                 </div>
                             </div>

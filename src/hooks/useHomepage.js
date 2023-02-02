@@ -42,3 +42,24 @@ export const useTopRafflers = () => {
         rafflers
     }
 }
+
+export const useFaqs = () => {
+    const [loading, setLoading] = useState(true);
+    const [faqs, setFaqs] = useState([]);
+
+    const getFaqs = async () => {
+        setLoading(true);
+        const res = await SecretApi.getFaqs();
+        setFaqs(res.data);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getFaqs();
+    }, [])
+
+    return {
+        loading,
+        faqs
+    }
+}
