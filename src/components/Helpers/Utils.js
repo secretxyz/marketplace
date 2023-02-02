@@ -1,3 +1,6 @@
+import { ONXRP_URL, ONXRP_BROKER } from "../Common/constants"
+import { XRPCAFE_URL, XRPCAFE_BROKER } from "../Common/constants"
+
 export const mapOrder = (array, order, key) => {
 	// eslint-disable-next-line func-names
 	array.sort(function (a, b) {
@@ -10,6 +13,30 @@ export const mapOrder = (array, order, key) => {
 	});
 	return array;
 };
+
+export const getMarketplaceByWallet = (destination, nft_tokenid) => {
+	if (!destination) {
+		return;
+	}
+
+	if (destination.wallet == ONXRP_BROKER) {
+		return <a href={`${ONXRP_URL}/${nft_tokenid}`} target="_blank"><span>at OnXRP</span></a>;
+	}
+
+	if (destination.wallet == XRPCAFE_BROKER) {
+		return <a href={`${XRPCAFE_URL}/${nft_tokenid}`} target="_blank"><span>at xrp.Cafe</span></a>;
+	}
+
+	return <a href={`profile/${destination.wallet}`} target="_blank"><span>to {getSummaryUsername(destination)}</span></a>;
+}
+
+export const getExpirationDateTime = (value) => {
+	if (!value) {
+		return "No Expiration";
+	}
+
+	return <>Expiration: <span>{getDifferenceTime(value)}</span></>;
+}
 
 export const getDateTimeWithFormat = (value) => {
 	const dt = new Date(value);
@@ -285,9 +312,9 @@ export const setThemeMode = (mode) => {
 	localStorage.setItem("mode", mode);
 }
 
-export const setTheme = () => {
+export const setTheme = (mode) => {
 	// set theme
-	let mode = getThemeMode();
+	setThemeMode(mode);
 	if (mode) {
 		document.body.classList.remove("cs-dark");
 	} else {

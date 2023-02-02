@@ -404,6 +404,16 @@ class SecretApi {
         }
     }
 
+    async getNftOffers(tokenid) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nft/offers/${tokenid}`);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async createRaffle(data) {
         // console.log(data);
         try {

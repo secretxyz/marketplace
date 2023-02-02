@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import Avatar from "../Profile/Avatar";
 import { useRaffleHistory } from "../../../hooks/useRaffle";
+import { useNftOffers } from "../../../hooks/useNft";
 import { APP_COLORS } from "../../Common/constants"
-import { getDateTimeWithFormat, getSummaryUsername, getTicketStatus } from "../../Helpers/Utils";
+import { getDateTimeWithFormat, getSummaryUsername, getTicketStatus, getExpirationDateTime, getMarketplaceByWallet } from "../../Helpers/Utils";
 
 const RaffleHistoryRow = ({ data }) => {
     const raffle = data?.attributes;
@@ -43,9 +44,41 @@ const RaffleHistoryRow = ({ data }) => {
     );
 }
 
+const OfferRow = ({ data }) => {
+    let owner = data.owner;
+    let destination = data.destination;
+
+    return (
+        <li>
+            <div className="cs-activity cs-box_shadow cs-white_bg cs-type1">
+                <div className="cs-activity_avatar">
+                    <Avatar className="cs-activity_avatar" {...{ name: owner.wallet, image: owner.picture_url }} />
+                </div>
+                <div className="row w-100">
+                    <div className="col-xl-9">
+                        <p className="cs-activity_text">
+                            <a href={`/profile/${owner.wallet}`} target="_blank">{getSummaryUsername(owner)}</a> created <strong>{data.type}</strong> offer {getMarketplaceByWallet(destination, data.nft_tokenid)}
+                        </p>
+                        <p className="cs-activity_text">
+                            {getExpirationDateTime(data.expiration)}
+                        </p>
+                    </div>
+                    <div className="col-xl-3">
+                        <p className="cs-activity_text"><span>Price</span></p>
+                        <p className="cs-activity_text">{data.amount} XRP</p>
+                    </div>
+                </div>
+                {/* <a href={`/nft/${data.offer_id}`} className="cs-btn cs-style1 cs-card_btn_3">
+                    <span>View</span>
+                </a> */}
+            </div>
+        </li>
+    );
+}
+
 const NftInfoTabs = ({ tokenid }) => {
     const { loading, history, fetchNext } = useRaffleHistory();
-    // const { offers, fetchOffers } = useNftOffers();
+    const { loading: offerLoading, offers } = useNftOffers(tokenid);
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -73,8 +106,8 @@ const NftInfoTabs = ({ tokenid }) => {
             <div className="cs-tab_content cs-tab_nft_info_content" onScroll={handleScroll}>
                 <div id="history" className="cs-tab active">
                     <ul className="cs-activity_list cs-mp0">
-                        {history.map(h => (
-                            <RaffleHistoryRow data={h} key={h.id} />
+                        {history.map(d => (
+                            <RaffleHistoryRow data={d} key={d.id} />
                         ))}
                     </ul>
                     <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
@@ -82,8 +115,12 @@ const NftInfoTabs = ({ tokenid }) => {
                 </div>
                 <div id="offers" className="cs-tab">
                     <ul className="cs-activity_list cs-mp0">
-
+                        {offers.map((d, id) => (
+                            <OfferRow data={d} key={id} />
+                        ))}
                     </ul>
+                    <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={offerLoading} size={15} />
+                    {!offerLoading && offers.length == 0 && <div className="cs-center">There are no records to display</div>}
                 </div>
             </div>
         </div>

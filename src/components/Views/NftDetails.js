@@ -175,7 +175,27 @@ const NftDetails = (props) => {
                     <div className="cs-height_30 cs-height_lg_30"></div>
                 </div>
             </div>
-        } else if (!isLoggedIn()) {
+        } else if (isLoggedIn() && !raffle) {
+            return <div className="row">
+                <div className="col-xl-12">
+                    <div className="cs-white_bg cs-box_shadow cs-general_box_5">
+                        <div className="row">
+                            <div className="col-6">
+                                <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                    <span>Offer at OnXRP</span>
+                                </a>
+                            </div>
+                            <div className="col-6">
+                                <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                    <span>Offer at XRP.cafe</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cs-height_30 cs-height_lg_30"></div>
+                </div>
+            </div>
+        } else if (!isLoggedIn() && !raffle) {
             return <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
@@ -438,6 +458,8 @@ const NftDetails = (props) => {
                 </div>
             </div>
         }
+
+
     }
 
     const getOwnerView = () => {
@@ -544,7 +566,7 @@ const NftDetails = (props) => {
     }, [result])
 
     const onClickCopyHash = () => {
-		navigator.clipboard.writeText(raffle?.payment_tx_hash);
+        navigator.clipboard.writeText(raffle?.payment_tx_hash);
     }
 
     return (

@@ -29,3 +29,8 @@ export const APP_MEDIAQUERY = {
 };
 
 export const BITHOMP_URL = "https://bithomp.com/explorer/";
+
+export const ONXRP_URL = "https://nft.onxrp.com/nft";
+export const ONXRP_BROKER = "rpZqTPC8GvrSvEfFsUuHkmPCg29GdQuXhC";
+export const XRPCAFE_URL = "https://xrp.cafe/nft";
+export const XRPCAFE_BROKER = "rpx9JThQ2y37FaGeeJP7PXDUVEXY3PHZSC";

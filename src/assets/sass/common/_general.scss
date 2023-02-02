@@ -3125,6 +3125,16 @@ ul::-webkit-scrollbar-thumb {
   .cs-collection_info_other {
     right: 0px;
   }
+
+  .cs-footer {
+    .cs-footer_main {
+      display: none;
+    }
+  }
+
+  .cs-menu_footer_widget {
+    display: block !important;
+  }
 }
 
 @media screen and (max-width: 400px) {

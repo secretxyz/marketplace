@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
+import Switch from "react-switch";
 import ConnectModal from "../Common/ConnectModal"
 import accountStore from '../../store/account.store';
 import { setAccount, setAuthToken, getSummaryAddress, getThemeMode, setThemeMode, setTheme } from '../Helpers/Utils';
@@ -82,12 +83,11 @@ const Header = () => {
 	}
 
 	useEffect(() => {
-		setTheme();
+		setTheme(mode);
 	}, [mode]);
 
 	const onChangeMode = () => {
 		setMode(!mode);
-		setThemeMode(!mode);
 	}
 
 	const onClickCopyWallet = () => {
@@ -143,6 +143,21 @@ const Header = () => {
 														<li><a href="/faq">FAQ</a></li>
 													</ul>
 												</li>
+												<li className="cs-menu_footer_widget">
+													<form className="cs-footer_newsletter">
+														<input type="text" placeholder="Subscribe to our newsletter" className="cs-newsletter_input" />
+														<button className="cs-newsletter_btn">
+															<svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path d="M24.7014 9.03523C25.0919 8.64471 25.0919 8.01154 24.7014 7.62102L18.3374 1.25706C17.9469 0.866533 17.3137 0.866533 16.9232 1.25706C16.5327 1.64758 16.5327 2.28075 16.9232 2.67127L22.5801 8.32812L16.9232 13.985C16.5327 14.3755 16.5327 15.0087 16.9232 15.3992C17.3137 15.7897 17.9469 15.7897 18.3374 15.3992L24.7014 9.03523ZM0.806641 9.32812H23.9943V7.32812H0.806641V9.32812Z" fill="white" />
+															</svg>
+														</button>
+													</form>
+													<div className="cs-footer_social_btns">
+														<a href="https://bearableguy.club" target="_blank"><i className="fas fa-mask fa-fw"></i></a>
+														<a href="https://twitter.com/BearableguyClub" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
+														<a href="https://discord.gg/VnNGWAAj3Q" target="_blank"><i className="fab fa-discord fa-fw"></i></a>
+													</div>
+												</li>
 											</ul>
 										</div>
 									</div>
@@ -150,13 +165,56 @@ const Header = () => {
 							</div>
 							<div className="cs-header_btns_wrap">
 								<div className="cs-header_btns">
+									<Switch
+										onChange={onChangeMode}
+										checked={mode}
+										offColor="#393551"
+										onColor="#5f8eff"
+										onHandleColor="#524e67"
+										handleDiameter={30}
+										uncheckedIcon={false}
+										checkedIcon={false}
+										boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+										activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+										height={20}
+										width={48}
+										className="react-switch"
+										uncheckedHandleIcon={
+											<div
+												style={{
+													display: "flex",
+													justifyContent: "center",
+													alignItems: "center",
+													height: "100%",
+													color: "#5f8eff",
+													fontSize: 20
+												}}
+											>
+												<i className="fas fa-sun fa-fw"></i>
+											</div>
+										}
+										checkedHandleIcon={
+											<div
+												style={{
+													display: "flex",
+													justifyContent: "center",
+													alignItems: "center",
+													height: "100%",
+													color: "#fff",
+													fontSize: 18
+												}}
+											>
+												<i className="fas fa-moon fa-fw"></i>
+											</div>
+										}
+									/>
 									<div className="cs-header_icon_btn cs-center cs-mobile_search_toggle">
 										<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
 											<path d="M17.5 18L13.875 14.375" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
 										</svg>
 									</div>
-									{auth_token ? <div className="cs-toggle_box cs-notification_box">
+									{auth_token ? <div className="cs-toggle_box cs-notification_box" hidden={true}>
 										<div className="cs-toggle_btn cs-header_icon_btn cs-center">
 											<i className="far fa-bell"></i>
 											<span className="cs-btn_badge">8</span>
@@ -245,12 +303,12 @@ const Header = () => {
 												<li><a href="/my-profile/raffle-tickets">My Tickets</a></li>
 												<li><a href="/my-profile/collected">My NFTs</a></li>
 												<li><a href="/my-profile/profile-info">My Profile</a></li>
-												<li>
+												{/* <li>
 													<div className="form-check form-switch">
 														<input className="form-check-input" type="checkbox" checked={mode} onChange={onChangeMode} />
 														<label className="form-check-label" htmlFor="mode_switch">Light Mode</label>
 													</div>
-												</li>
+												</li> */}
 												{/* <li><a className="cs-btn" onClick={() => onLogout()}>Logout</a></li> */}
 											</ul>
 											<div className="text-center">
