@@ -5,7 +5,7 @@ import ContentWrapper from '../Layout/ContentWrapper';
 import BidBanner from './Home/BidBanner';
 import NewItems from './Home/NewItems';
 import CollectionBanner from './Home/CollectionBanner';
-import TopSellers from './Home/TopSellers';
+import TopRafflers from './Home/TopRafflers';
 import Partners from './Home/Partners';
 
 import HomeBanner from './Home/HomeBanner';
@@ -32,7 +32,7 @@ class Home extends React.Component {
                 <HomeBanner2 />
 
                 <div className="cs-height_70 cs-height_lg_40"></div>
-                <TopSellers />
+                <TopRafflers />
 
                 <FeaturedRaffles />
 

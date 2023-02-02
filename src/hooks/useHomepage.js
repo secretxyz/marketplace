@@ -21,3 +21,24 @@ export const useBannerCollections = () => {
         collections
     }
 }
+
+export const useTopRafflers = () => {
+    const [loading, setLoading] = useState(true);
+    const [rafflers, setRafflers] = useState([]);
+
+    const getTopRafflers = async () => {
+        setLoading(true);
+        const res = await SecretApi.getTopRafflers();
+        setRafflers(res);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getTopRafflers();
+    }, [])
+
+    return {
+        loading,
+        rafflers
+    }
+}

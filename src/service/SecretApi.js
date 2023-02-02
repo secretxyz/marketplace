@@ -45,6 +45,16 @@ class SecretApi {
         }
     }
 
+    async getTopRafflers() {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/top-rafflers`);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async getCollections(page, pageSize, category) {
         let params = {
             "pagination[page]": page,

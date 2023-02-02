@@ -593,6 +593,17 @@
       object-fit: cover;
       border-radius: inherit;
     }
+
+    .cs-card_avatar {
+      height: 100%;
+      width: 100%;
+
+      img {
+        border-radius: 100% !important;
+        object-fit: cover;
+        border-radius: inherit;
+      }
+    }
   }
 
   .cs-card_media {
@@ -604,6 +615,13 @@
       justify-content: center;
       margin: auto;
       width: 36px;
+    }
+
+    .cs-card_media_info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      line-height: 1.5em;
     }
   }
 
