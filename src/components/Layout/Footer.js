@@ -78,7 +78,7 @@ const Footer = () => {
 						<div className="cs-copyright">Copyright 2023. Created by SecretLabs.</div>
 						<ul className="cs-footer_menu">
 							<li><a href="/privacy-policy">Privacy Policy</a></li>
-							<li><a href="/terms-condition">Term & Condition</a></li>
+							<li><a href="/terms-condition">Terms & Conditions</a></li>
 						</ul>
 					</div>
 				</div>
