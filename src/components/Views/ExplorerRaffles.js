@@ -4,44 +4,46 @@ import ContentWrapper from "../Layout/ContentWrapper";
 import RaffleCard from './Card/RaffleCard';
 import { APP_COLORS } from "../Common/constants"
 import { useRaffles } from "../../hooks/useRaffle";
+import RaffleFilterBar from "./FilterBar/RaffleFilterBar";
 
-const Filters = [
-    { id: 0, label: "Featured", isChecked: true },
-    { id: 1, label: "All Raffles", isChecked: false },
-    { id: 2, label: "Past Raffles", isChecked: false },
+const Categories = [
+    { id: 0, label: "Featured", isChecked: true, key: "featured" },
+    { id: 1, label: "All Raffles", isChecked: false, key: "all" },
+    { id: 2, label: "Past Raffles", isChecked: false, key: "past" },
 ];
 
 const ExplorerRaffles = () => {
-    const { loading, raffles, fetchNext } = useRaffles();
-    const [filters, setFilters] = useState(Filters);
-    const [category, setCategory] = useState(0);
+    const { loading, raffles, meta, fetchNext } = useRaffles();
+    const [categories, setCategories] = useState(Categories);
+    const [category, setCategory] = useState("featured");
+    const [filter, setFilter] = useState();
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
         if (bottom <= 1 && !loading) {
-            fetchNext(0, category);
+            fetchNext(category, filter);
         }
     }
 
     useEffect(() => {
-        fetchNext(1, category);
-    }, [])
-
-    useEffect(() => {
-        fetchNext(1, category);
+        fetchNext(category, filter, 1);
     }, [category])
 
+    useEffect(() => {
+        fetchNext(category, filter, 1);
+    }, [filter])
+
     // Filter change handler
-    const onFilter = id => {
-        let options = filters.map(f => {
+    const onChangeCategory = id => {
+        let options = categories.map(f => {
             if (f.id === id) {
-                setCategory(f.id);
+                setCategory(f.key);
                 return { ...f, isChecked: true };
             }
 
             return { ...f, isChecked: false };
         })
-        setFilters(options);
+        setCategories(options);
     };
 
     return (
@@ -56,9 +58,9 @@ const ExplorerRaffles = () => {
                     <div className="cs-isotop_filter cs-style1 cs-center">
                         <ul className="cs-mp0 cs-center">
                             {
-                                filters.map(f => (
+                                categories.map(f => (
                                     <li className={f.isChecked ? 'active' : ''} key={`${f.id}`}>
-                                        <button onClick={() => { onFilter(f.id); }}><span>{f.label}</span></button>
+                                        <button onClick={() => { onChangeCategory(f.id); }}><span>{f.label}</span></button>
                                     </li>
                                 ))
                             }
@@ -66,8 +68,10 @@ const ExplorerRaffles = () => {
                     </div>
                 </div>
             </section>
-            <div className="cs-height_20 cs-height_lg_20"></div>
             <div className="container cs-cards_area" onScroll={handleScroll}>
+                <div className="cs-height_15 cs-height_lg_10"></div>
+                <RaffleFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
+                <div className="cs-height_15 cs-height_lg_10"></div>
                 <div className="cs-grid_5 cs-gap_30" >
                     {raffles.map(n => (
                         <RaffleCard data={{ id: n.id, ...n.attributes }} key={n.id} hiddenStatus={true} />

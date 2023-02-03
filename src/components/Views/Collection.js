@@ -276,7 +276,7 @@ const Collection = (props) => {
                             <div className="cs-filter_head_left">
                                 <span className="cs-search_result cs-medium cs-ternary_color">{meta?.pagination?.total} Results</span>
                                 <div className="cs-form_field_wrap">
-                                    <input type="text" className="cs-form_field cs-field_sm" placeholder="In Auction" />
+                                    <input type="text" className="cs-form_field cs-field_sm cs-field_tag" placeholder="In Auction" />
                                 </div>
                                 <a className="cs-clear_btn">Clear All</a>
                             </div>

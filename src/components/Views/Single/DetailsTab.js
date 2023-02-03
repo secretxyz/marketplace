@@ -12,7 +12,7 @@ const DetailsTab = (props) => {
                     <li>Token ID <a href={`${BITHOMP_URL}${props.nft_tokenid}`} target="_blank"><span>{getSummaryTxID(props.nft_tokenid)}</span></a></li>
                     <li>Token Standard <span>{props.standard}</span></li>
                     <li>Creator Fee <span>{`${Number(props.creator_fee) / 1000} %`}</span></li>
-                    <a className="cs-btn cs-style1 cs-card_btn_3" href={`${props.ipfs_url}`} target="_blank">
+                    <a className="cs-btn cs-style1 cs-card_btn_3" href={`${BITHOMP_URL}${props.nft_tokenid}`} target="_blank">
                         <span>View Metadata<i className="fas fa-arrow-right"></i></span>
                     </a>
                 </ul>

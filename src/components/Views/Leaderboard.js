@@ -1,7 +1,7 @@
 import React from "react";
 import ContentWrapper from '../Layout/ContentWrapper';
 
-const Activity = () => {
+const Leaderboard = () => {
 
 	return (
 		<ContentWrapper>
@@ -9,7 +9,7 @@ const Activity = () => {
 			<section className="cs-page_head cs-bg" style={{ background: `url("img/page_head_bg.png")` }}>
 				<div className="container">
 					<div className="text-center">
-						<h1 className="cs-page_title">Activity</h1>
+						<h1 className="cs-page_title">Leaderboard</h1>
 					</div>
 				</div>
 			</section>
@@ -26,4 +26,4 @@ const Activity = () => {
 	);
 }
 
-export default Activity;
+export default Leaderboard;

@@ -9,9 +9,9 @@ export const useNfts = () => {
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
-    const fetchNfts = async (page, filters, reset) => {
+    const fetchNfts = async (page, category, filter, reset) => {
         setLoading(true);
-        const res = await SecretApi.getNftsWithFilters(page, filters);
+        const res = await SecretApi.getNftsWithFilters(page, category, filter);
         if (reset) {
             setNfts(res.data);
         } else {
@@ -24,7 +24,7 @@ export const useNfts = () => {
         setLoading(false);
     }
 
-    const fetchNext = (pageNumber, filters) => {
+    const fetchNext = (pageNumber, category, filter) => {
         let reset;
         if (!pageNumber) {
             if (ended) return;
@@ -35,7 +35,7 @@ export const useNfts = () => {
             page.current = pageNumber;
             reset = true;
         }
-        fetchNfts(page.current, filters, reset);
+        fetchNfts(page.current, category, filter, reset);
     }
 
     return {

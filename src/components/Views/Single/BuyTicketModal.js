@@ -35,7 +35,7 @@ const BuyTicketModal = ({ ticket, refreshDetails, closeModal }) => {
                         {step == 0 ? <div>
                             <h2 className="cs-modal_title">Connecting to XUMM wallet...</h2>
                             <div className="cs-height_10 cs-height_lg_10"></div>
-                            We're waiting for your wallet to approve this action.
+                            Please wait a few moments until you receive the sign request in your XUMM.
                             <div className="cs-height_5 cs-height_lg_5"></div>
                         </div> : <div>
                             <h2 className="cs-modal_title">Result</h2>

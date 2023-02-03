@@ -6,6 +6,7 @@ import { getSummaryAddress } from '../../Helpers/Utils';
 const NftCard = ({ data }) => {
     const nft_link = `/nft/${data.nft_tokenid}`;
     const owner = { id: data.owner?.data?.id, ...data.owner?.data?.attributes };
+    const likes = data?.likes?.attributes?.count || 0;
 
     const getFooterButton = () => {
         if (owner.id == getAccount().id) {
@@ -36,9 +37,9 @@ const NftCard = ({ data }) => {
             {/* {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
                 #{data.rarity_rank}
             </span>} */}
-            {data?.likes && <span className="cs-card_like cs-primary_color">
+            {<span className="cs-card_like cs-primary_color">
                 <i className="fas fa-heart fa-fw"></i>
-                {data.likes}
+                {likes}
             </span>}
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
                 {isVideoAsset(data.picture_url) ? <video src={data.picture_url} type="video/mp4" /> :
@@ -57,13 +58,6 @@ const NftCard = ({ data }) => {
                 <div className="cs-card_footer">
                     {getFooterButton()}
                 </div>
-                {/* <div className="cs-card_footer">
-                    <span className="cs-card_btn_1" data-modal="#history_1">
-                        <i className="fas fa-redo fa-fw"></i>
-                        View History
-                    </span>
-                    <span className="cs-card_btn_2" data-modal="#bid_1"><span>Place Bid</span></span>
-                </div> */}
             </div>
         </div>
     );

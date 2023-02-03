@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import ContentWrapper from '../Layout/ContentWrapper';
 import Avatar from "./Profile/Avatar";
 import CollectedItems from './Profile/CollectedItems';
@@ -177,18 +179,22 @@ const Profile = (props) => {
                 <div className="cs-cover_photo cs-bg" style={{ background: `url(${profile?.banner_picture_url || "img/cover-photo.jpeg"})` }}>
                     <div className="cs-profile_info_other cs-box_shadow">
                         <div className="cs-profile_info_head">
-                            <a className="cs-style1 cs-btn" onClick={onClickRefresh}>
+                            <a id="account_refresh" className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                 <span><i className="fas fa-redo fa-fw"></i></span>
                             </a>
-                            <a className="cs-style1 cs-btn" onClick={onClickLike}>
+                            <ReactTooltip anchorId="account_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh profile information" />
+                            <a id="account_follow" className="cs-style1 cs-btn" onClick={onClickLike}>
                                 <span><i className="fas fa-star fa-fw"></i></span>
                             </a>
-                            <a className="cs-style1 cs-btn" onClick={onClickShare}>
+                            <ReactTooltip anchorId="account_follow" className="cs-modal_tooltip" place="bottom" content="Follow account" />
+                            <a id="account_share" className="cs-style1 cs-btn" onClick={onClickShare}>
                                 <span><i className="fas fa-share fa-fw"></i></span>
                             </a>
-                            <a className="cs-style1 cs-btn" onClick={onClickReport}>
+                            <ReactTooltip anchorId="account_share" className="cs-modal_tooltip" place="bottom" content="Copy share link" />
+                            <a id="account_report" className="cs-style1 cs-btn" onClick={onClickReport}>
                                 <span><i className="fas fa-flag fa-fw"></i></span>
                             </a>
+                            <ReactTooltip anchorId="account_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import CollectionCard from './Card/CollectionCard'
 import { APP_COLORS } from "../Common/constants"
 import { useCollections } from "../../hooks/useCollection";
 
-const Filters = [
+const Categories = [
 	{ id: 0, label: "Trending", isChecked: true, key: "trending" },
 	{ id: 1, label: "Top", isChecked: false, key: "top" },
 	{ id: 2, label: "Art", isChecked: false, key: "art" },
@@ -19,24 +19,24 @@ const Filters = [
 const ExplorerCollections = (props) => {
 	const { menu } = props.match.params;
 	const { loading, collections, fetchNext } = useCollections();
-	const [filters, setFilters] = useState(Filters);
+	const [categories, setCategories] = useState(Categories);
 	const [category, setCategory] = useState("trending");
 
 	useEffect(() => {
 		if (menu) {
-			var valid = filters.filter(m => { return m.key === menu });
+			var valid = categories.filter(m => { return m.key === menu });
 			if (!valid.length) {
 				window.location.replace("/explorer-collections");
 				return;
 			}
 
-			let menus = filters.map(m => {
+			let menus = categories.map(m => {
 				if (m.key === menu) {
 					return { ...m, isChecked: true };
 				}
 				return { ...m, isChecked: false };
 			})
-			setFilters(menus);
+			setCategories(menus);
 			fetchNext(1, 25, menu);
 		} else {
 			fetchNext(1, 25, category);
@@ -55,15 +55,15 @@ const ExplorerCollections = (props) => {
 	}
 
 	// Filter change handler
-	const onFilter = id => {
-		let options = filters.map(f => {
+	const onChangeCategory = id => {
+		let options = categories.map(f => {
 			if (f.id === id) {
 				setCategory(f.key);
 				return { ...f, isChecked: true };
 			}
 			return { ...f, isChecked: false };
 		})
-		setFilters(options);
+		setCategories(options);
 
 		// change url
 		if (menu) {
@@ -83,9 +83,9 @@ const ExplorerCollections = (props) => {
 					<div className="cs-isotop_filter cs-style1 cs-center">
 						<ul className="cs-mp0 cs-center">
 							{
-								filters.map(f => (
+								categories.map(f => (
 									<li className={f.isChecked ? 'active' : ''} key={`${f.id}`}>
-										<button onClick={() => { onFilter(f.id); }}><span>{f.label}</span></button>
+										<button onClick={() => { onChangeCategory(f.id); }}><span>{f.label}</span></button>
 									</li>
 								))
 							}

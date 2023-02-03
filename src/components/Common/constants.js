@@ -34,3 +34,14 @@ export const ONXRP_URL = "https://nft.onxrp.com/nft";
 export const ONXRP_BROKER = "rpZqTPC8GvrSvEfFsUuHkmPCg29GdQuXhC";
 export const XRPCAFE_URL = "https://xrp.cafe/nft";
 export const XRPCAFE_BROKER = "rpx9JThQ2y37FaGeeJP7PXDUVEXY3PHZSC";
+
+export const A_Z = 1;
+export const Z_A = 2;
+export const LIKES_HIGH_TO_LOW = 3;
+export const LIKES_LOW_TO_HIGH = 4;
+export const RAFFLES_HIGH_TO_LOW = 5;
+export const RAFFLES_LOW_TO_HIGH = 6;
+export const RAFFLE_PRICE_HIGH_TO_LOW = 7;
+export const RAFFLE_PRICE_LOW_TO_HIGH = 8;
+export const TICKET_PRICE_HIGH_TO_LOW = 9;
+export const TICKET_PRICE_LOW_TO_HIGH = 10;

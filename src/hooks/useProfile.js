@@ -23,37 +23,47 @@ export const useProfile = () => {
 }
 
 export const useRaffleItems = () => {
-    const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState([]);
+    const [meta, setMeta] = useState();
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
-    const fetchRaffleItems = async (id, page) => {
+    const fetchRaffleItems = async (id, filter, page, reset) => {
         setLoading(true);
-        const res = await SecretApi.getRaffleItems(id, page);
-        setItems([...items, ...res.data]);
+        const res = await SecretApi.getRaffleItems(id, filter, page);
+        if (reset) {
+            setItems(res.data);
+        } else {
+            setItems([...items, ...res.data]);
+        }
         if (!res.data?.length) {
             setEnded(true);
         }
+        setMeta(res.meta);
         setLoading(false);
     }
 
-    const fetchNext = (accountId, pageNumber) => {
+    const fetchNext = async (accountId, filter, pageNumber) => {
         if (accountId) {
+            let reset;
             if (!pageNumber) {
                 if (ended) return;
                 page.current = page.current + 1;
+                reset = false;
             } else {
                 page.current = pageNumber;
                 setEnded(false);
+                reset = true;
             }
-            fetchRaffleItems(accountId, page.current);
+            fetchRaffleItems(accountId, filter, page.current, reset);
         }
     }
 
     return {
-        items,
         loading,
+        items,
+        meta,
         fetchNext
     }
 }
@@ -95,37 +105,47 @@ export const useRaffleTicketItems = () => {
 }
 
 export const useCollectedItems = () => {
-    const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState([]);
+    const [meta, setMeta] = useState();
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
-    const fetchCollectedItems = async (id, page) => {
+    const fetchCollectedItems = async (id, filter, page, reset) => {
         setLoading(true);
-        const res = await SecretApi.getCollected(id, page);
-        setItems([...items, ...res.data]);
+        const res = await SecretApi.getCollected(id, filter, page);
+        if (reset) {
+            setItems(res.data);
+        } else {
+            setItems([...items, ...res.data]);
+        }
         if (!res.data?.length) {
             setEnded(true);
         }
+        setMeta(res.meta);
         setLoading(false);
     }
 
-    const fetchNext = async (accountId, pageNumber) => {
+    const fetchNext = async (accountId, filter, pageNumber) => {
         if (accountId) {
+            let reset;
             if (!pageNumber) {
                 if (ended) return;
                 page.current = page.current + 1;
+                reset = false;
             } else {
                 page.current = pageNumber;
                 setEnded(false);
+                reset = true;
             }
-            await fetchCollectedItems(accountId, page.current);
+            await fetchCollectedItems(accountId, filter, page.current, reset);
         }
     }
 
     return {
         items,
         loading,
+        meta,
         fetchNext
     }
 }

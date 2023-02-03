@@ -1,8 +1,85 @@
 import axios from "axios";
 import { active } from "d3";
+import {
+    A_Z, Z_A,
+    LIKES_HIGH_TO_LOW, LIKES_LOW_TO_HIGH,
+    RAFFLES_HIGH_TO_LOW, RAFFLES_LOW_TO_HIGH,
+    TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH,
+} from "../components/Common/constants";
 import { getAuthToken, setAccount, setAuthToken } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
 
+const getFilters = (filter) => {
+    let filters = {
+        "filters[name][$notNull]": true
+    };
+
+    if (filter) {
+        if (filter.search.length > 0) {
+            filters = {
+                ...filters,
+                "filters[name][$containsi]": filter.search.trimStart()
+            }
+        }
+        switch (Number(filter.order)) {
+            case A_Z:
+                filters = {
+                    ...filters,
+                    "sort[0]": "name:asc"
+                }
+                break;
+            case Z_A:
+                filters = {
+                    ...filters,
+                    "sort[0]": "name:desc"
+                }
+                break;
+            case LIKES_HIGH_TO_LOW:
+                filters = {
+                    ...filters,
+                    "sort[0]": "likes.count:desc"
+                }
+                break;
+            case LIKES_LOW_TO_HIGH:
+                filters = {
+                    ...filters,
+                    "sort[0]": "likes.count:asc"
+                }
+                break;
+            case RAFFLES_HIGH_TO_LOW:
+                filters = {
+                    ...filters,
+                    "sort[0]": "raffles.count:desc"
+                }
+                break;
+            case RAFFLES_LOW_TO_HIGH:
+                filters = {
+                    ...filters,
+                    "sort[0]": "raffles.count:asc"
+                }
+                break;
+            case TICKET_PRICE_HIGH_TO_LOW:
+                filters = {
+                    ...filters,
+                    "sort[0]": "ticket_price:desc"
+                }
+                break;
+            case TICKET_PRICE_LOW_TO_HIGH:
+                filters = {
+                    ...filters,
+                    "sort[0]": "ticket_price:asc"
+                }
+                break;
+            default:
+                filters = {
+                    ...filters,
+                    "sort[0]": "id:asc"
+                }
+                break;
+        }
+    }
+    return filters;
+}
 class SecretApi {
     baseUrl = process.env.NODE_ENV == "production" ? "https://secretmarket.xyz:2096" : "http://192.168.1.20:1337";
     timeout = 30000;
@@ -104,37 +181,41 @@ class SecretApi {
         }
     }
 
-    async getRafflesWithFilters(page, category) {
+    async getRafflesWithFilters(category, filter, page) {
         let filters;
         switch (category) {
-            case 0:
+            case "featured":
                 filters = {
                     "filters[featured]": true,
-                    "filters[status]": "active"
+                    "filters[status]": "active",
+                    "sort[10][raffle_end_datetime]": "asc",
                 };
                 break;
-            case 1:
+            case "all":
                 filters = {
                     "filters[status]": "active",
+                    "sort[10][raffle_end_datetime]": "asc",
                 };
                 break;
-            case 2:
+            case "past":
                 filters = {
                     "filters[status][$in]": ["canceling", "canceled", "raffling", "raffled"],
-                    "sort[raffle_end_datetime]": "desc",
+                    "sort[10][raffle_end_datetime]": "desc",
                 };
                 break;
         }
+
+        let filters1 = getFilters(filter);
 
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
-                    "sort[raffle_end_datetime]": "asc",
                     "populate[raffler]": true,
                     "populate[nft]": true,
                     ...filters,
+                    ...filters1,
                 }
             });
             return res.data;
@@ -252,7 +333,8 @@ class SecretApi {
         }
     }
 
-    async getCollected(id, page) {
+    async getCollected(id, filter, page) {
+        let filters = getFilters(filter);
         try {
             const res = await axios.get(`${this.baseUrl}/api/nfts`, {
                 params: {
@@ -260,6 +342,9 @@ class SecretApi {
                     "pagination[pageSize]": this.pageSize,
                     "filters[owner]": id,
                     "populate[owner]": true,
+                    "populate[raffles][count]": true,
+                    "populate[likes][count]": true,
+                    ...filters
                 }
             });
             return res.data;
@@ -302,17 +387,18 @@ class SecretApi {
         }
     }
 
-    async getRaffleItems(id, page) {
+    async getRaffleItems(id, filter, page) {
+        let filters = getFilters(filter);
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "filters[raffler]": id,
-                    // "sort[status]": "asc",
-                    "sort[raffle_end_datetime]": "desc",
+                    "sort[10][raffle_end_datetime]": "desc",
                     "populate[nft]": true,
                     "populate[raffler]": true,
+                    ...filters
                 }
             });
             return res.data;
@@ -344,14 +430,16 @@ class SecretApi {
 
     // NftDetails
 
-    async getNftsWithFilters(page, filters) {
+    async getNftsWithFilters(page, category, filter) {
         // To Do: implement filters
+        let filters = getFilters(filter);
         try {
             const res = await axios.get(`${this.baseUrl}/api/nfts`, {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "populate[owner]": true,
+                    ...filters
                 }
             });
             return res.data;

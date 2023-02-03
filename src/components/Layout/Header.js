@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import Switch from "react-switch";
 import ConnectModal from "../Common/ConnectModal"
 import accountStore from '../../store/account.store';
-import { setAccount, setAuthToken, getSummaryAddress, getThemeMode, setThemeMode, setTheme } from '../Helpers/Utils';
+import SwitchMode from '../Common/SwitchMode';
+import { setAccount, setAuthToken, getSummaryAddress } from '../Helpers/Utils';
 
 const mainNav = () => {
 	$('.cs-nav').append('<span class="cs-menu_toggle"><span></span></span>');
@@ -19,18 +19,6 @@ const mainNav = () => {
 	$('.cs-menu_dropdown_toggle').on('click', function () {
 		$(this).toggleClass('active').siblings('ul').slideToggle();
 		$(this).parent().toggleClass('active');
-	});
-	// Mega Menu
-	$('.cs-mega-wrapper>li>a').removeAttr('href');
-	// Special Nav
-	$('.cs-hamburger').on('click', function () {
-		$(this).toggleClass('active');
-		$('.cs-nav_wrap').toggleClass('active');
-		$('body').toggleClass('hamburger_active');
-	});
-	$('.cs-nav_cross').on('click', function () {
-		$('.cs-nav_wrap').removeClass('active');
-		$('body').toggleClass('hamburger_active');
 	});
 	// Search Toggle
 	$('.cs-search_toggle').on('click', function () {
@@ -58,7 +46,7 @@ const mainNav = () => {
 
 const Header = () => {
 	const { auth_token, account } = accountStore;
-	const [mode, setMode] = useState(getThemeMode());
+
 	useEffect(() => {
 		mainNav();
 	}, [auth_token]);
@@ -82,15 +70,6 @@ const Header = () => {
 		setConnecting(true);
 	}
 
-	useEffect(() => {
-		setTheme(mode);
-	}, [mode]);
-
-	const onChangeMode = () => {
-		setThemeMode(!mode);
-		setMode(!mode);
-	}
-
 	const onClickCopyWallet = () => {
 		navigator.clipboard.writeText(account?.wallet);
 	}
@@ -104,7 +83,7 @@ const Header = () => {
 							<a className="cs-site_branding" href="/"><img src="img/logo.png" alt="Logo" /></a>
 						</div>
 						<div className="cs-main_header_right">
-							<div className="cs-search_wrap">
+							<div className="cs-search_wrap cs-toggle_box cs-profile_box">
 								<form action="#" className="cs-search">
 									<input type="text" className="cs-search_input" placeholder="Search" />
 									<button className="cs-search_btn">
@@ -114,6 +93,14 @@ const Header = () => {
 										</svg>
 									</button>
 								</form>
+								{/* <div className="cs-toggle_body active">
+									<ul>
+										<li><a href="/">Search1</a></li>
+										<li><a href="/">Search2</a></li>
+										<li><a href="/">Search3</a></li>
+										<li><a href="/">Search4</a></li>
+									</ul>
+								</div> */}
 							</div>
 							<div className="cs-nav_wrap">
 								<div className="cs-nav_out">
@@ -130,17 +117,17 @@ const Header = () => {
 												</li>
 												<li><a href="/drop">Drops</a></li>
 												<li className="menu-item-has-children">
-													<a href="contact.html">Stats</a>
+													<a href="/activity">Stats</a>
 													<ul>
 														<li><a href="/activity">Activity</a></li>
-														<li><a href="/leaderboards">Leaderboards</a></li>
+														<li><a href="/leaderboard">Leaderboard</a></li>
 													</ul>
 												</li>
 												<li className="menu-item-has-children">
-													<a href="contact.html">Resources</a>
+													<a href="/faq">Resources</a>
 													<ul>
 														<li><a href="/provably-fair">Provably Fair</a></li>
-														<li><a href="/about">Contact Us</a></li>
+														<li><a href="/contact">Contact Us</a></li>
 														<li><a href="/faq">FAQ</a></li>
 													</ul>
 												</li>
@@ -166,49 +153,7 @@ const Header = () => {
 							</div>
 							<div className="cs-header_btns_wrap">
 								<div className="cs-header_btns">
-									<Switch
-										onChange={onChangeMode}
-										checked={mode}
-										offColor="#393551"
-										onColor="#5f8eff"
-										onHandleColor="#524e67"
-										handleDiameter={30}
-										uncheckedIcon={false}
-										checkedIcon={false}
-										boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-										activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-										height={20}
-										width={48}
-										className="react-switch"
-										uncheckedHandleIcon={
-											<div
-												style={{
-													display: "flex",
-													justifyContent: "center",
-													alignItems: "center",
-													height: "100%",
-													color: "#5f8eff",
-													fontSize: 20
-												}}
-											>
-												<i className="fas fa-sun fa-fw"></i>
-											</div>
-										}
-										checkedHandleIcon={
-											<div
-												style={{
-													display: "flex",
-													justifyContent: "center",
-													alignItems: "center",
-													height: "100%",
-													color: "#fff",
-													fontSize: 18
-												}}
-											>
-												<i className="fas fa-moon fa-fw"></i>
-											</div>
-										}
-									/>
+									<SwitchMode />
 									<div className="cs-header_icon_btn cs-center cs-mobile_search_toggle">
 										<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
@@ -304,13 +249,6 @@ const Header = () => {
 												<li><a href="/my-profile/raffle-tickets">My Tickets</a></li>
 												<li><a href="/my-profile/collected">My NFTs</a></li>
 												<li><a href="/my-profile/profile-info">My Profile</a></li>
-												{/* <li>
-													<div className="form-check form-switch">
-														<input className="form-check-input" type="checkbox" checked={mode} onChange={onChangeMode} />
-														<label className="form-check-label" htmlFor="mode_switch">Light Mode</label>
-													</div>
-												</li> */}
-												{/* <li><a className="cs-btn" onClick={() => onLogout()}>Logout</a></li> */}
 											</ul>
 											<div className="text-center">
 												<a className="cs-btn cs-style1" onClick={() => onLogout()}>

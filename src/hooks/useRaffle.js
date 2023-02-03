@@ -5,12 +5,13 @@ import SecretApi from "../service/SecretApi";
 export const useRaffles = () => {
     const [loading, setLoading] = useState(true);
     const [raffles, setRaffles] = useState([]);
+    const [meta, setMeta] = useState();
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
-    const fetchRaffles = async (page, filters, reset) => {
+    const fetchRaffles = async (category, filter, page, reset) => {
         setLoading(true);
-        const res = await SecretApi.getRafflesWithFilters(page, filters);
+        const res = await SecretApi.getRafflesWithFilters(category, filter, page);
         if (reset) {
             setRaffles(res.data);
         } else {
@@ -19,10 +20,11 @@ export const useRaffles = () => {
         if (!res.data?.length) {
             setEnded(true);
         }
+        setMeta(res.meta);
         setLoading(false);
     }
 
-    const fetchNext = (pageNumber, filters) => {
+    const fetchNext = (category, filter, pageNumber) => {
         let reset;
         if (!pageNumber) {
             if (ended) return;
@@ -33,12 +35,13 @@ export const useRaffles = () => {
             page.current = pageNumber;
             reset = true;
         }
-        fetchRaffles(page.current, filters, reset);
+        fetchRaffles(category, filter, page.current, reset);
     }
 
     return {
-        raffles,
         loading,
+        raffles,
+        meta,
         fetchNext
     }
 }

@@ -4,38 +4,42 @@ import ContentWrapper from "../Layout/ContentWrapper";
 import NftCard from './Card/NftCard';
 import { APP_COLORS } from "../Common/constants"
 import { useNfts } from "../../hooks/useNft";
+import NftFilterBar from "./FilterBar/NftFilterBar";
 
-const Filters = [
-	{ id: 0, label: "All NFTs", isChecked: true },
-	{ id: 1, label: "Trending", isChecked: false },
-	{ id: 2, label: "Auctions", isChecked: false },
+const Categories = [
+	{ id: 0, label: "All NFTs", isChecked: true, key: "all" },
+	{ id: 1, label: "Trending", isChecked: false, key: "trending" },
+	{ id: 2, label: "Auctions", isChecked: false, key: "auction" },
 ];
 
 const ExplorerNfts = () => {
 	const { loading, nfts, meta, fetchNext } = useNfts();
-	const [filters, setFilters] = useState(Filters);
+	const [categories, setCategories] = useState(Categories);
+	const [category, setCategory] = useState("all");
+	const [filter, setFilter] = useState();
 
 	const handleScroll = (e) => {
 		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
 		if (bottom <= 1 && !loading) {
-			fetchNext(0);
+			fetchNext(0, category, filter);
 		}
 	}
 
 	useEffect(() => {
-		fetchNext(1);
-	}, [])
+		fetchNext(1, category, filter);
+	}, [filter])
 
 	// Filter change handler
-	const onFilter = id => {
-		let options = filters.map(f => {
+	const onChangeCategory = id => {
+		let options = categories.map(f => {
 			if (f.id === id) {
+                setCategory(f.key);
 				return { ...f, isChecked: true };
 			}
 
 			return { ...f, isChecked: false };
 		})
-		setFilters(options);
+		setCategories(options);
 	};
 
 	return (
@@ -50,9 +54,9 @@ const ExplorerNfts = () => {
 					<div className="cs-isotop_filter cs-style1 cs-center">
 						<ul className="cs-mp0 cs-center">
 							{
-								filters.map(f => (
+								categories.map(f => (
 									<li className={f.isChecked ? 'active' : ''} key={`${f.id}`}>
-										<button onClick={() => { onFilter(f.id); }}><span>{f.label}</span></button>
+										<button onClick={() => { onChangeCategory(f.id); }}><span>{f.label}</span></button>
 									</li>
 								))
 							}
@@ -171,33 +175,7 @@ const ExplorerNfts = () => {
 						</div>
 					</div>
 					<div className="cs-sidebar_frame_right">
-						<div className="cs-filter_head">
-							<div className="cs-filter_head_left">
-								<span className="cs-search_result cs-medium cs-ternary_color">{meta?.pagination?.total} Results</span>
-								<div className="cs-form_field_wrap">
-									<input type="text" className="cs-form_field cs-field_sm" placeholder="In Auction" />
-								</div>
-								<a href="#" className="cs-clear_btn">Clear All</a>
-							</div>
-							<div className="cs-filter_head_right">
-								<div className="cs-form_field_wrap cs-select_arrow">
-									<select className="cs-form_field cs-field_sm">
-										<option value="11">Sort By</option>
-										<option value="22">Last 7 days</option>
-										<option value="33">Last 30 days</option>
-										<option value="44">All time</option>
-									</select>
-								</div>
-								<div className="cs-form_field_wrap cs-select_arrow">
-									<select className="cs-form_field cs-field_sm">
-										<option value="1">Likes</option>
-										<option value="2">Most popular</option>
-										<option value="3">By price</option>
-										<option value="4">By published</option>
-									</select>
-								</div>
-							</div>
-						</div>
+						<NftFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
 						<div className="cs-height_30 cs-height_lg_30"></div>
 						<div className="row cs-cards_area" onScroll={handleScroll}>
 							{nfts.map(n => (

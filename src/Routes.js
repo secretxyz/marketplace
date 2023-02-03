@@ -8,7 +8,6 @@ import PageLoader from './components/Common/PageLoader';
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
-
 /* Used to render a lazy component with react-router */
 const waitFor = Tag => props => <Tag {...props} />;
 
@@ -22,68 +21,70 @@ const RaffleDetails = lazy(() => import('./components/Views/RaffleDetails'));
 const Drop = lazy(() => import('./components/Views/Drop'));
 const Ranking = lazy(() => import('./components/Views/Ranking'));
 const Activity = lazy(() => import('./components/Views/Activity'));
+const Leaderboard = lazy(() => import('./components/Views/Leaderboard'));
 const Create = lazy(() => import('./components/Views/Create'));
 const Profile = lazy(() => import('./components/Views/Profile'));
 
-const About = lazy(() => import('./components/Views/Resource/About'));
+const Contact = lazy(() => import('./components/Views/Resource/Contact'));
 const Faq = lazy(() => import('./components/Views/Resource/Faq'));
 const ProvablyFair = lazy(() => import('./components/Views/Resource/ProvablyFair'));
 const PrivacyPolicy = lazy(() => import('./components/Views/Resource/PrivacyPolicy'));
 const TermsCondition = lazy(() => import('./components/Views/Resource/TermsCondition'));
 
 const Routes = ({ location }) => {
-    const currentKey = location.pathname.split('/')[1] || '/';
-    const timeout = { enter: 500, exit: 500 };
+	const currentKey = location.pathname.split('/')[1] || '/';
+	const timeout = { enter: 500, exit: 500 };
 
-    // Animations supported
-    //      'rag-fadeIn'
-    //      'rag-fadeInRight'
-    //      'rag-fadeInLeft'
+	// Animations supported
+	//      'rag-fadeIn'
+	//      'rag-fadeInRight'
+	//      'rag-fadeInLeft'
 
-    const animationName = 'rag-fadeIn'
+	const animationName = 'rag-fadeIn'
 
-    return (
-        // Layout component wrapper
-        // Use <BaseHorizontal> to change layout
-        <Base>
-            <TransitionGroup>
-                <CSSTransition key={currentKey} timeout={timeout} classNames={animationName} exit={false}>
-                    <div>
-                        <Suspense fallback={<PageLoader />}>
-                            <Switch location={location}>
-                                <Route path="/collection/:slug" component={waitFor(Collection)} />
-                                <Route path="/explorer-collections/:menu" component={waitFor(ExplorerCollections)} />
-                                <Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
-                                <Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
-                                <Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />
-                                <Route path="/nft/:tokenid/:raffleid" component={waitFor(NftDetails)} />
-                                <Route path="/nft/:tokenid" component={waitFor(NftDetails)} />
-                                <Route path="/raffle" component={waitFor(RaffleDetails)} />
-                                <Route path="/drop" component={waitFor(Drop)} />
-                                <Route path="/ranking" component={waitFor(Ranking)} />
-                                <Route path="/activity" component={waitFor(Activity)} />
+	return (
+		// Layout component wrapper
+		// Use <BaseHorizontal> to change layout
+		<Base>
+			<TransitionGroup>
+				<CSSTransition key={currentKey} timeout={timeout} classNames={animationName} exit={false}>
+					<div>
+						<Suspense fallback={<PageLoader />}>
+							<Switch location={location}>
+								<Route path="/collection/:slug" component={waitFor(Collection)} />
+								<Route path="/explorer-collections/:menu" component={waitFor(ExplorerCollections)} />
+								<Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
+								<Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
+								<Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />
+								<Route path="/nft/:tokenid/:raffleid" component={waitFor(NftDetails)} />
+								<Route path="/nft/:tokenid" component={waitFor(NftDetails)} />
+								<Route path="/raffle" component={waitFor(RaffleDetails)} />
+								<Route path="/drop" component={waitFor(Drop)} />
+								<Route path="/ranking" component={waitFor(Ranking)} />
+								<Route path="/activity" component={waitFor(Activity)} />
+								<Route path="/leaderboard" component={waitFor(Leaderboard)} />
 
-                                <Route path="/my-profile/:menu" component={waitFor(Profile)} />
-                                <Route path="/my-profile" component={waitFor(Profile)} />
-                                <Route path="/profile/:wallet" component={waitFor(Profile)} />
-                                <Route path="/create" component={waitFor(Create)} />
+								<Route path="/my-profile/:menu" component={waitFor(Profile)} />
+								<Route path="/my-profile" component={waitFor(Profile)} />
+								<Route path="/profile/:wallet" component={waitFor(Profile)} />
+								<Route path="/create" component={waitFor(Create)} />
 
-                                <Route path="/about" component={waitFor(About)} />
-                                <Route path="/faq" component={waitFor(Faq)} />
-                                <Route path="/provably-fair" component={waitFor(ProvablyFair)} />
-                                <Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
-                                <Route path="/terms-condition" component={waitFor(TermsCondition)} />
+								<Route path="/contact" component={waitFor(Contact)} />
+								<Route path="/faq" component={waitFor(Faq)} />
+								<Route path="/provably-fair" component={waitFor(ProvablyFair)} />
+								<Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
+								<Route path="/terms-condition" component={waitFor(TermsCondition)} />
 
-                                <Route path="/" component={waitFor(Home)} />
+								<Route path="/" component={waitFor(Home)} />
 
-                                <Redirect to="/" />
-                            </Switch>
-                        </Suspense>
-                    </div>
-                </CSSTransition>
-            </TransitionGroup>
-        </Base>
-    )
+								<Redirect to="/" />
+							</Switch>
+						</Suspense>
+					</div>
+				</CSSTransition>
+			</TransitionGroup>
+		</Base>
+	)
 }
 
 export default withRouter(Routes);
