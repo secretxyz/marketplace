@@ -572,11 +572,11 @@ const NftDetails = (props) => {
     const assetView = (nft) => {
         if (nft?.animation_url) {
             if (isVideoAsset(nft.animation_url) || nft.animation_url.startsWith("https://storage.googleapis.com")) {
-                return <video src={nft.animation_url} autoplay loop muted controls />
+                return <video src={nft.animation_url} autoPlay loop muted controls />
             }
         }
         if (isVideoAsset(nft?.picture_url)) {
-            return <video src={nft?.picture_url} autoplay loop muted controls />
+            return <video src={nft?.picture_url} autoPlay loop muted controls />
         }
         return <img src={nft?.picture_url} alt="" />
     }
@@ -658,7 +658,7 @@ const NftDetails = (props) => {
                                             <h3 className="cs-nft_details_collection_name">{collection?.name}</h3>
                                         </a>
                                         <p>created by <a href={`/profile/${collection?.issuer}`}>
-                                            <span>{collection?.creator ? `@${collection?.creator?.username?.trimStart()}` : getSummaryAddress(collection?.issuer)}</span>
+                                            <span>{collection?.creator?.username ? `@${collection?.creator?.username.trimStart()}` : getSummaryAddress(collection?.issuer)}</span>
                                         </a></p>
                                     </div>
                                 </div>
