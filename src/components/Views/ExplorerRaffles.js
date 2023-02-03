@@ -68,11 +68,11 @@ const ExplorerRaffles = () => {
                     </div>
                 </div>
             </section>
-            <div className="container cs-cards_area" onScroll={handleScroll}>
+            <div className="container" onScroll={handleScroll}>
                 <div className="cs-height_15 cs-height_lg_10"></div>
                 <RaffleFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
                 <div className="cs-height_15 cs-height_lg_10"></div>
-                <div className="cs-grid_5 cs-gap_30" >
+                <div className="cs-grid_5 cs-gap_30 cs-cards_area" >
                     {raffles.map(n => (
                         <RaffleCard data={{ id: n.id, ...n.attributes }} key={n.id} hiddenStatus={true} />
                     ))}
