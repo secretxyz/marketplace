@@ -1,3 +1,4 @@
+import path from "path";
 import { ONXRP_URL, ONXRP_BROKER } from "../Common/constants"
 import { XRPCAFE_URL, XRPCAFE_BROKER } from "../Common/constants"
 
@@ -152,13 +153,13 @@ export const getCurrentTime = () => {
 };
 
 export const getImageLink = (url) => {
-	if (!url) {
-		return "img/cover-photo.jpeg";
+	if (url?.endsWith("undefined")){
+		return null;
 	}
-	if (url.startsWith("ipfs://ipfs/")) {
+	if (url?.startsWith("ipfs://ipfs/")) {
 		return `https://ipfs.bithomp.com/image/${url.substring(12)}`;
 	}
-	if (url.startsWith("ipfs://")) {
+	if (url?.startsWith("ipfs://")) {
 		return `https://ipfs.bithomp.com/image/${url.substring(7)}`;
 	}
 	return url;
@@ -321,5 +322,16 @@ export const setTheme = (mode) => {
 		document.body.classList.remove("cs-dark");
 	} else {
 		document.body.classList.add("cs-dark");
+	}
+}
+
+export const isVideoAsset = (url) => {
+	let extension = path.extname(url);
+	switch (extension) {
+		case ".mp4":
+		case ".avi":
+			return true;
+		default:
+			return false;
 	}
 }

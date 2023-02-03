@@ -395,6 +395,13 @@
       background-size: cover !important;
       display: block;
     }
+
+    video {
+      width: 100%;
+      border-radius: inherit;
+      background-size: cover !important;
+      display: block;
+    }
   }
 
   .cs-avatar {

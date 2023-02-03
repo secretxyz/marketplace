@@ -8,7 +8,7 @@ import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
 import { useNft, useNftOther } from "../../hooks/useNft";
-import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink } from "../Helpers/Utils";
+import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset } from "../Helpers/Utils";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
 import BuyTicketModal from "./Single/BuyTicketModal";
 import PageLoader from "../Common/PageLoader";
@@ -569,6 +569,18 @@ const NftDetails = (props) => {
         navigator.clipboard.writeText(raffle?.payment_tx_hash);
     }
 
+    const assetView = (nft) => {
+        if (nft?.animation_url) {
+            if (isVideoAsset(nft.animation_url) || nft.animation_url.startsWith("https://storage.googleapis.com")) {
+                return <video src={nft.animation_url} autoplay loop muted controls />
+            }
+        }
+        if (isVideoAsset(nft?.picture_url)) {
+            return <video src={nft?.picture_url} autoplay loop muted controls />
+        }
+        return <img src={nft?.picture_url} alt="" />
+    }
+
     return (
         loading || submitting ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_140 cs-height_lg_120"></div>
@@ -577,7 +589,7 @@ const NftDetails = (props) => {
                     <div className="col-lg-5">
                         <div className="cs-single_asset">
                             <div className="cs-asset_view">
-                                <img src={nft?.picture_url} alt="" />
+                                {assetView(nft)}
                                 {/* <span className="cs-card_rare cs-primary_color">
                                     #{nft?.rarity}
                                 </span> */}

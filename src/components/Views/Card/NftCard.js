@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from "../Profile/Avatar";
-import { getAccount } from '../../Helpers/Utils';
+import { getAccount, isVideoAsset } from '../../Helpers/Utils';
 import { getSummaryAddress } from '../../Helpers/Utils';
 
 const NftCard = ({ data }) => {
@@ -41,7 +41,8 @@ const NftCard = ({ data }) => {
                 {data.likes}
             </span>}
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
-                <img style={{ background: `url(${data.picture_url})` }} alt="Image" className="cs-zoom_item" />
+                {isVideoAsset(data.picture_url) ? <video src={data.picture_url} type="video/mp4" /> :
+                    <img style={{ background: `url(${data.picture_url})` }} alt="Image" className="cs-zoom_item" />}
             </a>
             <div className="cs-card_info">
                 <a href={nft_link} className="cs-avatar cs-white_bg cs-box_shadow">
