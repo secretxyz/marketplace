@@ -4,6 +4,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { observer } from 'mobx-react';
 import { useRaffle } from '../../../hooks/useRaffle';
 import { getDateTimeWithFormat } from '../../Helpers/Utils';
+import xummStore from '../../../store/xumm.store';
 
 const SellOptions = [
 	{ id: 1, label: "25%", isChecked: false },
@@ -30,6 +31,8 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	});
 	const [featured, setFeatured] = useState(false);
 	const [agreed, setAgreed] = useState(false);
+	const { subscription } = xummStore;
+	const [qrshow, setQrshow] = useState(false);
 
 	useEffect(() => {
 		if (result) {
@@ -116,16 +119,20 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		setAgreed(!agreed);
 	}
 
+	useEffect(() => {
+		setQrshow(false);
+	}, [subscription])
+
 	return (
 		<div className="cs-modal_wrap" id="create_raffle_modal">
 			<div className="cs-modal_overlay"></div>
 			<div className="cs-modal_container">
 				<div className="cs-modal_container_in">
-					<div className="cs-modal_close cs-center" onClick={close}>
+					{step == Steps.Creating && <div className="cs-modal_close cs-center" onClick={close}>
 						<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M11.9649 2.54988C12.3554 2.15936 12.3554 1.52619 11.9649 1.13567C11.5744 0.745142 10.9412 0.745142 10.5507 1.13567L11.9649 2.54988ZM0.550706 11.1357C0.160181 11.5262 0.160181 12.1594 0.550706 12.5499C0.94123 12.9404 1.5744 12.9404 1.96492 12.5499L0.550706 11.1357ZM1.96492 1.13567C1.5744 0.745142 0.94123 0.745142 0.550706 1.13567C0.160181 1.52619 0.160181 2.15936 0.550706 2.54988L1.96492 1.13567ZM10.5507 12.5499C10.9412 12.9404 11.5744 12.9404 11.9649 12.5499C12.3554 12.1594 12.3554 11.5262 11.9649 11.1357L10.5507 12.5499ZM10.5507 1.13567L0.550706 11.1357L1.96492 12.5499L11.9649 2.54988L10.5507 1.13567ZM0.550706 2.54988L10.5507 12.5499L11.9649 11.1357L1.96492 1.13567L0.550706 2.54988Z" fill="currentColor" />
 						</svg>
-					</div>
+					</div>}
 					<div className="cs-modal">
 						{step == Steps.Creating ? <div>
 							<div className="cs-modal_header">
@@ -138,7 +145,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									anchorId="feature_option"
 									place="bottom"
 									className="cs-modal_tooltip"
-									content={<div>Selecting this option will host your raffle under the featured section. 
+									content={<div>Selecting this option will host your raffle under the featured section.
 										This option cost is 20 XRP and is non refundable regardless of outcome.</div>}
 								/>
 							</div>
@@ -208,12 +215,27 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 						</div> : step == Steps.Waiting ? <div>
 							<h2 className="cs-modal_title">Connecting to XUMM wallet...</h2>
 							<div className="cs-height_10 cs-height_lg_10"></div>
-							Please wait a few moments until you receive the sign request in your XUMM.
+							<div>
+								{subscription?.message || "Please wait a few moments until you receive the sign request in your XUMM."}
+							</div>
+							{subscription && !qrshow && <a className="cs-modal_sub_link" onClick={() => { setQrshow(true); }}>
+								Didn't receive a notification? Click here!
+							</a>}
+							{subscription && qrshow && <div className="cs-modal_sign_area">
+								<img className="cs-qr_img" src={subscription.data.xumm_qr_code} />
+								<a href={subscription.data.xumm_app_url} target="_blank">XUMM</a>
+							</div>}
 							<div className="cs-height_5 cs-height_lg_5"></div>
 						</div> : <div>
 							<h2 className="cs-modal_title">Result</h2>
 							<div className="cs-height_10 cs-height_lg_10"></div>
-							<div>{result.message}</div>
+							<div>{result?.message}</div>
+							<div className="cs-height_30 cs-height_lg_15"></div>
+							<div className="cs-modal_footer">
+								<button className="cs-btn cs-style1 cs-btn_sm cs-modal_ok text-center" onClick={close}>
+									<span>OK</span>
+								</button>
+							</div>
 							<div className="cs-height_5 cs-height_lg_5"></div>
 						</div>}
 					</div>

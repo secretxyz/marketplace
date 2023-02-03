@@ -596,10 +596,10 @@ const NftDetails = (props) => {
                                 {raffle?.featured && <span className="cs-card_featured cs-primary_color">
                                     Featured
                                 </span>}
-                                <span className="cs-card_like cs-primary_color cs-box_shadow">
+                                {/* <span className="cs-card_like cs-primary_color cs-box_shadow">
                                     <i className="fas fa-heart fa-fw"></i>
                                     {nft?.likes}
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                         <div className="cs-height_25 cs-height_lg_25"></div>

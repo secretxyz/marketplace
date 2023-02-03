@@ -37,10 +37,10 @@ const NftCard = ({ data }) => {
             {/* {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
                 #{data.rarity_rank}
             </span>} */}
-            {<span className="cs-card_like cs-primary_color">
+            {/* {<span className="cs-card_like cs-primary_color">
                 <i className="fas fa-heart fa-fw"></i>
                 {likes}
-            </span>}
+            </span>} */}
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
                 {isVideoAsset(data.picture_url) ? <video src={data.picture_url} type="video/mp4" /> :
                     <img style={{ background: `url(${data.picture_url})` }} alt="Image" className="cs-zoom_item" />}

@@ -22,10 +22,10 @@ const RaffleCard = ({ data, hiddenStatus }) => {
             {data.featured && <span className="cs-card_featured cs-primary_color">
                 Featured
             </span>}
-            {nft?.likes && <span className="cs-card_like cs-primary_color">
+            {/* {nft?.likes && <span className="cs-card_like cs-primary_color">
                 <i className="fas fa-heart fa-fw"></i>
                 {nft.likes}
-            </span>}
+            </span>} */}
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
                 <img style={{ background: `url(${data.nft?.data?.attributes?.picture_url})` }} alt="Image" className="cs-zoom_item" />
             </a>

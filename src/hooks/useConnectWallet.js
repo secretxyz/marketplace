@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getAuthChannel, setAuthToken, setAccount } from "../components/Helpers/Utils";
-import xummStore from "../store/xumm.store";
 import accountStore from "../store/account.store";
 import SecretApi from "../service/SecretApi";
 
 const useConnectWallet = () => {
+    const [result, setResult] = useState();
     let controller = new AbortController();
 
     const startRequest = async () => {
@@ -22,7 +22,7 @@ const useConnectWallet = () => {
                 setAccount(account);
                 accountStore.setAuthToken(auth_token);
                 accountStore.setAccount(account);
-                xummStore.setResult(res.data);
+                setResult(res.data);
             }
         } catch (error) {
             controller = new AbortController();
@@ -34,6 +34,7 @@ const useConnectWallet = () => {
     }
 
     return ({
+        result,
         startRequest,
         cancelRequest
     })

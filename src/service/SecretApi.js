@@ -6,7 +6,7 @@ import {
     RAFFLES_HIGH_TO_LOW, RAFFLES_LOW_TO_HIGH,
     TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH,
 } from "../components/Common/constants";
-import { getAuthToken, setAccount, setAuthToken } from "../components/Helpers/Utils";
+import { getAuthChannel, getAuthToken, setAccount, setAuthToken } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
 
 const getFilters = (filter) => {
@@ -505,7 +505,7 @@ class SecretApi {
     async createRaffle(data) {
         // console.log(data);
         try {
-            const res = await axios.post(`${this.baseUrl}/api/raffle`, data, { headers: this.headers() })
+            const res = await axios.post(`${this.baseUrl}/api/raffle/${getAuthChannel()}`, data, { headers: this.headers() })
             return res.data;
         } catch (error) {
             console.log(error);
@@ -516,7 +516,7 @@ class SecretApi {
     async createRaffleTicket(data) {
         // console.log(data);
         try {
-            const res = await axios.post(`${this.baseUrl}/api/raffle-ticket`,
+            const res = await axios.post(`${this.baseUrl}/api/raffle-ticket/${getAuthChannel()}`,
                 data,
                 { headers: this.headers() }
             )
@@ -656,6 +656,16 @@ class SecretApi {
                 }
             });
             return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async sendMessage(data) {
+        try {
+            const res = await axios.post(`${this.baseUrl}/api/messages`, { data });
+            return res;
         } catch (error) {
             console.log(error);
             return null;

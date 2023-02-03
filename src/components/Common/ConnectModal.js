@@ -6,20 +6,20 @@ import xummStore from '../../store/xumm.store';
 import accountStore from '../../store/account.store';
 
 const ConnectModal = ({ closeModal }) => {
-  const { startRequest, cancelRequest } = useConnectWallet();
+  const { auth_token } = accountStore;
+  const { subscription } = xummStore;
+  const { result, startRequest, cancelRequest } = useConnectWallet();
 
   useEffect(() => {
     startRequest();
   }, [])
 
-  const { auth_token } = accountStore;
   useEffect(() => {
     if (auth_token) {
       close();
     }
   }, [auth_token]);
 
-  const { subscription, result } = xummStore;
   useEffect(() => {
     if (result?.status) {
       console.log("Received result...", toJS(result));
@@ -32,7 +32,6 @@ const ConnectModal = ({ closeModal }) => {
 
     $("#connect_modal").removeClass("active");
     xummStore.setSubscription(null);
-    xummStore.setResult(null);
 
     closeModal();
   }
@@ -50,8 +49,8 @@ const ConnectModal = ({ closeModal }) => {
           <div className="cs-modal">
             <h2 className="cs-modal_title">Connect to wallet</h2>
             <div className="cs-modal_sign_area">
-              <img className="cs-qr_img" src={subscription ? subscription.xumm_qr_code : "img/xumm-qr.png"} />
-              {subscription ? <a href={subscription.xumm_app_url} target="_blank">XUMM</a> : <div className="cs-modal_text">Please wait till generate QR code...</div>}
+              <img className="cs-qr_img" src={subscription ? subscription.data.xumm_qr_code : "img/xumm-qr.png"} />
+              {subscription ? <a href={subscription.data.xumm_app_url} target="_blank">XUMM</a> : <div className="cs-modal_text">Please wait till generate QR code...</div>}
             </div>
           </div>
         </div>
