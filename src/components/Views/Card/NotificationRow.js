@@ -13,21 +13,21 @@ const NotificationRow = ({ data }) => {
         switch (data.activity) {
             case "raffle-winner":
                 return <>
-                    {`You choose as winner`}
+                    {`You were chosen as the winner`}
                 </>
             case "raffle-cancel":
                 return <>
-                    {`Raffle is cancelled`}
+                    {`The raffle has been cancelled`}
                 </>
                 break;
             case "raffle-end":
                 return <>
-                    {`Raffle is ended`}
+                    {`The raffle has ended`}
                 </>
                 break;
             case "raffle-ticket":
                 return <>
-                    {`${getSummaryUsername(from)} bought ${raffle_ticket.ticket_count} tickets`}
+                    {`${getSummaryUsername(from)} reserved ${raffle_ticket.ticket_count} tickets`}
                 </>
                 break;
         }
