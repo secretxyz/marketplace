@@ -201,7 +201,7 @@
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     width: 340px;
-    padding: 25px 20px 40px;
+    padding: 20px;
     border: 0px solid;
     border-image-slice: 1;
     border-top-width: 2px;
@@ -240,7 +240,7 @@
     display: flex;
     align-items: center;
     font-weight: 400;
-    padding: 12px 15px;
+    padding: 12px 8px;
     border-radius: 10px;
 
     &:hover {
@@ -251,12 +251,20 @@
       margin: 0;
       font-size: 16px;
       line-height: 1.5em;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     h4 {
       margin: 0;
       font-size: 16px;
       line-height: 1.5em;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 

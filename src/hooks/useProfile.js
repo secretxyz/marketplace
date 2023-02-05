@@ -273,3 +273,47 @@ export const useProfileOther = () => {
         report,
     }
 }
+
+
+export const useNotifications = () => {
+    const [items, setItems] = useState([]);
+    const [meta, setMeta] = useState();
+    const [loading, setLoading] = useState(true);
+    const [ended, setEnded] = useState(false);
+    const page = useRef(0);
+
+    const fetchNotifications = async (page) => {
+        setLoading(true);
+        const res = await SecretApi.getNotifications(page);
+        setItems([...items, ...res.data]);
+        if (!res.data?.length) {
+            setEnded(true);
+        }
+        setMeta(res.meta);
+        setLoading(false);
+    }
+
+    const confirm = async (id) => {
+        await SecretApi.confirmNotification(id);
+
+    }
+
+    const fetchNext = (pageNumber) => {
+        if (!pageNumber) {
+            if (ended) return;
+            page.current = page.current + 1;
+        } else {
+            page.current = pageNumber;
+            setEnded(false);
+        }
+        fetchNotifications(page.current);
+    }
+
+    return {
+        loading,
+        items,
+        meta,
+        fetchNext,
+        confirm
+    }
+}

@@ -662,6 +662,44 @@ class SecretApi {
         }
     }
 
+    // Notifications
+
+    async getNotifications(page) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/notifications`, {
+                headers: this.headers(),
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": 10,
+                    "filters[confirmed]": false,
+                    "populate[raffle]": true,
+                    "populate[raffle_ticket]": true,
+                    "populate[from]": true,
+                    "populate[nft][fields][0]": "name",
+                    "populate[nft][fields][1]": "nft_tokenid",
+                    "populate[nft][fields][2]": "picture_url",
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async confirmNotification(id) {
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/notification/${id}`, null, {
+                headers: this.headers(),
+            });
+            console.log(res);
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async sendMessage(data) {
         try {
             const res = await axios.post(`${this.baseUrl}/api/messages`, { data });
