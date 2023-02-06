@@ -670,7 +670,7 @@ const NftDetails = (props) => {
                             </div>
                         </div>
                         {getBuySellView()}
-                        {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} />}
+                        {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} status={raffle?.status} />}
                         {nft && !raffle && <NftInfoTabs tokenid={tokenid} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>

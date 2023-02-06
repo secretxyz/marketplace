@@ -29,7 +29,7 @@ const RaffleBuyerRow = ({ data }) => {
     );
 }
 
-const RaffleTxRow = ({ data }) => {
+const RaffleTxRow = ({ data, status }) => {
     const ticket = data?.attributes;
     const buyer = data?.attributes?.buyer?.data?.attributes;
     return (
@@ -43,20 +43,25 @@ const RaffleTxRow = ({ data }) => {
                 </a>
                 <div className="cs-activity_right">
                     <p className="cs-activity_text cs-activity_row_text">
-                        Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></p>
+                        {
+                            status == "canceling" || status == "canceled" ?
+                                <>Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></> :
+                                <>Refunded <span>{ticket.ticket_count} Tickets</span> to <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></>
+                        }
+                    </p>
                     <p className="cs-activity_text">
-                        {getDateTimeWithFormat(ticket.createdAt)}
+                        {getDateTimeWithFormat(status == "canceling" || status == "canceled" ? ticket.updatedAt : ticket.createdAt)}
                     </p>
                 </div>
-                <a href={`${BITHOMP_URL}${ticket.create_tx_hash}`} className="cs-activity_icon cs-center cs-gray_bg cs-accent_color" target="_blank">
+                <a href={`${BITHOMP_URL}${status == "canceling" || status == "canceled" ? ticket.cancel_tx_hash : ticket.create_tx_hash}`} className="cs-activity_icon cs-center cs-gray_bg cs-accent_color" target="_blank">
                     <i className="fas fa-arrow-right"></i>
                 </a>
-            </div>
-        </li>
+            </div >
+        </li >
     );
 }
 
-const RaffleInfoTabs = ({ raffleId, reservedCount }) => {
+const RaffleInfoTabs = ({ raffleId, reservedCount, status }) => {
     const { buyers, fetchRaffleBuyers } = useRaffleBuyers();
     const { loading, transactions, fetchNext } = useRaffleTransactions();
     const [txs, setTxs] = useState([]);
@@ -106,7 +111,7 @@ const RaffleInfoTabs = ({ raffleId, reservedCount }) => {
                         <div id="transactions" className="cs-tab">
                             <ul className="cs-activity_list cs-mp0">
                                 {txs.map(tx => (
-                                    <RaffleTxRow data={tx} key={tx.id} />
+                                    <RaffleTxRow data={tx} status={status} key={tx.id} />
                                 ))}
                             </ul>
                         </div>
