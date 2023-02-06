@@ -2293,6 +2293,12 @@ ul::-webkit-scrollbar-thumb {
 .cs-name {
   text-align: center;
   margin-top: 5px;
+
+  button {
+    margin-left: 8px;
+    border: 0px;
+    background: transparent;
+  }
 }
 
 .cs-profile_meta {
@@ -2742,7 +2748,7 @@ ul::-webkit-scrollbar-thumb {
     padding: 4px 10px;
     font-size: 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: $white;
     border-radius: 10px;
     line-height: 1.5em;
@@ -3402,4 +3408,17 @@ ul::-webkit-scrollbar-thumb {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.Toastify__toast-theme--dark {
+  background: #28282e !important;
+}
+
+.Toastify__progress-bar-theme--dark,
+.Toastify__progress-bar-theme--light {
+  background: $accent !important;
+}
+
+.Toastify__toast-body {
+  font-size: 14px;
 }

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { observer } from 'mobx-react';
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ContentWrapper from "../Layout/ContentWrapper";
 import CountLoader from "../Common/CountLoader";
 import Avatar from "./Profile/Avatar";
@@ -8,7 +12,7 @@ import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
 import { useNft, useNftOther } from "../../hooks/useNft";
-import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset } from "../Helpers/Utils";
+import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, getThemeMode } from "../Helpers/Utils";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
 import BuyTicketModal from "./Single/BuyTicketModal";
 import PageLoader from "../Common/PageLoader";
@@ -39,6 +43,8 @@ const NftDetails = (props) => {
     const [ticketing, setTicketing] = useState(false);
     const [drawing, setDrawing] = useState(false);
     const [prizing, setPrizing] = useState(false);
+
+    const notify = (msg) => toast(msg);
 
     const initPage = () => {
         CountLoader('.cs-countdown_style2');
@@ -139,6 +145,10 @@ const NftDetails = (props) => {
                 </p>
             </div>
         }
+    }
+
+    const isOwner = () => {
+        return nft?.owner?.id == getAccount()?.id || isRaffleOwner();
     }
 
     const isRaffleOwner = () => {
@@ -552,7 +562,12 @@ const NftDetails = (props) => {
     }
 
     const onClickShare = () => {
-        console.log("sharing...");
+        if (raffle) {
+            navigator.clipboard.writeText(`https://secretmarket.xyz/nft/${nft?.nft_tokenid}/${raffle?.id}`);
+        } else {
+            navigator.clipboard.writeText(`https://secretmarket.xyz/nft/${nft?.nft_tokenid}`);
+        }
+        notify("The NFT link has been copied.");
     }
 
     const onClickReport = () => {
@@ -631,15 +646,18 @@ const NftDetails = (props) => {
                         <div className="cs-single_product_head">
                             <h2>{nft?.name}</h2>
                             <div className="cs-single_info_head cs-box_shadow">
-                                <a className="cs-style1 cs-btn" onClick={onClickRefresh}>
+                                <a id="nft_refresh" className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                     <span><i className="fas fa-redo fa-fw"></i></span>
                                 </a>
-                                <a className="cs-style1 cs-btn" onClick={onClickShare}>
+                                <ReactTooltip anchorId="nft_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh NFT details" />
+                                <a id="nft_share" className="cs-style1 cs-btn" onClick={onClickShare}>
                                     <span><i className="fas fa-share-alt fa-fw"></i></span>
                                 </a>
-                                <a className="cs-style1 cs-btn" onClick={onClickReport}>
+                                <ReactTooltip anchorId="nft_share" className="cs-modal_tooltip" place="bottom" content="Copy NFT link" />
+                                {!isOwner() && <a className="cs-style1 cs-btn" id="nft_report" onClick={onClickReport}>
                                     <span><i className="fas fa-flag fa-fw"></i></span>
-                                </a>
+                                </a>}
+                                <ReactTooltip anchorId="nft_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
                             </div>
                         </div>
                         {getRafflePriceView()}
@@ -695,6 +713,17 @@ const NftDetails = (props) => {
                 refreshDetails={() => { fetchNftDetails(tokenid) }}
                 closeModal={() => { setPrizing(false) }} />}
 
+            <ToastContainer position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover={false}
+                theme={getThemeMode() ? "light" : "dark"}
+            />
         </ContentWrapper >
     );
 }

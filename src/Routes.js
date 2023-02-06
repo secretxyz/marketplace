@@ -17,7 +17,6 @@ const ExplorerCollections = lazy(() => import('./components/Views/ExplorerCollec
 const ExplorerNfts = lazy(() => import('./components/Views/ExplorerNfts'));
 const ExplorerRaffles = lazy(() => import('./components/Views/ExplorerRaffles'));
 const NftDetails = lazy(() => import('./components/Views/NftDetails'));
-const RaffleDetails = lazy(() => import('./components/Views/RaffleDetails'));
 const Drop = lazy(() => import('./components/Views/Drop'));
 const Ranking = lazy(() => import('./components/Views/Ranking'));
 const Activity = lazy(() => import('./components/Views/Activity'));
@@ -59,7 +58,6 @@ const Routes = ({ location }) => {
 								<Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />
 								<Route path="/nft/:tokenid/:raffleid" component={waitFor(NftDetails)} />
 								<Route path="/nft/:tokenid" component={waitFor(NftDetails)} />
-								<Route path="/raffle" component={waitFor(RaffleDetails)} />
 								<Route path="/drop" component={waitFor(Drop)} />
 								<Route path="/ranking" component={waitFor(Ranking)} />
 								<Route path="/activity" component={waitFor(Activity)} />

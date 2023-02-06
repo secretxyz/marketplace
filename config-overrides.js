@@ -42,6 +42,12 @@ module.exports = {
             }
         });
 
+        webpackConfig.module.rules.push({
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: "javascript/auto"
+        });
+
         // Set globals for external plugins
         webpackConfig.plugins = (webpackConfig.plugins || []).concat([
             new webpack.ProvidePlugin({
