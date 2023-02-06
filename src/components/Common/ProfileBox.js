@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import accountStore from '../../store/account.store';
 import { setAccount, setAuthToken, getSummaryAddress } from '../Helpers/Utils';
 
 const ProfileBox = ({ account }) => {
