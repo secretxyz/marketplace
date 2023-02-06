@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import BeatLoader from "react-spinners/BeatLoader";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useCollection } from '../../hooks/useCollection';
 import { useCollectionNfts } from '../../hooks/useNft';
 import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
 import NftCard from './Card/NftCard';
 import { APP_COLORS } from "../Common/constants"
-import { getImageLink, getNumberFormat1, getSummaryAddress } from '../Helpers/Utils';
+import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode } from '../Helpers/Utils';
 
 const ATTRIBUTES = [
     {
@@ -48,6 +52,10 @@ const Collection = (props) => {
         }
     }, [collection])
 
+    const isCreator = () => {
+        return collection?.issuer == getAccount()?.wallet;
+    }
+
     return (
         loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_35 cs-height_lg_30"></div>
@@ -58,18 +66,22 @@ const Collection = (props) => {
                         <div className="cs-collection_img">
                             <div className="cs-collection_info_other cs-box_shadow">
                                 <div className="cs-collection_info_head">
-                                    <a className="cs-style1 cs-btn">
+                                    <a id="collection_refresh" className="cs-style1 cs-btn">
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
-                                    <a className="cs-style1 cs-btn">
+                                    <ReactTooltip anchorId="collection_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh collection" />
+                                    {!isCreator() && <a id="collection_like" className="cs-style1 cs-btn">
                                         <span><i className="fas fa-star fa-fw"></i></span>
-                                    </a>
-                                    <a className="cs-style1 cs-btn">
+                                    </a>}
+                                    <ReactTooltip anchorId="collection_like" className="cs-modal_tooltip" place="bottom" content="Like collection" />
+                                    <a id="collection_share" className="cs-style1 cs-btn">
                                         <span><i className="fas fa-share-alt fa-fw"></i></span>
                                     </a>
-                                    <a className="cs-style1 cs-btn">
+                                    <ReactTooltip anchorId="collection_share" className="cs-modal_tooltip" place="bottom" content="Copy collection link" />
+                                    {!isCreator() && <a id="collection_report" className="cs-style1 cs-btn">
                                         <span><i className="fas fa-flag fa-fw"></i></span>
-                                    </a>
+                                    </a>}
+                                    <ReactTooltip anchorId="collection_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
                                 </div>
                             </div>
                             <img src={collection?.banner_picture_url || "img/cover-photo.jpeg"} alt="Collection Details" />
@@ -314,6 +326,18 @@ const Collection = (props) => {
                     </div>
                 </div>
             </div>
+
+            <ToastContainer position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover={false}
+                theme={getThemeMode() ? "light" : "dark"}
+            />
         </ContentWrapper>
     );
 }

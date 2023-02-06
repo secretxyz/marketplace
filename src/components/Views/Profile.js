@@ -169,7 +169,11 @@ const Profile = (props) => {
     }
 
     const onClickCopyWallet = () => {
-        navigator.clipboard.writeText(wallet);
+        let address = wallet;
+        if (isOwner()) {
+            address = getAccount()?.wallet;
+        }
+        navigator.clipboard.writeText(address);
         notify("The wallet address has been copied.");
     }
 

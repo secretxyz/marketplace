@@ -2285,10 +2285,11 @@ ul::-webkit-scrollbar-thumb {
 }
 
 .cs-profile_title {
-  font-size: 28px;
+  font-size: 22px;
   text-align: center;
   margin-top: 15px;
   margin-bottom: 0;
+  word-break: break-word;
 }
 
 .cs-name {
@@ -3021,7 +3022,7 @@ ul::-webkit-scrollbar-thumb {
   }
 
   .cs-profile_title {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .cs-edit_profile_img {
