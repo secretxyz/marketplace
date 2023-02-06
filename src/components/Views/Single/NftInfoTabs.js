@@ -19,11 +19,11 @@ const RaffleHistoryRow = ({ data }) => {
                 </div>
                 <div className="row w-100">
                     <div className="col-xl-6">
-                        <p className="cs-activity_text">Raffled by <a href="#">{getSummaryUsername(raffler)}</a></p>
-                        <p className="cs-activity_posted_by">
+                        <div className="cs-activity_text">Raffled by <a href="#">{getSummaryUsername(raffler)}</a></div>
+                        <div className="cs-activity_posted_by">
                             {getDateTimeWithFormat(raffle.raffle_start_datetime)}
                             <span className="cs-activity_status">{getTicketStatus(raffle.status)}</span>
-                        </p>
+                        </div>
                     </div>
                     <div className="col-xl-3">
                         <p className="cs-activity_text"><span>Total Price</span></p>

@@ -560,7 +560,7 @@ class SecretApi {
 
     async drawNftWithRaffleId(id) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/raffle/draw-nft/${id}`,
+            const res = await axios.get(`${this.baseUrl}/api/raffle/draw-nft/${id}/${getAuthChannel()}`,
                 { headers: this.headers() }
             )
             return res.data;
@@ -571,7 +571,7 @@ class SecretApi {
 
     async drawPrizeWithRaffleId(id) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/raffle/draw-prize/${id}`,
+            const res = await axios.get(`${this.baseUrl}/api/raffle/draw-prize/${id}/${getAuthChannel()}`,
                 { headers: this.headers() }
             )
             return res.data;
