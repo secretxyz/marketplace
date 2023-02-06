@@ -57,10 +57,10 @@ const ActivityCard = ({ data }) => {
                 <i className={getCategoryIcon()}></i>
             </div>
             <div className="cs-activity_nft_thumb">
-                <img src={nft?.picture_url} alt="Image" />
+                <a href={`/nft/${nft.nft_tokenid}`}><img src={nft?.picture_url} alt="Image" /></a>
             </div>
             <div className="cs-activity_right cs-activity_nft_name">
-                <div className="cs-activity_text"><h3>{nft?.name}</h3></div>
+                <div className="cs-activity_text"><h3><a href={`/nft/${nft.nft_tokenid}`}>{nft?.name}</a></h3></div>
                 <p className="cs-activity_price"><span>Ticket/Price</span> {raffle.ticket_price} XRP</p>
             </div>
             <div className="cs-activity_right">
