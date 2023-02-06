@@ -772,6 +772,10 @@
   
   .cs-search_wrap .cs-toggle_body {
     top: 124px;
+
+    .cs-search_right {
+      max-width: 230px !important;
+    }
   }
 }
 
@@ -847,6 +851,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         line-height: 32px;
+        max-width: 170px;
       }
     }
   }
