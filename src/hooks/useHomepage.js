@@ -68,6 +68,7 @@ export const useSearch = () => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
     const [collections, setCollections] = useState([]);
+    const [profiles, setProfiles] = useState([]);
 
     const searchNfts = async (keyword) => {
         setLoading(true);
@@ -83,15 +84,24 @@ export const useSearch = () => {
         setLoading(false);
     }
 
+    const searchProfiles = async (keyword) => {
+        setLoading(true);
+        const res = await SecretApi.getSearchProfilesInHeader(keyword);
+        setProfiles(res.data);
+        setLoading(false);
+    }
+
     const search = async (keyword) => {
-        searchNfts(keyword);
+        // searchNfts(keyword);
         searchCollections(keyword);
+        searchProfiles(keyword);
     }
 
     return {
         loading,
         nfts,
         collections,
+        profiles,
         search,
     }
 }

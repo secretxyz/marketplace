@@ -769,7 +769,7 @@
     transform: translateX(-50%);
     width: calc(100% - 30px);
   }
-  
+
   .cs-search_wrap .cs-toggle_body {
     top: 124px;
 
@@ -842,6 +842,11 @@
           width: 32px;
           height: 32px;
           border-radius: 6px;
+        }
+
+        .cs-profile_avatar_oval {
+          width: 32px;
+          height: 32px;
         }
       }
 

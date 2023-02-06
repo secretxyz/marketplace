@@ -736,6 +736,24 @@ class SecretApi {
         }
     }
 
+    async getSearchProfilesInHeader(keyword) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/accounts`, {
+                params: {
+                    "pagination[page]": 1,
+                    "pagination[pageSize]": 5,
+                    "filters[username][$containsi]": keyword,
+                }
+            });
+
+           return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+
     async sendMessage(data) {
         try {
             const res = await axios.post(`${this.baseUrl}/api/messages`, { data });

@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSearch } from "../../hooks/useHomepage";
 import { useOuterClick } from "../../hooks/useOuterClick";
-import { getImageLink } from "../Helpers/Utils";
+import { getImageLink, getSummaryUsername } from "../Helpers/Utils";
+import Avatar from "../Views/Profile/Avatar";
 
 const SearchBox = ({ keyword, clear }) => {
-    const { loading, nfts, collections, search } = useSearch();
+    const { loading, nfts, collections, profiles, search } = useSearch();
     const [active, setActive] = useState();
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const SearchBox = ({ keyword, clear }) => {
     });
 
     return (
-        <div ref={innerRef} className={`cs-toggle_body ${active && (collections?.length > 0 || nfts?.length > 0) && "active"}`}>
+        <div ref={innerRef} className={`cs-toggle_body ${active && (collections?.length > 0 || profiles?.length > 0) && "active"}`}>
             {
                 collections?.length > 0 && <><h3>Collections</h3>
                     <hr />
@@ -41,16 +42,18 @@ const SearchBox = ({ keyword, clear }) => {
                 </>
             }
             {
-                nfts?.length > 0 && <>
+                profiles?.length > 0 && <>
                     <h3>NFTs</h3>
                     <hr />
                     <ul>
-                        {nfts?.map(d => {
-                            const nft = d.attributes;
+                        {profiles?.map(d => {
+                            const profile = d.attributes;
                             return <li key={d.id}>
-                                <a href={`/nft/${nft.nft_tokenid}`}>
-                                    <div className="cs-search_thumb"><img src={getImageLink(nft?.picture_url)} alt="Image" /></div>
-                                    <div className="cs-search_right">{nft?.name}</div>
+                                <a href={`/profile/${profile.wallet}`}>
+                                    <div className="cs-search_thumb">
+                                        <Avatar className="cs-profile_avatar_oval" {...{ name: profile.wallet, image: profile.picture_url }} />
+                                    </div>
+                                    <div className="cs-search_right">{getSummaryUsername(profile)}</div>
                                 </a>
                             </li>
                         })}
