@@ -45,8 +45,8 @@ const RaffleTxRow = ({ data, status }) => {
                     <p className="cs-activity_text cs-activity_row_text">
                         {
                             status == "canceling" || status == "canceled" ?
-                                <>Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></> :
-                                <>Refunded <span>{ticket.ticket_count} Tickets</span> to <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></>
+                                <>Refunded <span>{ticket.ticket_count} Tickets</span> to <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></> :
+                                <>Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></>
                         }
                     </p>
                     <p className="cs-activity_text">
