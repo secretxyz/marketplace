@@ -700,6 +700,42 @@ class SecretApi {
         }
     }
 
+    async getSearchNftsInHeader(keyword) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nfts`, {
+                params: {
+                    "pagination[page]": 1,
+                    "pagination[pageSize]": 5,
+                    "filters[name][$containsi]": keyword,
+                    // "sort[0]": "name",
+                }
+            });
+
+           return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async getSearchCollectionsInHeader(keyword) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/collections`, {
+                params: {
+                    "pagination[page]": 1,
+                    "pagination[pageSize]": 5,
+                    "filters[name][$containsi]": keyword,
+                    // "sort[0]": "name",
+                }
+            });
+
+           return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async sendMessage(data) {
         try {
             const res = await axios.post(`${this.baseUrl}/api/messages`, { data });

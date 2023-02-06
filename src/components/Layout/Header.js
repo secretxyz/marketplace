@@ -5,6 +5,7 @@ import accountStore from '../../store/account.store';
 import SwitchMode from '../Common/SwitchMode';
 import NotificationBox from '../Common/NotificationBox';
 import ProfileBox from '../Common/ProfileBox';
+import SearchBox from '../Common/SearchBox';
 
 const mainNav = () => {
 	$('.cs-nav').append('<span class="cs-menu_toggle"><span></span></span>');
@@ -37,11 +38,15 @@ const mainNav = () => {
 
 const Header = () => {
 	const { auth_token, account } = accountStore;
+	const [keyword, setKeyword] = useState();
 
 	useEffect(() => {
 		mainNav();
 	}, [auth_token]);
 
+	const onChangeKeyword = (event) => {
+		setKeyword(event.target.value);
+	}
 
 	const [connecting, setConnecting] = useState(false);
 	useEffect(() => {
@@ -64,23 +69,18 @@ const Header = () => {
 						</div>
 						<div className="cs-main_header_right">
 							<div className="cs-search_wrap cs-toggle_box cs-profile_box">
-								<form action="#" className="cs-search">
-									<input type="text" className="cs-search_input" placeholder="Search" />
+								<div className="cs-search">
+									<input type="text" className="cs-search_input" placeholder="Search" value={keyword || ""} onChange={onChangeKeyword} />
 									<button className="cs-search_btn">
 										<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
 											<path d="M17.5 18L13.875 14.375" stroke="currentColor" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
 										</svg>
 									</button>
-								</form>
-								{/* <div className="cs-toggle_body active">
-									<ul>
-										<li><a href="/">Search1</a></li>
-										<li><a href="/">Search2</a></li>
-										<li><a href="/">Search3</a></li>
-										<li><a href="/">Search4</a></li>
-									</ul>
-								</div> */}
+								</div>
+								<SearchBox keyword={keyword} clear={() => {
+									setKeyword("");
+								}} />
 							</div>
 							<div className="cs-nav_wrap">
 								<div className="cs-nav_out">

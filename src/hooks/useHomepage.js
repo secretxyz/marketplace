@@ -63,3 +63,35 @@ export const useFaqs = () => {
         faqs
     }
 }
+
+export const useSearch = () => {
+    const [loading, setLoading] = useState(true);
+    const [nfts, setNfts] = useState([]);
+    const [collections, setCollections] = useState([]);
+
+    const searchNfts = async (keyword) => {
+        setLoading(true);
+        const res = await SecretApi.getSearchNftsInHeader(keyword);
+        setNfts(res.data);
+        setLoading(false);
+    }
+
+    const searchCollections = async (keyword) => {
+        setLoading(true);
+        const res = await SecretApi.getSearchCollectionsInHeader(keyword);
+        setCollections(res.data);
+        setLoading(false);
+    }
+
+    const search = async (keyword) => {
+        searchNfts(keyword);
+        searchCollections(keyword);
+    }
+
+    return {
+        loading,
+        nfts,
+        collections,
+        search,
+    }
+}
