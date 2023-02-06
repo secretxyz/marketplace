@@ -1583,6 +1583,7 @@ ul::-webkit-scrollbar-thumb {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    background-color: $white;
   }
 }
 
@@ -2004,7 +2005,7 @@ ul::-webkit-scrollbar-thumb {
 }
 
 .cs-activity_list {
-  padding: 6px;
+  // padding: 6px;
 
   li {
     &:not(:last-child) {
@@ -2128,6 +2129,77 @@ ul::-webkit-scrollbar-thumb {
   .cs-activity_left {
     position: absolute;
     right: 20px;
+  }
+}
+
+.cs-activity {
+  &.cs-type2 {
+    padding: 16px 24px;
+
+    .cs-activity_nft_thumb {
+      height: 64px;
+      width: 64px;
+      flex: none;
+      margin-right: 15px;
+      margin-left: 58px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+    }
+
+    .cs-activity_nft_name {
+      min-width: 264px;
+    }
+
+    h3 {
+      margin: 4px 0px;
+      font-size: 20px;
+    }
+
+    .cs-activity_price {
+      margin-top: 4px;
+      font-size: 14px;
+
+      span {
+        color: $accent;
+      }
+    }
+
+    .cs-activity_date {
+      font-size: 14px;
+      margin: 4px 0px;
+    }
+
+    .cs-activity_text {
+      display: flex;
+      align-items: center;
+    }
+
+    .cs-profile_avatar_oval {
+      width: 28px;
+      height: 28px;
+      border-radius: 100%;
+      margin: 4px 0px;
+      margin-right: 8px;
+    }
+
+    .cs-activity_category_icon {
+      width: 48px;
+      height: 48px;
+      right: 0 !important;
+      left: 20px;
+    }
+
+    .cs-activity_view {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 }
 

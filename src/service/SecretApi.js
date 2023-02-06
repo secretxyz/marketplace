@@ -700,6 +700,32 @@ class SecretApi {
         }
     }
 
+
+    async getActivities(page, filter) {
+        // let filters = getFilters(filter);
+
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/activities`, {
+                headers: this.headers(),
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": 10,
+                    "populate[raffle]": true,
+                    "populate[raffle_ticket]": true,
+                    "populate[from]": true,
+                    "populate[nft][fields][0]": "name",
+                    "populate[nft][fields][1]": "nft_tokenid",
+                    "populate[nft][fields][2]": "picture_url",
+                    // ...filters
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
     async getSearchNftsInHeader(keyword) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nfts`, {
@@ -711,7 +737,7 @@ class SecretApi {
                 }
             });
 
-           return res.data;
+            return res.data;
         } catch (error) {
             console.log(error);
             return null;
@@ -729,7 +755,7 @@ class SecretApi {
                 }
             });
 
-           return res.data;
+            return res.data;
         } catch (error) {
             console.log(error);
             return null;
@@ -746,7 +772,7 @@ class SecretApi {
                 }
             });
 
-           return res.data;
+            return res.data;
         } catch (error) {
             console.log(error);
             return null;

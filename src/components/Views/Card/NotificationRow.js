@@ -15,27 +15,26 @@ const NotificationRow = ({ data }) => {
                 return <>
                     {`You were chosen as the winner`}
                 </>
-            case "raffle-cancel":
+            case "raffle-ticket-cancel":
                 return <>
-                    {`The raffle has been cancelled`}
+                    {`Refunded ${raffle_ticket.ticket_count} tickets`}
                 </>
-                break;
-            case "raffle-end":
+            case "raffle-ticket-end":
                 return <>
                     {`The raffle has ended`}
                 </>
-                break;
             case "raffle-ticket":
                 return <>
                     {`${getSummaryUsername(from)} reserved ${raffle_ticket.ticket_count} tickets`}
                 </>
-                break;
         }
     }
 
     return (
         <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id}`} className="cs-notification_item">
-            <div className="cs-notification_thumb"><img src={nft?.picture_url} alt="Image" /></div>
+            <div className="cs-notification_thumb">
+                <img src={nft?.picture_url} alt="Image" />
+            </div>
             <div className="cs-notification_right">
                 <p>{generateMessage()}</p>
                 <h4>{nft?.name}</h4>
