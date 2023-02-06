@@ -159,7 +159,7 @@ class RaffleDetails extends Component {
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
                                     <a className="cs-style1 cs-btn" href="#">
-                                        <span><i className="fas fa-share fa-fw"></i></span>
+                                        <span><i className="fas fa-share-alt fa-fw"></i></span>
                                     </a>
                                     <a className="cs-style1 cs-btn" href="#">
                                         <span><i className="fas fa-flag fa-fw"></i></span>

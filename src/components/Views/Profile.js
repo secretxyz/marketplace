@@ -188,7 +188,7 @@ const Profile = (props) => {
                             </a>
                             <ReactTooltip anchorId="account_follow" className="cs-modal_tooltip" place="bottom" content="Follow account" />
                             <a id="account_share" className="cs-style1 cs-btn" onClick={onClickShare}>
-                                <span><i className="fas fa-share fa-fw"></i></span>
+                                <span><i className="fas fa-share-alt fa-fw"></i></span>
                             </a>
                             <ReactTooltip anchorId="account_share" className="cs-modal_tooltip" place="bottom" content="Copy share link" />
                             <a id="account_report" className="cs-style1 cs-btn" onClick={onClickReport}>

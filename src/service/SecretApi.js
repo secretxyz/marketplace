@@ -73,7 +73,7 @@ const getFilters = (filter) => {
             default:
                 filters = {
                     ...filters,
-                    "sort[0]": "id:asc"
+                    "sort[1]": "id:asc"
                 }
                 break;
         }
@@ -395,9 +395,12 @@ class SecretApi {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "filters[raffler]": id,
-                    "sort[10][raffle_end_datetime]": "desc",
+                    "sort[0]": "raffle_end_datetime:desc",
                     "populate[nft]": true,
                     "populate[raffler]": true,
+                    "filters[status][$notIn][0]": "canceled",
+                    "filters[status][$notIn][1]": "raffling",
+                    "filters[status][$notIn][2]": "raffled",
                     ...filters
                 }
             });
@@ -415,7 +418,7 @@ class SecretApi {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "filters[buyer]": id,
-                    "sort[createdAt]": "desc",
+                    "sort[0]": "createdAt:desc",
                     // "sort[raffle_end_datetime]": "desc",
                     "populate[raffle][populate][nft]": true,
                     "populate[raffle][populate][raffler]": true,

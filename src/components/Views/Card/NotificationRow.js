@@ -19,7 +19,12 @@ const NotificationRow = ({ data }) => {
                 return <>
                     {`Refunded ${raffle_ticket.ticket_count} tickets`}
                 </>
+            case "raffle-cancel":
+                return <>
+                    {`The raffle has cancelled`}
+                </>
             case "raffle-ticket-end":
+            case "raffle-end":
                 return <>
                     {`The raffle has ended`}
                 </>
