@@ -130,7 +130,7 @@ const Activity = () => {
 						</div>
 					</div>
 					<div className="cs-sidebar_frame_right">
-						<ul className="cs-activity_list cs-mp0" onScroll={handleScroll}>
+						<ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
 							{items?.map(d => (
 								<li key={d.id} >
 									<ActivityCard data={d.attributes} key={d.id} />

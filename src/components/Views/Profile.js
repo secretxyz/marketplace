@@ -198,7 +198,7 @@ const Profile = (props) => {
                             </a>
                             <ReactTooltip anchorId="account_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh profile information" />
                             {!isOwner() && <a id="account_follow" className="cs-style1 cs-btn" onClick={onClickLike}>
-                                <span><i className="fas fa-star fa-fw"></i></span>
+                                <span><i className="far fa-star fa-fw"></i></span>
                             </a>}
                             <ReactTooltip anchorId="account_follow" className="cs-modal_tooltip" place="bottom" content="Follow account" />
                             <a id="account_share" className="cs-style1 cs-btn" onClick={onClickShare}>
