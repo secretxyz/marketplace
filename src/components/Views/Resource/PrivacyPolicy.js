@@ -1,55 +1,35 @@
-import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import React from 'react';
 import ContentWrapper from "../../Layout/ContentWrapper";
 
-class PrivacyPolicy extends Component {
-    componentDidMount() {
+const PrivacyPolicy = () => {
 
-    }
-
-    render() {
-        return (
-            <ContentWrapper>
-                <div className="cs-height_90 cs-height_lg_80"></div>
-                <section className="cs-page_head cs-resource_page_head cs-bg" style={{ background: `url("img/page_head_bg.png")` }}>
-                    <div className="container">
-                        <div className="text-center">
-                            <h1 className="cs-page_title">Privacy Policy</h1>
-                        </div>
-                    </div>
-                </section>
-                <div className="cs-height_40 cs-height_lg_30"></div>
+    return (
+        <ContentWrapper>
+            <div className="cs-height_90 cs-height_lg_80"></div>
+            <section className="cs-page_head cs-resource_page_head cs-bg" style={{ background: `url("img/page_head_bg.png")` }}>
                 <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8 offset-lg-2">
-                            <div className="cs-single_post">
-                                <h3>Privacy Policy</h3>
-                                <p>It is a long established fact that a reader will be distrac by the readable content of a page when looking at its layout. The point of using Lorem Ipm i has a more-ornormal distribution of letters,as opposed It is a long established fact that a reader will be distrac by the readable content of a page when looking at itslayout. The point of using Lorem Ipm i has a NFTs<br /><br />Crypto is a long established fact that a reader will be distrac by the readable content of a page when looking at its layout. The point of using Lorem Ipm i has a more-ornormal distribution of letters,as opposed It is a long established fact that a reader will be distrac by the readable content of a page when looking at itslayout. The point of using Lorem Ipm i has a NFTs</p>
-                                <h3>How do we use this information?</h3>
-                                <p>NFTS Music is a long established fact that a reader will be distrac by the readable content of a page when looking at its layout. The point of using Lorem Ipm i has a more-ornormal distribution of letters,as opposed It is a long established fact that a reader will be distrac by the readable content of a page when looking at itslayout. The point of using Lorem Ipm i has a NFTs</p>
-                                <ul>
-                                    <li>How to make and sell an NFT.</li>
-                                    <li>Buy some cryptocurrency to fund your wallet.</li>
-                                    <li>Add some cryptocurrency to your wallet.</li>
-                                    <li>Upload the file you want to turn into an NFT.</li>
-                                    <li>Set up an auction for your NFT</li>
-                                </ul>
-                                <h3>Third-party applications, websites and services</h3>
-                                <p>NFTs a long established fact that a reader will be distrac by the readable content of a page when looking at its layout. The point of using Lorem Ipm i has a.</p>
-                                <h3>Data Access and Control</h3>
-                                <p>You can view, access, edit, or delete your Personal Data for certain aspects of the Service via your Settings page. You may also have certain additional rights.</p>
-                                <ul>
-                                    <li>It is a long established fact that a reader will be distracted by the readable</li>
-                                    <li>Content of a page when looking at its layout</li>
-                                </ul>
-                            </div>
+                    <div className="text-center">
+                        <h1 className="cs-page_title">Privacy Policy</h1>
+                    </div>
+                </div>
+            </section>
+            <div className="cs-height_40 cs-height_lg_30"></div>
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-8 offset-lg-2">
+                        <div className="cs-single_post">
+                            <p>At SecretMarket, we take privacy seriously and are committed to protecting the personal information of our users. We believe in transparency and want to make sure our users fully understand what data we collect and how it is used.</p>
+                            <p>We do not collect any personal information from our users. This means we do not ask for, or store, any personally identifiable information such as names, addresses, phone numbers, or email addresses.</p>
+                            <p>In addition, we will never sell or share any of our users' data with third parties for any reason. We do not engage in any data mining or data tracking practices, and we do not use cookies or other tracking technologies to gather information about our users.</p>
+                            <p>We understand the importance of privacy and security, and we are dedicated to ensuring that our users' data remains confidential and protected at all times.</p>
+                            <p>If you have any questions or concerns about our privacy policy, please do not hesitate to contact us.</p>
                         </div>
                     </div>
                 </div>
-                <div className="cs-height_70 cs-height_lg_40"></div>
-            </ContentWrapper >
-        );
-    }
+            </div>
+            <div className="cs-height_70 cs-height_lg_40"></div>
+        </ContentWrapper >
+    );
 }
 
-export default withRouter(PrivacyPolicy);
+export default PrivacyPolicy;

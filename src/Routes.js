@@ -30,6 +30,7 @@ const Faq = lazy(() => import('./components/Views/Resource/Faq'));
 const ProvablyFair = lazy(() => import('./components/Views/Resource/ProvablyFair'));
 const PrivacyPolicy = lazy(() => import('./components/Views/Resource/PrivacyPolicy'));
 const TermsCondition = lazy(() => import('./components/Views/Resource/TermsCondition'));
+const Disclaimer = lazy(() => import('./components/Views/Resource/Disclaimer'));
 
 const Routes = ({ location }) => {
 	const currentKey = location.pathname.split('/')[1] || '/';
@@ -74,6 +75,7 @@ const Routes = ({ location }) => {
 								<Route path="/provably-fair" component={waitFor(ProvablyFair)} />
 								<Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
 								<Route path="/terms-condition" component={waitFor(TermsCondition)} />
+								<Route path="/disclaimer" component={waitFor(Disclaimer)} />
 
 								<Route path="/" component={waitFor(Home)} />
 
