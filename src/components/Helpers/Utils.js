@@ -145,6 +145,8 @@ export const getDifferenceTime = (dt) => {
 			return `in ${m} Mins ${ss} Secs`;
 		}
 	}
+
+	return `a Min ago`;
 }
 
 export const getCurrentTime = () => {

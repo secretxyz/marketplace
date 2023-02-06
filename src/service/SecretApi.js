@@ -702,21 +702,58 @@ class SecretApi {
 
 
     async getActivities(page, filter) {
-        // let filters = getFilters(filter);
+        let filters;
+        if (filter.create) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][0]": "raffle-create"
+            }
+        }
+        if (filter.ticket) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][1]": "raffle-ticket"
+            }
+        }
+        if (filter.winner) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][2]": "raffle-winner"
+            }
+        }
+        if (filter.end) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][3]": "raffle-end"
+            }
+        }
+        if (filter.cancel) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][4]": "raffle-cancel"
+            }
+        }
+        if (filter.keyword) {
+            filters = {
+                ...filters,
+                "filters[nft][name][$containsi]": filter.keyword
+            }
+        }
 
         try {
             const res = await axios.get(`${this.baseUrl}/api/activities`, {
                 headers: this.headers(),
                 params: {
                     "pagination[page]": page,
-                    "pagination[pageSize]": 10,
+                    "pagination[pageSize]": this.pageSize,
                     "populate[raffle]": true,
                     "populate[raffle_ticket]": true,
                     "populate[from]": true,
                     "populate[nft][fields][0]": "name",
                     "populate[nft][fields][1]": "nft_tokenid",
                     "populate[nft][fields][2]": "picture_url",
-                    // ...filters
+                    "sort[0]": "createdAt:desc",
+                    ...filters
                 }
             });
             return res.data;

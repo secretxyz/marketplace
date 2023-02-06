@@ -36,24 +36,39 @@ const ActivityCard = ({ data }) => {
         }
     }
 
+    const getCategoryIcon = () => {
+        switch (data.activity) {
+            case "raffle-create":
+                return "fa fa-award";
+            case "raffle-winner":
+                return "fas fa-crown";
+            case "raffle-cancel":
+                return "fa fa-trash";
+            case "raffle-end":
+                return "fas fa-clock";
+            case "raffle-ticket":
+                return "fas fa-ticket-alt";
+        }
+    }
+
     return (
-        <div class="cs-activity cs-type2 cs-white_bg cs-box_shadow">
-            <div class="cs-activity_icon cs-center cs-gray_bg cs-accent_color cs-activity_category_icon">
-                <i className="fa fa-award"></i>
+        <div className="cs-activity cs-type2 cs-white_bg cs-box_shadow">
+            <div className="cs-activity_icon cs-center cs-gray_bg cs-accent_color cs-activity_category_icon">
+                <i className={getCategoryIcon()}></i>
             </div>
-            <div class="cs-activity_nft_thumb">
+            <div className="cs-activity_nft_thumb">
                 <img src={nft?.picture_url} alt="Image" />
             </div>
-            <div class="cs-activity_right cs-activity_nft_name">
-                <p class="cs-activity_text"><h3>{nft?.name}</h3></p>
-                <p class="cs-activity_price"><span>Ticket/Price</span> {raffle.ticket_price} XRP</p>
+            <div className="cs-activity_right cs-activity_nft_name">
+                <div className="cs-activity_text"><h3>{nft?.name}</h3></div>
+                <p className="cs-activity_price"><span>Ticket/Price</span> {raffle.ticket_price} XRP</p>
             </div>
-            <div class="cs-activity_right">
-                <p class="cs-activity_text">
-                    <a></a>
-                    <Avatar className="cs-profile_avatar_oval" {...{ name: from.wallet, image: from.picture_url }} />{generateMessage()}
-                </p>
-                <p class="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
+            <div className="cs-activity_right">
+                <div className="cs-activity_text">
+                    <a href={`/profile/${from?.wallet}`}><Avatar className="cs-profile_avatar_oval" {...{ name: from?.wallet, image: from?.picture_url }} /></a>
+                    {generateMessage()}
+                </div>
+                <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
             </div>
             <a href={`/nft/${nft.nft_tokenid}/${raffle.id}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
                 <span>View</span>

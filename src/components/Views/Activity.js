@@ -4,11 +4,10 @@ import { useActivity } from "../../hooks/useActivity";
 import { APP_COLORS } from "../Common/constants";
 import ContentWrapper from '../Layout/ContentWrapper';
 import ActivityCard from "./Card/ActivityCard";
-import ActivityFilterBar from "./FilterBar/NftFilterBar";
 
 const Activity = () => {
 	const { loading, items, meta, fetchNext } = useActivity();
-	const [filter, setFilter] = useState();
+	const [filter, setFilter] = useState({});
 
 	const handleScroll = (e) => {
 		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -27,6 +26,23 @@ const Activity = () => {
 	useEffect(() => {
 		fetchNext(1, filter);
 	}, [filter])
+
+	const onChangeStatus = (event) => {
+		let name = event.target.name;
+		let value = event.target.checked;
+
+		setFilter({
+			...filter,
+			[name]: value
+		})
+	}
+
+	const onChangeKeyword = (event) => {
+		setFilter({
+			...filter,
+			[event.target.name]: event.target.value
+		})
+	}
 
 	return (
 		<ContentWrapper>
@@ -56,31 +72,31 @@ const Activity = () => {
 									<ul>
 										<li>
 											<div className="form-check">
-												<input className="form-check-input" type="checkbox" id="raffle-create" />
+												<input name="create" className="form-check-input" type="checkbox" id="raffle-create" checked={filter.create || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="raffle-create">Create Raffle</label>
 											</div>
 										</li>
 										<li>
 											<div className="form-check">
-												<input className="form-check-input" type="checkbox" id="raffle-ticket" />
+												<input name="ticket" className="form-check-input" type="checkbox" id="raffle-ticket" checked={filter.ticket || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="raffle-ticket">Reserve Ticket</label>
 											</div>
 										</li>
 										<li>
 											<div className="form-check">
-												<input className="form-check-input" type="checkbox" id="raffle-winner" />
+												<input name="winner" className="form-check-input" type="checkbox" id="raffle-winner" checked={filter.winner || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="raffle-winner">Pick Winner</label>
 											</div>
 										</li>
 										<li>
 											<div className="form-check">
-												<input className="form-check-input" type="checkbox" id="raffle-end" />
+												<input name="end" className="form-check-input" type="checkbox" id="raffle-end" checked={filter.end || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="raffle-end">Complete Raffle</label>
 											</div>
 										</li>
 										<li>
 											<div className="form-check">
-												<input className="form-check-input" type="checkbox" id="raffle-cancel" />
+												<input name="cancel" className="form-check-input" type="checkbox" id="raffle-cancel" checked={filter.cancel || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="raffle-cancel">Cancel Raffle</label>
 											</div>
 										</li>
@@ -100,7 +116,7 @@ const Activity = () => {
 								<div className="cs-filter_toggle_body">
 									<div className="cs-search_collection_widget">
 										<form action="#" className="cs-search">
-											<input type="text" className="cs-search_input" placeholder="Search by name" />
+											<input name="keyword" type="text" className="cs-search_input" placeholder="Search by name" value={filter.keyword || ""} onChange={onChangeKeyword} />
 											<button className="cs-search_btn">
 												<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 													<path d="M9.16667 16.3333C12.8486 16.3333 15.8333 13.3486 15.8333 9.66667C15.8333 5.98477 12.8486 3 9.16667 3C5.48477 3 2.5 5.98477 2.5 9.66667C2.5 13.3486 5.48477 16.3333 9.16667 16.3333Z" stroke="currentColor" strokeOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />

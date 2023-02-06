@@ -1174,7 +1174,7 @@ ul::-webkit-scrollbar-thumb {
 
   &:not(:last-child) {
     border: 0px solid;
-    border-image-slice: 1;
+    border-image-slice: 1 !important;
     border-bottom-width: 1px;
     border-image-source: linear-gradient(116.85deg, rgba(252, 70, 107, 0.15) 0%, rgba(63, 94, 251, 0.15) 100%);
   }
@@ -2175,6 +2175,7 @@ ul::-webkit-scrollbar-thumb {
     }
 
     .cs-activity_text {
+      height: 32px;
       display: flex;
       align-items: center;
     }
