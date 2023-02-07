@@ -45,7 +45,7 @@ const ActivityCard = ({ data }) => {
             case "raffle-cancel":
                 return "fa fa-trash";
             case "raffle-end":
-                return "fas fa-clock";
+                return "fas fa-crown";
             case "raffle-ticket":
                 return "fas fa-ticket-alt";
         }
