@@ -3,6 +3,7 @@ import { getSummaryUsername } from "../../Helpers/Utils";
 const NotificationRow = ({ data }) => {
     const nft = data.nft?.data?.attributes;
     const from = data.from?.data?.attributes;
+    const to = data.to?.data?.attributes;
     const raffle = {
         ...data.raffle?.data?.attributes,
         id: data.raffle?.data?.id,
@@ -11,27 +12,21 @@ const NotificationRow = ({ data }) => {
 
     const generateMessage = () => {
         switch (data.activity) {
+            case "raffle-create-follow":
+                return <>{`${getSummaryUsername(from)} has created the raffle`}</>;
+            case "raffle-ticket-follow":
+                return <>{`${getSummaryUsername(from)} reserved ${raffle_ticket?.ticket_count} tickets`}</>;
             case "raffle-winner":
-                return <>
-                    {`You were chosen as the winner`}
-                </>
+                return <>{`You were chosen as the winner`}</>;
             case "raffle-ticket-cancel":
-                return <>
-                    {`Refunded ${raffle_ticket?.ticket_count} tickets`}
-                </>
+                return <>{`Refunded ${raffle_ticket?.ticket_count} tickets`}</>;
             case "raffle-cancel":
-                return <>
-                    {`The raffle has cancelled`}
-                </>
+                return <>{`The raffle has cancelled`}</>;
             case "raffle-ticket-end":
             case "raffle-end":
-                return <>
-                    {`The raffle has ended`}
-                </>
+                return <>{`The raffle has ended`}</>;
             case "raffle-ticket":
-                return <>
-                    {`${getSummaryUsername(from)} reserved ${raffle_ticket?.ticket_count} tickets`}
-                </>
+                return <>{`${getSummaryUsername(from)} reserved ${raffle_ticket?.ticket_count} tickets`}</>;
         }
     }
 

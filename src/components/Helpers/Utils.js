@@ -168,10 +168,15 @@ export const getImageLink = (url) => {
 }
 
 export const getSummaryUsername = (data) => {
-	if (data && data.username) {
-		return `@${data.username}`
+	if (data) {
+		if (data.username) {
+			return `@${data.username}`
+		} else if (data.wallet) {
+			return getSummaryAddress2(data.wallet);
+		}
 	}
-	return getSummaryAddress2(data.wallet);
+
+	return `@Unknown`;
 }
 
 export const getSummaryAddress = (addr) => {

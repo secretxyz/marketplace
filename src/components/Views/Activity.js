@@ -82,12 +82,12 @@ const Activity = () => {
 												<label className="form-check-label" htmlFor="raffle-ticket">Reserve Ticket</label>
 											</div>
 										</li>
-										<li>
+										{/* <li>
 											<div className="form-check">
 												<input name="winner" className="form-check-input" type="checkbox" id="raffle-winner" checked={filter.winner || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="raffle-winner">Pick Winner</label>
 											</div>
-										</li>
+										</li> */}
 										<li>
 											<div className="form-check">
 												<input name="end" className="form-check-input" type="checkbox" id="raffle-end" checked={filter.end || false} onChange={onChangeStatus} />

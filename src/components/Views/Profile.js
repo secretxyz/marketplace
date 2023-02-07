@@ -183,7 +183,9 @@ const Profile = (props) => {
     }
 
     useEffect(() => {
-        fetchProfile(wallet || getAccount().wallet);
+        if (result) {
+            fetchProfile(wallet || getAccount().wallet);
+        }
     }, [result])
 
 
@@ -192,10 +194,10 @@ const Profile = (props) => {
     }
 
     const isOwner = () => {
-        if (!isLoggedIn()){
+        if (!isLoggedIn()) {
             return true;
         }
-        
+
         return wallet == getAccount.wallet;
     }
 
@@ -250,10 +252,10 @@ const Profile = (props) => {
                                     </button>
                                 </div>
                                 <ReactTooltip anchorId="account_wallet" className="cs-modal_tooltip" place="bottom" content="Copy wallet" />
-                                {/* <ul className="cs-profile_meta cs-mp0">
-                                    <li>Followers (560)</li>
-                                    <li>Following (56)</li>
-                                </ul> */}
+                                <ul className="cs-profile_meta cs-mp0">
+                                    <li>Following ({profile?.followings})</li>
+                                    <li>Followers ({profile?.followers})</li>
+                                </ul>
                             </div>
                             <div className="cs-height_30 cs-height_lg_30"></div>
                             <ul className="cs-profile_nav cs-mp0">

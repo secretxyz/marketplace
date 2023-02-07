@@ -252,7 +252,7 @@
       font-size: 16px;
       line-height: 1.5em;
       display: -webkit-box;
-      -webkit-line-clamp: 1;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -700,7 +700,7 @@
 
   .cs-site_branding {
     margin-left: auto;
-    
+
     img {
       height: 40px;
       object-fit: contain;
