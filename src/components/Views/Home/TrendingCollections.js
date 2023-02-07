@@ -15,7 +15,7 @@ const TrendingCollections = () => {
             <div className="container">
                 <div className="cs-section_heading cs-style2">
                     <div className="cs-section_left">
-                        <h2 className="cs-section_title">Trending Collections</h2>
+                        <h2 className="cs-section_title">Trending across XRPL</h2>
                     </div>
                     <div className="cs-section_right">
                         <a href="/explorer-collections" className="cs-btn cs-style1"><span>Explore More</span></a>
