@@ -158,17 +158,20 @@ class SecretApi {
         if (category === "trending") {
             params = {
                 ...params,
+                "filters[daily_volume][$notNull]": true,
                 "sort[0]": "daily_volume:desc",
             }
         } else if (category === "top") {
             params = {
                 ...params,
+                "filters[total_volume][$notNull]": true,
                 "sort[0]": "total_volume:desc",
             }
         } else {
             params = {
                 ...params,
                 "filters[category]": category,
+                "filters[total_volume][$notNull]": true,
                 "sort[0]": "total_volume:desc",
             }
         }
