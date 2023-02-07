@@ -205,7 +205,7 @@ const NftDetails = (props) => {
                     <div className="cs-height_30 cs-height_lg_30"></div>
                 </div>
             </div>
-        } else if (!isLoggedIn() && !raffle) {
+        } else if (!isLoggedIn() && (!raffle || (raffle && raffle.status == "active"))) {
             return <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
