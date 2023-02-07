@@ -5,6 +5,7 @@ import RaffleCard from './Card/RaffleCard';
 import { APP_COLORS } from "../Common/constants"
 import { useRaffles } from "../../hooks/useRaffle";
 import RaffleFilterBar from "./FilterBar/RaffleFilterBar";
+import CountLoader from "../Common/CountLoader";
 
 const Categories = [
     { id: 0, label: "Featured", isChecked: true, key: "featured" },
@@ -26,12 +27,19 @@ const ExplorerRaffles = () => {
     }
 
     useEffect(() => {
+        CountLoader(1);
         fetchNext(category, filter, 1);
     }, [category])
 
     useEffect(() => {
-        fetchNext(category, filter, 1);
+        if (filter) {
+            fetchNext(category, filter, 1);
+        }
     }, [filter])
+
+    useEffect(() => {
+        CountLoader('.cs-countdown');
+    }, [raffles])
 
     // Filter change handler
     const onChangeCategory = id => {

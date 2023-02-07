@@ -4,6 +4,7 @@ import ContentWrapper from "../Layout/ContentWrapper";
 import DropCard from "./Card/DropCard";
 import { APP_COLORS } from "../Common/constants"
 import { useDrops } from "../../hooks/useDrop";
+import CountLoader from "../Common/CountLoader";
 
 const Filters = [
 	{ id: 1, label: "Upcoming", isChecked: false, key: "upcoming" },
@@ -24,12 +25,15 @@ const Drop = () => {
 	}
 
 	useEffect(() => {
-		fetchNext(1, category);
-	}, [])
-
-	useEffect(() => {
+		CountLoader(1);
 		fetchNext(1, category);
 	}, [category])
+
+	useEffect(() => {
+		if (category == "upcoming") {
+			CountLoader(".cs-countdown_style2");
+		}
+	}, [drops])
 
 	// Filter change handler
 	const onFilter = id => {

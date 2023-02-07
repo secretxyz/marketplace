@@ -1,18 +1,11 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { withTranslation, Trans } from 'react-i18next';
 import SecretApi from '../../../service/SecretApi';
-import CountLoader from '../../Common/CountLoader';
 import { getSummaryUsername } from '../../Helpers/Utils';
 
 const DropCard = ({ data, category }) => {
     const picture_url = data.picture_url?.data?.attributes?.url;
     const banner_picture_url = data.banner_picture_url?.data?.attributes?.url;
     const creator = data.creator?.data?.attributes;
-
-    useEffect(() => {
-        CountLoader(".cs-countdown_style2");
-    }, []);
 
     return (
         <div className="cs-card cs-style3 cs-drop_card cs-box_shadow cs-white_bg">

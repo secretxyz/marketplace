@@ -10,10 +10,6 @@ const RaffleCard = ({ data, hiddenStatus }) => {
     const raffle_link = `/nft/${nft?.nft_tokenid}/${data.id}`;
     const raffler = data.raffler?.data?.attributes;
 
-    useEffect(() => {
-        CountLoader('.cs-countdown');
-    }, [data])
-
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
             {/* {nft?.rarity_rank && <span className="cs-card_rare cs-primary_color">
