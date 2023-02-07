@@ -19,7 +19,7 @@ const CollectionSimpleCard = ({ data, id }) => {
                             <div className="cs-card_media_details">
                                 <div className='cs-card_media_details_item'>
                                     <div className='cs-card_media_details_item_subtitle'>Volume:</div>
-                                    {getNumberFormat1(collection?.daily_volume)} XRP
+                                    {getNumberFormat1(collection?.total_volume)} XRP
                                 </div>
                                 <div className='cs-card_media_details_item'>
                                     <div className='cs-card_media_details_item_subtitle'>Floor Price:</div>
