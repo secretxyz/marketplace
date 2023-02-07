@@ -11,8 +11,8 @@ const FeaturedRaffles = () => {
 
     useEffect(() => {
         if (items.length > 0) {
-            CountLoader('.cs-countdown');
             SlickLoader('.cs-raffle_nft_slider');
+            CountLoader('.cs-countdown');
             setHidden(false);
         } else {
             setHidden(true);

@@ -13,8 +13,8 @@ const HomeBanner2 = () => {
 
     useEffect(() => {
         if (items?.length > 0) {
-            CountLoader('.cs-countdown');
             SlickLoader('.cs-raffle_banner_slider');
+            CountLoader('.cs-countdown');
         }
     }, [items])
 
