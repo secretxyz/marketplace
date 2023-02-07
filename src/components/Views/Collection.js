@@ -139,7 +139,7 @@ const Collection = (props) => {
                                                         </li>
                                                         <li>
                                                             <div className="cs-collection_list_title">Total Sales</div>
-                                                            <div className="cs-collection_list_number">{getNumberFormat1(collection.total_volume)} XRP</div>
+                                                            <div className="cs-collection_list_number">{collection.total_sales || 0}</div>
                                                         </li>
                                                     </ul>
                                                 </div>
