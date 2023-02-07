@@ -3,6 +3,7 @@ import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
 import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
 import { useState } from 'react';
+import CountLoader from '../../Common/CountLoader';
 
 const FeaturedRaffles = () => {
     const [hidden, setHidden] = useState(false);
@@ -10,6 +11,7 @@ const FeaturedRaffles = () => {
 
     useEffect(() => {
         if (items.length > 0) {
+            CountLoader('.cs-countdown');
             SlickLoader('.cs-raffle_nft_slider');
             setHidden(false);
         } else {
