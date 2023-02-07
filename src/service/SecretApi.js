@@ -73,7 +73,7 @@ const getFilters = (filter) => {
             default:
                 filters = {
                     ...filters,
-                    "sort[1]": "id:asc"
+                    "sort[10]": "id:asc"
                 }
                 break;
         }
@@ -158,18 +158,18 @@ class SecretApi {
         if (category === "trending") {
             params = {
                 ...params,
-                "sort[daily_volume]": "desc",
+                "sort[0]": "daily_volume:desc",
             }
         } else if (category === "top") {
             params = {
                 ...params,
-                "sort[total_volume]": "desc",
+                "sort[0]": "total_volume:desc",
             }
         } else {
             params = {
                 ...params,
                 "filters[category]": category,
-                "sort[total_volume]": "desc",
+                "sort[0]": "total_volume:desc",
             }
         }
         try {
@@ -188,19 +188,19 @@ class SecretApi {
                 filters = {
                     "filters[featured]": true,
                     "filters[status]": "active",
-                    "sort[10][raffle_end_datetime]": "asc",
+                    "sort[1]": "raffle_end_datetime:asc",
                 };
                 break;
             case "all":
                 filters = {
                     "filters[status]": "active",
-                    "sort[10][raffle_end_datetime]": "asc",
+                    "sort[1]": "raffle_end_datetime:asc",
                 };
                 break;
             case "past":
                 filters = {
                     "filters[status][$in]": ["canceling", "canceled", "raffling", "raffled"],
-                    "sort[10][raffle_end_datetime]": "desc",
+                    "sort[1]": "raffle_end_datetime:desc",
                 };
                 break;
         }
