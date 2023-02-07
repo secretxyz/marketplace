@@ -252,17 +252,13 @@ export const useProfileOther = () => {
     }
 
     const like = async (accountId) => {
-        setLoading(true);
         const res = await SecretApi.likeProfile(accountId);
-        setResult(res);
-        setLoading(false);
+        return res;
     }
 
     const report = async (accountId) => {
-        setLoading(true);
         const res = await SecretApi.reportProfile(accountId);
-        setResult(res);
-        setLoading(false);
+        return res;
     }
 
     return {

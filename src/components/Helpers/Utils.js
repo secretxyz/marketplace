@@ -155,7 +155,7 @@ export const getCurrentTime = () => {
 };
 
 export const getImageLink = (url) => {
-	if (url?.endsWith("undefined")){
+	if (url?.endsWith("undefined")) {
 		return null;
 	}
 	if (url?.startsWith("ipfs://ipfs/")) {
@@ -336,4 +336,28 @@ export const isVideoAsset = (url) => {
 		default:
 			return false;
 	}
+}
+
+export const likeAccount = (accountId) => {
+	let accounts = getLikedAccounts();
+
+	if (accounts.includes(accountId)) {
+		accounts.splice(accounts.indexOf(accountId), 1);
+	} else {
+		accounts.push(accountId);
+	}
+
+	localStorage.setItem("like_accounts", JSON.stringify(accounts));
+}
+
+export const getLikedAccounts = () => {
+	let accounts = localStorage.getItem("like_accounts");
+	if (!accounts) {
+		return [];
+	}
+	return JSON.parse(accounts);
+}
+
+export const setLikedAccounts = (accounts) => {
+	localStorage.setItem("like_accounts", JSON.stringify(accounts));
 }

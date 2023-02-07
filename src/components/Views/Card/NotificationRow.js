@@ -17,7 +17,7 @@ const NotificationRow = ({ data }) => {
                 </>
             case "raffle-ticket-cancel":
                 return <>
-                    {`Refunded ${raffle_ticket.ticket_count} tickets`}
+                    {`Refunded ${raffle_ticket?.ticket_count} tickets`}
                 </>
             case "raffle-cancel":
                 return <>
@@ -30,7 +30,7 @@ const NotificationRow = ({ data }) => {
                 </>
             case "raffle-ticket":
                 return <>
-                    {`${getSummaryUsername(from)} reserved ${raffle_ticket.ticket_count} tickets`}
+                    {`${getSummaryUsername(from)} reserved ${raffle_ticket?.ticket_count} tickets`}
                 </>
         }
     }

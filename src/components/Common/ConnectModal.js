@@ -21,8 +21,7 @@ const ConnectModal = ({ closeModal }) => {
   }, [auth_token]);
 
   useEffect(() => {
-    if (result?.status) {
-      console.log("Received result...", toJS(result));
+    if (result) {
       close();
     }
   }, [result])

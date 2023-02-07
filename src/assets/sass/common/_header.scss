@@ -303,9 +303,7 @@
 
 .cs-site_branding {
   display: inline-block;
-  // img {
-  //   height: 45px;
-  // }
+  margin-left: 38px;
 }
 
 @media screen and (min-width: 1200px) {
@@ -700,8 +698,13 @@
     display: none;
   }
 
-  .cs-site_branding img {
-    height: 40px;
+  .cs-site_branding {
+    margin-left: auto;
+    
+    img {
+      height: 40px;
+      object-fit: contain;
+    }
   }
 
   .cs-site_header.cs-style1 .cs-main_header_center {

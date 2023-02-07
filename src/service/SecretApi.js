@@ -304,7 +304,15 @@ class SecretApi {
     }
 
     async likeProfile(id) {
-
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/account/like/${id}`, null, {
+                headers: this.headers()
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     }
 
     async reportProfile(id) {

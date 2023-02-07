@@ -17,7 +17,7 @@ import Activity from './Profile/Activity';
 import ProfileInfo from './Profile/ProfileInfo';
 import Hidden from './Profile/Hidden';
 import { useProfile, useProfileOther } from '../../hooks/useProfile';
-import { getAccount, getSummaryAddress, getThemeMode } from '../Helpers/Utils';
+import { getAccount, getLikedAccounts, getSummaryAddress, getThemeMode, isLoggedIn, likeAccount } from '../Helpers/Utils';
 import PageLoader from '../Common/PageLoader';
 
 const NavComponents = {
@@ -155,8 +155,13 @@ const Profile = (props) => {
         refresh(accountId);
     }
 
-    const onClickLike = () => {
-        console.log("liking...");
+    const onClickLike = async () => {
+        // like
+        const res = await like(accountId);
+        if (res && res.status) {
+            refreshProfile();
+            likeAccount(accountId);
+        }
     }
 
     const onClickShare = () => {
@@ -187,7 +192,19 @@ const Profile = (props) => {
     }
 
     const isOwner = () => {
+        if (!isLoggedIn()){
+            return true;
+        }
+        
         return wallet == getAccount.wallet;
+    }
+
+    const isLikeProfile = () => {
+        let accounts = getLikedAccounts();
+        if (accounts.includes(accountId)) {
+            return true;
+        }
+        return false;
     }
 
     return (
@@ -202,7 +219,7 @@ const Profile = (props) => {
                             </a>
                             <ReactTooltip anchorId="account_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh profile information" />
                             {!isOwner() && <a id="account_follow" className="cs-style1 cs-btn" onClick={onClickLike}>
-                                <span><i className="far fa-star fa-fw"></i></span>
+                                <span><i className={`${isLikeProfile() ? "fa" : "far"} fa-star fa-fw`}></i></span>
                             </a>}
                             <ReactTooltip anchorId="account_follow" className="cs-modal_tooltip" place="bottom" content="Follow account" />
                             <a id="account_share" className="cs-style1 cs-btn" onClick={onClickShare}>
@@ -210,7 +227,7 @@ const Profile = (props) => {
                             </a>
                             <ReactTooltip anchorId="account_share" className="cs-modal_tooltip" place="bottom" content="Copy profile link" />
                             {!isOwner() && <a id="account_report" className="cs-style1 cs-btn" onClick={onClickReport}>
-                                <span><i className="fas fa-flag fa-fw"></i></span>
+                                <span><i className="far fa-flag fa-fw"></i></span>
                             </a>}
                             <ReactTooltip anchorId="account_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
                         </div>
