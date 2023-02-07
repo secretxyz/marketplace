@@ -11,7 +11,7 @@ const HomeBanner2 = () => {
     const { loading, items } = useFeaturedRaffle(0);
 
     useEffect(() => {
-        if (items.length > 0) {
+        if (items?.length > 0) {
             SlickLoader('.cs-raffle_banner_slider');
         }
     }, [items])

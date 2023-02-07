@@ -285,11 +285,13 @@ export const useNotifications = () => {
     const fetchNotifications = async (page) => {
         setLoading(true);
         const res = await SecretApi.getNotifications(page);
-        setItems([...items, ...res.data]);
-        if (!res.data?.length) {
-            setEnded(true);
+        if (res) {
+            setItems([...items, ...res.data]);
+            if (!res.data?.length) {
+                setEnded(true);
+            }
+            setMeta(res.meta);
         }
-        setMeta(res.meta);
         setLoading(false);
     }
 

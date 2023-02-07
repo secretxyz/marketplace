@@ -39,7 +39,7 @@ const TopRafflers = () => {
                 <h2 className="cs-section_heading cs-style1 text-center">Top Rafflers in 1 Week</h2>
                 <div className="cs-height_45 cs-height_lg_45"></div>
                 <div className="row">
-                    {rafflers.map(n => {
+                    {rafflers?.map(n => {
                         return <div className="col-xl-3 col-lg-4 col-md-6" key={n.id}>
                             <RafflerCard data={n} />
                             <div className="cs-height_30 cs-height_lg_30"></div>

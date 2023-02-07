@@ -11,14 +11,16 @@ export const useActivity = () => {
     const fetchActivities = async (page, filter, reset) => {
         setLoading(true);
         const res = await SecretApi.getActivities(page, filter);
-        if (reset) {
-            setItems(res?.data);
-        } else {
-            setItems([...items, ...res?.data]);
-        }
-        setMeta(res?.meta);
-        if (!res?.data?.length) {
-            setEnded(true);
+        if (res) {
+            if (reset) {
+                setItems(res.data);
+            } else {
+                setItems([...items, ...res.data]);
+            }
+            setMeta(res.meta);
+            if (!res.data?.length) {
+                setEnded(true);
+            }
         }
         setLoading(false);
     }

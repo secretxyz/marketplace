@@ -12,14 +12,16 @@ export const useNfts = () => {
     const fetchNfts = async (page, category, filter, reset) => {
         setLoading(true);
         const res = await SecretApi.getNftsWithFilters(page, category, filter);
-        if (reset) {
-            setNfts(res.data);
-        } else {
-            setNfts([...nfts, ...res.data]);
-        }
-        setMeta(res.meta);
-        if (!res.data?.length) {
-            setEnded(true);
+        if (res) {
+            if (reset) {
+                setNfts(res.data);
+            } else {
+                setNfts([...nfts, ...res.data]);
+            }
+            setMeta(res.meta);
+            if (!res.data?.length) {
+                setEnded(true);
+            }
         }
         setLoading(false);
     }
@@ -54,7 +56,9 @@ export const useNft = (tokenid, raffleid) => {
     const fetchNftDetails = async (tokenid, raffleid) => {
         setLoading(true);
         const res = await SecretApi.getNftWithTokenID(tokenid, raffleid);
-        setNft(res.data);
+        if (res) {
+            setNft(res.data);
+        }
         setLoading(false);
     }
 
@@ -78,21 +82,27 @@ export const useNftOther = () => {
     const refresh = async (tokenid) => {
         setLoading(true);
         const res = await SecretApi.refreshNft(tokenid);
-        setResult(res);
+        if (res) {
+            setResult(res);
+        }
         setLoading(false);
     }
 
     const like = async (tokenid) => {
         setLoading(true);
         const res = await SecretApi.likeNft(tokenid);
-        setResult(res);
+        if (res) {
+            setResult(res);
+        }
         setLoading(false);
     }
 
     const report = async (tokenid) => {
         setLoading(true);
         const res = await SecretApi.reportNft(tokenid);
-        setResult(res);
+        if (res) {
+            setResult(res);
+        }
         setLoading(false);
     }
 
@@ -116,10 +126,12 @@ export const useCollectionNfts = () => {
     const fetchNfts = async (collectionId, page, params) => {
         setLoading(true);
         const res = await SecretApi.getCollectionNfts(collectionId, page, params);
-        setNfts([...nfts, ...res.data]);
-        setMeta(res.meta);
-        if (!res.data?.length) {
-            setEnded(true);
+        if (res) {
+            setNfts([...nfts, ...res.data]);
+            setMeta(res.meta);
+            if (!res.data?.length) {
+                setEnded(true);
+            }
         }
         setLoading(false);
     }

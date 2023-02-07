@@ -8,7 +8,9 @@ export const useBannerCollections = () => {
     const getBannerCollections = async () => {
         setLoading(true);
         const res = await SecretApi.getBannerCollections();
-        setCollections(res?.data || []);
+        if (res) {
+            setCollections(res.data);
+        }
         setLoading(false);
     }
 
@@ -29,7 +31,9 @@ export const useTopRafflers = () => {
     const getTopRafflers = async () => {
         setLoading(true);
         const res = await SecretApi.getTopRafflers();
-        setRafflers(res);
+        if (res) {
+            setRafflers(res);
+        }
         setLoading(false);
     }
 
@@ -50,7 +54,9 @@ export const useFaqs = () => {
     const getFaqs = async () => {
         setLoading(true);
         const res = await SecretApi.getFaqs();
-        setFaqs(res.data);
+        if (res) {
+            setFaqs(res.data);
+        }
         setLoading(false);
     }
 
@@ -73,21 +79,27 @@ export const useSearch = () => {
     const searchNfts = async (keyword) => {
         setLoading(true);
         const res = await SecretApi.getSearchNftsInHeader(keyword);
-        setNfts(res.data);
+        if (res) {
+            setNfts(res.data);
+        }
         setLoading(false);
     }
 
     const searchCollections = async (keyword) => {
         setLoading(true);
         const res = await SecretApi.getSearchCollectionsInHeader(keyword);
-        setCollections(res.data);
+        if (res) {
+            setCollections(res.data);
+        }
         setLoading(false);
     }
 
     const searchProfiles = async (keyword) => {
         setLoading(true);
         const res = await SecretApi.getSearchProfilesInHeader(keyword);
-        setProfiles(res.data);
+        if (res) {
+            setProfiles(res.data);
+        }
         setLoading(false);
     }
 

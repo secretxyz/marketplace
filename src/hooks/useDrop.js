@@ -11,13 +11,15 @@ export const useDrops = () => {
     const fetchDrops = async (page, category, reset) => {
         setLoading(true);
         const res = await SecretApi.getDrops(page, category);
-        if (reset) {
-            setDrops(res.data);
-        } else {
-            setDrops([...drops, ...res.data]);
-        }
-        if (!res.data?.length) {
-            setEnded(true);
+        if (res) {
+            if (reset) {
+                setDrops(res.data);
+            } else {
+                setDrops([...drops, ...res.data]);
+            }
+            if (!res.data?.length) {
+                setEnded(true);
+            }
         }
         setLoading(false);
     }

@@ -34,7 +34,7 @@ const FeaturedRaffles = () => {
                     <div className="cs-raffle_nft_slider cs-style1 cs-gap-20">
                         <div className="cs-slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="3" data-md-slides="4" data-lg-slides="4" data-add-slides="4">
                             <div className="cs-slider_wrapper">
-                                {items.map(n => (
+                                {items?.map(n => (
                                     <div className="cs-slide" key={n.id}>
                                         <RaffleCard data={{ id: n.id, ...n.attributes }} hiddenStatus={true} />
                                     </div>

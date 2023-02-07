@@ -11,13 +11,15 @@ export const useCollections = () => {
     const fetchCollections = async (page, pageSize, category, reset) => {
         setLoading(true);
         const res = await SecretApi.getCollections(page, pageSize, category);
-        if (reset) {
-            setCollections(res.data);
-        } else {
-            setCollections([...collections, ...res.data]);
-        }
-        if (!res.data?.length) {
-            setEnded(true);
+        if (res) {
+            if (reset) {
+                setCollections(res.data);
+            } else {
+                setCollections([...collections, ...res.data]);
+            }
+            if (!res.data?.length) {
+                setEnded(true);
+            }
         }
         setLoading(false);
     }
@@ -51,7 +53,9 @@ export const useCollection = (slug) => {
         if (slug) {
             setLoading(true);
             const res = await SecretApi.getCollectionWithSlug(slug);
-            setCollection(res.data);
+            if (res) {
+                setCollection(res.data);
+            }
             setLoading(false);
         }
     }
