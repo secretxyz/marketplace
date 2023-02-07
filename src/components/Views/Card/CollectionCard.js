@@ -27,17 +27,17 @@ const CollectionCard = ({ data }) => {
                     </div>
                     <div className="cs-card_meta_info_item">
                         <i className="far fa-user fa-fw"></i>
-                        <span>{collection.owners || 0}</span>
+                        <span>{getNumberFormat1(collection.owners)}</span>
                     </div>
                 </div>
                 <div className="cs-card_footer">
                     <div className="cs-left">
                         <h4>Volume</h4>
-                        <p>{collection.total_volume || 0} XRP</p>
+                        <p>{getNumberFormat1(collection.total_volume)} XRP</p>
                     </div>
                     <div className="cs-left">
                         <h4>Floor Price</h4>
-                        <p>{collection.floor_price || 0} XRP</p>
+                        <p>{getNumberFormat1(collection.floor_price)} XRP</p>
                     </div>
                 </div>
             </div>

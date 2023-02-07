@@ -25,7 +25,7 @@ const TopCollections = () => {
                                 <a href="">Last 24 hours</a>
                                 <a href="">Last 7 days</a>
                                 <a href="">Last 30 days</a>
-                                <a href="">Last 90 days</a>
+                                <a href="">All Time</a>
                             </div>
                         </div>
                         <a href="/explorer-collections" className="cs-btn cs-style1"><span>Explore More</span></a>
