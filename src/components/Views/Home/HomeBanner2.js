@@ -5,7 +5,6 @@ import RaffleCard from '../Card/RaffleCard';
 import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
 import { isLoggedIn } from '../../Helpers/Utils';
 import accountStore from '../../../store/account.store';
-import CountLoader from '../../Common/CountLoader';
 
 const HomeBanner2 = () => {
     const { auth_token } = accountStore;
@@ -14,7 +13,6 @@ const HomeBanner2 = () => {
     useEffect(() => {
         if (items?.length > 0) {
             SlickLoader('.cs-raffle_banner_slider');
-            CountLoader('.cs-countdown');
         }
     }, [items])
 

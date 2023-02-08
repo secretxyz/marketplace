@@ -5,7 +5,6 @@ import ContentWrapper from '../../Layout/ContentWrapper';
 import RaffleCard from '../Card/RaffleCard';
 import { useRaffleItems } from '../../../hooks/useProfile';
 import RaffleFilterBar from '../FilterBar/RaffleFilterBar';
-import CountLoader from '../../Common/CountLoader';
 
 const Raffles = ({ accountId }) => {
     const { loading, items, meta, fetchNext } = useRaffleItems();
@@ -23,12 +22,6 @@ const Raffles = ({ accountId }) => {
             fetchNext(accountId, filter, 1);
         }
     }, [filter])
-
-    useEffect(() => {
-        if (items && items.length > 0) {
-            CountLoader('.cs-countdown');
-        }
-    }, [items])
 
     return (
         <ContentWrapper>

@@ -4,7 +4,6 @@ import NftCard from '../Card/NftCard';
 import AuctionCard from '../Card/AuctionCard';
 import RaffleCard from '../Card/RaffleCard';
 import { useSimilarNfts } from '../../../hooks/useNft';
-import CountLoader from '../../Common/CountLoader';
 
 const SimilarItems = ({ tokenid, collection }) => {
     const { loading, nfts } = useSimilarNfts(tokenid, collection.id);
@@ -12,7 +11,6 @@ const SimilarItems = ({ tokenid, collection }) => {
     useEffect(() => {
         if (nfts.length > 0) {
             SlickLoader('.cs-trend_nft_slider');
-            CountLoader('.cs-countdown');
         }
     }, [nfts])
 

@@ -127,7 +127,6 @@ const RaffleInfoTabs = ({ raffleId, reservedCount, status }) => {
                         <li className="cs-mp1">Raffle tickets cannot be refunded once bought unless the raffle is cancelled.</li>
                         <li className="cs-mp1">Raffle tickets will not be refunded if you did not win the raffle.</li>
                         <li className="cs-mp1">You can only buy 20% of total tickets.</li>
-                        <li className="cs-mp1">Do not enter raffles from multiple wallets, repeat offenders will be banned from the platform.</li>
                         <li className="cs-mp1">Do not purchase tickets to your own hosted raffle.</li>
                     </ul>
                 </div>

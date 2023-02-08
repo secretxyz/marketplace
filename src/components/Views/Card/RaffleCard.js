@@ -10,6 +10,11 @@ const RaffleCard = ({ data, hiddenStatus }) => {
     const raffle_link = `/nft/${nft?.nft_tokenid}/${data.id}`;
     const raffler = data.raffler?.data?.attributes;
 
+    const counter = new Date(data.raffle_end_datetime).getTime();
+    useEffect(() => {
+        CountLoader(`#${counter}`);
+    }, [])
+
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
             {/* {nft?.rarity_rank && <span className="cs-card_rare cs-primary_color">
@@ -26,7 +31,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 <img style={{ background: `url(${data.nft?.data?.attributes?.picture_url})` }} alt="Image" className="cs-zoom_item" />
             </a>
             {
-                data.status == "active" ? <div className="cs-countdown" data-countdate={data.raffle_end_datetime}>
+                data.status == "active" ? <div id={counter} className="cs-countdown" data-countdate={data.raffle_end_datetime} data-key={counter}>
                     <div className="cs-countdown_item">
                         <div className="cs-countdown_number">
                             <div className="cs-count_days"></div>

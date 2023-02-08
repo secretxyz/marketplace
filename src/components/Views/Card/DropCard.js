@@ -1,11 +1,18 @@
 import React from 'react';
+import { useEffect } from 'react';
 import SecretApi from '../../../service/SecretApi';
+import CountLoader from '../../Common/CountLoader';
 import { getSummaryUsername } from '../../Helpers/Utils';
 
 const DropCard = ({ data, category }) => {
     const picture_url = data.picture_url?.data?.attributes?.url;
     const banner_picture_url = data.banner_picture_url?.data?.attributes?.url;
     const creator = data.creator?.data?.attributes;
+    const counter = new Date(data.mint_start_datetime).getTime();
+
+    useEffect(() => {
+        CountLoader(`#${counter}`);
+    }, [])
 
     return (
         <div className="cs-card cs-style3 cs-drop_card cs-box_shadow cs-white_bg">
@@ -16,8 +23,7 @@ const DropCard = ({ data, category }) => {
                 <div className="cs-iconbox_img">
                     <img src={`${SecretApi.baseUrl}${picture_url}`} alt="Avatar" />
 
-                    {category == "upcoming" ? <div className="cs-countdown_style2"
-                        data-countdate={data.mint_start_datetime}>
+                    {category == "upcoming" ? <div id={counter} className="cs-countdown_style2" data-countdate={data.mint_start_datetime} data-key={counter}>
                         <div className="cs-countdown_item">
                             <div className="cs-countdown_number">
                                 <div className="cs-count_days"></div>

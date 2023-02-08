@@ -1,24 +1,19 @@
 import $ from 'jquery';
 
-let components = [];
-let intervals = [];
+let timers = new Map();
 
 const CountLoader = (tag) => {
-    if (tag === 1) {
-        components = [];
-        intervals.forEach(x => clearInterval(x));
-        return;
-    }
-
     if ($(tag)) {
         $(tag).each(function () {
             var _this = this;
+            var key = $(_this).data('key');
+            if (timers.has(key)){
+                let x = timers.get(key);
+                clearInterval(x);
+            }
+
             var el = $(_this).data('countdate');
             var countDownDate = new Date(el).getTime();
-            if (components.includes(countDownDate)) {
-                return;
-            }
-            components.push(countDownDate);
             var x = setInterval(function () {
                 var now = new Date().getTime();
                 var distance = countDownDate - now;
@@ -40,7 +35,7 @@ const CountLoader = (tag) => {
                     $(_this).find('.cs-count_seconds').html(0);
                 }
             }, 1000);
-            intervals.push(x);
+            timers.set(key, x);
         });
     }
 }
