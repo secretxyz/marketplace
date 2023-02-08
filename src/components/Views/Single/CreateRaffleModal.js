@@ -22,17 +22,18 @@ const Steps = {
 const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	const { creating, result, createRaffle } = useRaffle();
 	const [step, setStep] = useState(Steps.Creating);
-	const [raffle, setRaffle] = useState({ total_ticket_price: "", ticket_count: "", raffle_duration: "", sell_option: 4 });
+	const [raffle, setRaffle] = useState({ ticket_price: "", ticket_count: "", raffle_duration: "", sell_option: 4 });
 	const [sellOptions, setSellOptions] = useState(SellOptions);
 	const [descriptions, setDescriptions] = useState({
-		total_ticket_price: "Possible earning 0 XRP",
-		ticket_count: "0 XRP per Ticket",
+		ticket_price: "Possible earning 0 XRP",
+		ticket_count: "Total raffle price 0 XRP",
 		raffle_duration: `Raffle will end ${getDateTimeWithFormat(new Date())}`
 	});
 	const [featured, setFeatured] = useState(false);
 	const [agreed, setAgreed] = useState(false);
 	const { subscription } = xummStore;
 	const [qrshow, setQrshow] = useState(false);
+	const [warning, setWarning] = useState();
 
 	useEffect(() => {
 		if (result) {
@@ -50,27 +51,26 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 
 	const onChangeInfo = (event) => {
 		let name = event.target.name;
-		let value = Number(event.target.value);
-		if (value < 0) {
-			value = 0
-		}
+		let value = event.target.value;
+
 		setRaffle({
 			...raffle,
 			[name]: value
 		});
 
 		switch (name) {
-			case "total_ticket_price":
+			case "ticket_price":
 				setDescriptions({
 					...descriptions,
-					total_ticket_price: `Possible earning ${(value * (raffle.sell_option / 4) * 0.9411).toFixed(2)} XRP`,
-					ticket_count: `${(value / Number(raffle.ticket_count)).toFixed(2)} XRP per Ticket`
+					ticket_price: `Possible earning ${(value * raffle.ticket_count * (raffle.sell_option / 4) * 0.9411).toFixed(2)} XRP`,
+					ticket_count: `Total raffle price ${raffle.ticket_count * value} XRP`
 				})
 				break;
 			case "ticket_count":
 				setDescriptions({
 					...descriptions,
-					ticket_count: `${(Number(raffle.total_ticket_price) / value).toFixed(2)} XRP per Ticket`
+					ticket_price: `Possible earning ${(value * raffle.ticket_price * (raffle.sell_option / 4) * 0.9411).toFixed(2)} XRP`,
+					ticket_count: `Total raffle price ${raffle.ticket_price * value} XRP`
 				})
 				break;
 			case "raffle_duration":
@@ -85,11 +85,19 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 	}
 
 	const onClickSubmit = () => {
-		if (Number(raffle.total_ticket_price) < 1 ||
-			Number(raffle.ticket_count) < 1 ||
-			Number(raffle.raffle_duration) < 1) {
+		if (Number(raffle.ticket_price) <= 0) {
+			setWarning("Invalid ticket price detected. Please confirm again.");
 			return;
 		}
+		if (Number(raffle.ticket_count) < 1) {
+			setWarning("Invalid ticket count detected. Please confirm again.");
+			return;
+		}
+		if (Number(raffle.raffle_duration) < 1) {
+			setWarning("Invalid raffle duration detected. Please confirm again.");
+			return;
+		}
+		setWarning(null);
 
 		let data = { ...raffle, nft, featured }
 		createRaffle(data)
@@ -102,7 +110,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 				setRaffle({ ...raffle, sell_option: f.id });
 				setDescriptions({
 					...descriptions,
-					total_ticket_price: `Possible earning ${(raffle.total_ticket_price * (f.id / 4) * 0.9411).toFixed(2)} XRP`,
+					ticket_price: `Possible earning ${(raffle.ticket_price * raffle.ticket_count * (f.id / 4) * 0.9411).toFixed(2)} XRP`,
 				})
 				return { ...f, isChecked: true };
 			}
@@ -153,16 +161,16 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 							<div className="row">
 								<div className="col-lg-6">
 									<div className="cs-offer_form_field">
-										<span className="cs-offer_field_title">Total Raffle Price</span>
-										<input name="total_ticket_price" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter price" value={raffle?.total_ticket_price || ""} onChange={onChangeInfo} min={1} />
-										<span className="cs-offer_field_description">{descriptions["total_ticket_price"]}</span>
+										<span className="cs-offer_field_title">Ticket Price</span>
+										<input name="ticket_price" type="number" className="cs-form_field cs-white_bg"
+											placeholder="Enter price" value={raffle?.ticket_price} onChange={onChangeInfo} min={0} />
+										<span className="cs-offer_field_description">{descriptions["ticket_price"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 									<div className="cs-offer_form_field">
 										<span className="cs-offer_field_title">Ticket Count</span>
 										<input name="ticket_count" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter count" value={raffle?.ticket_count || ""} onChange={onChangeInfo} min={1} />
+											placeholder="Enter count" value={raffle?.ticket_count} onChange={onChangeInfo} min={0} />
 										<span className="cs-offer_field_description">{descriptions["ticket_count"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
@@ -203,12 +211,21 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 								</div>
+
+								<div className="col-lg-12">
+									<div className="cs-form_field_wrap">
+										<textarea name="comment" cols="30" rows="2" className="cs-form_field cs-white_bg"
+											placeholder="Raffle comment..." value={raffle.comment || ""} onChange={onChangeInfo} maxLength={100}></textarea>
+									</div>
+								</div>
 							</div>
+							<div className="cs-height_15 cs-height_lg_15"></div>
 							<div className="form-check">
 								<input className="form-check-input" type="checkbox" id="flexCheckAgree" onChange={onChangeSettingAgree} checked={agreed} />
 								<label className="form-check-label" htmlFor="flexCheckAgree">Please review your raffle settings. Raffles cannot be cancelled unless timer ends and reserve is not met. No exceptions!</label>
 							</div>
 							<div className="cs-height_15 cs-height_lg_15"></div>
+							{warning && <label className="form-check-label text-warning cs-center">{warning}</label>}
 							<button className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickSubmit} disabled={!agreed}>
 								<span>Submit</span>
 							</button>

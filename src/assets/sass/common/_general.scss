@@ -916,6 +916,10 @@ ul::-webkit-scrollbar-thumb {
   .form-check-label {
     font-size: 14px;
   }
+
+  .cs-form_field_wrap {
+    border-radius: 8px;
+  }
 }
 
 .cs-modal_overlay {
@@ -2301,7 +2305,7 @@ ul::-webkit-scrollbar-thumb {
     border: 0px;
     background: transparent;
 
-    svg{
+    svg {
       margin-bottom: 2px;
     }
   }
@@ -2723,6 +2727,12 @@ ul::-webkit-scrollbar-thumb {
     margin: 0;
     line-height: 1.3em;
   }
+}
+
+.cs-raffle_comment {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
 }
 
 .cs-single_product_head {

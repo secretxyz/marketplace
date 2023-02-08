@@ -96,7 +96,11 @@ const NftDetails = (props) => {
 
     const getRafflePriceView = () => {
         return raffle && <div>
-            <div className="cs-height_15 cs-height_lg_15"></div>
+            <div className="cs-height_5 cs-height_lg_5"></div>
+            <div className="cs-raffle_comment">
+                {raffle.comment}
+            </div>
+            <div className="cs-height_10 cs-height_lg_10"></div>
             <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-single_raffle_info">
