@@ -24,12 +24,6 @@ const CollectedItems = ({ accountId }) => {
         }
     }, [filter])
 
-    useEffect(() => {
-        if (items && items.length > 0) {
-            CountLoader('.cs-countdown');
-        }
-    }, [items])
-
     return (
         <ContentWrapper>
             <NftFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
