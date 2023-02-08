@@ -104,9 +104,9 @@ export const useSearch = () => {
     }
 
     const search = async (keyword) => {
-        // searchNfts(keyword);
         searchCollections(keyword);
         searchProfiles(keyword);
+        searchNfts(keyword);
     }
 
     return {
