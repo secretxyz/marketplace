@@ -58,8 +58,10 @@ export const useNft = (tokenid, raffleid) => {
         const res = await SecretApi.getNftWithTokenID(tokenid, raffleid);
         if (res) {
             setNft(res.data);
+            if (res.data) {
+                setLoading(false);
+            }
         }
-        setLoading(false);
     }
 
     useEffect(async () => {

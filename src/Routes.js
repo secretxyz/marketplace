@@ -24,6 +24,7 @@ const Leaderboard = lazy(() => import('./components/Views/Leaderboard'));
 const Create = lazy(() => import('./components/Views/Create'));
 const Profile = lazy(() => import('./components/Views/Profile'));
 
+const NotFound = lazy(() => import('./components/Views/NotFound'));
 const Contact = lazy(() => import('./components/Views/Resource/Contact'));
 const Faq = lazy(() => import('./components/Views/Resource/Faq'));
 const ProvablyFair = lazy(() => import('./components/Views/Resource/ProvablyFair'));
@@ -74,6 +75,8 @@ const Routes = ({ location }) => {
 								<Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
 								<Route path="/terms-condition" component={waitFor(TermsCondition)} />
 								<Route path="/disclaimer" component={waitFor(Disclaimer)} />
+
+								<Route path="/not-found" component={waitFor(NotFound)} />
 
 								<Route path="/" component={waitFor(Home)} />
 

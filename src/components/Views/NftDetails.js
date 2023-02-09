@@ -68,7 +68,7 @@ const NftDetails = (props) => {
 
     useEffect(() => {
         if (!nft) {
-            window.location.replace("/");
+            window.location.replace("/not-found");
             return;
         }
         setCollection(nft?.collection);

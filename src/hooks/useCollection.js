@@ -55,8 +55,10 @@ export const useCollection = (slug) => {
             const res = await SecretApi.getCollectionWithSlug(slug);
             if (res) {
                 setCollection(res.data);
+                if (res.data) {
+                    setLoading(false);
+                }
             }
-            setLoading(false);
         }
     }
 

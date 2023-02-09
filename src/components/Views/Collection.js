@@ -49,6 +49,8 @@ const Collection = (props) => {
     useEffect(() => {
         if (collection) {
             fetchNext(collection.id, 0)
+        } else if (collection === null) {
+            window.location.replace("/not-found");
         }
     }, [collection])
 
