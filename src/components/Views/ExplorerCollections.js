@@ -38,13 +38,13 @@ const ExplorerCollections = (props) => {
 			})
 			setCategories(menus);
 			fetchNext(1, 25, menu);
-		} else {
-			fetchNext(1, 25, category);
 		}
 	}, [])
 
 	useEffect(() => {
-		fetchNext(1, 25, category);
+		if (!menu && category) {
+			fetchNext(1, 25, category);
+		}
 	}, [category])
 
 	const handleScroll = (e) => {

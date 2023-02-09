@@ -26,14 +26,16 @@ const ExplorerNfts = () => {
 	}
 
 	useEffect(() => {
-		fetchNext(1, category, filter);
+		if (filter) {
+			fetchNext(1, category, filter);
+		}
 	}, [filter])
 
 	// Filter change handler
 	const onChangeCategory = id => {
 		let options = categories.map(f => {
 			if (f.id === id) {
-                setCategory(f.key);
+				setCategory(f.key);
 				return { ...f, isChecked: true };
 			}
 
