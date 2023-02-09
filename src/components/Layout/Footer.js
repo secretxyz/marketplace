@@ -18,9 +18,9 @@ const Footer = () => {
 								<div className="cs-footer_widget">
 									<h2 className="cs-widget_title">Marketplace</h2>
 									<ul className="cs-widget_nav">
-										<li><a href="/explorer-raffles">Explore Raffles</a></li>
-										<li><a href="/explorer-collections">Explore Collections</a></li>
-										<li><a href="/explorer-nfts">Explore NFTs</a></li>
+										<li><a href="/explorer-raffles">Raffles</a></li>
+										<li><a href="/explorer-collections">Collections</a></li>
+										<li><a href="/explorer-nfts">NFTs</a></li>
 										<li><a href="/drops">Drops</a></li>
 										<li><a href="/leaderboards">Leaderboards</a></li>
 									</ul>

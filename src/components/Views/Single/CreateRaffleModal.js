@@ -75,7 +75,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 				break;
 			case "raffle_duration":
 				let dt = new Date();
-				dt.setDate(new Date().getDate() + value);
+				dt.setDate(new Date().getDate() + Number(value));
 				setDescriptions({
 					...descriptions,
 					raffle_duration: `Raffle will end ${getDateTimeWithFormat(dt)}`

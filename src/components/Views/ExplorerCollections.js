@@ -77,7 +77,7 @@ const ExplorerCollections = (props) => {
 			<section className="cs-page_head cs-bg" style={{ background: `url("img/page_head_bg.png")` }}>
 				<div className="container">
 					<div className="text-center">
-						<h1 className="cs-page_title">Explore collections</h1>
+						<h1 className="cs-page_title">Explore Collections</h1>
 					</div>
 					<div className="cs-height_20 cs-height_lg_20"></div>
 					<div className="cs-isotop_filter cs-style1 cs-center">

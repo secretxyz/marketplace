@@ -41,6 +41,7 @@ export const getExpirationDateTime = (value) => {
 
 export const getDateTimeWithFormat = (value) => {
 	const dt = new Date(value);
+	console.log(dt);
 	let dd = dt.getDate();
 	let mm = dt.getMonth() + 1;
 
