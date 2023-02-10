@@ -369,10 +369,15 @@
   align-items: center;
   border-radius: 1.6em;
   padding: 2px 7px;
+  cursor: pointer;
 
   i {
-    color: #FF4E4E;
     margin-right: 5px;
+    color: gray;
+  }
+    
+  .cs-card_like_active {
+    color: #FF4E4E;
   }
 }
 

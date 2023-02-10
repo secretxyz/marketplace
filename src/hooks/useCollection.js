@@ -71,3 +71,21 @@ export const useCollection = (slug) => {
         collection
     }
 }
+
+export const useAttributes = () => {
+    const [loading, setLoading] = useState(true);
+    const [attributes, setAttributes] = useState();
+
+    const fetchAttributes = async (id) => {
+        setLoading(true);
+        const res = await SecretApi.getCollectionAttributes(id);
+        setAttributes(res.data);
+        setLoading(false);
+    }
+
+    return {
+        loading,
+        attributes,
+        fetchAttributes
+    }
+}

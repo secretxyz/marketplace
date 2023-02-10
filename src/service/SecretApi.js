@@ -6,7 +6,7 @@ import {
     RAFFLES_HIGH_TO_LOW, RAFFLES_LOW_TO_HIGH,
     TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH,
 } from "../components/Common/constants";
-import { getAuthChannel, getAuthToken, setAccount, setAuthToken } from "../components/Helpers/Utils";
+import { getAuthChannel, getAuthToken, isLoggedIn, setAccount, setAuthToken } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
 
 const getFilters = (filter) => {
@@ -602,7 +602,18 @@ class SecretApi {
     }
 
     async likeNft(id) {
+        if (!isLoggedIn())
+            return;
 
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/nft/like/${id}`, null, {
+                headers: this.headers(),
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     }
 
     async reportNft(id) {
@@ -630,6 +641,16 @@ class SecretApi {
                     "populate[owner]": true,
                 }
             });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    async getCollectionAttributes(collectionId) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nft-attributes/collection/${collectionId}`);
             return res.data;
         } catch (error) {
             console.log(error);

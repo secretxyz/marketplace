@@ -1,43 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 import BeatLoader from "react-spinners/BeatLoader";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useCollection } from '../../hooks/useCollection';
+import { useAttributes, useCollection } from '../../hooks/useCollection';
 import { useCollectionNfts } from '../../hooks/useNft';
 import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
 import NftCard from './Card/NftCard';
 import { APP_COLORS } from "../Common/constants"
-import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode } from '../Helpers/Utils';
-
-const ATTRIBUTES = [
-    {
-        trait_type: "Background",
-        values: [
-            { value: "Red", count: 3 },
-            { value: "Blue", count: 5 },
-            { value: "Yellow", count: 6 },
-            { value: "Green", count: 2 },
-        ]
-    },
-    {
-        trait_type: "Body",
-        values: [
-            { value: "Alberta", count: 3 },
-            { value: "Brown", count: 5 },
-            { value: "Grizzly", count: 6 },
-            { value: "Panda", count: 2 },
-        ]
-    }
-]
+import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode, htmlDecode } from '../Helpers/Utils';
 
 const Collection = (props) => {
     const { slug } = props.match.params;
     const { loading, collection } = useCollection(slug);
     const { loading: nftsLoading, nfts, meta, fetchNext } = useCollectionNfts();
-    const [attributes, setAttributes] = useState(ATTRIBUTES);
+    const { loading: attrsLoading, attributes, fetchAttributes } = useAttributes();
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -48,11 +28,20 @@ const Collection = (props) => {
 
     useEffect(() => {
         if (collection) {
-            fetchNext(collection.id, 0)
+            fetchNext(collection.id, 0);
+            fetchAttributes(collection.id);
         } else if (collection === null) {
             window.location.replace("/not-found");
         }
     }, [collection])
+
+    useEffect(() => {
+        if (attributes) {
+            $('.cs-filter_toggle_btn').on('click', function () {
+                $(this).toggleClass('active').siblings('.cs-filter_toggle_body').slideToggle();
+            })
+        }
+    }, [attributes])
 
     const isCreator = () => {
         return collection?.issuer == getAccount()?.wallet;
@@ -72,16 +61,16 @@ const Collection = (props) => {
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
                                     <ReactTooltip anchorId="collection_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh collection" />
-                                    {!isCreator() && <a id="collection_like" className="cs-style1 cs-btn">
-                                        <span><i className="fas fa-star fa-fw"></i></span>
+                                    {/* {!isCreator() && <a id="collection_like" className="cs-style1 cs-btn">
+                                        <span><i className="far fa-star fa-fw"></i></span>
                                     </a>}
-                                    <ReactTooltip anchorId="collection_like" className="cs-modal_tooltip" place="bottom" content="Like collection" />
+                                    <ReactTooltip anchorId="collection_like" className="cs-modal_tooltip" place="bottom" content="Like collection" /> */}
                                     <a id="collection_share" className="cs-style1 cs-btn">
                                         <span><i className="fas fa-share-alt fa-fw"></i></span>
                                     </a>
                                     <ReactTooltip anchorId="collection_share" className="cs-modal_tooltip" place="bottom" content="Copy collection link" />
                                     {!isCreator() && <a id="collection_report" className="cs-style1 cs-btn">
-                                        <span><i className="fas fa-flag fa-fw"></i></span>
+                                        <span><i className="far fa-flag fa-fw"></i></span>
                                     </a>}
                                     <ReactTooltip anchorId="collection_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
                                 </div>
@@ -147,9 +136,11 @@ const Collection = (props) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="cs-collection_description">
+                                        <MarkdownPreview className="cs-collection_description" source={htmlDecode(collection?.bio)} />
+
+                                        {/* <div className="cs-collection_description">
                                             {collection?.bio}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -253,7 +244,7 @@ const Collection = (props) => {
                                 </h2>
                                 <div className="cs-filter_toggle_body">
                                     {
-                                        attributes.map(attr => (
+                                        attributes?.map(attr => (
                                             <div className="cs-filter_widget cs-filter_subwidget" key={attr.trait_type}>
                                                 <h2 className="cs-filter_toggle_btn">
                                                     <span>{attr.trait_type}<div className="cs-filter_toggle_btn_subtitle cs-ternary_color">{attr.values.length}</div></span>
@@ -263,13 +254,13 @@ const Collection = (props) => {
                                                         </svg>
                                                     </span>
                                                 </h2>
-                                                <div className="cs-filter_toggle_body">
+                                                <div className="cs-filter_toggle_body" style={{ display: "none" }}>
                                                     <ul>
-                                                        {attr.values.map(v => (
-                                                            <li key={v.value}>
+                                                        {attr.values.map((v, id) => (
+                                                            <li key={id}>
                                                                 <div className="form-check">
                                                                     <div>
-                                                                        <input className="form-check-input" type="radio" name={attr.trait_type} id={v.value} />
+                                                                        <input className="form-check-input" type="radio" name={attr.value} id={v.value} />
                                                                         <label className="form-check-label" htmlFor={v.value}>{v.value}</label>
                                                                     </div>
                                                                     <label className="form-check-label cs-ternary_color">{v.count}</label>

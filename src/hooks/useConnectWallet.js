@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getAuthChannel, setAuthToken, setAccount, setLikedAccounts } from "../components/Helpers/Utils";
+import { getAuthChannel, setAuthToken, setAccount, setLikedAccounts, setLikedNfts } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
 import SecretApi from "../service/SecretApi";
 
@@ -29,6 +29,7 @@ const useConnectWallet = () => {
                 accountStore.setAccount(account_data);
 
                 setLikedAccounts(account.followings);
+                setLikedNfts(account.like_nfts);
                 setResult(res.data.status);
             }
         } catch (error) {

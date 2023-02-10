@@ -3,6 +3,7 @@ import Avatar from "../Profile/Avatar";
 import CountLoader from '../../Common/CountLoader';
 import { getAccount, getDateTimeWithFormat, getDifferenceTime, getRaffleStatus } from '../../Helpers/Utils';
 import { getSummaryAddress } from '../../Helpers/Utils';
+import LikeNft from '../../Common/LikeNft';
 
 const RaffleCard = ({ data, hiddenStatus }) => {
     const nft = data.nft?.data?.attributes;
@@ -27,6 +28,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 <i className="fas fa-heart fa-fw"></i>
                 {nft.likes}
             </span>} */}
+            <LikeNft nft={{ id: data.nft?.data?.id, likes: nft?.likes }} />
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
                 <img style={{ background: `url(${data.nft?.data?.attributes?.picture_url})` }} alt="Image" className="cs-zoom_item" />
             </a>

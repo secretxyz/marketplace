@@ -23,13 +23,14 @@ import accountStore from "../../store/account.store";
 import DrawNftModal from "./Single/DrawNftModal";
 import DrawPrizeModal from "./Single/DrawPrizeModal";
 import { BITHOMP_URL } from "../Common/constants";
+import LikeNft from "../Common/LikeNft";
 
 const NftDetails = (props) => {
     const { auth_token } = accountStore;
     const { tokenid, raffleid } = props.match.params;
 
     const { loading, nft, fetchNftDetails } = useNft(tokenid, raffleid);
-    const { loading: submitting, result, refresh, like, report } = useNftOther();
+    const { loading: submitting, result, refresh, report } = useNftOther();
 
     const [raffle, setRaffle] = useState();
     const [raffler, setRaffler] = useState();
@@ -479,14 +480,14 @@ const NftDetails = (props) => {
     const getOwnerView = () => {
         let user = raffle ? raffler : owner;
         return <div className="cs-author_card cs-white_bg cs-box_shadow">
-            <a href={`/profile/${user?.wallet}`} target="_blank">
+            <a href={`/profile/${user?.wallet}`}>
                 <div className="cs-author_img">
                     <Avatar className="cs-profile_avatar_oval" {...{ name: user?.wallet, image: user?.picture_url }} />
                 </div>
             </a>
             <div className="cs-author_right">
                 <h3>{raffle ? "Raffled by" : "Owned by"}</h3>
-                <a href={`/profile/${user?.wallet}`} target="_blank">
+                <a href={`/profile/${user?.wallet}`}>
                     <p>{user?.username ? `@${user?.username.trimStart()}` : getSummaryAddress(user?.wallet)}</p>
                 </a>
             </div>
@@ -561,10 +562,6 @@ const NftDetails = (props) => {
         refresh(tokenid);
     }
 
-    const onClickLike = () => {
-        console.log("liking...");
-    }
-
     const onClickShare = () => {
         if (raffle) {
             navigator.clipboard.writeText(`https://secretmarket.xyz/nft/${nft?.nft_tokenid}/${raffle?.id}`);
@@ -597,7 +594,7 @@ const NftDetails = (props) => {
         if (isVideoAsset(nft?.picture_url)) {
             return <video src={nft?.picture_url} autoPlay loop muted controls />
         }
-        return <img src={nft?.picture_url} alt="" />
+        return <img style={{ background: `url(${nft.picture_url})` }} alt="" />
     }
 
     return (
@@ -615,10 +612,7 @@ const NftDetails = (props) => {
                                 {raffle?.featured && <span className="cs-card_featured cs-primary_color">
                                     Featured
                                 </span>}
-                                {/* <span className="cs-card_like cs-primary_color cs-box_shadow">
-                                    <i className="fas fa-heart fa-fw"></i>
-                                    {nft?.likes}
-                                </span> */}
+                                <LikeNft nft={nft} />
                             </div>
                         </div>
                         <div className="cs-height_25 cs-height_lg_25"></div>
@@ -670,13 +664,13 @@ const NftDetails = (props) => {
                         <div className="row">
                             <div className="col-xl-7">
                                 <div className="cs-author_card cs-white_bg cs-box_shadow">
-                                    <a href={`/collection/${collection?.slug}`} target="_blank">
+                                    <a href={`/collection/${collection?.slug}`}>
                                         <div className="cs-author_img">
                                             <img src={getImageLink(collection?.picture_url)} alt="" />
                                         </div>
                                     </a>
                                     <div className="cs-author_right">
-                                        <a href={`/collection/${collection?.slug}`} target="_blank">
+                                        <a href={`/collection/${collection?.slug}`}>
                                             <h3 className="cs-nft_details_collection_name">{collection?.name}</h3>
                                         </a>
                                         <p>created by <a href={`/profile/${collection?.issuer}`}>

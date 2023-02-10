@@ -367,3 +367,34 @@ export const getLikedAccounts = () => {
 export const setLikedAccounts = (accounts) => {
 	localStorage.setItem("like_accounts", JSON.stringify(accounts));
 }
+
+
+export const likeNft = (nftId) => {
+	let nfts = getLikedNfts();
+
+	if (nfts.includes(nftId)) {
+		nfts.splice(nfts.indexOf(nftId), 1);
+	} else {
+		nfts.push(nftId);
+	}
+
+	localStorage.setItem("like_nfts", JSON.stringify(nfts));
+}
+
+export const getLikedNfts = () => {
+	let nfts = localStorage.getItem("like_nfts");
+	if (!nfts) {
+		return [];
+	}
+	return JSON.parse(nfts);
+}
+
+export const setLikedNfts = (nfts) => {
+	localStorage.setItem("like_nfts", JSON.stringify(nfts));
+}
+
+
+export const htmlDecode = (input) => {
+	const doc = new DOMParser().parseFromString(input, "text/html");
+	return doc.documentElement.textContent;
+}

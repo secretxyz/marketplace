@@ -90,22 +90,14 @@ export const useNftOther = () => {
         setLoading(false);
     }
 
-    const like = async (tokenid) => {
-        setLoading(true);
-        const res = await SecretApi.likeNft(tokenid);
-        if (res) {
-            setResult(res);
-        }
-        setLoading(false);
+    const like = async (id) => {
+        const res = await SecretApi.likeNft(id);
+        return res;
     }
 
     const report = async (tokenid) => {
-        setLoading(true);
         const res = await SecretApi.reportNft(tokenid);
-        if (res) {
-            setResult(res);
-        }
-        setLoading(false);
+        return res;
     }
 
     return {
