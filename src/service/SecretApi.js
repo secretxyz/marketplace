@@ -117,7 +117,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -127,7 +127,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/top-rafflers`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -142,7 +142,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -179,7 +179,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/collections`, { params });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -223,7 +223,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -241,7 +241,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -268,7 +268,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -286,7 +286,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -301,7 +301,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/account/refresh/${id}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -313,7 +313,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -327,7 +327,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/account/${wallet}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -339,7 +339,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -360,7 +360,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -377,7 +377,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -393,7 +393,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -417,7 +417,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -437,7 +437,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -458,7 +458,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -491,7 +491,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -501,7 +501,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/nft/${tokenid}?raffleid=${raffleid}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -511,7 +511,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/nft/offers/${tokenid}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -522,7 +522,7 @@ class SecretApi {
             const res = await axios.post(`${this.baseUrl}/api/raffle/${getAuthChannel()}`, data, { headers: this.headers() })
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -564,7 +564,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -596,7 +596,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/nft/refresh/${id}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -611,7 +611,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -626,7 +626,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/collection/${slug}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -643,7 +643,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -653,7 +653,7 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/nft-attributes/collection/${collectionId}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -692,7 +692,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -717,7 +717,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -730,7 +730,7 @@ class SecretApi {
             console.log(res);
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -793,7 +793,7 @@ class SecretApi {
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -811,7 +811,7 @@ class SecretApi {
 
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -829,7 +829,7 @@ class SecretApi {
 
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -846,7 +846,7 @@ class SecretApi {
 
             return res.data;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
@@ -857,7 +857,7 @@ class SecretApi {
             const res = await axios.post(`${this.baseUrl}/api/messages`, { data });
             return res;
         } catch (error) {
-            console.log(error);
+            handleError(error);
             return null;
         }
     }
