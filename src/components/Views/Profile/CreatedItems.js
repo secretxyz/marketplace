@@ -26,7 +26,7 @@ const CreatedItems = ({ accountId }) => {
             <div className="row cs-cards_area" onScroll={handleScroll}>
                 {items.map(n => (
                     <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                        <NftCard data={{ ...n.attributes, owner_id: accountId }} />
+                        <NftCard data={{ ...n.attributes, id: n.id }} />
                         <div className="cs-height_20 cs-height_lg_20"></div>
                     </div>
                 ))}

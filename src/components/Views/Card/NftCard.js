@@ -2,11 +2,11 @@ import React from 'react';
 import Avatar from "../Profile/Avatar";
 import { getAccount, isVideoAsset } from '../../Helpers/Utils';
 import { getSummaryAddress } from '../../Helpers/Utils';
+import LikeNft from '../../Common/LikeNft';
 
 const NftCard = ({ data }) => {
     const nft_link = `/nft/${data.nft_tokenid}`;
     const owner = { id: data.owner?.data?.id, ...data.owner?.data?.attributes };
-    const likes = data?.likes?.attributes?.count || 0;
 
     const getFooterButton = () => {
         if (owner.id == getAccount().id) {
@@ -37,10 +37,7 @@ const NftCard = ({ data }) => {
             {/* {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
                 #{data.rarity_rank}
             </span>} */}
-            {/* {<span className="cs-card_like cs-primary_color">
-                <i className="fas fa-heart fa-fw"></i>
-                {likes}
-            </span>} */}
+            <LikeNft nft={data} />
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
                 {isVideoAsset(data.picture_url) ? <video src={data.picture_url} type="video/mp4" /> :
                     <img style={{ background: `url(${data.picture_url})` }} alt="Image" className="cs-zoom_item" />}

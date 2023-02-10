@@ -74,12 +74,14 @@ const RaffleInfoTabs = ({ raffleId, reservedCount, status }) => {
     }
 
     useEffect(() => {
-        let sum = 0;
-        let txs = transactions.map(t => {
-            sum += t.attributes.ticket_count;
-            return { ...t, number: reservedCount - sum + 1 }
-        })
-        setTxs(txs);
+        if (transactions) {
+            let sum = 0;
+            let txs = transactions.map(t => {
+                sum += t.attributes.ticket_count;
+                return { ...t, number: reservedCount - sum + 1 }
+            })
+            setTxs(txs);
+        }
     }, [transactions])
 
     useEffect(() => {
