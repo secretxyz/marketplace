@@ -4,7 +4,7 @@ import {
     A_Z, Z_A,
     LIKES_HIGH_TO_LOW, LIKES_LOW_TO_HIGH,
     RAFFLES_HIGH_TO_LOW, RAFFLES_LOW_TO_HIGH,
-    TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH,
+    TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH, CREATED_SOON,
 } from "../components/Common/constants";
 import { getAuthChannel, getAuthToken, isLoggedIn, setAccount, setAuthToken } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
@@ -68,6 +68,12 @@ const getFilters = (filter) => {
                 filters = {
                     ...filters,
                     "sort[0]": "ticket_price:asc"
+                }
+                break;
+            case CREATED_SOON:
+                filters = {
+                    ...filters,
+                    "sort[0]": "createdAt:desc"
                 }
                 break;
             default:
@@ -714,7 +720,7 @@ class SecretApi {
                     "populate[from]": true,
                     "populate[nft][fields][0]": "name",
                     "populate[nft][fields][1]": "nft_tokenid",
-                    "populate[nft][fields][2]": "picture_url",                    
+                    "populate[nft][fields][2]": "picture_url",
                     "sort[0]": "createdAt:desc",
                 }
             });

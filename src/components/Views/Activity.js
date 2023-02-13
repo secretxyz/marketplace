@@ -73,13 +73,13 @@ const Activity = () => {
 										<li>
 											<div className="form-check">
 												<input name="create" className="form-check-input" type="checkbox" id="raffle-create" checked={filter.create || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-create">Create Raffle</label>
+												<label className="form-check-label" htmlFor="raffle-create">Created Raffle</label>
 											</div>
 										</li>
 										<li>
 											<div className="form-check">
 												<input name="ticket" className="form-check-input" type="checkbox" id="raffle-ticket" checked={filter.ticket || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-ticket">Reserve Ticket</label>
+												<label className="form-check-label" htmlFor="raffle-ticket">Reserved Ticket</label>
 											</div>
 										</li>
 										{/* <li>
@@ -91,13 +91,13 @@ const Activity = () => {
 										<li>
 											<div className="form-check">
 												<input name="end" className="form-check-input" type="checkbox" id="raffle-end" checked={filter.end || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-end">Complete Raffle</label>
+												<label className="form-check-label" htmlFor="raffle-end">Completed Raffle</label>
 											</div>
 										</li>
 										<li>
 											<div className="form-check">
 												<input name="cancel" className="form-check-input" type="checkbox" id="raffle-cancel" checked={filter.cancel || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-cancel">Cancel Raffle</label>
+												<label className="form-check-label" htmlFor="raffle-cancel">Cancelled Raffle</label>
 											</div>
 										</li>
 									</ul>

@@ -46,3 +46,4 @@ export const RAFFLE_PRICE_HIGH_TO_LOW = 7;
 export const RAFFLE_PRICE_LOW_TO_HIGH = 8;
 export const TICKET_PRICE_HIGH_TO_LOW = 9;
 export const TICKET_PRICE_LOW_TO_HIGH = 10;
+export const CREATED_SOON = 11;
