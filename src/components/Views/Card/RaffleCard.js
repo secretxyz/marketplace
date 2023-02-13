@@ -73,10 +73,12 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 </h3>
                 <div className="cs-card_price">Tickets Sold: {data.reserved_count == data.ticket_count ? <b className="text-danger">
                     Sold Out
-                </b> : <b className="cs-primary_color">
-                    {data.reserved_count} / {data.ticket_count}
-                </b>}
+                </b> : <span><b className="cs-primary_color">{data.reserved_count} / {data.ticket_count}</b> ({Number(data.reserved_count / data.ticket_count * 100).toFixed(0)}%) <span className="cs-card_threshold cs-primary_color cs-box_shadow">{data.sell_option * 25} %</span></span>
+                }
                 </div>
+                {/* <div className="cs-card_price">
+                    Reserve to Sales: <b className="cs-primary_color">{data.sell_option * 25} %</b>
+                </div> */}
                 <div className="cs-card_price">
                     Price/Ticket: <b className="cs-primary_color">{data.ticket_price} XRP</b>
                 </div>

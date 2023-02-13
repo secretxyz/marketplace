@@ -27,7 +27,7 @@ const SimilarItems = ({ tokenid, collection }) => {
             <div className="cs-height_20 cs-height_lg_20"></div>
             <div className="cs-general_box_2">
                 <div className="cs-trend_nft_slider cs-style1 cs-gap-30">
-                    <div className="cs-slider_container" data-autoplay="0" data-loop="0" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="4" data-lg-slides="5" data-add-slides="5">
+                    <div className="cs-slider_container" data-autoplay="0" data-loop="0" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="4" data-lg-slides="4" data-add-slides="4">
                         <div className="cs-slider_wrapper">
                             {nfts.map(n => (
                                 <div className="cs-slide" key={n.id}>

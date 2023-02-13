@@ -356,6 +356,19 @@
   color: white;
 }
 
+.cs-card_threshold {
+  z-index: 2;
+  left: 20px;
+  top: 20px;
+  background: linear-gradient(116.85deg, #FC466B 0%, #3F5EFB 100%);
+  font-size: 12px;
+  line-height: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 1.6em;
+  padding: 2px 7px;
+  color: white;
+}
 
 .cs-card_like {
   position: absolute;
@@ -375,7 +388,7 @@
     margin-right: 5px;
     color: gray;
   }
-    
+
   .cs-card_like_active {
     color: #FF4E4E;
   }
