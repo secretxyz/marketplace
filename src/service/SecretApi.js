@@ -707,14 +707,15 @@ class SecretApi {
                 headers: this.headers(),
                 params: {
                     "pagination[page]": page,
-                    "pagination[pageSize]": 10,
+                    "pagination[pageSize]": 8,
                     "filters[confirmed]": false,
                     "populate[raffle]": true,
                     "populate[raffle_ticket]": true,
                     "populate[from]": true,
                     "populate[nft][fields][0]": "name",
                     "populate[nft][fields][1]": "nft_tokenid",
-                    "populate[nft][fields][2]": "picture_url",
+                    "populate[nft][fields][2]": "picture_url",                    
+                    "sort[0]": "createdAt:desc",
                 }
             });
             return res.data;
@@ -729,7 +730,7 @@ class SecretApi {
             const res = await axios.put(`${this.baseUrl}/api/notification/${id}`, null, {
                 headers: this.headers(),
             });
-            console.log(res);
+            // console.log(res);
             return res.data;
         } catch (error) {
             this.handleError(error);
@@ -737,6 +738,18 @@ class SecretApi {
         }
     }
 
+    async confirmAllNotifications() {
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/all-notifications`, null, {
+                headers: this.headers(),
+            });
+            // console.log(res);
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
 
     async getActivities(page, filter) {
         let filters;

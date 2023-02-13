@@ -200,12 +200,13 @@
   .cs-toggle_body {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
-    width: 340px;
+    width: 350px;
     padding: 20px;
     border: 0px solid;
     border-image-slice: 1;
     border-top-width: 2px;
     border-image-source: linear-gradient(116.85deg, #FC466B 0%, #3F5EFB 100%);
+    overflow: scroll;
   }
 
   .cs-notification_list {
@@ -236,6 +237,10 @@
     }
   }
 
+  .cs-notification_time {
+    font-size: 14px;
+  }
+
   .cs-notification_item {
     display: flex;
     align-items: center;
@@ -249,7 +254,7 @@
 
     p {
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.5em;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -770,7 +775,8 @@
     left: 50%;
     top: 80px;
     transform: translateX(-50%);
-    width: calc(100% - 30px);
+    // width: calc(100% - 30px);
+    max-height: 560px;
   }
 
   .cs-search_wrap .cs-toggle_body {

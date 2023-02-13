@@ -292,7 +292,11 @@ export const useNotifications = () => {
 
     const confirm = async (id) => {
         await SecretApi.confirmNotification(id);
+    }
 
+    const confirmAll = async () => {
+        await SecretApi.confirmAllNotifications();
+        setItems([]);
     }
 
     const fetchNext = (pageNumber) => {
@@ -311,6 +315,7 @@ export const useNotifications = () => {
         items,
         meta,
         fetchNext,
-        confirm
+        confirm,
+        confirmAll
     }
 }

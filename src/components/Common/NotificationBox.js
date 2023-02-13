@@ -4,7 +4,7 @@ import { useOuterClick } from "../../hooks/useOuterClick";
 import NotificationRow from '../Views/Card/NotificationRow';
 
 const NotificationBox = () => {
-	const { loading, items, meta, fetchNext, confirm } = useNotifications();
+	const { loading, items, meta, fetchNext, confirm, confirmAll } = useNotifications();
 	const [badge, setBadge] = useState();
 	const [active, setActive] = useState();
 
@@ -18,6 +18,13 @@ const NotificationBox = () => {
 		}
 	}, [meta])
 
+	useEffect(() => {
+		if (items?.length == 0) {
+			setActive(false);
+			setBadge(0);
+		}
+	}, [items])
+
 	const onClickToggle = () => {
 		if (badge > 0) {
 			setActive(!active);
@@ -26,6 +33,10 @@ const NotificationBox = () => {
 
 	const onClickNotification = (id) => {
 		confirm(id);
+	}
+
+	const onClickMarkAsRead = async () => {
+		await confirmAll();
 	}
 
 	const innerRef = useOuterClick(ev => {
@@ -47,11 +58,11 @@ const NotificationBox = () => {
 						</li>
 					))}
 				</ul>
-				{/* <div className="text-center">
-                    <a href="#" className="cs-btn cs-style1">
-                        <span>View More</span>
-                    </a>
-                </div> */}
+				<div className="text-center">
+					<button className="cs-btn cs-style1" onClick={onClickMarkAsRead}>
+						<span>Mark as read all</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	);

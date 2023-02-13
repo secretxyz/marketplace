@@ -1,4 +1,4 @@
-import { getSummaryUsername } from "../../Helpers/Utils";
+import { getDifferenceTime, getSummaryUsername } from "../../Helpers/Utils";
 
 const NotificationRow = ({ data }) => {
     const nft = data.nft?.data?.attributes;
@@ -17,11 +17,11 @@ const NotificationRow = ({ data }) => {
             case "raffle-ticket-follow":
                 return <>{`${getSummaryUsername(from)} reserved ${raffle_ticket?.ticket_count} tickets`}</>;
             case "raffle-winner":
-                return <>{`You were chosen as the winner`}</>;
+                return <>{`You were chosen as the winner.`}<br/>{`Please Claim Prize.`}</>;
             case "raffle-ticket-cancel":
                 return <>{`Refunded ${raffle_ticket?.ticket_count} tickets`}</>;
             case "raffle-cancel":
-                return <>{`The raffle has cancelled`}</>;
+                return <>{`The raffle has cancelled.`}<br/>{`Please Claim NFT.`}</>;
             case "raffle-ticket-end":
             case "raffle-end":
                 return <>{`The raffle has ended`}</>;
@@ -38,6 +38,9 @@ const NotificationRow = ({ data }) => {
             <div className="cs-notification_right">
                 <p>{generateMessage()}</p>
                 <h4>{nft?.name}</h4>
+                {/* <div className="cs-notification_time">
+                    {getDifferenceTime(data.createdAt)}
+                </div> */}
             </div>
         </a>
     )

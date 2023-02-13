@@ -26,7 +26,7 @@ const RaffleFilterBar = ({ result, callback }) => {
             <div className="cs-filter_head_right">
                 <div className="cs-form_field_wrap cs-select_arrow">
                     <select name="order" className="cs-form_field cs-field_sm" value={filter.order} onChange={onChangeFilter}>
-                        <option value="0"> Sort By </option>
+                        <option value="0"> Ending Soon </option>
                         <option value={TICKET_PRICE_HIGH_TO_LOW}>Price: High to Low</option>
                         <option value={TICKET_PRICE_LOW_TO_HIGH} >Price: Low to High</option>
                         <option value={A_Z}>A-Z</option>
