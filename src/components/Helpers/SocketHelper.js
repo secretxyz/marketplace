@@ -18,7 +18,7 @@ const SocketLoader = async () => {
     //  wait until socket connects before adding event listeners
     socket.on("connect", () => {
         socket.on(getAuthChannel(), (data) => {
-            console.log(data);
+            // console.log(data);
             xummStore.setSubscription(data);
         });
     });

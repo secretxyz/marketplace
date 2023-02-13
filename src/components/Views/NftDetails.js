@@ -669,7 +669,10 @@ const NftDetails = (props) => {
         setActivity({
             activity,
             offer_id: offer.offer_id,
-            nft: { nft_tokenid: offer.nft_tokenid }
+            offer_owner: { id: offer.owner.id, wallet: offer.owner.wallet },
+            destination: offer.destination?.wallet,
+            price: offer.amount,
+            nft: { id: nft.id, nft_tokenid: nft.nft_tokenid },
         });
     }
 

@@ -4,6 +4,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { observer } from 'mobx-react';
 import xummStore from '../../../store/xumm.store';
 import { useOffer } from '../../../hooks/useOffer';
+import { SECRET_BROKER, SERVICE_BROKER_FEE } from '../../Common/constants';
 
 const xrpl = require("xrpl");
 
@@ -30,9 +31,11 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 			case "list":
 				return "List NFT";
 			case "bid":
-				return "Place a Bid"
+				return "Place a Bid";
 			case "buy":
-				return "Checkout"
+				return "Checkout";
+			case "accept":
+				return "Accept an Offer";
 		}
 	}
 
@@ -87,7 +90,7 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 									<span className="cs-offer_field_title">Price (XRP)</span>
 									<input name="price" type="number" className="cs-form_field cs-white_bg"
 										placeholder="Enter amount" value={offer?.price || ""} onChange={onChangeInfo} min={0} />
-									<span className="cs-offer_field_description">Service fee: 0%</span>
+									<span className="cs-offer_field_description">Please input valid price</span>
 								</div>
 							</div>
 							<div className="col-lg-6">
@@ -125,7 +128,7 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 									<span className="cs-offer_field_title">Price (XRP)</span>
 									<input name="price" type="number" className="cs-form_field cs-white_bg"
 										placeholder="Enter amount" value={offer?.price || ""} onChange={onChangeInfo} min={0} />
-									<span className="cs-offer_field_description">Service fee: 0%</span>
+									<span className="cs-offer_field_description">Please input above 1 XRP</span>
 								</div>
 							</div>
 							<div className="col-lg-6">
@@ -146,6 +149,78 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 						<hr />
 						{warning && <label className="form-check-label text-warning cs-center">{warning}</label>}
 						<button className="cs-btn cs-style1 cs-btn_lg w-100" onClick={onClickSubmit} disabled={!agreed}>
+							<span>Submit</span>
+						</button>
+					</div>
+				</div>
+			case "buy":
+				return <div>
+					<div className="cs-modal_header">
+						<h2 className="cs-modal_title">{getTitle()}</h2>
+					</div>
+					<div className="cs-modal_card">
+						<div className="cs-height_10 cs-height_lg_10"></div>
+						<div className="cs-bid_card">
+							<div className="cs-bid_info">
+								<ul>
+									<li>
+										<span>Bid Price</span>
+										<b>{Number(activity.price) / 1000000} XRP</b>
+									</li>
+									<li>
+										<span>Service Fee</span>
+										<b>1 XRP</b>
+									</li>
+								</ul>
+							</div>
+							<hr />
+							<div className="cs-bid_info">
+								<ul>
+									<li>
+										<span>Possible Earning</span>
+										<b>{Number(activity.price) / 1000000 + SERVICE_BROKER_FEE} XRP</b>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div className="cs-height_20 cs-height_lg_20"></div>
+						<button className="cs-btn cs-style1 cs-btn_lg w-100" onClick={onClickSubmit}>
+							<span>Submit</span>
+						</button>
+					</div>
+				</div>
+			case "accept":
+				return <div>
+					<div className="cs-modal_header">
+						<h2 className="cs-modal_title">{getTitle()}</h2>
+					</div>
+					<div className="cs-modal_card">
+						<div className="cs-height_10 cs-height_lg_10"></div>
+						<div className="cs-bid_card">
+							<div className="cs-bid_info">
+								<ul>
+									<li>
+										<span>Bid Price</span>
+										<b>{Number(activity.price) / 1000000} XRP</b>
+									</li>
+									<li>
+										<span>Service Fee</span>
+										<b>1 XRP</b>
+									</li>
+								</ul>
+							</div>
+							<hr />
+							<div className="cs-bid_info">
+								<ul>
+									<li>
+										<span>Possible Earning</span>
+										<b>{Number(activity.price) / 1000000 - SERVICE_BROKER_FEE} XRP</b>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div className="cs-height_20 cs-height_lg_20"></div>
+						<button className="cs-btn cs-style1 cs-btn_lg w-100" onClick={onClickSubmit}>
 							<span>Submit</span>
 						</button>
 					</div>
@@ -188,14 +263,14 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 
 	useEffect(() => {
 		if (activity) {
-			if (activity.activity == "cancel") {
+			if (activity.activity == "cancel" ||
+				(activity.activity == "buy" && activity.destination != SECRET_BROKER) ||
+				(activity.activity == "accept" && activity.destination != SECRET_BROKER)) {
 				createOffer({
 					...offer,
 					...activity
 				});
 				setStep(Steps.Waiting);
-			} else if (activity.activity == "buy") {
-
 			}
 		}
 	}, [activity])
@@ -231,14 +306,12 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 				return;
 			}
 
-			setWarning(null);
 			createOffer({
 				...offer,
 				...activity
 			});
-			setStep(Steps.Waiting);
 		} else if (activity.activity == "list") {
-			if (Number(offer.price) <= 0 || isNaN(Number(offer.price))) {
+			if (Number(offer.price) <= 1 || isNaN(Number(offer.price))) {
 				setWarning("Invalid sell price. Please confirm again.");
 				return;
 			}
@@ -247,15 +320,13 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 				return;
 			}
 
-			setWarning(null);
 			createOffer({
 				...offer,
 				featured,
 				...activity,
 			});
-			setStep(Steps.Waiting);
 		} else if (activity.activity == "bid") {
-			if (Number(offer.price) <= 0 || isNaN(Number(offer.price))) {
+			if (Number(offer.price) <= 1 || isNaN(Number(offer.price))) {
 				setWarning("Invalid sell price. Please confirm again.");
 				return;
 			}
@@ -264,13 +335,19 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 				return;
 			}
 
-			setWarning(null);
 			createOffer({
 				...offer,
 				...activity,
 			});
-			setStep(Steps.Waiting);
+		} else if (activity.activity == "accept" || activity.activity == "buy") {
+			createOffer({
+				...offer,
+				...activity,
+			});
 		}
+
+		setWarning(null);
+		setStep(Steps.Waiting);
 	}
 
 	return (
