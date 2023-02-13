@@ -71,7 +71,10 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 <h3 className="cs-card_title">
                     <a href={nft_link}>{data.name}</a>
                 </h3>
-                <div className="cs-card_price">Tickets Sold: {data.reserved_count == data.ticket_count ? <b className="text-danger">
+                <div className="cs-card_price">
+                    Price/Ticket: <b className="cs-primary_color">{data.ticket_price} XRP</b>
+                </div>
+                <div className="cs-card_price">Sold: {data.reserved_count == data.ticket_count ? <b className="text-danger">
                     Sold Out
                 </b> : <span><b className="cs-primary_color">{data.reserved_count} / {data.ticket_count}</b> ({Number(data.reserved_count / data.ticket_count * 100).toFixed(0)}%) <span className="cs-card_threshold cs-primary_color cs-box_shadow">{data.sell_option * 25} %</span></span>
                 }
@@ -79,9 +82,6 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 {/* <div className="cs-card_price">
                     Reserve to Sales: <b className="cs-primary_color">{data.sell_option * 25} %</b>
                 </div> */}
-                <div className="cs-card_price">
-                    Price/Ticket: <b className="cs-primary_color">{data.ticket_price} XRP</b>
-                </div>
                 <hr />
                 <div className="cs-card_footer cs-card_footer_center">
                     <a href={raffle_link} className="cs-btn cs-style1 cs-card_btn_3">
