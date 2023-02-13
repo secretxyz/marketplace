@@ -270,7 +270,6 @@ export const useProfileOther = () => {
     }
 }
 
-
 export const useNotifications = () => {
     const [items, setItems] = useState([]);
     const [meta, setMeta] = useState();

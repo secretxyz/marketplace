@@ -224,7 +224,7 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 								<input className="form-check-input" type="checkbox" id="flexCheckAgree" onChange={onChangeSettingAgree} checked={agreed} />
 								<label className="form-check-label" htmlFor="flexCheckAgree">Please review your raffle settings. Raffles cannot be cancelled unless timer ends and reserve is not met. No exceptions!</label>
 							</div>
-							<div className="cs-height_15 cs-height_lg_15"></div>
+							<hr />
 							{warning && <label className="form-check-label text-warning cs-center">{warning}</label>}
 							<button className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickSubmit} disabled={!agreed}>
 								<span>Submit</span>

@@ -1,5 +1,6 @@
 import path from "path";
-import { ONXRP_URL, ONXRP_BROKER } from "../Common/constants"
+import { toast } from "react-toastify";
+import { ONXRP_URL, ONXRP_BROKER, SECRET_BROKER } from "../Common/constants"
 import { XRPCAFE_URL, XRPCAFE_BROKER } from "../Common/constants"
 
 export const mapOrder = (array, order, key) => {
@@ -15,9 +16,25 @@ export const mapOrder = (array, order, key) => {
 	return array;
 };
 
+export const getMarketplaceNftLink = (destination, nft_tokenid)=>{
+	if (destination.wallet == ONXRP_BROKER) {
+		return `${ONXRP_URL}/${nft_tokenid}`;
+	}
+
+	if (destination.wallet == XRPCAFE_BROKER) {
+		return`${XRPCAFE_URL}/${nft_tokenid}`;
+	}
+
+	return null;
+}
+
 export const getMarketplaceByWallet = (destination, nft_tokenid) => {
 	if (!destination) {
 		return;
+	}
+
+	if (destination.wallet == SECRET_BROKER) {
+		return <a><span>at SecretLabs</span></a>;
 	}
 
 	if (destination.wallet == ONXRP_BROKER) {
@@ -27,7 +44,6 @@ export const getMarketplaceByWallet = (destination, nft_tokenid) => {
 	if (destination.wallet == XRPCAFE_BROKER) {
 		return <a href={`${XRPCAFE_URL}/${nft_tokenid}`} target="_blank"><span>at xrp.cafe</span></a>;
 	}
-
 	return <a href={`profile/${destination.wallet}`} target="_blank"><span>to {getSummaryUsername(destination)}</span></a>;
 }
 
@@ -37,6 +53,14 @@ export const getExpirationDateTime = (value) => {
 	}
 
 	return <>Expiration: <span>{getDifferenceTime(value)}</span></>;
+}
+
+export const getExpirationDateTime1 = (value) => {
+	if (!value) {
+		return null;
+	}
+
+	return <>Expires <span>{getDifferenceTime(value)}</span></>;
 }
 
 export const getDateTimeWithFormat = (value) => {
@@ -397,3 +421,5 @@ export const htmlDecode = (input) => {
 	const doc = new DOMParser().parseFromString(input, "text/html");
 	return doc.documentElement.textContent;
 }
+
+export const notify = (msg) => toast(msg);

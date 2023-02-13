@@ -3,8 +3,6 @@ import MarkdownPreview from '@uiw/react-markdown-preview';
 import BeatLoader from "react-spinners/BeatLoader";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useAttributes, useCollection } from '../../hooks/useCollection';
 import { useCollectionNfts } from '../../hooks/useNft';
 import PageLoader from '../Common/PageLoader';
@@ -319,18 +317,6 @@ const Collection = (props) => {
                     </div>
                 </div>
             </div>
-
-            <ToastContainer position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable={false}
-                pauseOnHover={false}
-                theme={getThemeMode() ? "light" : "dark"}
-            />
         </ContentWrapper>
     );
 }

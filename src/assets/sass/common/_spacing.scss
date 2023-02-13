@@ -173,6 +173,10 @@
   .cs-height_210 {
     height: 210px;
   }
+
+  .cs-width_75 {
+    width: 75px;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -346,7 +350,15 @@
 
   .cs-height_lg_210 {
     height: 210px;
+  } 
+
+  .cs-width_lg_75 {
+    width: 75px;
   }
+}
+
+.cs-spacing_100 {
+  width: 100px;
 }
 
 .cs-spacing-right-10 {

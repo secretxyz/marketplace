@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
 export const useRaffles = () => {
@@ -133,7 +132,7 @@ export const useRaffleHistory = () => {
         setLoading(false);
     }
 
-    const fetchNext = (tokenid, pageNumber) => {
+    const fetchNext = async (tokenid, pageNumber) => {
         if (tokenid) {
             if (!pageNumber) {
                 if (ended) return;

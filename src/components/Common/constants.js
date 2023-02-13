@@ -30,6 +30,7 @@ export const APP_MEDIAQUERY = {
 
 export const BITHOMP_URL = "https://bithomp.com/explorer/";
 
+export const SECRET_BROKER = process.env.NODE_ENV === 'development' ? "rBGCuupZo3npQYK54kcUaejQpNe3mTmKnC" : "rseC4tmmcEPyT2Vav52hNMptNcgxHVGwM2";
 export const ONXRP_URL = "https://nft.onxrp.com/nft";
 export const ONXRP_BROKER = "rpZqTPC8GvrSvEfFsUuHkmPCg29GdQuXhC";
 export const XRPCAFE_URL = "https://xrp.cafe/nft";

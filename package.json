@@ -97,7 +97,8 @@
     "validator": "10.11.0",
     "weather-icons": "github:erikflowers/weather-icons",
     "web-vitals": "0.2.4",
-    "whirl": "github:themicon/whirl"
+    "whirl": "github:themicon/whirl",
+    "xrpl": "^2.8.0-beta.0"
   },
   "devDependencies": {
     "acorn-dynamic-import": "3.0.0",

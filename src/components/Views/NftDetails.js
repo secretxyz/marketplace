@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { observer } from 'mobx-react';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import ContentWrapper from "../Layout/ContentWrapper";
 import CountLoader from "../Common/CountLoader";
 import Avatar from "./Profile/Avatar";
@@ -12,10 +10,11 @@ import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
 import { useNft, useNftOther } from "../../hooks/useNft";
-import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, getThemeMode } from "../Helpers/Utils";
-import CreateRaffleModal from "./Single/CreateRaffleModal";
-import BuyTicketModal from "./Single/BuyTicketModal";
+import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, notify, getExpirationDateTime, getExpirationDateTime1 } from "../Helpers/Utils";
 import PageLoader from "../Common/PageLoader";
+import CreateRaffleModal from "./Single/CreateRaffleModal";
+import CreateOfferModal from "./Single/CreateOfferModal";
+import BuyTicketModal from "./Single/BuyTicketModal";
 import RaffleInfoTabs from "./Single/RaffleInfoTabs";
 import NftInfoTabs from "./Single/NftInfoTabs";
 import ConnectModal from "../Common/ConnectModal";
@@ -32,20 +31,21 @@ const NftDetails = (props) => {
     const { loading, nft, fetchNftDetails } = useNft(tokenid, raffleid);
     const { loading: submitting, result, refresh, report } = useNftOther();
 
+    const [offer, setOffer] = useState();
     const [raffle, setRaffle] = useState();
     const [raffler, setRaffler] = useState();
     const [winner, setWinner] = useState();
     const [collection, setCollection] = useState();
     const [owner, setOwner] = useState();
     const [ticket, setTicket] = useState({ ticket_count: 0 });
+    const [activity, setActivity] = useState();
 
     const [connecting, setConnecting] = useState(false);
     const [raffling, setRaffling] = useState(false);
     const [ticketing, setTicketing] = useState(false);
     const [drawing, setDrawing] = useState(false);
     const [prizing, setPrizing] = useState(false);
-
-    const notify = (msg) => toast(msg);
+    const [offering, setOffering] = useState(false);
 
     const initPage = () => {
         CountLoader('.cs-countdown_style2');
@@ -76,6 +76,9 @@ const NftDetails = (props) => {
         setOwner(nft?.owner);
         if (nft?.raffles) {
             setRaffle(nft.raffles[0] || null);
+        }
+        if (nft?.offers) {
+            setOffer(nft.offers[0] || null);
         }
     }, [nft])
 
@@ -142,14 +145,13 @@ const NftDetails = (props) => {
     }
 
     const getPriceView = () => {
-        if (nft?.bid_price) {
-            return <div className="cs-single_product_head">
-                <p>
-                    On sale for <span className="cs-accent_color"><strong>{nft?.bid_price} XRP</strong></span>
-                    {nft?.highest_bid_price && <span> · Highest bid ~ <span className="cs-accent_color"><strong>{nft?.highest_bid_price} XRP</strong></span></span>}
-                </p>
-            </div>
-        }
+        return <div className="cs-single_product_head">
+            <p>
+                On sale for <span className="cs-accent_color"><strong>{offer?.price} XRP</strong></span>
+                {/* {nft?.highest_bid_price && <span> · Highest bid ~ <span className="cs-accent_color"><strong>{nft?.highest_bid_price} XRP</strong></span></span>} */}
+                {offer.expire_at && <span> · {getExpirationDateTime1(offer.expire_at)}</span>}
+            </p>
+        </div>
     }
 
     const isOwner = () => {
@@ -166,41 +168,81 @@ const NftDetails = (props) => {
 
     const getBuySellView = () => {
         if (isLoggedIn() && getAccount().id == nft?.owner?.id && !raffle) {
-            return <div className="row">
-                <div className="col-xl-12">
-                    <div className="cs-white_bg cs-box_shadow cs-general_box_5">
-                        <div className="row">
-                            <div className="col-4">
-                                <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickCreateRaffle}>
-                                    <span>Create Raffle</span>
-                                </a>
-                            </div>
-                            <div className="col-4">
-                                <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                    <span>List at OnXRP</span>
-                                </a>
-                            </div>
-                            <div className="col-4">
-                                <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                    <span>List at XRP.cafe</span>
-                                </a>
+            if (!offer) {
+                return <div className="row">
+                    <div className="col-xl-12">
+                        <div className="cs-white_bg cs-box_shadow cs-general_box_5 cs-buy_sell_view">
+                            <div className="row">
+                                <div className="col-3">
+                                    <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickCreateRaffle}>
+                                        <span>Create Raffle</span>
+                                    </a>
+                                </div>
+                                <div className="col-3">
+                                    <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickListOffer}>
+                                        <span>List at Secret</span>
+                                    </a>
+                                </div>
+                                <div className="col-3">
+                                    <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                        <span>List at onXRP</span>
+                                    </a>
+                                </div>
+                                <div className="col-3">
+                                    <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                        <span>List at xrp.cafe</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
                     </div>
-                    <div className="cs-height_30 cs-height_lg_30"></div>
                 </div>
-            </div>
-        } else if (isLoggedIn() && !raffle) {
+            } else {
+                return <div className="row">
+                    <div className="col-xl-7">
+                        <div className="cs-white_bg cs-box_shadow cs-general_box_5 cs-buy_sell_view">
+                            <div className="row">
+                                <div className="col-6">
+                                    <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                        <span>List at onXRP</span>
+                                    </a>
+                                </div>
+                                <div className="col-6">
+                                    <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                        <span>List at xrp.cafe</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                    <div className="col-xl-5">
+                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
+                            <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickUnlist}>
+                                <span>Unlist Sale</span>
+                            </a>
+                        </div>
+                        <div className="cs-height_15 cs-height_lg_15"></div>
+                    </div>
+                </div>
+            }
+        } else if (isLoggedIn() && !raffle && (!offer || (offer && offer.from.id != getAccount().id))) {
             return <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col-4">
+                                <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickOffer}>
+                                    <span>Offer at Secret</span>
+                                </a>
+                            </div>
+                            <div className="col-4">
                                 <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                     <span>Offer at OnXRP</span>
                                 </a>
                             </div>
-                            <div className="col-6">
+                            <div className="col-4">
                                 <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                     <span>Offer at XRP.cafe</span>
                                 </a>
@@ -572,7 +614,49 @@ const NftDetails = (props) => {
     }
 
     const onClickReport = () => {
-        console.log("sharing...");
+        console.log("reporting...");
+    }
+
+    useEffect(() => {
+        if (offering) {
+            $("#create_offer_modal").toggleClass("active");
+        }
+    }, [offering])
+
+    useEffect(() => {
+        if (activity) {
+            setOffering(true);
+        }
+    }, [activity]);
+
+    const onClickTransfer = () => {
+        setActivity({
+            activity: "transfer",
+            nft: nft,
+        });
+    }
+
+    const onClickListOffer = () => {
+        setActivity({
+            activity: "list",
+            nft: nft,
+        });
+    }
+
+    const onClickUnlist = () => {
+        setActivity({
+            activity: "cancel",
+            offer_id: offer.offer_index,
+            nft: { id: nft.id, nft_tokenid: nft.nft_tokenid },
+        });
+    }
+
+    const onClickOffer = () => {
+        setActivity({
+            activity: "bid",
+            owner: { id: owner.id, wallet: owner.wallet },
+            nft: { id: nft.id, nft_tokenid: nft.nft_tokenid },
+        });
     }
 
     useEffect(() => {
@@ -580,6 +664,14 @@ const NftDetails = (props) => {
             fetchNftDetails(tokenid);
         }
     }, [result])
+
+    const submitOffer = (activity, offer) => {
+        setActivity({
+            activity,
+            offer_id: offer.offer_id,
+            nft: { nft_tokenid: offer.nft_tokenid }
+        });
+    }
 
     const onClickCopyHash = () => {
         navigator.clipboard.writeText(raffle?.payment_tx_hash);
@@ -656,10 +748,14 @@ const NftDetails = (props) => {
                                     <span><i className="fas fa-flag fa-fw"></i></span>
                                 </a>}
                                 <ReactTooltip anchorId="nft_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
+                                {isOwner() && <a className="cs-style1 cs-btn" id="nft_transfer" onClick={onClickTransfer}>
+                                    <span><i className="fas fa-paper-plane fa-fw"></i></span>
+                                </a>}
+                                <ReactTooltip anchorId="nft_transfer" className="cs-modal_tooltip" place="bottom" content="Transfer NFT" />
                             </div>
                         </div>
                         {getRafflePriceView()}
-                        {getPriceView()}
+                        {offer && getPriceView()}
                         <div className="cs-height_15 cs-height_lg_15"></div>
                         <div className="row">
                             <div className="col-xl-7">
@@ -687,7 +783,7 @@ const NftDetails = (props) => {
                         </div>
                         {getBuySellView()}
                         {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} status={raffle?.status} />}
-                        {nft && !raffle && <NftInfoTabs tokenid={tokenid} />}
+                        {nft && !raffle && <NftInfoTabs tokenid={tokenid} nftOwner={owner} submit={submitOffer} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>
                 </div>
@@ -710,18 +806,9 @@ const NftDetails = (props) => {
             {prizing && <DrawPrizeModal raffleId={raffle?.id}
                 refreshDetails={() => { fetchNftDetails(tokenid) }}
                 closeModal={() => { setPrizing(false) }} />}
-
-            <ToastContainer position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable={false}
-                pauseOnHover={false}
-                theme={getThemeMode() ? "light" : "dark"}
-            />
+            {offering && <CreateOfferModal activity={activity}
+                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                closeModal={() => { setOffering(false); setActivity(); }} />}
         </ContentWrapper >
     );
 }

@@ -406,7 +406,7 @@ class SecretApi {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
                     "filters[raffler]": id,
-                    "sort[0]": "raffle_end_datetime:desc",
+                    "sort[0]": "raffle_end_datetime:asc",
                     "populate[nft]": true,
                     "populate[raffler]": true,
                     "filters[status][$notIn][0]": "canceled",
@@ -776,6 +776,12 @@ class SecretApi {
                 "filters[nft][name][$containsi]": filter.keyword
             }
         }
+        if (filter.from) {
+            filters = {
+                ...filters,
+                "filters[from]": filter.from
+            }
+        }
 
         try {
             const res = await axios.get(`${this.baseUrl}/api/activities`, {
@@ -853,11 +859,47 @@ class SecretApi {
         }
     }
 
-
+    // contact us
     async sendMessage(data) {
         try {
             const res = await axios.post(`${this.baseUrl}/api/messages`, { data });
             return res;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    // offer
+    async createOffer(data) {
+        try {
+            const res = await axios.post(`${this.baseUrl}/api/offer/${getAuthChannel()}`, data, { headers: this.headers() })
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async getOffers(page, filter) {
+        let filters = {};
+
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/offers`, {
+                headers: this.headers(),
+                params: {
+                    "pagination[page]": page,
+                    "pagination[pageSize]": this.pageSize,
+                    "populate[from]": true,
+                    "populate[to]": true,
+                    "populate[nft][fields][0]": "name",
+                    "populate[nft][fields][1]": "nft_tokenid",
+                    "populate[nft][fields][2]": "picture_url",
+                    "sort[0]": "createdAt:desc",
+                    ...filters
+                }
+            });
+            return res.data;
         } catch (error) {
             this.handleError(error);
             return null;

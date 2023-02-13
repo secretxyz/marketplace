@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import ContentWrapper from '../Layout/ContentWrapper';
 import Avatar from "./Profile/Avatar";
 import CollectedItems from './Profile/CollectedItems';
@@ -12,12 +10,11 @@ import Raffles from './Profile/Raffles';
 import RaffleTickets from './Profile/RaffleTickets';
 import OffersMade from './Profile/OffersMade';
 import OffersReceived from './Profile/OffersReceived';
-import Transfer from './Profile/Transfer';
 import Activity from './Profile/Activity';
 import ProfileInfo from './Profile/ProfileInfo';
 import Hidden from './Profile/Hidden';
 import { useProfile, useProfileOther } from '../../hooks/useProfile';
-import { getAccount, getLikedAccounts, getSummaryAddress, getThemeMode, isLoggedIn, likeAccount } from '../Helpers/Utils';
+import { getAccount, getLikedAccounts, getSummaryAddress, notify, isLoggedIn, likeAccount } from '../Helpers/Utils';
 import PageLoader from '../Common/PageLoader';
 
 const NavComponents = {
@@ -28,7 +25,6 @@ const NavComponents = {
     "collections": Collections,
     "offers-made": OffersMade,
     "offers-received": OffersReceived,
-    "transfer": Transfer,
     "activity": Activity,
     "profile-info": ProfileInfo,
     "hidden": Hidden,
@@ -73,11 +69,6 @@ const NavMenus = [
         key: "offers-received"
     },
     {
-        label: "Transfers",
-        icon: "fa-exchange-alt",
-        key: "transfer"
-    },
-    {
         label: "Activity",
         icon: "fa-running",
         key: "activity"
@@ -103,8 +94,6 @@ const Profile = (props) => {
     const selectedMenu = navMenus.find(m => m.isChecked);
 
     const ContentComponent = NavComponents[selectedMenu.key];
-
-    const notify = (msg) => toast(msg);
 
     // Filter change handler
     const onFilter = label => {
@@ -251,7 +240,7 @@ const Profile = (props) => {
                                         </svg>
                                     </button>
                                 </div>
-                                <ReactTooltip anchorId="account_wallet" className="cs-modal_tooltip" place="bottom" content="Copy wallet" />
+                                <ReactTooltip anchorId="account_wallet" className="cs-modal_tooltip" place="bottom" content="Copy wallet address" />
                                 <ul className="cs-profile_meta cs-mp0">
                                     <li>Following ({profile?.followings})</li>
                                     <li>Followers ({profile?.followers})</li>
@@ -284,17 +273,6 @@ const Profile = (props) => {
                 </div>
             </div>
             <div className="cs-height_70 cs-height_lg_40"></div>
-            <ToastContainer position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable={false}
-                pauseOnHover={false}
-                theme={getThemeMode() ? "light" : "dark"}
-            />
         </ContentWrapper>
     );
 }
