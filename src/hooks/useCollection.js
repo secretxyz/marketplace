@@ -63,12 +63,27 @@ export const useCollection = (slug) => {
     }
 
     useEffect(async () => {
-        await fetchCollection();
+        if (slug) {
+            await fetchCollection();
+        }
     }, [])
+
+    const refresh = async (id) => {
+        setLoading(true);
+        const res = await SecretApi.refreshCollection(id);
+        setLoading(false);
+        return res;
+    }
+
+    const like = async (id) => {
+        return await SecretApi.likeCollection(id);
+    }
 
     return {
         loading,
-        collection
+        collection,
+        refresh,
+        like
     }
 }
 

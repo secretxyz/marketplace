@@ -7,6 +7,7 @@ import LikeNft from '../../Common/LikeNft';
 const NftCard = ({ data }) => {
     const nft_link = `/nft/${data.nft_tokenid}`;
     const owner = { id: data.owner?.data?.id, ...data.owner?.data?.attributes };
+    const owner_link = `/profile/${owner.wallet}`;
 
     const getFooterButton = () => {
         if (owner.id == getAccount().id) {
@@ -22,7 +23,7 @@ const NftCard = ({ data }) => {
         } else {
             if (!data.bid_price) {
                 return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
-                    <span>Place Bid</span>
+                    <span>Place Offer</span>
                 </a>;
             } else {
                 return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
@@ -43,7 +44,7 @@ const NftCard = ({ data }) => {
                     <img style={{ background: `url(${data.picture_url})` }} alt="Image" className="cs-zoom_item" />}
             </a>
             <div className="cs-card_info">
-                <a href={nft_link} className="cs-avatar cs-white_bg cs-box_shadow">
+                <a href={owner_link} className="cs-avatar cs-white_bg cs-box_shadow">
                     <Avatar className="cs-profile_avatar_oval" {...{ name: owner.wallet, image: owner.picture_url }} />
                     <span>{owner.username ?? getSummaryAddress(owner.wallet)}</span>
                 </a>

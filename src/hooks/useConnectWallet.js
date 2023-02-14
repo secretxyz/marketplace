@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getAuthChannel, setAuthToken, setAccount, setLikedAccounts, setLikedNfts } from "../components/Helpers/Utils";
+import { getAuthChannel, setAuthToken, setAccount } from "../components/Helpers/Utils";
+import { setLikedItems } from "../components/Helpers/Likes";
 import accountStore from "../store/account.store";
 import SecretApi from "../service/SecretApi";
+import { setReportedItems } from "../components/Helpers/Reports";
 
 const useConnectWallet = () => {
     const [result, setResult] = useState();
@@ -28,8 +30,13 @@ const useConnectWallet = () => {
                 setAccount(account_data);
                 accountStore.setAccount(account_data);
 
-                setLikedAccounts(account.followings);
-                setLikedNfts(account.like_nfts);
+                setLikedItems("account", account.like_accounts);
+                setLikedItems("nft", account.like_nfts);
+                setLikedItems("collection", account.like_collections);
+                setReportedItems("account", account.report_accounts);
+                setReportedItems("nft", account.report_nfts);
+                setReportedItems("collection", account.report_collections);
+
                 setResult(res.data.status);
             }
         } catch (error) {

@@ -16,13 +16,13 @@ export const mapOrder = (array, order, key) => {
 	return array;
 };
 
-export const getMarketplaceNftLink = (destination, nft_tokenid)=>{
+export const getMarketplaceNftLink = (destination, nft_tokenid) => {
 	if (destination.wallet == ONXRP_BROKER) {
 		return `${ONXRP_URL}/${nft_tokenid}`;
 	}
 
 	if (destination.wallet == XRPCAFE_BROKER) {
-		return`${XRPCAFE_URL}/${nft_tokenid}`;
+		return `${XRPCAFE_URL}/${nft_tokenid}`;
 	}
 
 	return null;
@@ -82,11 +82,11 @@ export const getDateTimeWithFormat = (value) => {
 	if (hh < 10) {
 		hh = `0${hh}`;
 	}
-	if (hh > 12) {
-		hh = hh - 12;
-	}
 	if (hh >= 12) {
 		ap = "PM"
+	}
+	if (hh > 12) {
+		hh = hh - 12;
 	}
 	if (m < 10) {
 		m = `0${m}`;
@@ -183,9 +183,16 @@ export const getImageLink = (url) => {
 		return null;
 	}
 	if (url?.startsWith("ipfs://ipfs/")) {
+		if (url.endsWith("mp4") || url.endsWith("avi")) {
+			return `https://ipfs.bithomp.com/video/${url.substring(12)}`;
+		}
 		return `https://ipfs.bithomp.com/image/${url.substring(12)}`;
 	}
+
 	if (url?.startsWith("ipfs://")) {
+		if (url.endsWith("mp4") || url.endsWith("avi")) {
+			return `https://ipfs.bithomp.com/video/${url.substring(7)}`;
+		}
 		return `https://ipfs.bithomp.com/image/${url.substring(7)}`;
 	}
 	return url;
@@ -281,7 +288,13 @@ export const setAccount = (account) => {
 		if (account) {
 			localStorage.setItem('account', JSON.stringify(account));
 		} else {
-			localStorage.removeItem('account');
+			localStorage.removeItem("account");
+			localStorage.removeItem("like_accounts");
+			localStorage.removeItem("like_nfts");
+			localStorage.removeItem("like_collections");
+			localStorage.removeItem("report_accounts");
+			localStorage.removeItem("report_nfts");
+			localStorage.removeItem("report_collections");
 		}
 	} catch (error) {
 		console.log(error);
@@ -366,56 +379,6 @@ export const isVideoAsset = (url) => {
 			return false;
 	}
 }
-
-export const likeAccount = (accountId) => {
-	let accounts = getLikedAccounts();
-
-	if (accounts.includes(accountId)) {
-		accounts.splice(accounts.indexOf(accountId), 1);
-	} else {
-		accounts.push(accountId);
-	}
-
-	localStorage.setItem("like_accounts", JSON.stringify(accounts));
-}
-
-export const getLikedAccounts = () => {
-	let accounts = localStorage.getItem("like_accounts");
-	if (!accounts) {
-		return [];
-	}
-	return JSON.parse(accounts);
-}
-
-export const setLikedAccounts = (accounts) => {
-	localStorage.setItem("like_accounts", JSON.stringify(accounts));
-}
-
-
-export const likeNft = (nftId) => {
-	let nfts = getLikedNfts();
-
-	if (nfts.includes(nftId)) {
-		nfts.splice(nfts.indexOf(nftId), 1);
-	} else {
-		nfts.push(nftId);
-	}
-
-	localStorage.setItem("like_nfts", JSON.stringify(nfts));
-}
-
-export const getLikedNfts = () => {
-	let nfts = localStorage.getItem("like_nfts");
-	if (!nfts) {
-		return [];
-	}
-	return JSON.parse(nfts);
-}
-
-export const setLikedNfts = (nfts) => {
-	localStorage.setItem("like_nfts", JSON.stringify(nfts));
-}
-
 
 export const htmlDecode = (input) => {
 	const doc = new DOMParser().parseFromString(input, "text/html");

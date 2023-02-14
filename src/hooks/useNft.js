@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import SecretApi from "../service/SecretApi";
 
 export const useNfts = () => {
@@ -70,42 +69,23 @@ export const useNft = (tokenid, raffleid) => {
         }
     }, [])
 
-    return {
-        loading,
-        nft,
-        fetchNftDetails
-    }
-}
-
-export const useNftOther = () => {
-    const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState();
-
-    const refresh = async (tokenid) => {
+    const refresh = async () => {
         setLoading(true);
         const res = await SecretApi.refreshNft(tokenid);
-        if (res) {
-            setResult(res);
-        }
         setLoading(false);
+        return res;
     }
 
     const like = async (id) => {
-        const res = await SecretApi.likeNft(id);
-        return res;
-    }
-
-    const report = async (tokenid) => {
-        const res = await SecretApi.reportNft(tokenid);
-        return res;
+        return await SecretApi.likeNft(id);
     }
 
     return {
         loading,
-        result,
+        nft,
+        fetchNftDetails,
         refresh,
         like,
-        report,
     }
 }
 

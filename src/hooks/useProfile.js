@@ -14,11 +14,31 @@ export const useProfile = () => {
         setLoading(false);
     }
 
+    const reload = async (wallet) => {
+        const res = await SecretApi.getProfileInfo(wallet);
+        setProfile(res?.data);
+    }
+
+    const refresh = async (id) => {
+        setLoading(true);
+        const res = await SecretApi.refreshProfile(id);
+        setLoading(false);
+        return res;
+    }
+
+    const like = async (id) => {
+        const res = await SecretApi.likeProfile(id);
+        return res;
+    }
+
     return {
         loading,
         accountId,
         profile,
-        fetchProfile
+        fetchProfile,
+        reload,
+        refresh,
+        like,
     }
 }
 
@@ -237,36 +257,6 @@ export const useProfileInfo = () => {
         loading,
         result,
         update
-    }
-}
-
-export const useProfileOther = () => {
-    const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState();
-
-    const refresh = async (accountId) => {
-        setLoading(true);
-        const res = await SecretApi.refreshProfile(accountId);
-        setResult(res);
-        setLoading(false);
-    }
-
-    const like = async (accountId) => {
-        const res = await SecretApi.likeProfile(accountId);
-        return res;
-    }
-
-    const report = async (accountId) => {
-        const res = await SecretApi.reportProfile(accountId);
-        return res;
-    }
-
-    return {
-        loading,
-        result,
-        refresh,
-        like,
-        report,
     }
 }
 

@@ -9,7 +9,7 @@ import SimilarItems from './Single/SimilarItems';
 import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
-import { useNft, useNftOther } from "../../hooks/useNft";
+import { useNft } from "../../hooks/useNft";
 import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, notify, getExpirationDateTime, getExpirationDateTime1 } from "../Helpers/Utils";
 import PageLoader from "../Common/PageLoader";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
@@ -23,13 +23,14 @@ import DrawNftModal from "./Single/DrawNftModal";
 import DrawPrizeModal from "./Single/DrawPrizeModal";
 import { BITHOMP_URL } from "../Common/constants";
 import LikeNft from "../Common/LikeNft";
+import ReportModal from '../Common/ReportModal';
+import { getReportedItems } from '../Helpers/Reports';
 
 const NftDetails = (props) => {
     const { auth_token } = accountStore;
     const { tokenid, raffleid } = props.match.params;
 
-    const { loading, nft, fetchNftDetails } = useNft(tokenid, raffleid);
-    const { loading: submitting, result, refresh, report } = useNftOther();
+    const { loading, nft, fetchNftDetails, refresh } = useNft(tokenid, raffleid);
 
     const [offer, setOffer] = useState();
     const [raffle, setRaffle] = useState();
@@ -39,6 +40,7 @@ const NftDetails = (props) => {
     const [owner, setOwner] = useState();
     const [ticket, setTicket] = useState({ ticket_count: 0 });
     const [activity, setActivity] = useState();
+    const [reported, setReported] = useState(false);
 
     const [connecting, setConnecting] = useState(false);
     const [raffling, setRaffling] = useState(false);
@@ -46,6 +48,7 @@ const NftDetails = (props) => {
     const [drawing, setDrawing] = useState(false);
     const [prizing, setPrizing] = useState(false);
     const [offering, setOffering] = useState(false);
+    const [reporting, setReporting] = useState(false);
 
     const initPage = () => {
         CountLoader('.cs-countdown_style2');
@@ -79,6 +82,9 @@ const NftDetails = (props) => {
         }
         if (nft?.offers) {
             setOffer(nft.offers[0] || null);
+        }
+        if (isReportNft()) {
+            setReported(true);
         }
     }, [nft])
 
@@ -601,7 +607,10 @@ const NftDetails = (props) => {
     }
 
     const onClickRefresh = () => {
-        refresh(tokenid);
+        const res = refresh();
+        if (res && res.status) {
+            fetchNftDetails(tokenid);
+        }
     }
 
     const onClickShare = () => {
@@ -613,8 +622,25 @@ const NftDetails = (props) => {
         notify("The NFT link has been copied.");
     }
 
+    const isReportNft = () => {
+        let nfts = getReportedItems("nft");
+        if (nfts.includes(nft.id)) {
+            return true;
+        }
+        return false;
+    }
+
+    useEffect(() => {
+        if (reporting) {
+            $("#report_modal").toggleClass("active");
+        }
+    }, [reporting])
+
     const onClickReport = () => {
-        console.log("reporting...");
+        if (reported) {
+            return;
+        }
+        setReporting(true);
     }
 
     useEffect(() => {
@@ -659,12 +685,6 @@ const NftDetails = (props) => {
         });
     }
 
-    useEffect(() => {
-        if (result) {
-            fetchNftDetails(tokenid);
-        }
-    }, [result])
-
     const submitOffer = (activity, offer) => {
         setActivity({
             activity,
@@ -683,17 +703,19 @@ const NftDetails = (props) => {
     const assetView = (nft) => {
         if (nft?.animation_url) {
             if (isVideoAsset(nft.animation_url) || nft.animation_url.startsWith("https://storage.googleapis.com")) {
-                return <video src={nft.animation_url} autoPlay loop muted controls />
+                return <video src={getImageLink(nft.animation_url)} autoPlay loop muted controls />
             }
         }
+
         if (isVideoAsset(nft?.picture_url)) {
-            return <video src={nft?.picture_url} autoPlay loop muted controls />
+            return <video src={getImageLink(nft?.picture_url)} autoPlay loop muted controls />
         }
+
         return <img style={{ background: `url(${nft.picture_url})` }} alt="" />
     }
 
     return (
-        loading || submitting ? <PageLoader /> : <ContentWrapper>
+        loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_140 cs-height_lg_120"></div>
             <div className="container">
                 <div className="row">
@@ -748,9 +770,9 @@ const NftDetails = (props) => {
                                 </a>
                                 <ReactTooltip anchorId="nft_share" className="cs-modal_tooltip" place="bottom" content="Copy NFT link" />
                                 {!isOwner() && <a className="cs-style1 cs-btn" id="nft_report" onClick={onClickReport}>
-                                    <span><i className="fas fa-flag fa-fw"></i></span>
+                                    <span><i className={`${reported ? "fas" : "far"} fa-flag fa-fw`}></i></span>
                                 </a>}
-                                <ReactTooltip anchorId="nft_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
+                                <ReactTooltip anchorId="nft_report" className="cs-modal_tooltip" place="bottom" content={reported ? "You have already reported this NFT" : "Report illegal material"} />
                                 {isOwner() && <a className="cs-style1 cs-btn" id="nft_transfer" onClick={onClickTransfer}>
                                     <span><i className="fas fa-paper-plane fa-fw"></i></span>
                                 </a>}
@@ -812,6 +834,8 @@ const NftDetails = (props) => {
             {offering && <CreateOfferModal activity={activity}
                 refreshDetails={() => { fetchNftDetails(tokenid) }}
                 closeModal={() => { setOffering(false); setActivity(); }} />}
+            {reporting && <ReportModal data={{ nft: nft.id }}
+                closeModal={(res) => { setReporting(false); setReported(res); }} />}
         </ContentWrapper >
     );
 }

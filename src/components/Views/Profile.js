@@ -11,11 +11,16 @@ import RaffleTickets from './Profile/RaffleTickets';
 import OffersMade from './Profile/OffersMade';
 import OffersReceived from './Profile/OffersReceived';
 import Activity from './Profile/Activity';
+import Favorites from './Profile/Favorites';
+import Follows from './Profile/Follows';
 import ProfileInfo from './Profile/ProfileInfo';
 import Hidden from './Profile/Hidden';
-import { useProfile, useProfileOther } from '../../hooks/useProfile';
-import { getAccount, getLikedAccounts, getSummaryAddress, notify, isLoggedIn, likeAccount } from '../Helpers/Utils';
+import { useProfile } from '../../hooks/useProfile';
+import { getAccount, getSummaryAddress, notify, isLoggedIn } from '../Helpers/Utils';
 import PageLoader from '../Common/PageLoader';
+import ReportModal from '../Common/ReportModal';
+import { getLikedItems, likeItem } from '../Helpers/Likes';
+import { getReportedItems } from '../Helpers/Reports';
 
 const NavComponents = {
     "raffles": Raffles,
@@ -26,6 +31,8 @@ const NavComponents = {
     "offers-made": OffersMade,
     "offers-received": OffersReceived,
     "activity": Activity,
+    "favorites": Favorites,
+    "follows": Follows,
     "profile-info": ProfileInfo,
     "hidden": Hidden,
 }
@@ -74,6 +81,16 @@ const NavMenus = [
         key: "activity"
     },
     {
+        label: "Favorites",
+        icon: "fa-heart",
+        key: "favorites"
+    },
+    {
+        label: "Follows",
+        icon: "fa-star",
+        key: "follows"
+    },
+    {
         label: "Profile Info",
         icon: "fa-user",
         key: "profile-info",
@@ -89,8 +106,12 @@ const NavMenus = [
 
 const Profile = (props) => {
     const { wallet, menu } = props.match.params;
-    const { loading: submitting, result, refresh, like, report } = useProfileOther();
+    const { loading, accountId, profile, fetchProfile, reload, refresh, like } = useProfile();
     const [navMenus, setNavMenus] = useState(NavMenus);
+    const [liked, setLiked] = useState(false);
+    const [reported, setReported] = useState(false);
+    const [reporting, setReporting] = useState(false);
+
     const selectedMenu = navMenus.find(m => m.isChecked);
 
     const ContentComponent = NavComponents[selectedMenu.key];
@@ -111,11 +132,19 @@ const Profile = (props) => {
         }
     };
 
-    const { loading, accountId, profile, fetchProfile } = useProfile();
-
     useEffect(() => {
         if (accountId === 0) {
             window.location.replace("/");
+            return;
+        }
+
+        if (accountId) {
+            if (isLikeAccount(accountId)) {
+                setLiked(true);
+            }
+            if (isReportAccount(accountId)) {
+                setReported(true);
+            }
         }
     }, [accountId]);
 
@@ -141,15 +170,23 @@ const Profile = (props) => {
     }, [])
 
     const onClickRefresh = () => {
-        refresh(accountId);
+        const res = refresh(accountId);
+        if (res) {
+            refreshProfile();
+        }
     }
 
     const onClickLike = async () => {
         // like
         const res = await like(accountId);
-        if (res && res.status) {
+        if (res) {
+            likeItem("account", accountId, res.result);
+            if (res.result == 1) {
+                setLiked(true);
+            } else {
+                setLiked(false);
+            }
             refreshProfile();
-            likeAccount(accountId);
         }
     }
 
@@ -158,8 +195,17 @@ const Profile = (props) => {
         notify("The profile link has been copied.");
     }
 
+    useEffect(() => {
+        if (reporting) {
+            $("#report_modal").toggleClass("active");
+        }
+    }, [reporting])
+
     const onClickReport = () => {
-        console.log("sharing...");
+        if (reported) {
+            return;
+        }
+        setReporting(true);
     }
 
     const onClickCopyWallet = () => {
@@ -171,15 +217,8 @@ const Profile = (props) => {
         notify("The wallet address has been copied.");
     }
 
-    useEffect(() => {
-        if (result) {
-            fetchProfile(wallet || getAccount().wallet);
-        }
-    }, [result])
-
-
     const refreshProfile = () => {
-        fetchProfile(wallet || getAccount().wallet);
+        reload(wallet || getAccount().wallet);
     }
 
     const isOwner = () => {
@@ -187,19 +226,27 @@ const Profile = (props) => {
             return true;
         }
 
-        return wallet == getAccount.wallet;
+        return accountId == getAccount().id;
     }
 
-    const isLikeProfile = () => {
-        let accounts = getLikedAccounts();
-        if (accounts.includes(accountId)) {
+    const isLikeAccount = (id) => {
+        let accounts = getLikedItems("account");
+        if (accounts.includes(id)) {
+            return true;
+        }
+        return false;
+    }
+
+    const isReportAccount = (id) => {
+        let accounts = getReportedItems("account");
+        if (accounts.includes(id)) {
             return true;
         }
         return false;
     }
 
     return (
-        loading || submitting ? <PageLoader /> : <ContentWrapper>
+        loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_100 cs-height_lg_70"></div>
             <div className="container">
                 <div className="cs-cover_photo cs-bg" style={{ background: `url(${profile?.banner_picture_url || "img/cover-photo.jpeg"})` }}>
@@ -210,17 +257,17 @@ const Profile = (props) => {
                             </a>
                             <ReactTooltip anchorId="account_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh profile information" />
                             {!isOwner() && <a id="account_follow" className="cs-style1 cs-btn" onClick={onClickLike}>
-                                <span><i className={`${isLikeProfile() ? "fa" : "far"} fa-star fa-fw`}></i></span>
+                                <span><i className={`${liked ? "fas" : "far"} fa-star fa-fw`}></i></span>
                             </a>}
-                            <ReactTooltip anchorId="account_follow" className="cs-modal_tooltip" place="bottom" content="Follow account" />
+                            <ReactTooltip anchorId="account_follow" className="cs-modal_tooltip" place="bottom" content={liked ? "Unfollow account" : "Follow account"} />
                             <a id="account_share" className="cs-style1 cs-btn" onClick={onClickShare}>
                                 <span><i className="fas fa-share-alt fa-fw"></i></span>
                             </a>
                             <ReactTooltip anchorId="account_share" className="cs-modal_tooltip" place="bottom" content="Copy profile link" />
                             {!isOwner() && <a id="account_report" className="cs-style1 cs-btn" onClick={onClickReport}>
-                                <span><i className="far fa-flag fa-fw"></i></span>
+                                <span><i className={`${reported ? "fas" : "far"} fa-flag fa-fw`}></i></span>
                             </a>}
-                            <ReactTooltip anchorId="account_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
+                            <ReactTooltip anchorId="account_report" className="cs-modal_tooltip" place="bottom" content={reported ? "You have already reported this account" : "Report illegal material"} />
                         </div>
                     </div>
                 </div>
@@ -273,6 +320,8 @@ const Profile = (props) => {
                 </div>
             </div>
             <div className="cs-height_70 cs-height_lg_40"></div>
+            {reporting && <ReportModal data={{ account: accountId }}
+                closeModal={(res) => { setReporting(false); setReported(res); }} />}
         </ContentWrapper>
     );
 }

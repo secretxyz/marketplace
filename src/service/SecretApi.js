@@ -324,10 +324,6 @@ class SecretApi {
         }
     }
 
-    async reportProfile(id) {
-
-    }
-
     async getProfileInfo(wallet) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/account/${wallet}`);
@@ -624,10 +620,6 @@ class SecretApi {
         }
     }
 
-    async reportNft(id) {
-
-    }
-
     // Collection
     async getCollectionWithSlug(slug) {
         try {
@@ -659,6 +651,28 @@ class SecretApi {
     async getCollectionAttributes(collectionId) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nft-attributes/collection/${collectionId}`);
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async refreshCollection(collectionId) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/collection/refresh/${collectionId}`);
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async likeCollection(collectionId) {
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/collection/like/${collectionId}`, null, {
+                headers: this.headers()
+            });
             return res.data;
         } catch (error) {
             this.handleError(error);
@@ -878,6 +892,17 @@ class SecretApi {
         }
     }
 
+    // create report
+    async createReport(data) {
+        try {
+            const res = await axios.post(`${this.baseUrl}/api/reports`, { data }, { headers: this.headers() });
+            return res;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
     // contact us
     async sendMessage(data) {
         try {
@@ -892,7 +917,7 @@ class SecretApi {
     // offer
     async createOffer(data) {
         try {
-            const res = await axios.post(`${this.baseUrl}/api/offer/${getAuthChannel()}`, data, { headers: this.headers() })
+            const res = await axios.post(`${this.baseUrl}/api/offer/${getAuthChannel()}`, data, { headers: this.headers() });
             return res.data;
         } catch (error) {
             this.handleError(error);

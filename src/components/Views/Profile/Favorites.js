@@ -5,9 +5,8 @@ import { useOffers } from "../../../hooks/useOffer";
 import { APP_COLORS } from "../../Common/constants";
 import ContentWrapper from '../../Layout/ContentWrapper';
 import OfferCard from "../Card/OfferCard";
-// import SignTxModal from "../Single/SignTxModal";
 
-const OffersMade = ({ accountId }) => {
+const Favorites = ({ accountId }) => {
     const { loading, items, meta, fetchNext } = useOffers();
     const [filter, setFilter] = useState({ from: accountId });
     const [signing, setSigning] = useState(false);
@@ -51,12 +50,9 @@ const OffersMade = ({ accountId }) => {
                 ))}
             </ul>
             <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-            {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
-            {signing && <SignTxModal activity={activity}
-                refreshItems={() => fetchNext(1, filter)}
-                closeModal={() => { setSigning(false); setActivity(); }} />} */}
+            {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>} */}
         </ContentWrapper>
     );
 }
 
-export default OffersMade;
+export default Favorites;

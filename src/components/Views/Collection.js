@@ -9,13 +9,19 @@ import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
 import NftCard from './Card/NftCard';
 import { APP_COLORS } from "../Common/constants"
-import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode, htmlDecode } from '../Helpers/Utils';
+import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode, htmlDecode, notify } from '../Helpers/Utils';
+import ReportModal from '../Common/ReportModal';
+import { getLikedItems, likeItem } from '../Helpers/Likes';
+import { getReportedItems } from '../Helpers/Reports';
 
 const Collection = (props) => {
     const { slug } = props.match.params;
-    const { loading, collection } = useCollection(slug);
+    const { loading, collection, refresh, like } = useCollection(slug);
     const { loading: nftsLoading, nfts, meta, fetchNext } = useCollectionNfts();
     const { loading: attrsLoading, attributes, fetchAttributes } = useAttributes();
+    const [liked, setLiked] = useState(false);
+    const [reported, setReported] = useState(false);
+    const [reporting, setReporting] = useState(false);
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -24,10 +30,32 @@ const Collection = (props) => {
         }
     }
 
+    const isLikeCollection = (collectionId) => {
+        let collections = getLikedItems("collection");
+        if (collections.includes(collectionId)) {
+            return true;
+        }
+        return false;
+    }
+
+    const isReportCollection = (collectionId) => {
+        let collections = getReportedItems("collection");
+        if (collections.includes(collectionId)) {
+            return true;
+        }
+        return false;
+    }
+
     useEffect(() => {
         if (collection) {
             fetchNext(collection.id, 0);
             fetchAttributes(collection.id);
+            if (isLikeCollection(collection.id)) {
+                setLiked(true);
+            }
+            if (isReportCollection(collection.id)) {
+                setReported(true);
+            }
         } else if (collection === null) {
             window.location.replace("/not-found");
         }
@@ -45,6 +73,40 @@ const Collection = (props) => {
         return collection?.issuer == getAccount()?.wallet;
     }
 
+    const onClickRefresh = async () => {
+
+    }
+
+    const onClickShare = async () => {
+        navigator.clipboard.writeText(`https://secretmarket.xyz/collection/${collection.slug}`);
+        notify("The collection link has been copied.");
+    }
+
+    const onClickLike = async () => {
+        const res = await like(collection.id);
+        if (res) {
+            likeItem("collection", collection.id, res.result);
+            if (res.result == 1) {
+                setLiked(true);
+            } else {
+                setLiked(false);
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (reporting) {
+            $("#report_modal").toggleClass("active");
+        }
+    }, [reporting])
+
+    const onClickReport = async () => {
+        if (reported) {
+            return;
+        }
+        setReporting(true);
+    }
+
     return (
         loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_35 cs-height_lg_30"></div>
@@ -59,18 +121,18 @@ const Collection = (props) => {
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
                                     <ReactTooltip anchorId="collection_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh collection" />
-                                    {/* {!isCreator() && <a id="collection_like" className="cs-style1 cs-btn">
-                                        <span><i className="far fa-star fa-fw"></i></span>
+                                    {!isCreator() && <a id="collection_like" className="cs-style1 cs-btn" onClick={onClickLike}>
+                                        <span><i className={`${liked ? "fas" : "far"} fa-star fa-fw`}></i></span>
                                     </a>}
-                                    <ReactTooltip anchorId="collection_like" className="cs-modal_tooltip" place="bottom" content="Like collection" /> */}
-                                    <a id="collection_share" className="cs-style1 cs-btn">
+                                    <ReactTooltip anchorId="collection_like" className="cs-modal_tooltip" place="bottom" content={liked ? "Unlike collection" : "Like collection"} />
+                                    <a id="collection_share" className="cs-style1 cs-btn" onClick={onClickShare}>
                                         <span><i className="fas fa-share-alt fa-fw"></i></span>
                                     </a>
                                     <ReactTooltip anchorId="collection_share" className="cs-modal_tooltip" place="bottom" content="Copy collection link" />
-                                    {!isCreator() && <a id="collection_report" className="cs-style1 cs-btn">
-                                        <span><i className="far fa-flag fa-fw"></i></span>
+                                    {!isCreator() && <a id="collection_report" className="cs-style1 cs-btn" onClick={onClickReport}>
+                                        <span><i className={`${reported ? "fas" : "far"} fa-flag fa-fw`}></i></span>
                                     </a>}
-                                    <ReactTooltip anchorId="collection_report" className="cs-modal_tooltip" place="bottom" content="Report illegal material" />
+                                    <ReactTooltip anchorId="collection_report" className="cs-modal_tooltip" place="bottom" content={reported ? "You have already reported this collection" : "Report illegal material"} />
                                 </div>
                             </div>
                             <img src={collection?.banner_picture_url || "img/cover-photo.jpeg"} alt="Collection Details" />
@@ -306,7 +368,7 @@ const Collection = (props) => {
                         <div className="row cs-cards_area" onScroll={handleScroll}>
                             {nfts.map(n => (
                                 <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                                    <NftCard data={{ ...n.attributes }} />
+                                    <NftCard data={{ id: n.id, ...n.attributes }} />
                                     <div className="cs-height_20 cs-height_lg_20"></div>
                                 </div>
                             ))}
@@ -317,6 +379,8 @@ const Collection = (props) => {
                     </div>
                 </div>
             </div>
+            {reporting && <ReportModal data={{ collection: collection.id }}
+                closeModal={(res) => { setReporting(false); setReported(res); }} />}
         </ContentWrapper>
     );
 }

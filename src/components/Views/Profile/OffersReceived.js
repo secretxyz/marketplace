@@ -5,7 +5,7 @@ import { useOffers } from "../../../hooks/useOffer";
 import { APP_COLORS } from "../../Common/constants";
 import ContentWrapper from '../../Layout/ContentWrapper';
 import OfferCard from "../Card/OfferCard";
-import SignTxModal from "../Single/SignTxModal";
+// import SignTxModal from "../Single/SignTxModal";
 
 const OffersReceived = ({ accountId }) => {
     const { loading, items, meta, fetchNext } = useOffers();
