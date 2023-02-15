@@ -54,7 +54,6 @@ const Collection = (props) => {
 
     useEffect(() => {
         if (collection) {
-            console.log("reloading...");
             fetchNext(collection.id, 0);
             fetchAttributes(collection.id);
             if (isLikeCollection(collection.id)) {
