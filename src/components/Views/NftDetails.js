@@ -568,10 +568,17 @@ const NftDetails = (props) => {
 
     const onChangeTicketInfo = (event) => {
         let name = event.target.name;
+        let value = event.target.value;
+
+        // disallow float value
+        if (!Number.isInteger(Number(value))) {
+            return;
+        }
+
         if (name == "ticket_count") {
             setTicket({
                 ...ticket,
-                ticket_count: Number(event.target.value)
+                ticket_count: Number(value)
             });
         }
     }

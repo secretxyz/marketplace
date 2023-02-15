@@ -45,28 +45,27 @@ export const useCollections = () => {
     }
 }
 
-export const useCollection = (slug) => {
+export const useCollection = () => {
     const [loading, setLoading] = useState(true);
     const [collection, setCollection] = useState();
 
-    const fetchCollection = async () => {
-        if (slug) {
-            setLoading(true);
-            const res = await SecretApi.getCollectionWithSlug(slug);
-            if (res) {
-                setCollection(res.data);
-                if (res.data) {
-                    setLoading(false);
-                }
+    const fetchCollection = async (slug) => {
+        setLoading(true);
+        const res = await SecretApi.getCollectionWithSlug(slug);
+        if (res) {
+            setCollection(res.data);
+            if (res.data) {
+                setLoading(false);
             }
         }
     }
 
-    useEffect(async () => {
-        if (slug) {
-            await fetchCollection();
+    const reload = async (slug) => {
+        const res = await SecretApi.getCollectionWithSlug(slug);
+        if (res) {
+            setCollection(res.data);
         }
-    }, [])
+    }
 
     const refresh = async (id) => {
         setLoading(true);
@@ -82,6 +81,8 @@ export const useCollection = (slug) => {
     return {
         loading,
         collection,
+        fetchCollection,
+        reload,
         refresh,
         like
     }

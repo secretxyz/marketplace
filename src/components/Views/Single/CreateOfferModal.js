@@ -293,6 +293,14 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 		let name = event.target.name;
 		let value = event.target.value;
 
+		if (name == "price" && Number(value) < 0) {
+			value = 0;
+		}
+
+		if (name == "expiration" && !Number.isInteger(Number(value))) {
+			return;
+		}
+
 		setOffer({
 			...offer,
 			[name]: value

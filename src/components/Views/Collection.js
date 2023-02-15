@@ -16,7 +16,7 @@ import { getReportedItems } from '../Helpers/Reports';
 
 const Collection = (props) => {
     const { slug } = props.match.params;
-    const { loading, collection, refresh, like } = useCollection(slug);
+    const { loading, collection, fetchCollection, reload, refresh, like } = useCollection();
     const { loading: nftsLoading, nfts, meta, fetchNext } = useCollectionNfts();
     const { loading: attrsLoading, attributes, fetchAttributes } = useAttributes();
     const [liked, setLiked] = useState(false);
@@ -47,7 +47,14 @@ const Collection = (props) => {
     }
 
     useEffect(() => {
+        if (slug) {
+            fetchCollection(slug);
+        }
+    }, [])
+
+    useEffect(() => {
         if (collection) {
+            console.log("reloading...");
             fetchNext(collection.id, 0);
             fetchAttributes(collection.id);
             if (isLikeCollection(collection.id)) {
@@ -74,7 +81,11 @@ const Collection = (props) => {
     }
 
     const onClickRefresh = async () => {
-
+        const res = refresh(collection.id);
+        if (res) {
+            // reload(slug);
+            notify("Collection synchronization will take a little while. Please confirm in an hour.");
+        }
     }
 
     const onClickShare = async () => {
@@ -117,7 +128,7 @@ const Collection = (props) => {
                         <div className="cs-collection_img">
                             <div className="cs-collection_info_other cs-box_shadow">
                                 <div className="cs-collection_info_head">
-                                    <a id="collection_refresh" className="cs-style1 cs-btn">
+                                    <a id="collection_refresh" className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
                                     <ReactTooltip anchorId="collection_refresh" className="cs-modal_tooltip" place="bottom" content="Refresh collection" />

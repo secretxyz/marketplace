@@ -53,6 +53,13 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		let name = event.target.name;
 		let value = event.target.value;
 
+		// disallow float value
+		if (name == "ticket_count" || name == "raffle_duration") {
+			if (!Number.isInteger(Number(value))) {
+				return;
+			}
+		}
+
 		setRaffle({
 			...raffle,
 			[name]: value
