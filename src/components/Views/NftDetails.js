@@ -718,7 +718,7 @@ const NftDetails = (props) => {
             return <video src={getImageLink(nft?.picture_url)} autoPlay loop muted controls />
         }
 
-        return <img style={{ background: `url(${nft.picture_url})` }} alt="" />
+        return <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="" />
     }
 
     return (

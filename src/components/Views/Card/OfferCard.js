@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useOffer } from '../../../hooks/useOffer';
-import { getAccount, getDifferenceTime, getSummaryUsername } from '../../Helpers/Utils';
+import { getAccount, getDifferenceTime, getImageLink, getSummaryUsername } from '../../Helpers/Utils';
 import Avatar from '../Profile/Avatar';
 import CreateOfferModal from '../Single/CreateOfferModal';
 
@@ -61,7 +61,7 @@ const OfferCard = ({ data, submit }) => {
         <div>
             <div className="cs-activity cs-type2 cs-white_bg cs-box_shadow">
                 <div className="cs-activity_nft_thumb ml-0">
-                    <a href={`/nft/${nft.nft_tokenid}`}><img src={nft?.picture_url} alt="Image" /></a>
+                    <a href={`/nft/${nft.nft_tokenid}`}><img src={getImageLink(nft?.picture_url)} alt="Image" /></a>
                 </div>
                 <div className="cs-activity_right cs-activity_nft_name">
                     <div className="cs-activity_text"><h3><a href={`/nft/${nft.nft_tokenid}`}>{nft?.name}</a></h3></div>

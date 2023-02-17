@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDifferenceTime, getSummaryUsername } from '../../Helpers/Utils';
+import { getDifferenceTime, getImageLink, getSummaryUsername } from '../../Helpers/Utils';
 import Avatar from '../Profile/Avatar';
 
 const ActivityCard = ({ data }) => {
@@ -57,7 +57,7 @@ const ActivityCard = ({ data }) => {
                 <i className={getCategoryIcon()}></i>
             </div>
             <div className="cs-activity_nft_thumb">
-                <a href={`/nft/${nft.nft_tokenid}`}><img src={nft?.picture_url} alt="Image" /></a>
+                <a href={`/nft/${nft.nft_tokenid}`}><img src={getImageLink(nft?.picture_url)} alt="Image" /></a>
             </div>
             <div className="cs-activity_right cs-activity_nft_name">
                 <div className="cs-activity_text"><h3><a href={`/nft/${nft.nft_tokenid}`}>{nft?.name}</a></h3></div>

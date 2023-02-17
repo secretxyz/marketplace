@@ -1,4 +1,4 @@
-import { getDifferenceTime, getSummaryUsername } from "../../Helpers/Utils";
+import { getDifferenceTime, getImageLink, getSummaryUsername } from "../../Helpers/Utils";
 
 const NotificationRow = ({ data }) => {
     const nft = data.nft?.data?.attributes;
@@ -17,11 +17,11 @@ const NotificationRow = ({ data }) => {
             case "raffle-ticket-follow":
                 return <>{`${getSummaryUsername(from)} reserved ${raffle_ticket?.ticket_count} tickets`}</>;
             case "raffle-winner":
-                return <>{`You were chosen as the winner.`}<br/>{`Please Claim Prize.`}</>;
+                return <>{`You were chosen as the winner.`}<br />{`Please Claim Prize.`}</>;
             case "raffle-ticket-cancel":
                 return <>{`Refunded ${raffle_ticket?.ticket_count} tickets`}</>;
             case "raffle-cancel":
-                return <>{`The raffle has cancelled.`}<br/>{`Please Claim NFT.`}</>;
+                return <>{`The raffle has cancelled.`}<br />{`Please Claim NFT.`}</>;
             case "raffle-ticket-end":
             case "raffle-end":
                 return <>{`The raffle has ended`}</>;
@@ -33,7 +33,7 @@ const NotificationRow = ({ data }) => {
     return (
         <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id}`} className="cs-notification_item">
             <div className="cs-notification_thumb">
-                <img src={nft?.picture_url} alt="Image" />
+                <img src={getImageLink(nft?.picture_url)} alt="Image" />
             </div>
             <div className="cs-notification_right">
                 <p>{generateMessage()}</p>
