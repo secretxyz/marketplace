@@ -707,15 +707,9 @@ const NftDetails = (props) => {
         navigator.clipboard.writeText(raffle?.payment_tx_hash);
     }
 
-    const assetView = (nft) => {
-        if (nft?.animation_url) {
-            if (isVideoAsset(nft.animation_url) || nft.animation_url.startsWith("https://storage.googleapis.com")) {
-                return <video src={getImageLink(nft.animation_url)} autoPlay loop muted controls />
-            }
-        }
-
-        if (isVideoAsset(nft?.picture_url)) {
-            return <video src={getImageLink(nft?.picture_url)} autoPlay loop muted controls />
+    const getAssetView = (nft) => {
+        if (isVideoAsset(nft)) {
+            return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted controls />
         }
 
         return <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="" />
@@ -729,7 +723,7 @@ const NftDetails = (props) => {
                     <div className="col-lg-5">
                         <div className="cs-single_asset">
                             <div className="cs-asset_view">
-                                {assetView(nft)}
+                                {getAssetView(nft)}
                                 {/* <span className="cs-card_rare cs-primary_color">
                                     #{nft?.rarity}
                                 </span> */}

@@ -33,6 +33,14 @@ const NftCard = ({ data }) => {
         }
     }
 
+    const getAssetView = (nft) => {
+        if (isVideoAsset(nft)) {
+            return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
+        }
+
+        return <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="Image" className="cs-zoom_item" />
+    }
+
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
             {/* {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
@@ -40,7 +48,7 @@ const NftCard = ({ data }) => {
             </span>} */}
             <LikeNft nft={data} />
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
-                <img style={{ background: `url(${getImageLink(data.picture_url)})` }} alt="Image" className="cs-zoom_item" />
+                {getAssetView(data)}
             </a>
             <div className="cs-card_info">
                 <a href={owner_link} className="cs-avatar cs-white_bg cs-box_shadow">

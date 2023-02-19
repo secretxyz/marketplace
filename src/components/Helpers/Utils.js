@@ -209,6 +209,9 @@ export const getImageLink = (url) => {
 	}
 
 	if (!url.startsWith("https://")) {
+		if (url.endsWith("mp4") || url.endsWith("avi")) {
+			return `https://ipfs.bithomp.com/video/${url}`;
+		}
 		return `https://ipfs.bithomp.com/image/${url}`;
 	}
 
@@ -386,15 +389,17 @@ export const setTheme = (mode) => {
 	}
 }
 
-export const isVideoAsset = (url) => {
-	let extension = path.extname(url);
+export const isVideoAsset = (nft) => {
+	let extension = path.extname(nft.animation_url) || path.extname(nft.video_url);
 	switch (extension) {
 		case ".mp4":
 		case ".avi":
 			return true;
-		default:
-			return false;
 	}
+	if (nft.animation_url.startsWith("https://storage.googleapis.com")) {
+		return true;
+	}
+	return false;
 }
 
 export const htmlDecode = (input) => {
