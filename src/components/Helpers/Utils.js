@@ -396,7 +396,7 @@ export const isVideoAsset = (nft) => {
 		case ".avi":
 			return true;
 	}
-	if (nft.animation_url.startsWith("https://storage.googleapis.com")) {
+	if (nft.animation_url?.startsWith("https://storage.googleapis.com")) {
 		return true;
 	}
 	return false;
