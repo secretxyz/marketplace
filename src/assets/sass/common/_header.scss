@@ -847,6 +847,12 @@
       display: flex;
 
       .cs-search_thumb {
+        video {
+          width: 32px;
+          height: 32px;
+          border-radius: 6px;
+        }
+
         img {
           width: 32px;
           height: 32px;

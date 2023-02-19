@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Avatar from "../Profile/Avatar";
 import CountLoader from '../../Common/CountLoader';
-import { getAccount, getDateTimeWithFormat, getDifferenceTime, getImageLink, getRaffleStatus } from '../../Helpers/Utils';
+import { getAccount, getDateTimeWithFormat, getDifferenceTime, getImageLink, getRaffleStatus, isVideoAsset } from '../../Helpers/Utils';
 import { getSummaryAddress } from '../../Helpers/Utils';
 import LikeNft from '../../Common/LikeNft';
 
@@ -15,6 +15,14 @@ const RaffleCard = ({ data, hiddenStatus }) => {
     useEffect(() => {
         CountLoader(`#${counter}`);
     }, [])
+
+    const getAssetView = (nft) => {
+        if (isVideoAsset(nft)) {
+            return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
+        }
+
+        return <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="Image" className="cs-zoom_item" />
+    }
 
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
@@ -30,7 +38,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
             </span>} */}
             <LikeNft nft={{ id: data.nft?.data?.id, likes: nft?.likes }} />
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
-                <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="Image" className="cs-zoom_item" />
+                {getAssetView(nft)}
             </a>
             {
                 data.status == "active" ? <div id={counter} className="cs-countdown" data-countdate={data.raffle_end_datetime} data-key={counter}>

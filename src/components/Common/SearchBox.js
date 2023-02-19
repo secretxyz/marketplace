@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSearch } from "../../hooks/useHomepage";
 import { useOuterClick } from "../../hooks/useOuterClick";
-import { getImageLink, getSummaryUsername } from "../Helpers/Utils";
+import { getImageLink, getSummaryUsername, isVideoAsset } from "../Helpers/Utils";
 import Avatar from "../Views/Profile/Avatar";
 
 const SearchBox = ({ keyword, clear }) => {
@@ -22,6 +22,14 @@ const SearchBox = ({ keyword, clear }) => {
 		setActive(false);
 		clear();
 	});
+
+	const getAssetView = (nft) => {
+		if (isVideoAsset(nft)) {
+			return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted />
+		}
+
+		return <img src={getImageLink(nft.picture_url)} alt="Image" />
+	}
 
 	return (
 		<div ref={innerRef} className={`cs-toggle_body ${active && (collections?.length > 0 || profiles?.length > 0 || nfts?.length > 0) && "active"}`}>
@@ -67,7 +75,9 @@ const SearchBox = ({ keyword, clear }) => {
 							const nft = d.attributes;
 							return <li key={d.id}>
 								<a href={`/nft/${nft.nft_tokenid}`}>
-									<div className="cs-search_thumb"><img src={getImageLink(nft?.picture_url)} alt="Image" /></div>
+									<div className="cs-search_thumb">
+										{getAssetView(nft)}
+									</div>
 									<span className="cs-search_right">{nft?.name}</span>
 								</a>
 							</li>
