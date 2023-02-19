@@ -179,28 +179,32 @@ export const getCurrentTime = () => {
 };
 
 export const getImageLink = (url) => {
-	if (url?.endsWith("undefined")) {
+	if (!url) {
 		return null;
 	}
 
-	if (url?.startsWith("ipfs://ipfs/")) {
+	if (url.endsWith("undefined")) {
+		return null;
+	}
+
+	if (url.startsWith("ipfs://ipfs/")) {
 		if (url.endsWith("mp4") || url.endsWith("avi")) {
 			return `https://ipfs.bithomp.com/video/${url.substring(12)}`;
 		}
 		return `https://ipfs.bithomp.com/image/${url.substring(12)}`;
 	}
 
-	if (url?.startsWith("ipfs://")) {
+	if (url.startsWith("ipfs://")) {
 		if (url.endsWith("mp4") || url.endsWith("avi")) {
 			return `https://ipfs.bithomp.com/video/${url.substring(7)}`;
 		}
 		return `https://ipfs.bithomp.com/image/${url.substring(7)}`;
 	}
 
-	if (!url?.startsWith("https://")) {
+	if (!url.startsWith("https://")) {
 		return `https://ipfs.bithomp.com/image/${url}`;
 	}
-	
+
 	return url;
 }
 
