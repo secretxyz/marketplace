@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react';
 import Avatar from "../Profile/Avatar";
 import CountLoader from '../../Common/CountLoader';
-import { isBeforeThanNow, getDifferenceTime, getSummaryUsername, getTicketStatus } from '../../Helpers/Utils';
+import { isBeforeThanNow, getDifferenceTime, getSummaryUsername, getTicketStatus, getImageLink, isVideoAsset } from '../../Helpers/Utils';
 
 const RaffleTicketCard = ({ data }) => {
     const raffle = data?.raffle?.data?.attributes;
     const raffler = raffle?.raffler?.data?.attributes;
     const nft = raffle?.nft?.data?.attributes;
 
+    const getAssetView = (nft) => {
+        if (isVideoAsset(nft)) {
+            return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-ticket_image" />
+        }
+
+        return <img src={getImageLink(nft.picture_url)} alt="Image" className="cs-ticket_image" />
+    }
+
     return (
         <li>
             <div className={`cs-activity cs-white_bg cs-type1 cs-raffle_ticket cs-box_shadow ${data.status == "winner" && "cs-winner_border"}`}>
                 <a href={`/nft/${nft?.nft_tokenid}/${data?.raffle?.data?.id}`} target="_blank">
-                    <img className="cs-ticket_image" src={nft.picture_url} />
+                    {getAssetView(nft)}
                 </a>
                 <div className="row w-100">
                     <div className="col-xl-4">
