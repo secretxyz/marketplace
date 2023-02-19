@@ -201,6 +201,13 @@ export const getImageLink = (url) => {
 		return `https://ipfs.bithomp.com/image/${url.substring(7)}`;
 	}
 
+	if (url.startsWith("https://ipfs.filebase.io/ipfs/")) {
+		if (url.endsWith("mp4") || url.endsWith("avi")) {
+			return `https://ipfs.bithomp.com/video/${url.substring(30)}`;
+		}
+		return `https://ipfs.bithomp.com/image/${url.substring(30)}`;
+	}
+
 	if (!url.startsWith("https://")) {
 		return `https://ipfs.bithomp.com/image/${url}`;
 	}
