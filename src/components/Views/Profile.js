@@ -3,6 +3,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import ContentWrapper from '../Layout/ContentWrapper';
 import Avatar from "./Profile/Avatar";
+import Claims from './Profile/Claims';
 import CollectedItems from './Profile/CollectedItems';
 import CreatedItems from './Profile/CreatedItems';
 import Collections from './Profile/Collections';
@@ -25,6 +26,7 @@ import { getReportedItems } from '../Helpers/Reports';
 const NavComponents = {
     "raffles": Raffles,
     "raffle-tickets": RaffleTickets,
+    "claims": Claims,
     "collected": CollectedItems,
     "created": CreatedItems,
     "collections": Collections,
@@ -48,6 +50,12 @@ const NavMenus = [
         label: "Raffle Tickets",
         icon: "fa-ticket-alt",
         key: "raffle-tickets",
+        isChecked: false
+    },
+    {
+        label: "Claims",
+        icon: "far fa-inbox",
+        key: "claims",
         isChecked: false
     },
     {
@@ -128,7 +136,7 @@ const Profile = (props) => {
 
         // change url
         if (menu) {
-            window.history.replaceState(null, null, "/my-profile")
+            window.history.replaceState(null, null, "/my-profile/")
         }
     };
 

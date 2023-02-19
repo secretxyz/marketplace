@@ -140,7 +140,7 @@ const Header = () => {
 											<path d="M17.5 18L13.875 14.375" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
 										</svg>
 									</div>
-									{auth_token && <NotificationBox accountId={account.id} />}
+									{auth_token && <NotificationBox accountId={account?.id} />}
 									{auth_token && <ProfileBox account={account} />}
 									{!auth_token && <button className="cs-btn cs-style1" onClick={() => { onConnectWallet() }}>
 										<span>Connect Wallet</span>
