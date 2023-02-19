@@ -2046,6 +2046,7 @@ ul::-webkit-scrollbar-thumb {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
   }
 
   .cs-attr_trait_percent {
