@@ -6,8 +6,8 @@ import { APP_COLORS } from "../Common/constants"
 import { useDrops } from "../../hooks/useDrop";
 
 const Filters = [
-	{ id: 1, label: "Upcoming", isChecked: false, key: "upcoming" },
-	{ id: 2, label: "Active", isChecked: true, key: "active" },
+	{ id: 1, label: "Upcoming", isChecked: true, key: "upcoming" },
+	{ id: 2, label: "Active", isChecked: false, key: "active" },
 	{ id: 3, label: "Past", isChecked: false, key: "past" },
 ];
 
