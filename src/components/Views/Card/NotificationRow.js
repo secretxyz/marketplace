@@ -1,4 +1,4 @@
-import { getDifferenceTime, getImageLink, getSummaryUsername } from "../../Helpers/Utils";
+import { getAssetView, getDifferenceTime, getImageLink, getSummaryUsername, isVideoAsset } from "../../Helpers/Utils";
 
 const NotificationRow = ({ data }) => {
     const nft = data.nft?.data?.attributes;
@@ -37,9 +37,9 @@ const NotificationRow = ({ data }) => {
     }
 
     return (
-        <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id ?? ""}`} className="cs-notification_item">
+        <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id || ""}`} className="cs-notification_item">
             <div className="cs-notification_thumb">
-                <img src={getImageLink(nft?.picture_url)} alt="Image" />
+                {getAssetView(nft)}
             </div>
             <div className="cs-notification_right">
                 <p>{generateMessage()}</p>

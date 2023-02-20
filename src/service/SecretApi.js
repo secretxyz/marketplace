@@ -739,6 +739,8 @@ class SecretApi {
                     "populate[nft][fields][0]": "name",
                     "populate[nft][fields][1]": "nft_tokenid",
                     "populate[nft][fields][2]": "picture_url",
+                    "populate[nft][fields][3]": "animation_url",
+                    "populate[nft][fields][4]": "video_url",
                     "sort[0]": "createdAt:desc",
                 }
             });
@@ -828,10 +830,14 @@ class SecretApi {
                     "pagination[pageSize]": this.pageSize,
                     "populate[raffle]": true,
                     "populate[raffle_ticket]": true,
+                    "populate[offer]": true,
                     "populate[from]": true,
+                    "populate[to]": true,
                     "populate[nft][fields][0]": "name",
                     "populate[nft][fields][1]": "nft_tokenid",
                     "populate[nft][fields][2]": "picture_url",
+                    "populate[nft][fields][3]": "animation_url",
+                    "populate[nft][fields][4]": "video_url",
                     "sort[0]": "createdAt:desc",
                     ...filters
                 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from "../Profile/Avatar";
-import { getAccount, getImageLink, isVideoAsset } from '../../Helpers/Utils';
+import { getAccount, getAssetView1 } from '../../Helpers/Utils';
 import { getSummaryAddress } from '../../Helpers/Utils';
 import LikeNft from '../../Common/LikeNft';
 
@@ -33,14 +33,6 @@ const NftCard = ({ data }) => {
         }
     }
 
-    const getAssetView = (nft) => {
-        if (isVideoAsset(nft)) {
-            return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
-        }
-
-        return <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="Image" className="cs-zoom_item" />
-    }
-
     return (
         <div className="cs-card cs-style4 cs-box_shadow cs-white_bg">
             {/* {data?.rarity_rank && <span className="cs-card_rare cs-primary_color">
@@ -48,7 +40,7 @@ const NftCard = ({ data }) => {
             </span>} */}
             <LikeNft nft={data} />
             <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
-                {getAssetView(data)}
+                {getAssetView1(data)}
             </a>
             <div className="cs-card_info">
                 <a href={owner_link} className="cs-avatar cs-white_bg cs-box_shadow">

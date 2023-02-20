@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { getDifferenceTime, getImageLink, getSummaryUsername } from '../../Helpers/Utils';
+import React from 'react';
+import { getAssetView, getDifferenceTime, getSummaryUsername } from '../../Helpers/Utils';
 import Avatar from '../Profile/Avatar';
 
 const ActivityCard = ({ data }) => {
     const nft = data.nft?.data?.attributes;
     const from = data.from?.data?.attributes;
+    const to = data.to?.data?.attributes;
+    const offer = data.offer?.data?.attributes;
     const raffle = {
         ...data.raffle?.data?.attributes,
         id: data.raffle?.data?.id,
@@ -13,6 +15,26 @@ const ActivityCard = ({ data }) => {
 
     const generateMessage = () => {
         switch (data.activity) {
+            case "transfer":
+                return <p>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> transferred to <a href={`/profile/${to?.wallet}`}>{`${getSummaryUsername(to)}`}</a>
+                </p>
+            case "list":
+                return <p>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created sell offer <span>on {offer?.price} XRP</span>
+                </p>
+            case "accept":
+                return <p>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> sold <span>on {offer?.price} XRP</span>
+                </p>
+            case "buy":
+                return <p>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> bought <span>on {offer?.price} XRP</span>
+                </p>
+            case "bid":
+                return <p>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created buy offer <span>on {offer?.price} XRP</span>
+                </p>
             case "raffle-create":
                 return <p>
                     <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created the raffle
@@ -38,6 +60,16 @@ const ActivityCard = ({ data }) => {
 
     const getCategoryIcon = () => {
         switch (data.activity) {
+            case "transfer":
+                return "fa fa-exchange-alt";
+            case "list":
+                return "fa fa-gavel";
+            case "accept":
+                return "fa fa-check-circle";
+            case "buy":
+                return "fa fa-shopping-cart";
+            case "bid":
+                return "fa  fa-tag";
             case "raffle-create":
                 return "fa fa-award";
             case "raffle-winner":
@@ -57,7 +89,9 @@ const ActivityCard = ({ data }) => {
                 <i className={getCategoryIcon()}></i>
             </div>
             <div className="cs-activity_nft_thumb">
-                <a href={`/nft/${nft.nft_tokenid}`}><img src={getImageLink(nft?.picture_url)} alt="Image" /></a>
+                <a href={`/nft/${nft.nft_tokenid}`}>
+                    {getAssetView(nft)}
+                </a>
             </div>
             <div className="cs-activity_right cs-activity_nft_name">
                 <div className="cs-activity_text"><h3><a href={`/nft/${nft.nft_tokenid}`}>{nft?.name}</a></h3></div>
@@ -70,7 +104,7 @@ const ActivityCard = ({ data }) => {
                 </div>
                 <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
             </div>
-            <a href={`/nft/${nft.nft_tokenid}/${raffle.id}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
+            <a href={`/nft/${nft.nft_tokenid}/${raffle.id || ""}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
                 <span>View</span>
             </a>
         </div>

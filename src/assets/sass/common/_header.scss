@@ -235,6 +235,12 @@
       object-fit: cover;
       border-radius: inherit;
     }
+
+    video {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+    }
   }
 
   .cs-notification_time {

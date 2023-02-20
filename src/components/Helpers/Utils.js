@@ -402,6 +402,22 @@ export const isVideoAsset = (nft) => {
 	return false;
 }
 
+export const getAssetView = (nft) => {
+	if (isVideoAsset(nft) && !nft.picture_url?.endsWith(".gif")) {
+		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted />
+	}
+
+	return <img src={getImageLink(nft.picture_url)} alt="Image" />
+}
+
+export const getAssetView1 = (nft) => {
+	if (isVideoAsset(nft) && !nft.picture_url?.endsWith(".gif")) {
+		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
+	}
+
+	return <img style={{ background: `url(${getImageLink(nft.picture_url)})` }} alt="Image" className="cs-zoom_item" />
+}
+
 export const htmlDecode = (input) => {
 	const doc = new DOMParser().parseFromString(input, "text/html");
 	return doc.documentElement.textContent;
