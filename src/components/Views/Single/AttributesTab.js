@@ -11,7 +11,7 @@ const AttributesTab = ({ attributes }) => {
                                 <div className="cs-form_field cs-field_sm">
                                     <span className="cs-attr_trait_type">{attr.key}</span>
                                     <span className="cs-attr_trait_value">{attr.value}</span>
-                                    {attr.rarity_percentage && <span className="cs-attr_trait_percent">{Number(attr.rarity_percentage).toFixed(2)}% has this trait</span>}
+                                    {/* {attr.rarity_percentage && <span className="cs-attr_trait_percent">{Number(attr.rarity_percentage).toFixed(2)}% has this trait</span>} */}
                                 </div>
                             </div>
                         }
