@@ -500,7 +500,7 @@ class SecretApi {
 
     async getNftWithTokenID(tokenId, raffleId) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenId}?raffleId=${raffleId}`);
+            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenId}?raffleid=${raffleId}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
