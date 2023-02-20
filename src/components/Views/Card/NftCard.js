@@ -11,7 +11,7 @@ const NftCard = ({ data }) => {
 
     const getFooterButton = () => {
         if (owner.id == getAccount().id) {
-            if (!data.bid_price) {
+            if (!data.price) {
                 return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
                     <span>List Now</span>
                 </a>;
@@ -21,7 +21,7 @@ const NftCard = ({ data }) => {
                 </a>;
             }
         } else {
-            if (!data.bid_price) {
+            if (!data.price) {
                 return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
                     <span>Place Offer</span>
                 </a>;
@@ -50,7 +50,7 @@ const NftCard = ({ data }) => {
                 <h3 className="cs-card_title">
                     <a href={nft_link}>{data.name}</a>
                 </h3>
-                <div className="cs-card_price">Offer For: <b className="cs-primary_color">{data.bid_price || 0} XRP</b></div>
+                <div className="cs-card_price">Offer For: <b className="cs-primary_color">{data.price || 0} XRP</b></div>
                 <hr />
                 <div className="cs-card_footer">
                     {getFooterButton()}

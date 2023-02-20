@@ -64,7 +64,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 </div>
             }
             <div className="cs-raffle_card_info">
-                <a href={`/profile/${raffler.wallet}`} className="cs-avatar cs-white_bg cs-box_shadow" target="_blank">
+                <a href={`/profile/${raffler?.wallet}`} className="cs-avatar cs-white_bg cs-box_shadow" target="_blank">
                     <Avatar className="cs-profile_avatar_oval" {...{ name: raffler?.wallet, image: raffler?.picture_url }} />
                     <span>{raffler?.username ?? getSummaryAddress(raffler?.wallet)}</span>
                 </a>
@@ -79,9 +79,6 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 </b> : <span><b className="cs-primary_color">{data.reserved_count} / {data.ticket_count}</b> ({Number(data.reserved_count / data.ticket_count * 100).toFixed(0)}%) <span className="cs-card_threshold cs-primary_color cs-box_shadow">{data.sell_option * 25} %</span></span>
                 }
                 </div>
-                {/* <div className="cs-card_price">
-                    Reserve to Sales: <b className="cs-primary_color">{data.sell_option * 25} %</b>
-                </div> */}
                 <hr />
                 <div className="cs-card_footer cs-card_footer_center">
                     <a href={raffle_link} className="cs-btn cs-style1 cs-card_btn_3">

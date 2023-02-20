@@ -169,7 +169,7 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 									</li>
 									<li>
 										<span>Service Fee</span>
-										<b>1 XRP</b>
+										<b>{SERVICE_BROKER_FEE} XRP</b>
 									</li>
 								</ul>
 							</div>
@@ -205,7 +205,7 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 									</li>
 									<li>
 										<span>Service Fee</span>
-										<b>1 XRP</b>
+										<b>{SERVICE_BROKER_FEE} XRP</b>
 									</li>
 								</ul>
 							</div>

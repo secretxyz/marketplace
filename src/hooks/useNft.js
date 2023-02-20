@@ -101,6 +101,7 @@ export const useCollectionNfts = () => {
         setLoading(true);
         const res = await SecretApi.getCollectionNfts(collectionId, page, filter);
         if (res) {
+            console.log(res.data);
             setNfts([...nfts, ...res.data]);
             setMeta(res.meta);
             if (!res.data?.length) {

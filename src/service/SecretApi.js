@@ -635,14 +635,13 @@ class SecretApi {
         }
     }
 
-    async getCollectionNfts(collectionId, page, params) {
+    async getCollectionNfts(collectionId, page, filter) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/nfts`, {
-                params: {
-                    "pagination[page]": page,
-                    "pagination[pageSize]": this.pageSize,
-                    "filters[collection]": collectionId,
-                    "populate[owner]": true,
+            const res = await axios.post(`${this.baseUrl}/api/nft/collection/${collectionId}`, {
+                data: {
+                    ...filter,
+                    "page": page,
+                    "page_size": this.pageSize,
                 }
             });
             return res.data;

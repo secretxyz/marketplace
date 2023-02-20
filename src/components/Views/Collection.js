@@ -7,9 +7,10 @@ import { useAttributes, useCollection } from '../../hooks/useCollection';
 import { useCollectionNfts } from '../../hooks/useNft';
 import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
+import RaffleCard from './Card/RaffleCard';
 import NftCard from './Card/NftCard';
 import { APP_COLORS, A_Z, ENDING_SOON, LIKES, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, Z_A } from "../Common/constants"
-import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode, htmlDecode, notify } from '../Helpers/Utils';
+import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, htmlDecode, notify } from '../Helpers/Utils';
 import ReportModal from '../Common/ReportModal';
 import { getLikedItems, likeItem } from '../Helpers/Likes';
 import { getReportedItems } from '../Helpers/Reports';
@@ -457,7 +458,14 @@ const Collection = (props) => {
                         <div className="row cs-cards_area" onScroll={handleScroll}>
                             {nfts.map(n => (
                                 <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                                    <NftCard data={{ id: n.id, ...n.attributes }} />
+                                    {n.raffle_status == "active" ? <RaffleCard data={{
+                                        ...n.raffle,
+                                        nft: { data: { attributes: n } },
+                                        raffler: { data: { attributes: n.raffler } }
+                                    }} hiddenStatus={true} /> : <NftCard data={{
+                                        ...n,
+                                        owner: { data: { id: n.owner.id, attributes: n.owner } }
+                                    }} />}
                                     <div className="cs-height_20 cs-height_lg_20"></div>
                                 </div>
                             ))}

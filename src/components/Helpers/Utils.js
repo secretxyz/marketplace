@@ -390,6 +390,10 @@ export const setTheme = (mode) => {
 }
 
 export const isVideoAsset = (nft) => {
+	if (!nft) {
+		return false;
+	}
+
 	let extension = path.extname(nft.animation_url) || path.extname(nft.video_url);
 	switch (extension) {
 		case ".mp4":
@@ -403,6 +407,10 @@ export const isVideoAsset = (nft) => {
 }
 
 export const getAssetView = (nft) => {
+	if (!nft) {
+		return false;
+	}
+
 	if (isVideoAsset(nft) && !nft.picture_url?.endsWith(".gif")) {
 		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted />
 	}
@@ -411,6 +419,10 @@ export const getAssetView = (nft) => {
 }
 
 export const getAssetView1 = (nft) => {
+	if (!nft) {
+		return false;
+	}
+	
 	if (isVideoAsset(nft) && !nft.picture_url?.endsWith(".gif")) {
 		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
 	}
