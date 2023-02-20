@@ -12,6 +12,12 @@ const NotificationRow = ({ data }) => {
 
     const generateMessage = () => {
         switch (data.activity) {
+            case "transfer":
+                return <>{`Received from ${getSummaryUsername(from)}`}<br />{`Please Claim NFT.`}</>;
+            case "accept":
+                return <>{`${getSummaryUsername(from)} accepted your offer`}</>;
+            case "bid":
+                return <>{`${getSummaryUsername(from)} created buy offer`}</>;
             case "raffle-create-follow":
                 return <>{`${getSummaryUsername(from)} has created the raffle`}</>;
             case "raffle-ticket-follow":
@@ -31,7 +37,7 @@ const NotificationRow = ({ data }) => {
     }
 
     return (
-        <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id}`} className="cs-notification_item">
+        <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id ?? ""}`} className="cs-notification_item">
             <div className="cs-notification_thumb">
                 <img src={getImageLink(nft?.picture_url)} alt="Image" />
             </div>

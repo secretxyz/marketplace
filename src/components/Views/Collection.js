@@ -8,7 +8,7 @@ import { useCollectionNfts } from '../../hooks/useNft';
 import PageLoader from '../Common/PageLoader';
 import ContentWrapper from '../Layout/ContentWrapper';
 import NftCard from './Card/NftCard';
-import { APP_COLORS } from "../Common/constants"
+import { APP_COLORS, A_Z, ENDING_SOON, LIKES, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, Z_A } from "../Common/constants"
 import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, getThemeMode, htmlDecode, notify } from '../Helpers/Utils';
 import ReportModal from '../Common/ReportModal';
 import { getLikedItems, likeItem } from '../Helpers/Likes';
@@ -22,6 +22,8 @@ const Collection = (props) => {
     const [liked, setLiked] = useState(false);
     const [reported, setReported] = useState(false);
     const [reporting, setReporting] = useState(false);
+    const [filter, setFilter] = useState();
+    const [attrs, setAttrs] = useState()
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -115,6 +117,87 @@ const Collection = (props) => {
             return;
         }
         setReporting(true);
+    }
+
+    const onClickClear = () => {
+        setFilter({
+            ...filter,
+            min_price: null,
+            max_price: null,
+        })
+    }
+
+    const onClickApply = () => {
+
+    }
+
+    useEffect(() => {
+        if (filter) {
+            console.log(filter);
+        }
+    }, [filter])
+
+    const onChangeFilter = (event) => {
+        let key = event.target.name;
+        let value;
+        switch (key) {
+            case "in_raffle":
+            case "buy_now":
+            case "has_offers":
+                value = event.target.checked;
+                break;
+            default:
+                value = event.target.value;
+                break;
+        }
+
+        if ((key == "min_price" || key == "max_price") && Number(value) < 0) {
+            value = 0;
+        }
+
+        // if (key == "max_price" && Number(value) < Number(filter.min_price)) {
+        //     value = filter.min_price;
+        // }
+
+        setFilter({
+            ...filter,
+            [key]: value
+        })
+    }
+
+    const onChangeAttributes = (event, trait_type) => {
+        let key = event.target.name;
+        let value = event.target.checked;
+        setAttrs({
+            ...attrs,
+            [key]: value
+        })
+
+        let traits = filter?.traits || [];
+        let trait_values = filter?.trait_values || [];
+        let trait_value_array;
+
+        let trait_index = traits.indexOf(trait_type);
+        if (trait_index >= 0) {
+            trait_value_array = trait_values[trait_index];
+            if (value) {
+                trait_value_array.push(key);
+            } else {
+                let idx = trait_value_array.indexOf(key);
+                trait_value_array.splice(idx, 1);
+            }
+        } else {
+            traits.push(trait_type);
+            if (value) {
+                trait_values.push([key]);
+            }
+        }
+
+        setFilter({
+            ...filter,
+            traits,
+            trait_values,
+        })
     }
 
     return (
@@ -236,26 +319,20 @@ const Collection = (props) => {
                                     <ul>
                                         <li>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="flexCheckChecked" defaultChecked />
-                                                <label className="form-check-label" htmlFor="flexCheckChecked">Buy Now</label>
+                                                <input className="form-check-input" type="checkbox" id="in_raffle" name="in_raffle" checked={filter?.in_raffle || false} onChange={onChangeFilter} />
+                                                <label className="form-check-label" htmlFor="in_raffle">In Raffle</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                                                <label className="form-check-label" htmlFor="flexCheckDefault">In Auction</label>
+                                                <input className="form-check-input" type="checkbox" id="buy_now" name="buy_now" checked={filter?.buy_now || false} onChange={onChangeFilter} />
+                                                <label className="form-check-label" htmlFor="buy_now">Buy Now</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="flexCheckDefault1" />
-                                                <label className="form-check-label" htmlFor="flexCheckDefault1">Looking to Sell</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="flexCheckDefault2" />
-                                                <label className="form-check-label" htmlFor="flexCheckDefault2">Has Offers</label>
+                                                <input className="form-check-input" type="checkbox" id="has_offers" name="has_offers" checked={filter?.has_offers || false} onChange={onChangeFilter} />
+                                                <label className="form-check-label" htmlFor="has_offers">Has Offers</label>
                                             </div>
                                         </li>
                                     </ul>
@@ -272,7 +349,7 @@ const Collection = (props) => {
                                 </h2>
                                 <div className="cs-filter_toggle_body">
                                     <div className="cs-price_form">
-                                        <form className="row row-15">
+                                        <div className="row row-15">
                                             <div className="col-lg-12">
                                                 <div className="cs-form_field_wrap cs-select_arrow">
                                                     <select className="cs-form_field cs-field_sm">
@@ -283,23 +360,23 @@ const Collection = (props) => {
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="cs-form_field_wrap">
-                                                    <input type="text" className="cs-form_field cs-field_sm" placeholder="Min" />
+                                                    <input type="number" className="cs-form_field cs-field_sm" name="min_price" placeholder="Min" value={filter?.min_price || ""} min={0} onChange={onChangeFilter} />
                                                 </div>
                                                 <div className="cs-height_15 cs-height_lg_15"></div>
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="cs-form_field_wrap">
-                                                    <input type="text" className="cs-form_field cs-field_sm" placeholder="Max" />
+                                                    <input type="number" className="cs-form_field cs-field_sm" name="max_price" placeholder="Max" value={filter?.max_price || ""} min={0} onChange={onChangeFilter} />
                                                 </div>
                                                 <div className="cs-height_10 cs-height_lg_10"></div>
                                             </div>
                                             <div className="col-lg-6">
-                                                <input type="reset" className="cs-btn cs-style1 cs-color1 cs-btn_sm" value="Clear" />
+                                                <button className="cs-btn cs-style1 cs-color1 cs-btn_sm" onClick={onClickClear}>Clear</button>
                                             </div>
                                             <div className="col-lg-6">
-                                                <button className="cs-btn cs-style1 cs-btn_sm"><span>Apply</span></button>
+                                                <button className="cs-btn cs-style1 cs-btn_sm" onClick={onClickApply}><span>Apply</span></button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +407,7 @@ const Collection = (props) => {
                                                             <li key={id}>
                                                                 <div className="form-check">
                                                                     <div>
-                                                                        <input className="form-check-input" type="radio" name={attr.value} id={v.value} />
+                                                                        <input className="form-check-input" type="checkbox" name={v.value} id={v.value} value={attrs && attrs[v.value] || false} onChange={(e) => onChangeAttributes(e, attr.trait_type)} />
                                                                         <label className="form-check-label" htmlFor={v.value}>{v.value}</label>
                                                                     </div>
                                                                     <label className="form-check-label cs-ternary_color">{v.count}</label>
@@ -351,25 +428,27 @@ const Collection = (props) => {
                             <div className="cs-filter_head_left">
                                 <span className="cs-search_result cs-medium cs-ternary_color">{meta?.pagination?.total} Results</span>
                                 <div className="cs-form_field_wrap">
-                                    <input type="text" className="cs-form_field cs-field_sm cs-field_tag" placeholder="In Auction" />
+                                    <input name="search" type="text" className="cs-form_field cs-field_sm" placeholder="Search by name" value={filter?.search || ""} onChange={onChangeFilter} />
                                 </div>
-                                <a className="cs-clear_btn">Clear All</a>
+                                {/* <a className="cs-clear_btn">Clear All</a> */}
                             </div>
                             <div className="cs-filter_head_right">
-                                <div className="cs-form_field_wrap cs-select_arrow">
+                                {/* <div className="cs-form_field_wrap cs-select_arrow">
                                     <select className="cs-form_field cs-field_sm">
                                         <option value="11">Sort By</option>
                                         <option value="22">Last 7 days</option>
                                         <option value="33">Last 30 days</option>
                                         <option value="44">All time</option>
                                     </select>
-                                </div>
+                                </div> */}
                                 <div className="cs-form_field_wrap cs-select_arrow">
-                                    <select className="cs-form_field cs-field_sm">
-                                        <option value="1">Likes</option>
-                                        <option value="2">Most popular</option>
-                                        <option value="3">By price</option>
-                                        <option value="4">By published</option>
+                                    <select name="order" className="cs-form_field cs-field_sm" value={filter?.order || PRICE_LOW_TO_HIGH} onChange={onChangeFilter}>
+                                        <option value={PRICE_LOW_TO_HIGH}>Price low to high</option>
+                                        <option value={PRICE_HIGH_TO_LOW}>Price hight to low</option>
+                                        <option value={LIKES}>Likes</option>
+                                        <option value={ENDING_SOON}>Ending soon</option>
+                                        <option value={A_Z}>A-Z</option>
+                                        <option value={Z_A}>Z-A</option>
                                     </select>
                                 </div>
                             </div>

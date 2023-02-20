@@ -60,7 +60,7 @@ export const getExpirationDateTime1 = (value) => {
 		return null;
 	}
 
-	return <>Expires <span>{getDifferenceTime(value)}</span></>;
+	return <>Expires <span className="cs-accent_color">{getDifferenceTime(value)}</span></>;
 }
 
 export const getDateTimeWithFormat = (value) => {

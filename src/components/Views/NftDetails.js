@@ -28,9 +28,9 @@ import { getReportedItems } from '../Helpers/Reports';
 
 const NftDetails = (props) => {
     const { auth_token } = accountStore;
-    const { tokenid, raffleid } = props.match.params;
+    const { tokenId, raffleId } = props.match.params;
 
-    const { loading, nft, fetchNftDetails, refresh } = useNft(tokenid, raffleid);
+    const { loading, nft, fetchNftDetails, refresh } = useNft(tokenId, raffleId);
 
     const [offer, setOffer] = useState();
     const [raffle, setRaffle] = useState();
@@ -66,7 +66,7 @@ const NftDetails = (props) => {
 
     useEffect(() => {
         if (auth_token) {
-            fetchNftDetails(tokenid, raffleid);
+            fetchNftDetails(tokenId, raffleId);
         }
     }, [auth_token]);
 
@@ -616,7 +616,7 @@ const NftDetails = (props) => {
     const onClickRefresh = () => {
         const res = refresh();
         if (res && res.status) {
-            fetchNftDetails(tokenid);
+            fetchNftDetails(tokenId);
         }
     }
 
@@ -809,31 +809,31 @@ const NftDetails = (props) => {
                         </div>
                         {getBuySellView()}
                         {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} status={raffle?.status} />}
-                        {nft && !raffle && <NftInfoTabs tokenid={tokenid} nftOwner={owner} submit={submitOffer} />}
+                        {nft && !raffle && <NftInfoTabs tokenId={tokenId} nftOwner={owner} submit={submitOffer} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>
                 </div>
                 <div className="cs-height_30 cs-height_lg_30"></div>
-                {collection && <SimilarItems tokenid={nft.nft_tokenid} collection={collection} />}
+                {collection && <SimilarItems tokenId={nft.nft_tokenid} collection={collection} />}
             </div>
             <div className="cs-height_70 cs-height_lg_70"></div>
 
             {connecting && <ConnectModal
                 closeModal={() => { setConnecting(false) }} />}
             {raffling && <CreateRaffleModal nft={nft}
-                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                refreshDetails={() => { fetchNftDetails(tokenId) }}
                 closeModal={() => { setRaffling(false) }} />}
             {ticketing && <BuyTicketModal ticket={ticket}
-                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                refreshDetails={() => { fetchNftDetails(tokenId) }}
                 closeModal={() => { setTicketing(false) }} />}
             {drawing && <DrawNftModal raffleId={raffle?.id}
-                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                refreshDetails={() => { fetchNftDetails(tokenId) }}
                 closeModal={() => { setDrawing(false) }} />}
             {prizing && <DrawPrizeModal raffleId={raffle?.id}
-                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                refreshDetails={() => { fetchNftDetails(tokenId) }}
                 closeModal={() => { setPrizing(false) }} />}
             {offering && <CreateOfferModal activity={activity}
-                refreshDetails={() => { fetchNftDetails(tokenid) }}
+                refreshDetails={() => { fetchNftDetails(tokenId) }}
                 closeModal={() => { setOffering(false); setActivity(); }} />}
             {reporting && <ReportModal data={{ nft: nft.id }}
                 closeModal={(res) => { setReporting(false); setReported(res); }} />}

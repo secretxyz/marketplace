@@ -57,8 +57,8 @@ const Routes = ({ location }) => {
 								<Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
 								<Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
 								<Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />
-								<Route path="/nft/:tokenid/:raffleid" component={waitFor(NftDetails)} />
-								<Route path="/nft/:tokenid" component={waitFor(NftDetails)} />
+								<Route path="/nft/:tokenId/:raffleId" component={waitFor(NftDetails)} />
+								<Route path="/nft/:tokenId" component={waitFor(NftDetails)} />
 								<Route path="/drop" component={waitFor(Drop)} />
 								<Route path="/ranking" component={waitFor(Ranking)} />
 								<Route path="/activity" component={waitFor(Activity)} />

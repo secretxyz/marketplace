@@ -14,7 +14,7 @@ const Filters = [
 const Drop = () => {
 	const { loading, drops, fetchNext } = useDrops();
 	const [filters, setFilters] = useState(Filters);
-	const [category, setCategory] = useState("active");
+	const [category, setCategory] = useState("upcoming");
 
 	const handleScroll = (e) => {
 		const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;

@@ -122,9 +122,9 @@ export const useRaffleHistory = () => {
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
 
-    const fetchRaffleHistory = async (tokenid, page) => {
+    const fetchRaffleHistory = async (tokenId, page) => {
         setLoading(true);
-        const res = await SecretApi.getRafflesWithTokenId(tokenid, page);
+        const res = await SecretApi.getRafflesWithTokenId(tokenId, page);
         setHistory([...history, ...res.data]);
         if (!res.data?.length) {
             setEnded(true);
@@ -132,8 +132,8 @@ export const useRaffleHistory = () => {
         setLoading(false);
     }
 
-    const fetchNext = async (tokenid, pageNumber) => {
-        if (tokenid) {
+    const fetchNext = async (tokenId, pageNumber) => {
+        if (tokenId) {
             if (!pageNumber) {
                 if (ended) return;
                 page.current = page.current + 1;
@@ -141,7 +141,7 @@ export const useRaffleHistory = () => {
                 page.current = pageNumber;
                 setEnded(false);
             }
-            fetchRaffleHistory(tokenid, page.current);
+            fetchRaffleHistory(tokenId, page.current);
         }
     }
 

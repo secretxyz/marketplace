@@ -48,13 +48,13 @@ export const useNfts = () => {
 }
 
 
-export const useNft = (tokenid, raffleid) => {
+export const useNft = (tokenId, raffleId) => {
     const [loading, setLoading] = useState(true);
     const [nft, setNft] = useState({});
 
-    const fetchNftDetails = async (tokenid, raffleid) => {
+    const fetchNftDetails = async (tokenId, raffleId) => {
         setLoading(true);
-        const res = await SecretApi.getNftWithTokenID(tokenid, raffleid);
+        const res = await SecretApi.getNftWithTokenID(tokenId, raffleId);
         if (res) {
             setNft(res.data);
             if (res.data) {
@@ -64,14 +64,14 @@ export const useNft = (tokenid, raffleid) => {
     }
 
     useEffect(async () => {
-        if (tokenid) {
-            await fetchNftDetails(tokenid, raffleid);
+        if (tokenId) {
+            await fetchNftDetails(tokenId, raffleId);
         }
     }, [])
 
     const refresh = async () => {
         setLoading(true);
-        const res = await SecretApi.refreshNft(tokenid);
+        const res = await SecretApi.refreshNft(tokenId);
         setLoading(false);
         return res;
     }
@@ -97,9 +97,9 @@ export const useCollectionNfts = () => {
     const page = useRef(0);
 
 
-    const fetchNfts = async (collectionId, page, params) => {
+    const fetchNfts = async (collectionId, page, filter) => {
         setLoading(true);
-        const res = await SecretApi.getCollectionNfts(collectionId, page, params);
+        const res = await SecretApi.getCollectionNfts(collectionId, page, filter);
         if (res) {
             setNfts([...nfts, ...res.data]);
             setMeta(res.meta);
@@ -110,7 +110,7 @@ export const useCollectionNfts = () => {
         setLoading(false);
     }
 
-    const fetchNext = (collectionId, pageNumber, params) => {
+    const fetchNext = (collectionId, pageNumber, filter) => {
         if (collectionId) {
             if (!pageNumber) {
                 if (ended) return;
@@ -119,7 +119,7 @@ export const useCollectionNfts = () => {
                 page.current = pageNumber;
                 setEnded(false);
             }
-            fetchNfts(collectionId, page.current, params);
+            fetchNfts(collectionId, page.current, filter);
         }
     }
 
@@ -131,16 +131,16 @@ export const useCollectionNfts = () => {
     }
 }
 
-export const useSimilarNfts = (tokenid, collectionid) => {
+export const useSimilarNfts = (tokenId, collectionId) => {
     const [loading, setLoading] = useState(true);
     const [nfts, setNfts] = useState([]);
 
     const fetchNfts = async () => {
         setLoading(true);
-        let res = await SecretApi.getSimilarNfts(tokenid, collectionid, 10, false);
+        let res = await SecretApi.getSimilarNfts(tokenId, collectionId, 10, false);
         let res1;
         if (res?.data?.length < 10) {
-            res1 = await SecretApi.getSimilarNfts(tokenid, collectionid, 10 - res.data.length, true);
+            res1 = await SecretApi.getSimilarNfts(tokenId, collectionId, 10 - res.data.length, true);
             setNfts([...res?.data, ...res1?.data]);
         } else {
             setNfts(res.data);
@@ -162,9 +162,9 @@ export const useNftOffers = () => {
     const [loading, setLoading] = useState(true);
     const [offers, setOffers] = useState([]);
 
-    const fetchNftOffers = async (tokenid) => {
+    const fetchNftOffers = async (tokenId) => {
         setLoading(true);
-        let res = await SecretApi.getNftOffers(tokenid);
+        let res = await SecretApi.getNftOffers(tokenId);
         setOffers(res.data);
         setLoading(false);
     }

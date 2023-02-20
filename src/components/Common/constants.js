@@ -38,6 +38,7 @@ export const XRPCAFE_BROKER = "rpx9JThQ2y37FaGeeJP7PXDUVEXY3PHZSC";
 
 export const SERVICE_BROKER_FEE = 1;
 
+export const ENDING_SOON = 0;
 export const A_Z = 1;
 export const Z_A = 2;
 export const LIKES_HIGH_TO_LOW = 3;
@@ -49,3 +50,6 @@ export const RAFFLE_PRICE_LOW_TO_HIGH = 8;
 export const TICKET_PRICE_HIGH_TO_LOW = 9;
 export const TICKET_PRICE_LOW_TO_HIGH = 10;
 export const CREATED_SOON = 11;
+export const LIKES = 20;
+export const PRICE_LOW_TO_HIGH = 21;
+export const PRICE_HIGH_TO_LOW = 22;

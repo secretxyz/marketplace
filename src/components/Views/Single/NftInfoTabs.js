@@ -46,23 +46,23 @@ const RaffleHistoryRow = ({ data }) => {
     );
 }
 
-const NftInfoTabs = ({ tokenid, nftOwner, submit }) => {
+const NftInfoTabs = ({ tokenId, nftOwner, submit }) => {
     const { loading, history, fetchNext } = useRaffleHistory();
     const { loading: offerLoading, offers, fetchNftOffers } = useNftOffers();
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
         if (bottom <= 1 && !loading) {
-            fetchNext(tokenid);
+            fetchNext(tokenId);
         }
     }
 
     useEffect(async () => {
-        if (tokenid) {
-            await fetchNext(tokenid, 0);
-            await fetchNftOffers(tokenid);
+        if (tokenId) {
+            await fetchNext(tokenId, 0);
+            await fetchNftOffers(tokenId);
         }
-    }, [tokenid])
+    }, [tokenId])
 
     return (
         <div className="cs-tabs cs-fade_tabs cs-style1">

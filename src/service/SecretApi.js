@@ -234,13 +234,13 @@ class SecretApi {
         }
     }
 
-    async getRafflesWithTokenId(tokenid, page) {
+    async getRafflesWithTokenId(tokenId, page) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/raffles`, {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
-                    "filters[nft_tokenid]": tokenid,
+                    "filters[nft_tokenid]": tokenId,
                     "sort[raffle_end_datetime]": "desc",
                     "populate[raffler]": true,
                 }
@@ -465,11 +465,11 @@ class SecretApi {
         }
     }
 
-    async getSimilarNfts(tokenid, collectionid, pageSize, reverse) {
+    async getSimilarNfts(tokenId, collectionId, pageSize, reverse) {
         let params = {
             "pagination[page]": 1,
             "pagination[pageSize]": pageSize,
-            "filters[nft_tokenid][$ne]": tokenid,
+            "filters[nft_tokenid][$ne]": tokenId,
             "populate[raffles][filters][status]": "active",
             "populate[raffles][populate][raffler]": true,
             "populate[owner]": true,
@@ -479,12 +479,12 @@ class SecretApi {
         if (!reverse) {
             params = {
                 ...params,
-                "filters[collection]": collectionid,
+                "filters[collection]": collectionId,
             }
         } else {
             params = {
                 ...params,
-                "filters[collection][id][$ne]": collectionid,
+                "filters[collection][id][$ne]": collectionId,
             }
         }
         try {
@@ -498,9 +498,9 @@ class SecretApi {
         }
     }
 
-    async getNftWithTokenID(tokenid, raffleid) {
+    async getNftWithTokenID(tokenId, raffleId) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenid}?raffleid=${raffleid}`);
+            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenId}?raffleId=${raffleId}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
@@ -508,14 +508,18 @@ class SecretApi {
         }
     }
 
-    async getNftOffers(tokenid) {
+    async getNftOffers(tokenId) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/nft/offers/${tokenid}`);
+            const res = await axios.get(`${this.baseUrl}/api/nft/offers/${tokenId}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
             return null;
         }
+    }
+
+    async getNftsOfCollection(collectionId) {
+
     }
 
     async createRaffle(data) {
@@ -686,7 +690,7 @@ class SecretApi {
         let params;
         if (category == "upcoming") {
             params = {
-                "sort[mint_start_datetime]": "desc",
+                "sort[mint_start_datetime]": "asc",
                 "filters[mint_start_datetime][$gte]": new Date(),
             }
         } else if (category == "active") {
@@ -927,6 +931,15 @@ class SecretApi {
 
     async getOffers(page, filter) {
         let filters = {};
+        if (filter.from) {
+            filters["filters[from]"] = filter.from;
+        }
+        if (filter.to) {
+            filters["filters[to]"] = filter.to;
+        }
+        if (filter.status) {
+            filters["filters[status]"] = filter.status;
+        }
 
         try {
             const res = await axios.get(`${this.baseUrl}/api/offers`, {

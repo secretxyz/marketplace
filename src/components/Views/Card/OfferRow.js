@@ -28,7 +28,7 @@ const OfferRow = ({ data, submit }) => {
                         <span>Buy</span>
                     </button>
                 } else if (destination?.id == getAccount().id) {
-                    return <button className="cs-btn cs-style1 cs-card_btn_3 cs-width_75 cs-width_lg_75" onClick={() => onClickSubmit("claim")}>
+                    return <button className="cs-btn cs-style1 cs-card_btn_3 cs-width_75 cs-width_lg_75" onClick={() => onClickSubmit("buy")}>
                         <span>Claim</span>
                     </button>
 

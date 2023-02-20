@@ -5,8 +5,8 @@ import AuctionCard from '../Card/AuctionCard';
 import RaffleCard from '../Card/RaffleCard';
 import { useSimilarNfts } from '../../../hooks/useNft';
 
-const SimilarItems = ({ tokenid, collection }) => {
-    const { loading, nfts } = useSimilarNfts(tokenid, collection.id);
+const SimilarItems = ({ tokenId, collection }) => {
+    const { loading, nfts } = useSimilarNfts(tokenId, collection.id);
 
     useEffect(() => {
         if (nfts.length > 0) {
