@@ -71,7 +71,7 @@ const Drop = () => {
 					</div>
 				))}
 				<BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-				{!loading && drops.length == 0 && <div className="cs-center">There are no records to display</div>}
+				{!loading && drops.length == 0 && <div className="cs-center_line">There are no records to display</div>}
 			</div>
 			<div className="cs-height_50 cs-height_lg_20"></div>
 		</ContentWrapper>

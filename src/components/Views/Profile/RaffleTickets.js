@@ -28,7 +28,7 @@ const RaffleTickets = ({ accountId }) => {
                     <RaffleTicketCard data={n.attributes} key={n.id} />
                 ))}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-                {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
+                {!loading && items.length == 0 && <div className="cs-center_line">There are no records to display</div>}
             </ul>
         </ContentWrapper>
     );

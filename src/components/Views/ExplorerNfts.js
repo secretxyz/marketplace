@@ -188,7 +188,7 @@ const ExplorerNfts = () => {
 							))}
 						</div>
 						<BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-						{!loading && nfts.length == 0 && <div className="cs-center">There are no records to display</div>}
+						{!loading && nfts.length == 0 && <div className="cs-center_line">There are no records to display</div>}
 						<div className="cs-height_30 cs-height_lg_30"></div>
 					</div>
 				</div>

@@ -63,7 +63,7 @@ const OffersReceived = ({ accountId }) => {
                     </li>
                 ))}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-                {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
+                {!loading && items.length == 0 && <div className="cs-center_line">There are no records to display</div>}
             </ul>
             {offering && <CreateOfferModal activity={activity}
                 refreshDetails={() => { fetchNext(1, filter) }}

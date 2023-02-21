@@ -57,7 +57,7 @@ const CollectedItems = ({ accountId }) => {
                     </div>
                 ))}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-                {!loading && collections.length == 0 && <div className="cs-center">There are no records to display</div>}
+                {!loading && collections.length == 0 && <div className="cs-center_line">There are no records to display</div>}
             </div> : <>
                 <NftFilterBar result={meta?.pagination?.total}
                     callback={(f) => { setFilter({ ...filter, ...f }) }}
@@ -77,7 +77,7 @@ const CollectedItems = ({ accountId }) => {
                         </div>
                     })}
                     <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-                    {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
+                    {!loading && items.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                 </div>
             </>}
         </ContentWrapper>

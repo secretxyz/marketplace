@@ -74,14 +74,16 @@ const ExplorerRaffles = () => {
                 <div className="cs-height_15 cs-height_lg_10"></div>
                 <RaffleFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
                 <div className="cs-height_15 cs-height_lg_10"></div>
-                <div className="cs-grid_5 cs-gap_30 cs-cards_area" onScroll={handleScroll}>
-                    {raffles.map(n => (
-                        <RaffleCard data={{ id: n.id, ...n.attributes }} key={n.id} hiddenStatus={true} />
-                    ))}
+                <div className="container cs-cards_area" onScroll={handleScroll}>
+                    <div className="cs-grid_5 cs-gap_30">
+                        {raffles.map(n => (
+                            <RaffleCard data={{ id: n.id, ...n.attributes }} key={n.id} hiddenStatus={true} />
+                        ))}
+                    </div>
+                    <div className="cs-height_20 cs-height_lg_20"></div>
+                    <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
+                    {!loading && raffles.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                 </div>
-                <div className="cs-height_20 cs-height_lg_20"></div>
-                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-                {!loading && raffles.length == 0 && <div className="cs-center">There are no records to display</div>}
             </div>
             <div className="cs-height_70 cs-height_lg_40"></div>
         </ContentWrapper>

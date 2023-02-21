@@ -508,10 +508,10 @@ const Collection = (props) => {
                                     <div className="cs-height_20 cs-height_lg_20"></div>
                                 </div>
                             ))}
+                            <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={nftsLoading} size={15} />
+                            {!nftsLoading && nfts.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                         </div>
-                        <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={nftsLoading} size={15} />
-                        {!nftsLoading && nfts.length == 0 && <div className="cs-center">There are no records to display</div>}
-                        <div className="cs-height_30 cs-height_lg_30"></div>
+                        <div className="cs-height_20 cs-height_lg_20"></div>
                     </div>
                 </div>
             </div>

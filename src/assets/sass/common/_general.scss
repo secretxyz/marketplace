@@ -80,6 +80,11 @@ ul::-webkit-scrollbar-thumb {
   justify-content: center;
 }
 
+.cs-center_line {
+  display: flex;
+  justify-content: center;
+}
+
 .cs-bg {
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -3378,7 +3383,7 @@ ul::-webkit-scrollbar-thumb {
 
 .cs-cards_area {
   overflow-y: scroll;
-  min-height: 280px;
+  min-height: 531px;
   max-height: 1200px;
 }
 

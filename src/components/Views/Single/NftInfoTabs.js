@@ -82,7 +82,7 @@ const NftInfoTabs = ({ tokenId, nftOwner, submit }) => {
                         ))}
                     </ul>
                     <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={offerLoading} size={15} />
-                    {!offerLoading && offers.length == 0 && <div className="cs-center">There are no records to display</div>}
+                    {!offerLoading && offers.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                 </div>
                 <div id="history" className="cs-tab">
                     <ul className="cs-activity_list cs-mp0">
@@ -91,7 +91,7 @@ const NftInfoTabs = ({ tokenId, nftOwner, submit }) => {
                         ))}
                     </ul>
                     <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-                    {!loading && history.length == 0 && <div className="cs-center">There are no records to display</div>}
+                    {!loading && history.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                 </div>
             </div>
         </div>
