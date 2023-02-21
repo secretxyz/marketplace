@@ -416,6 +416,8 @@
 
     video {
       width: 100%;
+      min-height: 218px;
+      background-color: black;
       border-radius: inherit;
       background-size: cover !important;
       display: block;
