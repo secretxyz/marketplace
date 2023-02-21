@@ -139,7 +139,17 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 180px;
+    min-width: 180px;
+  }
+
+  .cs-card_small_title1 {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+    // height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 180px;
   }
 
   .cs-card_subtitle {
@@ -194,6 +204,10 @@
 
   .cs-card_info {
     padding: 0 20px 15px;
+
+    hr {
+      margin: 8px 0px;
+    }
   }
 
   .cs-card_meta_info {

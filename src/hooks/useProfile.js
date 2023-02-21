@@ -125,8 +125,9 @@ export const useRaffleTicketItems = () => {
 }
 
 export const useCollectedItems = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [items, setItems] = useState([]);
+    const [collections, setCollections] = useState([]);
     const [meta, setMeta] = useState();
     const [ended, setEnded] = useState(false);
     const page = useRef(0);
@@ -158,15 +159,24 @@ export const useCollectedItems = () => {
                 setEnded(false);
                 reset = true;
             }
-            await fetchCollectedItems(accountId, filter, page.current, reset);
+            fetchCollectedItems(accountId, filter, page.current, reset);
         }
+    }
+
+    const fetchCollections = async (accountId) => {
+        setLoading(true);
+        const res = await SecretApi.getCollectionsWithAccount(accountId);
+        setCollections(res.data);
+        setLoading(false);
     }
 
     return {
         items,
+        collections,
         loading,
         meta,
-        fetchNext
+        fetchNext,
+        fetchCollections
     }
 }
 

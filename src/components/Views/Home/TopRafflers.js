@@ -36,7 +36,7 @@ const TopRafflers = () => {
     return (
         <section>
             <div className="container">
-                <h2 className="cs-section_heading cs-style1 text-center">Top Rafflers in 1 Week</h2>
+                <h2 className="cs-section_heading cs-style1 text-center">Top Secret Rafflers</h2>
                 <div className="cs-height_45 cs-height_lg_45"></div>
                 <div className="row">
                     {rafflers?.map(n => {

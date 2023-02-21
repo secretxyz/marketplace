@@ -21,6 +21,12 @@ const getFilters = (filter) => {
                 "filters[name][$containsi]": filter.search.trimStart()
             }
         }
+        if (filter.collectionId) {
+            filters = {
+                ...filters,
+                "filters[collection]": filter.collectionId
+            }
+        }
         switch (Number(filter.order)) {
             case A_Z:
                 filters = {
@@ -362,6 +368,16 @@ class SecretApi {
                     ...filters
                 }
             });
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async getCollectionsWithAccount(id) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/account/collections/${id}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
