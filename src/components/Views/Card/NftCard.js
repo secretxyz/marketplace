@@ -50,7 +50,7 @@ const NftCard = ({ data }) => {
                 <h3 className="cs-card_title">
                     <a href={nft_link}>{data.name}</a>
                 </h3>
-                <div className="cs-card_price">Offer For: <b className="cs-primary_color">{data.price || 0} XRP</b></div>
+                <div className="cs-card_price">{data.activity == "list" ? "Offer For:" : "Best Offer:"} <b className="cs-primary_color">{data.price || 0} XRP</b></div>
                 <hr />
                 <div className="cs-card_footer">
                     {getFooterButton()}

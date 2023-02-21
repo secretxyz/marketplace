@@ -123,6 +123,7 @@ const Collection = (props) => {
     }
 
     const onClickClear = () => {
+        setWarning(null);
         setPrices({
             min_price: null,
             max_price: null
