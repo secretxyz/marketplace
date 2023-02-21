@@ -10,7 +10,7 @@ import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
 import { useNft } from "../../hooks/useNft";
-import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, notify, getExpirationDateTime, getExpirationDateTime1 } from "../Helpers/Utils";
+import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, notify, getExpirationDateTime1 } from "../Helpers/Utils";
 import PageLoader from "../Common/PageLoader";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
 import CreateOfferModal from "./Single/CreateOfferModal";

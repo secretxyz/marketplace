@@ -4,7 +4,7 @@ import {
     A_Z, Z_A,
     LIKES_HIGH_TO_LOW, LIKES_LOW_TO_HIGH,
     RAFFLES_HIGH_TO_LOW, RAFFLES_LOW_TO_HIGH,
-    TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH, CREATED_SOON,
+    TICKET_PRICE_HIGH_TO_LOW, TICKET_PRICE_LOW_TO_HIGH, CREATED_SOON, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, ENDING_SOON, LIKES,
 } from "../components/Common/constants";
 import { getAuthChannel, getAuthToken, isLoggedIn, setAccount, setAuthToken } from "../components/Helpers/Utils";
 import accountStore from "../store/account.store";
@@ -636,6 +636,32 @@ class SecretApi {
     }
 
     async getCollectionNfts(collectionId, page, filter) {
+        switch (Number(filter?.order)) {
+            case A_Z:
+                filter.sort = "name:asc";
+                break;
+            case Z_A:
+                filter.sort = "name:desc";
+                break;
+            case PRICE_HIGH_TO_LOW:
+                filter.sort = "price:desc";
+                break;
+            case PRICE_LOW_TO_HIGH:
+                filter.sort = "price:asc";
+                break;
+            case ENDING_SOON:
+                filter.sort = "raffle_end_datetime:asc";
+                break;
+            case LIKES:
+                filter.sort = "likes:desc";
+                break;
+            default:
+                filter = {
+                    ...filter,
+                    sort: "price:asc"
+                };
+                break;
+        }
         try {
             const res = await axios.post(`${this.baseUrl}/api/nft/collection/${collectionId}`, {
                 ...filter,

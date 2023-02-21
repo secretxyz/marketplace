@@ -97,29 +97,36 @@ export const useCollectionNfts = () => {
     const page = useRef(0);
 
 
-    const fetchNfts = async (collectionId, page, filter) => {
+    const fetchNfts = async (collectionId, filter, page, reset) => {
         setLoading(true);
         const res = await SecretApi.getCollectionNfts(collectionId, page, filter);
         if (res) {
-            setNfts([...nfts, ...res.data]);
-            setMeta(res.meta);
+            if (reset) {
+                setNfts(res.data);
+            } else {
+                setNfts([...nfts, ...res.data]);
+            }
             if (!res.data?.length) {
                 setEnded(true);
             }
+            // setMeta(res.meta);
         }
         setLoading(false);
     }
 
-    const fetchNext = (collectionId, pageNumber, filter) => {
+    const fetchNext = (collectionId, filter, pageNumber) => {
         if (collectionId) {
+            let reset;
             if (!pageNumber) {
                 if (ended) return;
                 page.current = page.current + 1;
+                reset = false;
             } else {
                 page.current = pageNumber;
                 setEnded(false);
+                reset = true;
             }
-            fetchNfts(collectionId, page.current, filter);
+            fetchNfts(collectionId, filter, page.current, reset);
         }
     }
 

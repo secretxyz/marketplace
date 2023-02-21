@@ -23,13 +23,15 @@ const Collection = (props) => {
     const [liked, setLiked] = useState(false);
     const [reported, setReported] = useState(false);
     const [reporting, setReporting] = useState(false);
+    const [prices, setPrices] = useState();
     const [filter, setFilter] = useState();
-    const [attrs, setAttrs] = useState()
+    const [attrs, setAttrs] = useState();
+    const [warning, setWarning] = useState();
 
     const handleScroll = (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
         if (bottom <= 1 && !loading) {
-            fetchNext(collection.id);
+            fetchNext(collection.id, filter, 0);
         }
     }
 
@@ -57,7 +59,7 @@ const Collection = (props) => {
 
     useEffect(() => {
         if (collection) {
-            fetchNext(collection.id, 0);
+            fetchNext(collection.id, filter, 1);
             fetchAttributes(collection.id);
             if (isLikeCollection(collection.id)) {
                 setLiked(true);
@@ -121,6 +123,11 @@ const Collection = (props) => {
     }
 
     const onClickClear = () => {
+        setPrices({
+            min_price: null,
+            max_price: null
+        })
+
         setFilter({
             ...filter,
             min_price: null,
@@ -129,14 +136,46 @@ const Collection = (props) => {
     }
 
     const onClickApply = () => {
-
+        if (!prices?.min_price) {
+            setWarning("Invalid min price!")
+            return;
+        }
+        if (!prices?.max_price) {
+            setWarning("Invalid max price!")
+            return;
+        }
+        if (Number(prices.max_price) < Number(prices.min_price)) {
+            setWarning("Max must be greater than min!")
+            return;
+        }
+        setWarning(null);
+        setFilter({
+            ...filter,
+            min_price: prices.min_price,
+            max_price: prices.max_price,
+        })
     }
 
     useEffect(() => {
         if (filter) {
-            console.log(filter);
+            // console.log(filter);
+            fetchNext(collection.id, filter, 1);
         }
     }, [filter])
+
+    const onChangePrice = (event) => {
+        let key = event.target.name;
+        let value = event.target.value;
+
+        if ((key == "min_price" || key == "max_price") && Number(value) < 0) {
+            value = 0;
+        }
+
+        setPrices({
+            ...prices,
+            [key]: value
+        })
+    }
 
     const onChangeFilter = (event) => {
         let key = event.target.name;
@@ -152,12 +191,9 @@ const Collection = (props) => {
                 break;
         }
 
-        if ((key == "min_price" || key == "max_price") && Number(value) < 0) {
-            value = 0;
-        }
-
-        // if (key == "max_price" && Number(value) < Number(filter.min_price)) {
-        //     value = filter.min_price;
+        // if (key == "order") {
+        //     value = Number(value);
+        //     // console.log(key, value);
         // }
 
         setFilter({
@@ -361,16 +397,17 @@ const Collection = (props) => {
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="cs-form_field_wrap">
-                                                    <input type="number" className="cs-form_field cs-field_sm" name="min_price" placeholder="Min" value={filter?.min_price || ""} min={0} onChange={onChangeFilter} />
+                                                    <input type="number" className="cs-form_field cs-field_sm" name="min_price" placeholder="Min" value={prices?.min_price || ""} min={0} onChange={onChangePrice} />
                                                 </div>
                                                 <div className="cs-height_15 cs-height_lg_15"></div>
                                             </div>
                                             <div className="col-lg-6">
                                                 <div className="cs-form_field_wrap">
-                                                    <input type="number" className="cs-form_field cs-field_sm" name="max_price" placeholder="Max" value={filter?.max_price || ""} min={0} onChange={onChangeFilter} />
+                                                    <input type="number" className="cs-form_field cs-field_sm" name="max_price" placeholder="Max" value={prices?.max_price || ""} min={0} onChange={onChangePrice} />
                                                 </div>
                                                 <div className="cs-height_10 cs-height_lg_10"></div>
                                             </div>
+                                            {warning && <label className="form-check-label text-warning cs-center">{warning}</label>}
                                             <div className="col-lg-6">
                                                 <button className="cs-btn cs-style1 cs-color1 cs-btn_sm" onClick={onClickClear}>Clear</button>
                                             </div>
@@ -427,7 +464,7 @@ const Collection = (props) => {
                     <div className="cs-sidebar_frame_right">
                         <div className="cs-filter_head">
                             <div className="cs-filter_head_left">
-                                <span className="cs-search_result cs-medium cs-ternary_color">{meta?.pagination?.total} Results</span>
+                                <span className="cs-search_result cs-medium cs-ternary_color">Search</span>
                                 <div className="cs-form_field_wrap">
                                     <input name="search" type="text" className="cs-form_field cs-field_sm" placeholder="Search by name" value={filter?.search || ""} onChange={onChangeFilter} />
                                 </div>
@@ -443,7 +480,7 @@ const Collection = (props) => {
                                     </select>
                                 </div> */}
                                 <div className="cs-form_field_wrap cs-select_arrow">
-                                    <select name="order" className="cs-form_field cs-field_sm" value={filter?.order || PRICE_LOW_TO_HIGH} onChange={onChangeFilter}>
+                                    <select name="order" className="cs-form_field cs-field_sm" value={filter?.order} onChange={onChangeFilter}>
                                         <option value={PRICE_LOW_TO_HIGH}>Price low to high</option>
                                         <option value={PRICE_HIGH_TO_LOW}>Price hight to low</option>
                                         <option value={LIKES}>Likes</option>

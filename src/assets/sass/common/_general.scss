@@ -1224,6 +1224,12 @@ ul::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: space-between;
   }
+
+  .text-warning {
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 4px;
+  }
 }
 
 .cs-filter_widget {
