@@ -1,6 +1,6 @@
 import path from "path";
 import { toast } from "react-toastify";
-import { ONXRP_URL, ONXRP_BROKER, SECRET_BROKER } from "../Common/constants"
+import { ONXRP_URL, ONXRP_BROKER, SECRET_BROKER, IMAGE_SERVER } from "../Common/constants"
 import { XRPCAFE_URL, XRPCAFE_BROKER } from "../Common/constants"
 
 export const mapOrder = (array, order, key) => {
@@ -218,6 +218,16 @@ export const getImageLink = (url) => {
 	return url;
 }
 
+export const getProfileImageLink = (url) => {
+	if (!url){
+		return null;
+	}
+	if (!url.startsWith("https://")) {
+		return `${IMAGE_SERVER}${url}`;
+	}
+	return url;
+}
+
 export const getSummaryUsername = (data) => {
 	if (data) {
 		if (data.username) {
@@ -422,7 +432,7 @@ export const getAssetView1 = (nft) => {
 	if (!nft) {
 		return false;
 	}
-	
+
 	if (isVideoAsset(nft) && !nft.picture_url) {
 		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
 	}

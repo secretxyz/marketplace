@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useProfileInfo } from '../../../hooks/useProfile';
+import SecretApi from '../../../service/SecretApi';
+import { getProfileImageLink } from '../../Helpers/Utils';
 import ContentWrapper from '../../Layout/ContentWrapper';
 import Avatar from "./Avatar";
 
 const ProfileInfo = ({ profile, refresh }) => {
     const [account, setAccount] = useState(profile);
     const { loading, result, update } = useProfileInfo();
+    const [avatar, setAvatar] = useState();
+    const [banner, setBanner] = useState();
 
-    const updateProfile = () => {
-        update(account);
+    const onClickUpdateProfile = () => {
+        update({ ...account, avatar, banner });
     }
 
     const onChangeInfo = (event) => {
@@ -23,6 +27,58 @@ const ProfileInfo = ({ profile, refresh }) => {
             refresh();
         }
     }, [result])
+
+    const onClickAvatarDelete = () => {
+        if (avatar) {
+            setAvatar(null);
+        }
+        setAccount({
+            ...account,
+            picture_url: null
+        })
+    }
+
+    const onChangeProfileAvatar = (e) => {
+        var file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            setAvatar({
+                name: file.name,
+                type: file.type,
+                blob: reader.result
+            })
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        }
+    }
+
+    const onClickBannerDelete = () => {
+        if (banner) {
+            setBanner(null);
+        }
+        setAccount({
+            ...account,
+            banner_picture_url: null
+        })
+    }
+
+    const onChangeProfileBanner = (e) => {
+        var file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            setBanner({
+                name: file.name,
+                type: file.type,
+                blob: reader.result
+            })
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        }
+    }
 
     return (
         <ContentWrapper>
@@ -85,34 +141,35 @@ const ProfileInfo = ({ profile, refresh }) => {
                 <div className="col-lg-6">
                     <div className="cs-edit_profile">
                         <div className="cs-edit_profile_img">
-                            <Avatar className="cs-profile_avatar" {...{ name: account?.wallet, image: account?.picture_url }} />
+                            <input type="file" className="cs-file" accept="image/png,image/jpeg" onChange={onChangeProfileAvatar} />
+                            {avatar ? <img className="cs-profile_avatar" src={avatar.blob} alt="" /> :
+                                <Avatar className="cs-profile_avatar" {...{ name: account?.wallet, image: account?.picture_url }} />}
                         </div>
                         <div className="cs-edit_profile_right">
-                            <div className="cs-edit_profile_btns">
-                                <a className="cs-upload_btn">Upload</a>
+                            <div className="cs-edit_profile_btns" onClick={onClickAvatarDelete}>
                                 <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
                             </div>
-                            <p>Images must be .png or .jpg format. Min size 200x200px (avatar)</p>
+                            <p>Images must be .png or .jpg format. Min size 200x200px. Below 2MB</p>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-6">
                     <div className="cs-edit_profile">
                         <div className="cs-edit_profile_banner_img">
-                            <img src={account.banner_picture_url || "img/cover-photo.jpeg"} />
+                            <input type="file" className="cs-file" accept="image/png,image/jpeg" onChange={onChangeProfileBanner} />
+                            {banner ? <img src={banner.blob} /> : <img src={getProfileImageLink(account.banner_picture_url) || "img/cover-photo.jpeg"} />}
                         </div>
                         <div className="cs-edit_profile_right">
-                            <div className="cs-edit_profile_btns">
-                                <a className="cs-upload_btn">Upload</a>
+                            <div className="cs-edit_profile_btns" onClick={onClickBannerDelete}>
                                 <span className="cs-delete_btn"><i className="far fa-trash-alt"></i> Delete</span>
                             </div>
-                            <p>Images must be .png or .jpg format. Min size 1400x400px (avatar)</p>
+                            <p>Images must be .png or .jpg format. Min size 1400x400px. Below 2MB</p>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-12">
                     <div className="cs-height_40 cs-height_lg_5"></div>
-                    <button className="cs-btn cs-style1 cs-btn_lg" onClick={updateProfile}>
+                    <button className="cs-btn cs-style1 cs-btn_lg" onClick={onClickUpdateProfile}>
                         <span>Update Profile</span>
                     </button>
                 </div>

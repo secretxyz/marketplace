@@ -17,7 +17,7 @@ import Follows from './Profile/Follows';
 import ProfileInfo from './Profile/ProfileInfo';
 import Hidden from './Profile/Hidden';
 import { useProfile } from '../../hooks/useProfile';
-import { getAccount, getSummaryAddress, notify, isLoggedIn } from '../Helpers/Utils';
+import { getAccount, getSummaryAddress, notify, isLoggedIn, getProfileImageLink } from '../Helpers/Utils';
 import PageLoader from '../Common/PageLoader';
 import ReportModal from '../Common/ReportModal';
 import { getLikedItems, likeItem } from '../Helpers/Likes';
@@ -257,7 +257,7 @@ const Profile = (props) => {
         loading ? <PageLoader /> : <ContentWrapper>
             <div className="cs-height_100 cs-height_lg_70"></div>
             <div className="container">
-                <div className="cs-cover_photo cs-bg" style={{ background: `url(${profile?.banner_picture_url || "img/cover-photo.jpeg"})` }}>
+                <div className="cs-cover_photo cs-bg" style={{ background: `url(${getProfileImageLink(profile?.banner_picture_url) || "img/cover-photo.jpeg"})` }}>
                     <div className="cs-profile_info_other cs-box_shadow">
                         <div className="cs-profile_info_head">
                             <a id="account_refresh" className="cs-style1 cs-btn" onClick={onClickRefresh}>
