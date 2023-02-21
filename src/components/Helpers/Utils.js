@@ -411,7 +411,7 @@ export const getAssetView = (nft) => {
 		return false;
 	}
 
-	if (isVideoAsset(nft) && !nft.picture_url?.endsWith(".gif")) {
+	if (isVideoAsset(nft) && !nft.picture_url) {
 		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted />
 	}
 
@@ -423,7 +423,7 @@ export const getAssetView1 = (nft) => {
 		return false;
 	}
 	
-	if (isVideoAsset(nft) && !nft.picture_url?.endsWith(".gif")) {
+	if (isVideoAsset(nft) && !nft.picture_url) {
 		return <video src={getImageLink(nft.animation_url || nft.video_url)} autoPlay loop muted className="cs-zoom_item" />
 	}
 
