@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import BeatLoader from 'react-spinners/BeatLoader';
 import { useCreatedCollections } from '../../../hooks/useProfile';
+import { APP_COLORS } from '../../Common/constants';
 import ContentWrapper from '../../Layout/ContentWrapper';
 import CollectionCard from '../Card/CollectionCard';
 
@@ -27,6 +29,8 @@ const Collections = ({ profile }) => {
                         <CollectionCard data={c} key={c.id} />
                     </div>
                 ))}
+                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
+                {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
             </div>
         </ContentWrapper>
     );

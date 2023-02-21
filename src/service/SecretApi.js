@@ -357,6 +357,8 @@ class SecretApi {
                     "populate[owner]": true,
                     "populate[raffles][count]": true,
                     "populate[likes][count]": true,
+                    "populate[offers][filters][status]": "active",
+                    "populate[offers][sort][0]": "price:desc",
                     ...filters
                 }
             });
@@ -390,7 +392,8 @@ class SecretApi {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
-                    "filters[issuer]": issuer
+                    "filters[issuer]": issuer,
+                    "populate[nfts][count]": true
                 }
             });
             return res.data;

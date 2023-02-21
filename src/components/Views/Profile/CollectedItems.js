@@ -29,12 +29,17 @@ const CollectedItems = ({ accountId }) => {
             <NftFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
             <div className="cs-height_15 cs-height_lg_10"></div>
             <div className="row cs-cards_area" onScroll={handleScroll}>
-                {items.map(n => (
-                    <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
+                {items.map(n => {
+                    let offers = n.attributes.offers.data;
+                    if (offers.length > 0) {
+                        n.attributes.activity = offers[0].attributes.activity;
+                        n.attributes.price = offers[0].attributes.price;
+                    }
+                    return <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
                         <NftCard data={{ ...n.attributes, id: n.id }} />
                         <div className="cs-height_20 cs-height_lg_20"></div>
                     </div>
-                ))}
+                })}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
                 {!loading && items.length == 0 && <div className="cs-center">There are no records to display</div>}
             </div>
