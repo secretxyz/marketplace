@@ -57,7 +57,7 @@ const Offers = ({ accountId }) => {
         let data = {
             activity,
             offer_id: offer.offer_index,
-            offer_owner: { id: getAccount().id, wallet: getAccount().wallet },
+            offer_owner: { id: offer.from.data.id, wallet: offer.from.data.attributes.wallet },
             price: offer.price * 1000000,
             nft: { id: offer.nft.data.id, nft_tokenid: offer.nft.data.attributes.nft_tokenid },
         }

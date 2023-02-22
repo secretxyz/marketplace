@@ -37,7 +37,7 @@ export const ONXRP_BROKER = "rpZqTPC8GvrSvEfFsUuHkmPCg29GdQuXhC";
 export const XRPCAFE_URL = "https://xrp.cafe/nft";
 export const XRPCAFE_BROKER = "rpx9JThQ2y37FaGeeJP7PXDUVEXY3PHZSC";
 
-export const SERVICE_BROKER_FEE = 1;
+export const SERVICE_BROKER_FEE = 0.012;
 
 export const ENDING_SOON = 0;
 export const A_Z = 1;
