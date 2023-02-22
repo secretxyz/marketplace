@@ -15,7 +15,7 @@ const getFilters = (filter) => {
     };
 
     if (filter) {
-        if (filter.search.length > 0) {
+        if (filter.search?.length > 0) {
             filters = {
                 ...filters,
                 "filters[name][$containsi]": filter.search.trimStart()
