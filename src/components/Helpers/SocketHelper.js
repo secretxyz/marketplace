@@ -21,6 +21,10 @@ const SocketLoader = async () => {
             // console.log(data);
             xummStore.setSubscription(data);
         });
+
+        socket.on('disconnect', function () {
+            console.log("socket disconnected!");
+        });
     });
 }
 
