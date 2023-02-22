@@ -22,23 +22,22 @@ import './assets/css/plugins/fontawesome.min.css'
 import './assets/css/plugins/bootstrap.min.css'
 import './assets/css/plugins/slick.css'
 import './assets/sass/style.scss'
+import { useEffect } from 'react';
 
-class App extends Component {
-  render() {
+const App = () => {
 
-    // specify base href from env varible 'PUBLIC_URL'
-    // use only if application isn't served from the root
-    // for development it is forced to root only
-    /* global PUBLIC_URL */
-    const basename = process.env.NODE_ENV === 'development' ? '/' : (PUBLIC_URL || '/');
+  // specify base href from env varible 'PUBLIC_URL'
+  // use only if application isn't served from the root
+  // for development it is forced to root only
+  /* global PUBLIC_URL */
+  const basename = process.env.NODE_ENV === 'development' ? '/' : (PUBLIC_URL || '/');
 
-    return (
-        <BrowserRouter basename={basename}>
-            <Routes />
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter basename={basename}>
+      <Routes />
+    </BrowserRouter>
+  );
 
-  }
 }
 
 export default App;

@@ -64,7 +64,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 </div>
             }
             <div className="cs-raffle_card_info">
-                <a href={`/profile/${raffler?.wallet}`} className="cs-avatar cs-white_bg cs-box_shadow" target="_blank">
+                <a href={`/profile/${raffler?.wallet}`} className="cs-avatar cs-white_bg cs-box_shadow">
                     <Avatar className="cs-profile_avatar_oval" {...{ name: raffler?.wallet, image: raffler?.picture_url }} />
                     <span>{raffler?.username ?? getSummaryAddress(raffler?.wallet)}</span>
                 </a>

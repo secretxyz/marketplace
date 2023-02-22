@@ -9,7 +9,7 @@ const RaffleBuyerRow = ({ data }) => {
     return (
         <li>
             <div className="cs-activity cs-white_bg cs-box_shadow cs-type1">
-                <a className="cs-activity_avatar" href={`/profile/${data.wallet}`} target="_blank">
+                <a className="cs-activity_avatar" href={`/profile/${data.wallet}`}>
                     <Avatar className="cs-activity_avatar" {...{ name: data.wallet, image: data.picture_url }} />
                 </a>
                 <div className="cs-activity_right">
@@ -38,15 +38,15 @@ const RaffleTxRow = ({ data, status }) => {
                 <div className="cs-activity_icon cs-center cs-gray_bg cs-accent_color cs-activity_number">
                     {data.number}
                 </div>
-                <a className="cs-activity_avatar cs-activity_tx_avatar" href={`/profile/${buyer.wallet}`} target="_blank">
+                <a className="cs-activity_avatar cs-activity_tx_avatar" href={`/profile/${buyer.wallet}`}>
                     <Avatar className="cs-activity_avatar" {...{ name: buyer.wallet, image: buyer.picture_url }} />
                 </a>
                 <div className="cs-activity_right">
                     <p className="cs-activity_text cs-activity_row_text">
                         {
                             status == "canceling" || status == "canceled" ?
-                                <>Refunded <span>{ticket.ticket_count} Tickets</span> to <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></> :
-                                <>Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`} target="_blank">{getSummaryUsername(buyer)}</a></>
+                                <>Refunded <span>{ticket.ticket_count} Tickets</span> to <a href={`/profile/${buyer.wallet}`}>{getSummaryUsername(buyer)}</a></> :
+                                <>Reserved <span>{ticket.ticket_count} Tickets</span> by <a href={`/profile/${buyer.wallet}`}>{getSummaryUsername(buyer)}</a></>
                         }
                     </p>
                     <p className="cs-activity_text">

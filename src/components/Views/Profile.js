@@ -26,7 +26,7 @@ import { getReportedItems } from '../Helpers/Reports';
 const NavComponents = {
     "raffles": Raffles,
     "raffle-tickets": RaffleTickets,
-    // "claims": Claims,
+    "claims": Claims,
     "collected": CollectedItems,
     "created": CreatedItems,
     "collections": Collections,
@@ -49,15 +49,14 @@ const NavMenus = [
     {
         label: "Raffle Tickets",
         icon: "fa-ticket-alt",
-        key: "raffle-tickets",
-        isChecked: false
+        key: "raffle-tickets"
     },
-    // {
-    //     label: "Claims",
-    //     icon: "far fa-inbox",
-    //     key: "claims",
-    //     isChecked: false
-    // },
+    {
+        label: "Claims",
+        icon: "far fa-inbox",
+        key: "claims",
+        self: true
+    },
     {
         label: "Collected",
         icon: "fa-list-ul",

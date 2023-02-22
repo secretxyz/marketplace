@@ -891,6 +891,18 @@ class SecretApi {
         }
     }
 
+    async getClaims() {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/claims`, {
+                headers: this.headers(),
+            });
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
     async getSearchNftsInHeader(keyword) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nfts`, {

@@ -45,3 +45,21 @@ export const useActivity = () => {
         fetchNext
     }
 }
+
+export const useClaims = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchClaims = async () => {
+        setLoading(true);
+        const res = await SecretApi.getClaims();
+        setItems(res.data);
+        setLoading(false);
+    }
+
+    return {
+        loading,
+        items,
+        fetchClaims
+    }
+}

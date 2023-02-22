@@ -27,7 +27,6 @@ const CollectedItems = ({ accountId }) => {
     }, [accountId])
 
     useEffect(() => {
-        console.log(filter);
         if (filter) {
             fetchNext(accountId, filter, 1);
         }
