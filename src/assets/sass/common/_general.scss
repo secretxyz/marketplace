@@ -3040,7 +3040,7 @@ ul::-webkit-scrollbar-thumb {
   }
 
   .cs-page_head {
-    padding: 60px 0 65px;
+    padding: 20px 0 20px;
   }
 
   .cs-col_reverse_lg {
@@ -3384,6 +3384,12 @@ ul::-webkit-scrollbar-thumb {
 .cs-cards_area {
   overflow-y: scroll;
   min-height: 531px;
+  max-height: 1200px;
+}
+
+.cs-cards_area1 {
+  overflow-y: scroll;
+  min-height: 561px;
   max-height: 1200px;
 }
 

@@ -23,6 +23,7 @@ const Collections = ({ profile }) => {
 
     return (
         <ContentWrapper>
+            <div className="cs-height_15 cs-height_lg_10"></div>
             <div className="row cs-cards_area" onScroll={handleScroll}>
                 {items.map(c => (
                     <div className="col-xl-3 col-lg-4 col-sm-6" key={c.id}>

@@ -9,6 +9,7 @@ import CreatedItems from './Profile/CreatedItems';
 import Collections from './Profile/Collections';
 import Raffles from './Profile/Raffles';
 import RaffleTickets from './Profile/RaffleTickets';
+import Offers from './Profile/Offers';
 import OffersMade from './Profile/OffersMade';
 import OffersReceived from './Profile/OffersReceived';
 import Activity from './Profile/Activity';
@@ -26,12 +27,13 @@ import { getReportedItems } from '../Helpers/Reports';
 const NavComponents = {
     "raffles": Raffles,
     "raffle-tickets": RaffleTickets,
-    "claims": Claims,
+    // "claims": Claims,
     "collected": CollectedItems,
     "created": CreatedItems,
     "collections": Collections,
-    "offers-made": OffersMade,
-    "offers-received": OffersReceived,
+    "offers": Offers,
+    // "offers-made": OffersMade,
+    // "offers-received": OffersReceived,
     "activity": Activity,
     "favorites": Favorites,
     "follows": Follows,
@@ -51,12 +53,12 @@ const NavMenus = [
         icon: "fa-ticket-alt",
         key: "raffle-tickets"
     },
-    {
-        label: "Claims",
-        icon: "far fa-inbox",
-        key: "claims",
-        self: true
-    },
+    // {
+    //     label: "Claims",
+    //     icon: "far fa-inbox",
+    //     key: "claims",
+    //     self: true
+    // },
     {
         label: "Collected",
         icon: "fa-list-ul",
@@ -73,15 +75,20 @@ const NavMenus = [
         key: "collections"
     },
     {
-        label: "Offers Made",
-        icon: "fa-shopping-cart",
-        key: "offers-made"
-    },
-    {
-        label: "Offers Received",
+        label: "Offers",
         icon: "fa-receipt",
-        key: "offers-received"
+        key: "offers"
     },
+    // {
+    //     label: "Offers Made",
+    //     icon: "fa-shopping-cart",
+    //     key: "offers-made"
+    // },
+    // {
+    //     label: "Offers Received",
+    //     icon: "fa-receipt",
+    //     key: "offers-received"
+    // },
     {
         label: "Activity",
         icon: "fa-running",
@@ -321,7 +328,6 @@ const Profile = (props) => {
                                 {profile.bio}
                             </div>
                         </div>} */}
-                        <div className="cs-height_15 cs-height_lg_10"></div>
                         <ContentComponent accountId={accountId} profile={profile} refresh={refreshProfile} />
                     </div>
                 </div>

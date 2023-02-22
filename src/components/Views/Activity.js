@@ -100,6 +100,38 @@ const Activity = () => {
 												<label className="form-check-label" htmlFor="raffle-cancel">Cancelled Raffle</label>
 											</div>
 										</li>
+										<hr />
+										<li>
+											<div className="form-check">
+												<input name="list" className="form-check-input" type="checkbox" id="listed-offer" checked={filter.list || false} onChange={onChangeStatus} />
+												<label className="form-check-label" htmlFor="listed-offer">Listed Offer</label>
+											</div>
+										</li>
+										<li>
+											<div className="form-check">
+												<input name="bid" className="form-check-input" type="checkbox" id="bid-offer" checked={filter.bid || false} onChange={onChangeStatus} />
+												<label className="form-check-label" htmlFor="bid-offer">Bid Offer</label>
+											</div>
+										</li>
+										<li>
+											<div className="form-check">
+												<input name="accept" className="form-check-input" type="checkbox" id="sold-nft" checked={filter.accept || false} onChange={onChangeStatus} />
+												<label className="form-check-label" htmlFor="sold-nft">Sold NFT</label>
+											</div>
+										</li>
+										<li>
+											<div className="form-check">
+												<input name="buy" className="form-check-input" type="checkbox" id="buy-nft" checked={filter.buy || false} onChange={onChangeStatus} />
+												<label className="form-check-label" htmlFor="buy-nft">Bought NFT</label>
+											</div>
+										</li>
+										<hr />
+										<li>
+											<div className="form-check">
+												<input name="transfer" className="form-check-input" type="checkbox" id="transfer" checked={filter.transfer || false} onChange={onChangeStatus} />
+												<label className="form-check-label" htmlFor="transfer">Transferred</label>
+											</div>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -130,7 +162,7 @@ const Activity = () => {
 						</div>
 					</div>
 					<div className="cs-sidebar_frame_right">
-						<ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
+						<ul className="cs-activity_list cs-mp0 cs-cards_area1" onScroll={handleScroll}>
 							{items?.map(d => (
 								<li key={d.id} >
 									<ActivityCard data={d.attributes} key={d.id} />

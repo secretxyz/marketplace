@@ -82,6 +82,7 @@ const ProfileInfo = ({ profile, refresh }) => {
 
     return (
         <ContentWrapper>
+            <div className="cs-height_15 cs-height_lg_10"></div>
             <div className="row">
                 <div className="col-lg-6">
                     <div className="cs-form_field_wrap">

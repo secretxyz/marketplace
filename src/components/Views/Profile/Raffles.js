@@ -25,6 +25,7 @@ const Raffles = ({ accountId }) => {
 
     return (
         <ContentWrapper>
+            <div className="cs-height_15 cs-height_lg_10"></div>
             <RaffleFilterBar result={meta?.pagination?.total} callback={(filter) => { setFilter(filter) }} />
             <div className="cs-height_15 cs-height_lg_10"></div>
             <div className="row cs-cards_area" onScroll={handleScroll}>

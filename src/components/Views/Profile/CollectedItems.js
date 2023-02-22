@@ -48,6 +48,7 @@ const CollectedItems = ({ accountId }) => {
 
     return (
         <ContentWrapper>
+            <div className="cs-height_15 cs-height_lg_10"></div>
             {!selectedCollection ? <div className="row cs-cards_area">
                 {collections.map(c => (
                     <div className="col-xl-3 col-lg-4 col-sm-6" key={c.id}>

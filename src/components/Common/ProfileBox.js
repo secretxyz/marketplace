@@ -54,7 +54,7 @@ const ProfileBox = ({ account }) => {
 				<li><a href="/my-profile/raffle-tickets">My Tickets</a></li>
 				<li><a href="/my-profile/claims">My Claims</a></li>
 				<li><a href="/my-profile/collected">My NFTs</a></li>
-				<li><a href="/my-profile/offers-made">My Offers</a></li>
+				<li><a href="/my-profile/offers">My Offers</a></li>
 				<li><a href="/my-profile/profile-info">My Profile</a></li>
 			</ul>
 			<div className="text-center">

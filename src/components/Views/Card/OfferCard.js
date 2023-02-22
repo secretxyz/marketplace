@@ -56,7 +56,7 @@ const OfferCard = ({ data, submit }) => {
                     {from.id == getAccount().id ?
                         <button className="cs-activity_view cs-btn cs-style1 cs-card_btn_3" onClick={() => onClickOffer("cancel")}>
                             <span>Cancel</span>
-                        </button> : <button className="cs-activity_view cs-btn cs-style1 cs-card_btn_3" onClick={() => onClickOffer("buy")}>
+                        </button> : getAccount().id && <button className="cs-activity_view cs-btn cs-style1 cs-card_btn_3" onClick={() => onClickOffer("buy")}>
                             <span>Buy</span>
                         </button>
                     }

@@ -21,9 +21,9 @@ const Claims = () => {
                         <ActivityCard data={d} type="self" key={d.id} />
                     </li>
                 ))}
+                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
+                {!loading && items.length == 0 && <div className="cs-center_line">There are no records to display</div>}
             </ul>
-            <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-            {!loading && items.length == 0 && <div className="cs-center_line">There are no records to display</div>}
         </ContentWrapper>
     );
 }

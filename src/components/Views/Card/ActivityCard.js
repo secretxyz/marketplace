@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAssetView, getDifferenceTime, getSummaryUsername } from '../../Helpers/Utils';
+import { getAccount, getAssetView, getDifferenceTime, getSummaryUsername, isLoggedIn } from '../../Helpers/Utils';
 import Avatar from '../Profile/Avatar';
 
 const ActivityCard = ({ data, type }) => {
@@ -109,7 +109,7 @@ const ActivityCard = ({ data, type }) => {
                 <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
             </div>
             <a href={`/nft/${nft.nft_tokenid}/${raffle?.id || ""}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
-                <span>{type ? "Claim" : "View"}</span>
+                <span>{(to?.id == getAccount().id && isLoggedIn()) ? "Claim" : "View"}</span>
             </a>
         </div>
     )

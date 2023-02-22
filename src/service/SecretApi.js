@@ -851,6 +851,36 @@ class SecretApi {
                 "filters[activity][$in][4]": "raffle-cancel"
             }
         }
+        if (filter.list) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][5]": "list"
+            }
+        }
+        if (filter.bid) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][6]": "bid"
+            }
+        }
+        if (filter.accept) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][7]": "accept"
+            }
+        }
+        if (filter.buy) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][8]": "buy"
+            }
+        }
+        if (filter.transfer) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][9]": "transfer"
+            }
+        }
         if (filter.keyword) {
             filters = {
                 ...filters,
@@ -891,9 +921,9 @@ class SecretApi {
         }
     }
 
-    async getClaims() {
+    async getClaims(accountId) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/claims`, {
+            const res = await axios.get(`${this.baseUrl}/api/claims/${accountId}`, {
                 headers: this.headers(),
             });
             return res.data;

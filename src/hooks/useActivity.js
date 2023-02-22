@@ -50,10 +50,10 @@ export const useClaims = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchClaims = async () => {
+    const fetchClaims = async (accountId) => {
         setLoading(true);
-        const res = await SecretApi.getClaims();
-        setItems(res.data);
+        const res = await SecretApi.getClaims(accountId);
+        setItems(res?.data);
         setLoading(false);
     }
 
