@@ -109,7 +109,7 @@ const ActivityCard = ({ data, type }) => {
                 <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
             </div>
             <a href={`/nft/${nft.nft_tokenid}/${raffle?.id || ""}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
-                <span>{self ? "Claim" : "View"}</span>
+                <span>{type ? "Claim" : "View"}</span>
             </a>
         </div>
     )
