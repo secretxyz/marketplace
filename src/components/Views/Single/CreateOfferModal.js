@@ -177,7 +177,7 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 							<div className="cs-bid_info">
 								<ul>
 									<li>
-										<span>Possible Earning</span>
+										<span>Total Pay</span>
 										<b>{Number(activity.price) / 1000000 + SERVICE_BROKER_FEE} XRP</b>
 									</li>
 								</ul>
