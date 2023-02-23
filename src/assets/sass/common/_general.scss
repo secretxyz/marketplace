@@ -1293,10 +1293,14 @@ ul::-webkit-scrollbar-thumb {
 
   span {
     display: flex;
+    overflow-wrap: anywhere;
+    padding-right: 8px;
 
     .cs-filter_toggle_btn_subtitle {
       margin-left: 6px;
       font-weight: normal;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -2405,7 +2409,7 @@ ul::-webkit-scrollbar-thumb {
 
 .cs-name {
   text-align: center;
-  margin-top: 5px;  
+  margin-top: 5px;
   overflow-wrap: break-word;
 
   button {
