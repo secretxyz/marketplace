@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useProfileInfo } from '../../../hooks/useProfile';
-import SecretApi from '../../../service/SecretApi';
+import { LIMIT_IMAGE_SIZE } from '../../Common/constants';
 import { getProfileImageLink } from '../../Helpers/Utils';
 import ContentWrapper from '../../Layout/ContentWrapper';
 import Avatar from "./Avatar";
@@ -8,10 +8,12 @@ import Avatar from "./Avatar";
 const ProfileInfo = ({ profile, refresh }) => {
     const [account, setAccount] = useState(profile);
     const { loading, result, update } = useProfileInfo();
+    const [warning, setWarning] = useState();
     const [avatar, setAvatar] = useState();
     const [banner, setBanner] = useState();
 
     const onClickUpdateProfile = () => {
+        setWarning(null);
         update({ ...account, avatar, banner });
     }
 
@@ -40,6 +42,15 @@ const ProfileInfo = ({ profile, refresh }) => {
 
     const onChangeProfileAvatar = (e) => {
         var file = e.target.files[0];
+        if (!file || Number(file.size) > LIMIT_IMAGE_SIZE) {
+            setWarning({
+                ...warning,
+                avatar: "File size too large."
+            })
+            return;
+        }
+        setWarning(null);
+
         let reader = new FileReader();
         reader.readAsDataURL(file)
         reader.onload = () => {
@@ -66,6 +77,15 @@ const ProfileInfo = ({ profile, refresh }) => {
 
     const onChangeProfileBanner = (e) => {
         var file = e.target.files[0];
+        if (!file || Number(file.size) > LIMIT_IMAGE_SIZE) {
+            setWarning({
+                ...warning,
+                banner: "File size too large."
+            })
+            return;
+        }
+        setWarning(null);
+
         let reader = new FileReader();
         reader.readAsDataURL(file)
         reader.onload = () => {
@@ -96,13 +116,13 @@ const ProfileInfo = ({ profile, refresh }) => {
                     </div>
                     <div className="cs-height_25 cs-height_lg_25"></div>
                     <div className="cs-form_field_wrap">
-                        <textarea name="bio" cols="30" rows="5" className="cs-form_field cs-white_bg"
+                        <textarea name="bio" cols="30" rows="4" className="cs-form_field cs-white_bg"
                             placeholder="Your bio..." value={account?.bio || ""} onChange={onChangeInfo}></textarea>
                     </div>
                     <div className="cs-height_20 cs-height_lg_20"></div>
                 </div>
                 <div className="col-lg-6">
-                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                    <span className="cs-btn cs-style2 cs-btn_lg1 w-100">
                         <span className="text-left cs-social_input">
                             <i className="fab fa-discord"></i>
                             <span>Discord</span>
@@ -111,7 +131,7 @@ const ProfileInfo = ({ profile, refresh }) => {
                         </span>
                     </span>
                     <div className="cs-height_25 cs-height_lg_25"></div>
-                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                    <span className="cs-btn cs-style2 cs-btn_lg1 w-100">
                         <span className="text-left cs-social_input">
                             <i className="fab fa-twitter"></i>
                             <span>Twitter</span>
@@ -120,7 +140,7 @@ const ProfileInfo = ({ profile, refresh }) => {
                         </span>
                     </span>
                     <div className="cs-height_25 cs-height_lg_25"></div>
-                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                    <span className="cs-btn cs-style2 cs-btn_lg1 w-100">
                         <span className="text-left cs-social_input">
                             <i className="fab fa-telegram"></i>
                             <span>Telegram</span>
@@ -128,7 +148,7 @@ const ProfileInfo = ({ profile, refresh }) => {
                                 placeholder="Do not add full url, just handle" value={account?.telegram_username || ""} onChange={onChangeInfo} />
                         </span>
                     </span><div className="cs-height_25 cs-height_lg_25"></div>
-                    <span className="cs-btn cs-style2 cs-btn_lg w-100">
+                    <span className="cs-btn cs-style2 cs-btn_lg1 w-100">
                         <span className="text-left cs-social_input">
                             <i className="fab fa-facebook"></i>
                             <span>Facebook</span>
@@ -137,7 +157,6 @@ const ProfileInfo = ({ profile, refresh }) => {
                         </span>
                     </span>
                     <div className="cs-height_30 cs-height_lg_30"></div>
-
                 </div>
                 <div className="col-lg-6">
                     <div className="cs-edit_profile">
@@ -153,6 +172,8 @@ const ProfileInfo = ({ profile, refresh }) => {
                             <p>Images must be .png or .jpg format. Min size 200x200px. Below 2MB</p>
                         </div>
                     </div>
+                    {warning?.avatar && <label className="form-check-label text-warning">{warning?.avatar}</label>}
+                    <div className="cs-height_20 cs-height_lg_20"></div>
                 </div>
                 <div className="col-lg-6">
                     <div className="cs-edit_profile">
@@ -167,9 +188,11 @@ const ProfileInfo = ({ profile, refresh }) => {
                             <p>Images must be .png or .jpg format. Min size 1400x400px. Below 2MB</p>
                         </div>
                     </div>
+                    {warning?.banner && <label className="form-check-label text-warning">{warning?.banner}</label>}
+                    <div className="cs-height_20 cs-height_lg_20"></div>
                 </div>
                 <div className="col-lg-12">
-                    <div className="cs-height_40 cs-height_lg_5"></div>
+                    <div className="cs-height_15 cs-height_lg_5"></div>
                     <button className="cs-btn cs-style1 cs-btn_lg" onClick={onClickUpdateProfile}>
                         <span>Update Profile</span>
                     </button>

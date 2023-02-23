@@ -10,10 +10,11 @@ import ContentWrapper from '../Layout/ContentWrapper';
 import RaffleCard from './Card/RaffleCard';
 import NftCard from './Card/NftCard';
 import { APP_COLORS, A_Z, ENDING_SOON, LIKES, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, Z_A } from "../Common/constants"
-import { getAccount, getImageLink, getNumberFormat1, getSummaryAddress, htmlDecode, notify } from '../Helpers/Utils';
+import { getAccount, getImageLink, getNumberFormat1, getProfileImageLink, getSummaryAddress, htmlDecode, notify } from '../Helpers/Utils';
 import ReportModal from '../Common/ReportModal';
 import { getLikedItems, likeItem } from '../Helpers/Likes';
 import { getReportedItems } from '../Helpers/Reports';
+import CollectionModal from '../Common/CollectionModal';
 
 const Collection = (props) => {
     const { slug } = props.match.params;
@@ -23,6 +24,7 @@ const Collection = (props) => {
     const [liked, setLiked] = useState(false);
     const [reported, setReported] = useState(false);
     const [reporting, setReporting] = useState(false);
+    const [editing, setEditing] = useState(false);
     const [prices, setPrices] = useState();
     const [filter, setFilter] = useState();
     const [attrs, setAttrs] = useState();
@@ -107,6 +109,16 @@ const Collection = (props) => {
                 setLiked(false);
             }
         }
+    }
+
+    useEffect(() => {
+        if (editing) {
+            $("#collection_modal").toggleClass("active");
+        }
+    }, [editing])
+
+    const onClickEdit = async () => {
+        setEditing(true);
     }
 
     useEffect(() => {
@@ -248,6 +260,10 @@ const Collection = (props) => {
                         <div className="cs-collection_img">
                             <div className="cs-collection_info_other cs-box_shadow">
                                 <div className="cs-collection_info_head">
+                                    {isCreator() && <a id="collection_edit" className="cs-style1 cs-btn" onClick={onClickEdit}>
+                                        <span><i className="fas fa-pen fa-fw"></i></span>
+                                    </a>}
+                                    <ReactTooltip anchorId="collection_edit" className="cs-modal_tooltip" place="bottom" content="Edit collection" />
                                     <a id="collection_refresh" className="cs-style1 cs-btn" onClick={onClickRefresh}>
                                         <span><i className="fas fa-redo fa-fw"></i></span>
                                     </a>
@@ -266,11 +282,11 @@ const Collection = (props) => {
                                     <ReactTooltip anchorId="collection_report" className="cs-modal_tooltip" place="bottom" content={reported ? "You have already reported this collection" : "Report illegal material"} />
                                 </div>
                             </div>
-                            <img src={collection?.banner_picture_url || "img/cover-photo.jpeg"} alt="Collection Details" />
+                            <img src={getProfileImageLink(collection?.banner_picture_url) || "img/cover-photo.jpeg"} alt="Collection Details" />
                         </div>
                         <div className="cs-collection_bottom">
                             <div className="cs-collection_avatar">
-                                <img src={getImageLink(collection?.picture_url)} alt="Collection" />
+                                <img src={getProfileImageLink(collection?.picture_url)} alt="Collection" />
                             </div>
                             <div className="cs-collection_info cs-box_shadow">
                                 <div className="cs-collection_info_in cs-white_bg">
@@ -411,9 +427,11 @@ const Collection = (props) => {
                                             {warning && <label className="form-check-label text-warning cs-center">{warning}</label>}
                                             <div className="col-lg-6">
                                                 <button className="cs-btn cs-style1 cs-color1 cs-btn_sm" onClick={onClickClear}>Clear</button>
+                                                <div className="cs-height_10 cs-height_lg_10"></div>
                                             </div>
                                             <div className="col-lg-6">
                                                 <button className="cs-btn cs-style1 cs-btn_sm" onClick={onClickApply}><span>Apply</span></button>
+                                                <div className="cs-height_10 cs-height_lg_10"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -517,6 +535,9 @@ const Collection = (props) => {
             </div>
             {reporting && <ReportModal data={{ collection: collection.id }}
                 closeModal={(res) => { setReporting(false); setReported(res); }} />}
+            {editing && <CollectionModal data={collection}
+                refreshDetails={() => { reload(slug); }}
+                closeModal={() => { setEditing(false); }} />}
         </ContentWrapper>
     );
 }

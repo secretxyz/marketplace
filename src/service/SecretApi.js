@@ -704,6 +704,18 @@ class SecretApi {
         }
     }
 
+    async updateCollection(data) {
+        try {
+            const res = await axios.put(`${this.baseUrl}/api/collection/${data.id}`, data, {
+                headers: this.headers()
+            });
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
     async refreshCollection(collectionId) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/collection/refresh/${collectionId}`);

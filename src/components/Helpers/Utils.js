@@ -225,7 +225,8 @@ export const getProfileImageLink = (url) => {
 	if (!url.startsWith("https://")) {
 		return `${IMAGE_SERVER}${url}`;
 	}
-	return url;
+
+	return getImageLink(url);
 }
 
 export const getSummaryUsername = (data) => {

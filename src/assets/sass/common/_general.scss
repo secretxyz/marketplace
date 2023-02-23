@@ -297,6 +297,12 @@ ul::-webkit-scrollbar-thumb {
     }
   }
 
+  &.cs-btn_lg1 {
+    >span {
+      padding: 10px 30px;
+    }
+  }
+
   &.cs-btn_sm {
     >span {
       padding: 8px 15px;
@@ -319,7 +325,7 @@ ul::-webkit-scrollbar-thumb {
 
     >span {
       display: inline-block;
-      min-width: 72px;
+      min-width: 80px;
     }
   }
 
@@ -352,7 +358,7 @@ ul::-webkit-scrollbar-thumb {
     border-left-width: 1px;
     border-image-source: linear-gradient(116.85deg, rgba(252, 70, 107, 0.3) 0%, rgba(63, 94, 251, 0.3) 100%);
     padding-left: 15px;
-    margin-left: 15px;
+    // margin-left: 15px;
     flex: 1;
   }
 
@@ -942,6 +948,13 @@ ul::-webkit-scrollbar-thumb {
 
 .cs-modal_container {
   max-width: 570px;
+  margin: auto;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cs-modal_container_lg {
+  max-width: 760px;
   margin: auto;
   border-radius: 10px;
   position: relative;
@@ -3394,16 +3407,16 @@ ul::-webkit-scrollbar-thumb {
 }
 
 .cs-social_input {
-  display: flex;
+  display: flex !important;
   align-items: center;
 
   i {
     min-width: 20px;
   }
 
-  input {
-    min-width: 320px;
-  }
+  // input {
+  //   min-width: 320px;
+  // }
 }
 
 .cs-profile_avatar {

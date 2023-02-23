@@ -39,6 +39,8 @@ export const XRPCAFE_BROKER = "rpx9JThQ2y37FaGeeJP7PXDUVEXY3PHZSC";
 
 export const SERVICE_BROKER_FEE = 0.012;
 
+export const LIMIT_IMAGE_SIZE = 1024 * 1024 * 2;
+
 export const ENDING_SOON = 0;
 export const A_Z = 1;
 export const Z_A = 2;
