@@ -12,6 +12,7 @@ const CollectedItems = ({ accountId }) => {
     const { loading, items, collections, meta, fetchNext, fetchCollections } = useCollectedItems();
     const [filter, setFilter] = useState();
     const [selectedCollection, setSelectedCollection] = useState();
+    const [selecting, setSelecting] = useState();
 
     const handleScroll = async (e) => {
         const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
@@ -42,7 +43,12 @@ const CollectedItems = ({ accountId }) => {
         }
     }, [selectedCollection])
 
+    useEffect(() => {
+        setSelecting(false);
+    }, [items])
+
     const onSelectCollectionCard = (collection) => {
+        setSelecting(true);
         setSelectedCollection(collection);
     }
 
@@ -65,7 +71,7 @@ const CollectedItems = ({ accountId }) => {
                     reset={() => { setSelectedCollection(null) }} />
                 <div className="cs-height_15 cs-height_lg_10"></div>
                 <div className="row cs-cards_area" onScroll={handleScroll}>
-                    {items.map(n => {
+                    {!selecting && items.map(n => {
                         let offers = n.attributes.offers.data;
                         if (offers.length > 0) {
                             n.attributes.activity = offers[0].attributes.activity;

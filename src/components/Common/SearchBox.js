@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSearch } from "../../hooks/useHomepage";
 import { useOuterClick } from "../../hooks/useOuterClick";
-import { getAssetView, getImageLink, getSummaryUsername, isVideoAsset } from "../Helpers/Utils";
+import { getAssetView, getProfileImageLink, getSummaryUsername } from "../Helpers/Utils";
 import Avatar from "../Views/Profile/Avatar";
 
 const SearchBox = ({ keyword, clear }) => {
@@ -33,7 +33,7 @@ const SearchBox = ({ keyword, clear }) => {
 							const collection = d.attributes;
 							return <li key={d.id}>
 								<a href={`/collection/${collection.slug}`}>
-									<div className="cs-search_thumb"><img src={getImageLink(collection?.picture_url)} alt="Image" /></div>
+									<div className="cs-search_thumb"><img src={getProfileImageLink(collection?.picture_url)} alt="Image" /></div>
 									<span className="cs-search_right">{collection?.name}</span>
 								</a>
 							</li>

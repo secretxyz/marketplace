@@ -788,7 +788,7 @@ const NftDetails = (props) => {
                                 <div className="cs-author_card cs-white_bg cs-box_shadow">
                                     <a href={`/collection/${collection?.slug}`}>
                                         <div className="cs-author_img">
-                                            <img src={getImageLink(collection?.picture_url)} alt="" />
+                                            <img src={getProfileImageLink(collection?.picture_url)} alt="" />
                                         </div>
                                     </a>
                                     <div className="cs-author_right">

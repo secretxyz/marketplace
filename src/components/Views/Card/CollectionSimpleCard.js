@@ -1,5 +1,5 @@
 import React from 'react';
-import { getImageLink, getNumberFormat1 } from "../../Helpers/Utils";
+import { getProfileImageLink, getNumberFormat1 } from "../../Helpers/Utils";
 
 const CollectionSimpleCard = ({ data, id }) => {
     const collection = data.attributes;
@@ -12,7 +12,7 @@ const CollectionSimpleCard = ({ data, id }) => {
                     <div className="cs-card_media">
                         <h3 className='cs-card_number_right'>{Number(id) + 1}</h3>
                         <a href={`/collection/${collection?.slug}`} className="cs-card_img cs-zoom_effect">
-                            <img src={getImageLink(collection?.picture_url)} alt="Avatar" className="cs-zoom_item" />
+                            <img src={getProfileImageLink(collection?.picture_url)} alt="Avatar" className="cs-zoom_item" />
                         </a>
                         <div className="cs-card_media_right">
                             <h3><a href={`/collection/${collection?.slug}`}>{collection?.name}</a></h3>
