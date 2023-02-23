@@ -151,6 +151,7 @@ const CollectionModal = ({ data, refreshDetails, closeModal }) => {
                                             <option value="utility">Utility</option>
                                             <option value="trading cards">Trading Cards</option>
                                             <option value="gaming">Gaming</option>
+                                            <option value="metaverse">Metaverse</option>
                                             <option value="music">Music</option>
                                             <option value="video">Video</option>
                                             <option value="fashion">Fashion</option>
