@@ -243,7 +243,7 @@ export const getSummaryUsername = (data) => {
 
 export const getSummaryAddress = (addr) => {
 	if (addr)
-		return `${addr.substring(0, 8)}...${addr.substring(addr.length - 8, addr.length)}`;
+		return `${addr.substring(0, 7)}...${addr.substring(addr.length - 7, addr.length)}`;
 }
 
 export const getSummaryAddress2 = (addr) => {
