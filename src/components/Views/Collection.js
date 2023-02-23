@@ -10,7 +10,7 @@ import ContentWrapper from '../Layout/ContentWrapper';
 import RaffleCard from './Card/RaffleCard';
 import NftCard from './Card/NftCard';
 import { APP_COLORS, A_Z, ENDING_SOON, LIKES, PRICE_HIGH_TO_LOW, PRICE_LOW_TO_HIGH, Z_A } from "../Common/constants"
-import { getAccount, getImageLink, getNumberFormat1, getProfileImageLink, getSummaryAddress, htmlDecode, notify } from '../Helpers/Utils';
+import { getAccount, getNumberFormat1, getImageLink, getSummaryAddress, htmlDecode, notify } from '../Helpers/Utils';
 import ReportModal from '../Common/ReportModal';
 import { getLikedItems, likeItem } from '../Helpers/Likes';
 import { getReportedItems } from '../Helpers/Reports';
@@ -282,11 +282,11 @@ const Collection = (props) => {
                                     <ReactTooltip anchorId="collection_report" className="cs-modal_tooltip" place="bottom" content={reported ? "You have already reported this collection" : "Report illegal material"} />
                                 </div>
                             </div>
-                            <img src={getProfileImageLink(collection?.banner_picture_url) || "img/cover-photo.jpeg"} alt="Collection Details" />
+                            <img src={getImageLink(collection?.banner_picture_url) || "img/cover-photo.jpeg"} alt="Collection Details" />
                         </div>
                         <div className="cs-collection_bottom">
                             <div className="cs-collection_avatar">
-                                <img src={getProfileImageLink(collection?.picture_url)} alt="Collection" />
+                                <img src={getImageLink(collection?.picture_url)} alt="Collection" />
                             </div>
                             <div className="cs-collection_info cs-box_shadow">
                                 <div className="cs-collection_info_in cs-white_bg">

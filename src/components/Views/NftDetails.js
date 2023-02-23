@@ -10,7 +10,7 @@ import AboutTab from "./Single/AboutTab";
 import DetailsTab from "./Single/DetailsTab";
 import AttributesTab from "./Single/AttributesTab";
 import { useNft } from "../../hooks/useNft";
-import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, getImageLink, isVideoAsset, notify, getExpirationDateTime1, getProfileImageLink } from "../Helpers/Utils";
+import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, isVideoAsset, notify, getExpirationDateTime1, getImageLink } from "../Helpers/Utils";
 import PageLoader from "../Common/PageLoader";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
 import CreateOfferModal from "./Single/CreateOfferModal";
@@ -788,7 +788,7 @@ const NftDetails = (props) => {
                                 <div className="cs-author_card cs-white_bg cs-box_shadow">
                                     <a href={`/collection/${collection?.slug}`}>
                                         <div className="cs-author_img">
-                                            <img src={getProfileImageLink(collection?.picture_url)} alt="" />
+                                            <img src={getImageLink(collection?.picture_url)} alt="" />
                                         </div>
                                     </a>
                                     <div className="cs-author_right">

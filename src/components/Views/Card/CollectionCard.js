@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProfileImageLink, getNumberFormat1 } from "../../Helpers/Utils";
+import { getImageLink, getNumberFormat1 } from "../../Helpers/Utils";
 
 const CollectionCard = ({ data }) => {
     const collection = data.attributes;
@@ -8,10 +8,10 @@ const CollectionCard = ({ data }) => {
     return (
         <div className="cs-card cs-style3 cs-box_shadow cs-white_bg cs-collection_card">
             <a href={`/collection/${collection?.slug}`} className="cs-card_thumb cs-zoom_effect">
-                <img src={getProfileImageLink(collection?.banner_picture_url) || "img/cover-photo.jpeg"} alt="Image" className="cs-zoom_item cs-height_100 cs-height_lg_100" />
+                <img src={getImageLink(collection?.banner_picture_url) || "img/cover-photo.jpeg"} alt="Image" className="cs-zoom_item cs-height_100 cs-height_lg_100" />
             </a>
             <a href={`/collection/${collection?.slug}`} className="cs-avatar">
-                <img src={getProfileImageLink(collection?.picture_url)} alt="Avatar" />
+                <img src={getImageLink(collection?.picture_url)} alt="Avatar" />
                 {
                     collection.verified && <span className="cs-avatar_status">
                         <i className="fa fa-check cs-check-icon"></i>

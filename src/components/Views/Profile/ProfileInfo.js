@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useProfileInfo } from '../../../hooks/useProfile';
 import { LIMIT_IMAGE_SIZE } from '../../Common/constants';
-import { getProfileImageLink } from '../../Helpers/Utils';
+import { getImageLink } from '../../Helpers/Utils';
 import ContentWrapper from '../../Layout/ContentWrapper';
 import Avatar from "./Avatar";
 
@@ -179,7 +179,7 @@ const ProfileInfo = ({ profile, refresh }) => {
                     <div className="cs-edit_profile">
                         <div className="cs-edit_profile_banner_img">
                             <input type="file" className="cs-file" accept="image/png,image/jpeg" onChange={onChangeProfileBanner} />
-                            {banner ? <img src={banner.blob} /> : <img src={getProfileImageLink(account.banner_picture_url) || "img/cover-photo.jpeg"} />}
+                            {banner ? <img src={banner.blob} /> : <img src={getImageLink(account.banner_picture_url) || "img/cover-photo.jpeg"} />}
                         </div>
                         <div className="cs-edit_profile_right">
                             <div className="cs-edit_profile_btns" onClick={onClickBannerDelete}>

@@ -187,6 +187,10 @@ export const getImageLink = (url) => {
 		return null;
 	}
 
+	if (url.startsWith("/collections") || url.startsWith("/profiles")) {
+		return `${IMAGE_SERVER}${url}`;
+	}
+
 	if (url.startsWith("ipfs://ipfs/")) {
 		if (url.endsWith("mp4") || url.endsWith("avi")) {
 			return `https://ipfs.bithomp.com/video/${url.substring(12)}`;
@@ -216,18 +220,6 @@ export const getImageLink = (url) => {
 	}
 
 	return url;
-}
-
-export const getProfileImageLink = (url) => {
-	if (!url) {
-		return null;
-	}
-
-	if (url.startsWith("/collections") || url.startsWith("/profiles")) {
-		return `${IMAGE_SERVER}${url}`;
-	}
-
-	return getImageLink(url);
 }
 
 export const getSummaryUsername = (data) => {

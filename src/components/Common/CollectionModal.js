@@ -1,7 +1,7 @@
 import { HttpStatusCode } from 'axios';
 import React, { useEffect, useState } from 'react';
 import SecretApi from '../../service/SecretApi';
-import { getProfileImageLink, notify } from '../Helpers/Utils';
+import { getImageLink, notify } from '../Helpers/Utils';
 import { LIMIT_IMAGE_SIZE } from './constants';
 
 const Steps = {
@@ -222,7 +222,7 @@ const CollectionModal = ({ data, refreshDetails, closeModal }) => {
                                     <div className="cs-edit_profile">
                                         <div className="cs-edit_profile_img">
                                             <input type="file" className="cs-file" accept="image/png,image/jpeg" onChange={onChangeAvatar} />
-                                            {avatar ? <img className="cs-profile_avatar" src={avatar.blob} alt="" /> : <img src={getProfileImageLink(collection.picture_url) || "img/cover-photo.jpeg"} />}
+                                            {avatar ? <img className="cs-profile_avatar" src={avatar.blob} alt="" /> : <img src={getImageLink(collection.picture_url) || "img/cover-photo.jpeg"} />}
                                         </div>
                                         <div className="cs-edit_profile_right">
                                             <p>Dimensions 400x400px. Below 2MB</p>
@@ -238,7 +238,7 @@ const CollectionModal = ({ data, refreshDetails, closeModal }) => {
                                     <div className="cs-edit_profile">
                                         <div className="cs-edit_profile_banner_img">
                                             <input type="file" className="cs-file" accept="image/png,image/jpeg" onChange={onChangeBanner} />
-                                            {banner ? <img src={banner.blob} /> : <img src={getProfileImageLink(collection.banner_picture_url) || "img/cover-photo.jpeg"} />}
+                                            {banner ? <img src={banner.blob} /> : <img src={getImageLink(collection.banner_picture_url) || "img/cover-photo.jpeg"} />}
                                         </div>
                                         <div className="cs-edit_profile_right">
                                             <p>Dimensions 1400x400px. Below 2MB</p>
