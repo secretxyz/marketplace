@@ -28,8 +28,8 @@ const RaffleHistoryRow = ({ data }) => {
                         </div>
                     </div>
                     <div className="col-xl-3">
-                        <p className="cs-activity_text"><span>Total Price</span></p>
-                        <p className="cs-activity_text">{raffle.total_ticket_price} XRP</p>
+                        <p className="cs-activity_text"><span>Ticket Price</span></p>
+                        <p className="cs-activity_text">{raffle.ticket_price} XRP</p>
                     </div>
                     <div className="col-xl-3">
                         <p className="cs-activity_text"><span>Tickets Sold</span></p>
