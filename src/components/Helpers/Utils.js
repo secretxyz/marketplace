@@ -219,10 +219,11 @@ export const getImageLink = (url) => {
 }
 
 export const getProfileImageLink = (url) => {
-	if (!url){
+	if (!url) {
 		return null;
 	}
-	if (!url.startsWith("https://")) {
+
+	if (url.startsWith("/collections") || url.startsWith("/profiles")) {
 		return `${IMAGE_SERVER}${url}`;
 	}
 
