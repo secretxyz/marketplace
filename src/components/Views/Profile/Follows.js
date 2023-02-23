@@ -41,16 +41,14 @@ const Follows = ({ accountId }) => {
 
     return (
         <ContentWrapper>
-            {/* <div className="cs-height_15 cs-height_lg_10"></div>
-            <ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
-                {items?.map(d => (
-                    <li key={d.id} >
-                        <OfferCard data={{ ...d.attributes, id: d.id }} key={d.id} submit={(activity, offerId) => submit(activity, offerId)} />
-                    </li>
-                ))}
-            </ul>
-            <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
-            {!loading && items.length == 0 && <div className="cs-center_line">There are no records to display</div>} */}
+            <div className="cs-height_15 cs-height_lg_10"></div>
+            <div className="container">
+                <div className="cs-coming_soon">
+                    <h1 className="cs-page_title">
+                        Coming Soon...
+                    </h1>
+                </div>
+            </div>
         </ContentWrapper>
     );
 }
