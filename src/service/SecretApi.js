@@ -790,6 +790,9 @@ class SecretApi {
                     "populate[raffle]": true,
                     "populate[raffle_ticket]": true,
                     "populate[from]": true,
+                    "filters[activity][$notIn][0]": "transfer",
+                    "filters[activity][$notIn][1]": "accept",
+                    "filters[activity][$notIn][2]": "bid",
                     "populate[nft][fields][0]": "name",
                     "populate[nft][fields][1]": "nft_tokenid",
                     "populate[nft][fields][2]": "picture_url",
@@ -845,52 +848,25 @@ class SecretApi {
                 "filters[activity][$in][1]": "raffle-ticket"
             }
         }
-        if (filter.winner) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][2]": "raffle-winner"
-            }
-        }
         if (filter.end) {
             filters = {
                 ...filters,
-                "filters[activity][$in][3]": "raffle-end"
+                "filters[activity][$in][2]": "raffle-end"
             }
         }
         if (filter.cancel) {
             filters = {
                 ...filters,
-                "filters[activity][$in][4]": "raffle-cancel"
+                "filters[activity][$in][3]": "raffle-cancel"
             }
         }
-        if (filter.list) {
+        if (!filter.create && !filter.ticket && !filter.end && !filter.cancel) {
             filters = {
                 ...filters,
-                "filters[activity][$in][5]": "list"
-            }
-        }
-        if (filter.bid) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][6]": "bid"
-            }
-        }
-        if (filter.accept) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][7]": "accept"
-            }
-        }
-        if (filter.buy) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][8]": "buy"
-            }
-        }
-        if (filter.transfer) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][9]": "transfer"
+                "filters[activity][$in][0]": "raffle-create",
+                "filters[activity][$in][1]": "raffle-ticket",
+                "filters[activity][$in][2]": "raffle-end",
+                "filters[activity][$in][3]": "raffle-cancel"
             }
         }
         if (filter.keyword) {

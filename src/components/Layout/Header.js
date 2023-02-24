@@ -87,15 +87,9 @@ const Header = () => {
 									<div className="cs-nav_in">
 										<div className="cs-nav">
 											<ul className="cs-nav_list">
-												<li className="menu-item-has-children">
+												<li className="menu-item">
 													<a href="/explorer-raffles">Explorer</a>
-													<ul>
-														<li><a href="/explorer-raffles">Raffles</a></li>
-														<li><a href="/explorer-collections">Collections</a></li>
-														<li><a href="/explorer-nfts">NFTs</a></li>
-													</ul>
 												</li>
-												<li><a href="/drop">Drops</a></li>
 												<li className="menu-item-has-children">
 													<a href="/activity">Stats</a>
 													<ul>
@@ -122,7 +116,7 @@ const Header = () => {
 													</form>
 													<div className="cs-footer_social_btns">
 														<a href="https://bearableguy.club" target="_blank"><i className="fas fa-mask fa-fw"></i></a>
-														<a href="https://twitter.com/BearableguyClub" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
+														<a href="https://twitter.com/SecretLabsXRPL" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
 														<a href="https://discord.gg/VnNGWAAj3Q" target="_blank"><i className="fab fa-discord fa-fw"></i></a>
 													</div>
 												</li>

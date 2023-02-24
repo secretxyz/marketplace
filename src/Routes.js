@@ -12,16 +12,10 @@ import BasePage from './components/Layout/BasePage';
 const waitFor = Tag => props => <Tag {...props} />;
 
 const Home = lazy(() => import('./components/Views/Home'));
-const Collection = lazy(() => import('./components/Views/Collection'));
-const ExplorerCollections = lazy(() => import('./components/Views/ExplorerCollections'));
-const ExplorerNfts = lazy(() => import('./components/Views/ExplorerNfts'));
 const ExplorerRaffles = lazy(() => import('./components/Views/ExplorerRaffles'));
 const NftDetails = lazy(() => import('./components/Views/NftDetails'));
-const Drop = lazy(() => import('./components/Views/Drop'));
-const Ranking = lazy(() => import('./components/Views/Ranking'));
 const Activity = lazy(() => import('./components/Views/Activity'));
 const Leaderboard = lazy(() => import('./components/Views/Leaderboard'));
-const Create = lazy(() => import('./components/Views/Create'));
 const Profile = lazy(() => import('./components/Views/Profile'));
 
 const NotFound = lazy(() => import('./components/Views/NotFound'));
@@ -52,22 +46,15 @@ const Routes = ({ location }) => {
 					<div>
 						<Suspense fallback={<PageLoader />}>
 							<Switch location={location}>
-								<Route path="/collection/:slug" component={waitFor(Collection)} />
-								<Route path="/explorer-collections/:menu" component={waitFor(ExplorerCollections)} />
-								<Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
-								<Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
 								<Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />
 								<Route path="/nft/:tokenId/:raffleId" component={waitFor(NftDetails)} />
 								<Route path="/nft/:tokenId" component={waitFor(NftDetails)} />
-								<Route path="/drop" component={waitFor(Drop)} />
-								<Route path="/ranking" component={waitFor(Ranking)} />
 								<Route path="/activity" component={waitFor(Activity)} />
 								<Route path="/leaderboard" component={waitFor(Leaderboard)} />
 
 								<Route path="/my-profile/:menu" component={waitFor(Profile)} />
 								<Route path="/my-profile" component={waitFor(Profile)} />
 								<Route path="/profile/:wallet" component={waitFor(Profile)} />
-								<Route path="/create" component={waitFor(Create)} />
 
 								<Route path="/contact" component={waitFor(Contact)} />
 								<Route path="/faq" component={waitFor(Faq)} />

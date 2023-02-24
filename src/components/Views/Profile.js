@@ -27,18 +27,18 @@ import { getReportedItems } from '../Helpers/Reports';
 const NavComponents = {
     "raffles": Raffles,
     "raffle-tickets": RaffleTickets,
-    // "claims": Claims,
+    "claims": Claims,
     "collected": CollectedItems,
-    "created": CreatedItems,
-    "collections": Collections,
-    "offers": Offers,
+    // "created": CreatedItems,
+    // "collections": Collections,
+    // "offers": Offers,
     // "offers-made": OffersMade,
     // "offers-received": OffersReceived,
     "activity": Activity,
-    "favorites": Favorites,
-    "follows": Follows,
+    // "favorites": Favorites,
+    // "follows": Follows,
     "profile-info": ProfileInfo,
-    "hidden": Hidden,
+    // "hidden": Hidden,
 }
 
 const NavMenus = [
@@ -53,32 +53,32 @@ const NavMenus = [
         icon: "fa-ticket-alt",
         key: "raffle-tickets"
     },
-    // {
-    //     label: "Claims",
-    //     icon: "far fa-inbox",
-    //     key: "claims",
-    //     self: true
-    // },
+    {
+        label: "Claims",
+        icon: "far fa-inbox",
+        key: "claims",
+        self: true
+    },
     {
         label: "Collected",
         icon: "fa-list-ul",
         key: "collected"
     },
-    {
-        label: "Created",
-        icon: "fa-pencil-alt",
-        key: "created"
-    },
-    {
-        label: "Collections",
-        icon: "fa-project-diagram",
-        key: "collections"
-    },
-    {
-        label: "Offers",
-        icon: "fa-receipt",
-        key: "offers"
-    },
+    // {
+    //     label: "Created",
+    //     icon: "fa-pencil-alt",
+    //     key: "created"
+    // },
+    // {
+    //     label: "Collections",
+    //     icon: "fa-project-diagram",
+    //     key: "collections"
+    // },
+    // {
+    //     label: "Offers",
+    //     icon: "fa-receipt",
+    //     key: "offers"
+    // },
     // {
     //     label: "Offers Made",
     //     icon: "fa-shopping-cart",
@@ -94,28 +94,28 @@ const NavMenus = [
         icon: "fa-running",
         key: "activity"
     },
-    {
-        label: "Favorites",
-        icon: "fa-heart",
-        key: "favorites"
-    },
-    {
-        label: "Follows",
-        icon: "fa-star",
-        key: "follows"
-    },
+    // {
+    //     label: "Favorites",
+    //     icon: "fa-heart",
+    //     key: "favorites"
+    // },
+    // {
+    //     label: "Follows",
+    //     icon: "fa-star",
+    //     key: "follows"
+    // },
     {
         label: "Profile Info",
         icon: "fa-user",
         key: "profile-info",
         self: true
     },
-    {
-        label: "Hidden",
-        icon: "fa-eye",
-        key: "hidden",
-        self: true
-    }
+    // {
+    //     label: "Hidden",
+    //     icon: "fa-eye",
+    //     key: "hidden",
+    //     self: true
+    // }
 ]
 
 const Profile = (props) => {
