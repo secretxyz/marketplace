@@ -96,16 +96,12 @@ const Header = () => {
 														<li><a href="/explorer-nfts">NFTs</a></li>
 													</ul>
 												</li>
-												<li><a href="/drop">Drops</a></li>
+												<li className="menu-item"><a href="/drop">Drops</a></li>
 												<li className="menu-item">
 													<a href="/activity">Activity</a>
 												</li>
-												<li className="menu-item-has-children">
-													<a href="/faq">Resources</a>
-													<ul>
-														<li><a href="/contact">Contact Us</a></li>
-														<li><a href="/faq">FAQ</a></li>
-													</ul>
+												<li className="menu-item">
+													<a href="/contact">Contact Us</a>
 												</li>
 												<li className="cs-menu_footer_widget">
 													<form className="cs-footer_newsletter">
