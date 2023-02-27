@@ -73,7 +73,7 @@ const IconBox = () => {
 								</svg>
 							</div>
 							<h2 className="cs-iconbox_title">Claim Prize</h2>
-							<div className="cs-iconbox_subtitle">Once a winner is chosen, claim your prize and enjoy your new NFT!</div>
+							<div className="cs-iconbox_subtitle">Once a winner is chosen, users simply claim their NFT into wallet.</div>
 						</div>
 						<div className="cs-height_30 cs-height_lg_30"></div>
 					</div>
