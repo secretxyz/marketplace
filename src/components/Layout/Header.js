@@ -66,7 +66,7 @@ const Header = () => {
 					<div className="cs-main_header_in">
 						<div className="cs-main_header_left">
 							<a className="cs-site_branding" href="/">
-								<img src={theme_mode ? "img/logo_dark.png" : "img/logo_light.png"} alt="Logo" />
+								<img src="img/logo.png" alt="Logo" />
 							</a>
 						</div>
 						<div className="cs-main_header_right">

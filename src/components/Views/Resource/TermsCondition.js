@@ -21,12 +21,11 @@ const TermsCondition = () => {
                         <div className="cs-single_post">
                             <h3>General Use</h3>
                             <p>SecretMarket offers an open marketplace aggregating offers from across the XRP Ledger. </p>
-                            <p>Use of the raffle feature is not trustless. While most processes are automated and have been tested thoroughly, by using any of our tools you agree to accept any risk associated with entering raffles, trading on the marketplace, and hosting of raffles.</p>
-                            <p>By using any raffle hosting services or using any of the tools within the SecretMarket platform, you agree SecretMarket and it's partners will not be held liable in any way for any losses at anytime. We do not use or store any of your seed phrases, passcodes, or other vulnerable information. We do not and will not sell any of your data. </p>
-                            <p>We reserve the right to blacklist or ban any users at our discretion, although this primarily centers around abuse of the platform, fraud, or other activities. You also agree that by entering any raffles you do not expect any return, and that entering a raffle does not guarantee a prize and carries an aspect of probability</p>
+                            <p>By using any services or using any of the tools within the SecretMarket platform, you agree SecretMarket and it's partners will not be held liable in any way for any losses at anytime. We do not use or store any of your seed phrases, passcodes, or other vulnerable information. We do not and will not sell any of your data.</p>
+                            <p>We reserve the right to blacklist or ban any users at our discretion, although this primarily centers around abuse of the platform, fraud, or other activities.</p>
 
                             <h3>Fees and payments</h3>
-                            <p>All marketplace fees can be changed at our discretion. No fee will ever be changed on an active raffle or sale, and at least 72 hour notice will be provided for any platform wide fee changes. </p>
+                            <p>All marketplace fees can be changed at our discretion. No fee will ever be changed on an active sale, and at least 72 hour notice will be provided for any platform wide fee changes. </p>
                         </div>
                     </div>
                 </div>
