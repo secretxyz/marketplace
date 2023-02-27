@@ -15,20 +15,14 @@ import PageLoader from '../Common/PageLoader';
 import ReportModal from '../Common/ReportModal';
 import { getLikedItems, likeItem } from '../Helpers/Likes';
 import { getReportedItems } from '../Helpers/Reports';
+import { useClaims } from '../../hooks/useActivity';
 
 const NavComponents = {
     "raffles": Raffles,
     "raffle-tickets": RaffleTickets,
     "claims": Claims,
     "collected": CollectedItems,
-    // "created": CreatedItems,
-    // "collections": Collections,
-    // "offers": Offers,
-    // "offers-made": OffersMade,
-    // "offers-received": OffersReceived,
     "activity": Activity,
-    // "favorites": Favorites,
-    // "follows": Follows,
     "profile-info": ProfileInfo,
     // "hidden": Hidden,
 }
@@ -113,6 +107,7 @@ const NavMenus = [
 const Profile = (props) => {
     const { wallet, menu } = props.match.params;
     const { loading, accountId, profile, fetchProfile, reload, refresh, like } = useProfile();
+    const { items: claims, fetchClaims } = useClaims();
     const [navMenus, setNavMenus] = useState(NavMenus);
     const [liked, setLiked] = useState(false);
     const [reported, setReported] = useState(false);
@@ -151,6 +146,7 @@ const Profile = (props) => {
             if (isReportAccount(accountId)) {
                 setReported(true);
             }
+            fetchClaims(accountId);
         }
     }, [accountId]);
 
@@ -308,6 +304,7 @@ const Profile = (props) => {
                                         <li key={k}>
                                             <a className={m.isChecked ? 'active' : ''} onClick={() => { onFilter(m.label) }}>
                                                 <span><i className={`fas ${m.icon}`}></i>{m.label}</span>
+                                                {m.key == "claims" && claims?.length > 0 && <span className="cs-btn_badge">{claims?.length}</span>}
                                             </a>
                                         </li>
                                     ))
