@@ -20,7 +20,7 @@ const Base = (props) => {
                 <meta charSet="utf-8" />
                 <title>SecretRaffles</title>
                 <meta name="description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
-                <link rel="canonical" href="https://secretraffles.xyz/img/secret_logo.png" />
+                <meta property="og:image" content="https://secretraffles.xyz/img/secret_logo.png" />
             </Helmet>
 
             <Header />
