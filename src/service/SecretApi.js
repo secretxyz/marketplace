@@ -268,7 +268,10 @@ class SecretApi {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
-                    "filters[nft_tokenid]": tokenId,
+                    "filters[nft_tokenid]": tokenId,                   
+                    "filters[status][$notIn][0]": "active",
+                    "filters[status][$notIn][1]": "canceling",
+                    "filters[status][$notIn][2]": "raffling",                    
                     "sort[raffle_end_datetime]": "desc",
                     "populate[raffler]": true,
                 }

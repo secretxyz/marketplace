@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import Avatar from "../Profile/Avatar";
-import { useRaffleBuyers, useRaffleTransactions } from "../../../hooks/useRaffle";
-import { getSummaryAddress, getSummaryUsername, getDateTimeWithFormat } from "../../Helpers/Utils";
-import { BITHOMP_URL } from "../../Common/constants";
+import { useRaffleBuyers, useRaffleHistory, useRaffleTransactions } from "../../../hooks/useRaffle";
+import { getSummaryAddress, getSummaryUsername, getDateTimeWithFormat, getTicketStatus } from "../../Helpers/Utils";
+import { APP_COLORS, BITHOMP_URL } from "../../Common/constants";
 import { useState } from "react";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const RaffleBuyerRow = ({ data }) => {
     return (
@@ -61,15 +62,61 @@ const RaffleTxRow = ({ data, status }) => {
     );
 }
 
-const RaffleInfoTabs = ({ raffleId, reservedCount, status }) => {
-    const { buyers, fetchRaffleBuyers } = useRaffleBuyers();
-    const { loading, transactions, fetchNext } = useRaffleTransactions();
+const RaffleHistoryRow = ({ data }) => {
+    const raffle = data?.attributes;
+    const raffler = raffle?.raffler?.data.attributes;
+
+    return (
+        <li>
+            <div className="cs-activity cs-box_shadow cs-white_bg cs-type1">
+                <div className="cs-activity_avatar">
+                    <Avatar className="cs-activity_avatar" {...{ name: raffler.wallet, image: raffler.picture_url }} />
+                </div>
+                <div className="row w-100">
+                    <div className="col-xl-12">
+                        <div className="cs-activity_text">Raffled by <a href="#">{getSummaryUsername(raffler)}</a></div>
+                        <div className="cs-activity_posted_by">
+                            {getDateTimeWithFormat(raffle.raffle_start_datetime)}
+                            <span className="cs-activity_status">{getTicketStatus(raffle.status)}</span>
+                        </div>
+                    </div>
+                    {/* <div className="col-xl-3">
+                        <p className="cs-activity_text"><span>Ticket Price</span></p>
+                        <p className="cs-activity_text">{raffle.ticket_price} XRP</p>
+                    </div>
+                    <div className="col-xl-3">
+                        <p className="cs-activity_text"><span>Tickets Sold</span></p>
+                        <p className="cs-activity_text">
+                            {raffle.reserved_count} / {raffle.ticket_count}
+                        </p>
+                    </div> */}
+                </div>
+                <a href={`/raffle/${data.id}`} className="cs-btn cs-style1 cs-card_btn_3">
+                    <span>View</span>
+                </a>
+            </div>
+        </li>
+    );
+}
+
+const RaffleInfoTabs = ({ raffleId, reservedCount, status, tokenId }) => {
+    const { loading: buyersLoading, buyers, fetchRaffleBuyers } = useRaffleBuyers();
+    const { loading: txLoading, transactions, fetchNext } = useRaffleTransactions();
+    const { loading: historyLoading, history, fetchNext: fetchHistoryNext } = useRaffleHistory();
+
     const [txs, setTxs] = useState([]);
 
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if (bottom) {
             fetchNext(raffleId);
+        }
+    }
+
+    const handleScroll1 = (e) => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (bottom) {
+            fetchHistoryNext(tokenId);
         }
     }
 
@@ -87,9 +134,13 @@ const RaffleInfoTabs = ({ raffleId, reservedCount, status }) => {
     useEffect(() => {
         if (raffleId) {
             fetchRaffleBuyers(raffleId);
-            fetchNext(raffleId, 0);
+            fetchNext(raffleId, 1);
         }
     }, [raffleId])
+
+    useEffect(() => {
+        fetchHistoryNext(tokenId, 1);
+    }, [tokenId])
 
     return (
         <div className="row">
@@ -99,22 +150,36 @@ const RaffleInfoTabs = ({ raffleId, reservedCount, status }) => {
                         <ul className="cs-tab_links cs-style1 cs-medium cs-primary_color cs-mp0 cs-primary_font">
                             <li className="active"><a className="cs-tab-sm" href="#participants">Participants ({buyers.length})</a></li>
                             <li><a className="cs-tab-sm" href="#transactions">Transactions ({transactions.length})</a></li>
+                            <li><a className="cs-tab-sm" href="#history">History</a></li>
                         </ul>
                     </div>
                     <div className="cs-height_10 cs-height_lg_10"></div>
-                    <div className="cs-tab_content cs-tab_nft_info_content" onScroll={handleScroll}>
+                    <div className="cs-tab_content cs-tab_nft_info_content" >
                         <div id="participants" className="cs-tab active">
                             <ul className="cs-activity_list cs-mp0">
                                 {buyers.map(buyer => (
                                     <RaffleBuyerRow data={buyer} key={buyer.account_id} />
                                 ))}
+                                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={buyersLoading} size={15} />
+                                {!buyersLoading && buyers.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                             </ul>
                         </div>
                         <div id="transactions" className="cs-tab">
-                            <ul className="cs-activity_list cs-mp0">
+                            <ul className="cs-activity_list cs-mp0" onScroll={handleScroll}>
                                 {txs.map(tx => (
                                     <RaffleTxRow data={tx} status={status} key={tx.id} />
                                 ))}
+                                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={txLoading} size={15} />
+                                {!txLoading && txs.length == 0 && <div className="cs-center_line">There are no records to display</div>}
+                            </ul>
+                        </div>
+                        <div id="history" className="cs-tab">
+                            <ul className="cs-activity_list cs-mp0" onScroll={handleScroll1}>
+                                {history.map(d => (
+                                    <RaffleHistoryRow data={d} key={d.id} />
+                                ))}
+                                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={historyLoading} size={15} />
+                                {!historyLoading && history.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                             </ul>
                         </div>
                     </div>

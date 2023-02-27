@@ -12,10 +12,8 @@ import AttributesTab from "./Single/AttributesTab";
 import { useNft } from "../../hooks/useNft";
 import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, isVideoAsset, notify, getExpirationDateTime1, getImageLink } from "../Helpers/Utils";
 import PageLoader from "../Common/PageLoader";
-import CreateRaffleModal from "./Single/CreateRaffleModal";
 import BuyTicketModal from "./Single/BuyTicketModal";
 import RaffleInfoTabs from "./Single/RaffleInfoTabs";
-import NftInfoTabs from "./Single/NftInfoTabs";
 import ConnectModal from "../Common/ConnectModal";
 import accountStore from "../../store/account.store";
 import DrawNftModal from "./Single/DrawNftModal";
@@ -597,7 +595,7 @@ const NftDetails = (props) => {
                             </div>
                         </div>
                         {getBuySellView()}
-                        {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} status={raffle?.status} />}
+                        {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} status={raffle?.status} tokenId={nft?.nft_tokenid} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>
                 </div>

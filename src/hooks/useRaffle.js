@@ -75,6 +75,7 @@ export const useRaffleBuyers = () => {
     }
 
     return {
+        loading,
         buyers,
         fetchRaffleBuyers
     }
