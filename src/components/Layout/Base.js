@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from "react-helmet";
 
 import Header from './Header'
 import Footer from './Footer'
@@ -15,6 +16,12 @@ const Base = (props) => {
 
     return (
         <div className="main-content">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>SecretRaffles</title>
+                <meta name="description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
+                <link rel="canonical" href="https://secretraffles.xyz/img/secret_logo.png" />
+            </Helmet>
 
             <Header />
 
