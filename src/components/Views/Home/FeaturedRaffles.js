@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
-import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
+import { useFeaturedRaffle } from '../../../hooks/useFeatured';
 import { useState } from 'react';
 import CountLoader from '../../Common/CountLoader';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import SlickLoader from '../../Common/SlickLoader'
 import RaffleCard from '../Card/RaffleCard';
-import { useFeaturedRaffle } from '../../../hooks/useFeaturedRaffle';
+import { useFeaturedRaffle } from '../../../hooks/useFeatured';
 import { isLoggedIn } from '../../Helpers/Utils';
 import accountStore from '../../../store/account.store';
 

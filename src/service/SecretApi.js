@@ -537,8 +537,14 @@ class SecretApi {
         }
     }
 
-    async getNftsOfCollection(collectionId) {
-
+    async getNftHistory(tokenId) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nft/history/${tokenId}`);
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
     }
 
     async createRaffle(data) {
@@ -730,6 +736,29 @@ class SecretApi {
         try {
             const res = await axios.put(`${this.baseUrl}/api/collection/like/${collectionId}`, null, {
                 headers: this.headers()
+            });
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async getFeaturedCollections(category) {
+        let filters;
+        if (!category) {
+            filters = { "filters[homepage_banner]": true };
+        } else {
+            filters = { "filters[featured]": true };
+        }
+
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/collections`, {
+                params: {
+                    "pagination[page]": 1,
+                    "pagination[pageSize]": 10,
+                    ...filters
+                }
             });
             return res.data;
         } catch (error) {
