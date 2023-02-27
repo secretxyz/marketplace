@@ -26,7 +26,7 @@ const AccountCard = ({ rank, data, buyer }) => {
                             </div>
                             <div className="cs-leader_card_info"><i className="fas fa-ticket-alt fa-fw"></i> {getNumberFormat1(data.tickets)}</div>
                             {buyer && <div className="cs-leader_card_info"><i className="fas fa-medal fa-fw"></i> {getNumberFormat1(data.won)}</div>}
-                            <div className="cs-leader_card_info"><i className="fas fa-coins fa-fw"></i> {getNumberFormat1(data.volume)}</div>
+                            <div className="cs-leader_card_volume"><i className="fas fa-coins fa-fw"></i> {getNumberFormat1(data.volume)}</div>
                         </div>
                     </div>
                 </div>
