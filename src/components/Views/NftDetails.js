@@ -179,22 +179,22 @@ const NftDetails = (props) => {
                     <div className="col-xl-12">
                         <div className="cs-white_bg cs-box_shadow cs-general_box_5 cs-buy_sell_view">
                             <div className="row">
-                                <div className="col-3">
+                                {/* <div className="col-3">
                                     <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickCreateRaffle}>
                                         <span>Create Raffle</span>
                                     </a>
-                                </div>
-                                <div className="col-3">
+                                </div> */}
+                                <div className="col-4">
                                     <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickListOffer}>
                                         <span>List at Secret</span>
                                     </a>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-4">
                                     <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                         <span>List at onXRP</span>
                                     </a>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-4">
                                     <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                         <span>List at xrp.cafe</span>
                                     </a>
