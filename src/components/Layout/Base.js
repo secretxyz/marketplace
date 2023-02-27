@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 import Header from './Header'
 import Footer from './Footer'
