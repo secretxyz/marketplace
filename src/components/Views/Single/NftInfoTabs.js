@@ -7,44 +7,6 @@ import { APP_COLORS, BITHOMP_URL } from "../../Common/constants"
 import { getDateTimeWithFormat, getSummaryUsername, getTicketStatus, getExpirationDateTime, getMarketplaceByWallet, getDifferenceTime } from "../../Helpers/Utils";
 import OfferRow from "../Card/OfferRow";
 
-const RaffleHistoryRow = ({ data }) => {
-    const raffle = data?.attributes;
-    const raffler = raffle?.raffler?.data.attributes;
-    // console.log(raffler);
-
-    return (
-        <li>
-            <div className="cs-activity cs-box_shadow cs-white_bg cs-type1">
-                <div className="cs-activity_avatar">
-                    <Avatar className="cs-activity_avatar" {...{ name: raffler.wallet, image: raffler.picture_url }} />
-                </div>
-                <div className="row w-100">
-                    <div className="col-xl-6">
-                        <div className="cs-activity_text">Raffled by <a href="#">{getSummaryUsername(raffler)}</a></div>
-                        <div className="cs-activity_posted_by">
-                            {getDateTimeWithFormat(raffle.raffle_start_datetime)}
-                            <span className="cs-activity_status">{getTicketStatus(raffle.status)}</span>
-                        </div>
-                    </div>
-                    <div className="col-xl-3">
-                        <p className="cs-activity_text"><span>Ticket Price</span></p>
-                        <p className="cs-activity_text">{raffle.ticket_price} XRP</p>
-                    </div>
-                    <div className="col-xl-3">
-                        <p className="cs-activity_text"><span>Tickets Sold</span></p>
-                        <p className="cs-activity_text">
-                            {raffle.reserved_count} / {raffle.ticket_count}
-                        </p>
-                    </div>
-                </div>
-                <a href={`/nft/${raffle.nft_tokenid}/${data.id}`} className="cs-btn cs-style1 cs-card_btn_3">
-                    <span>View</span>
-                </a>
-            </div>
-        </li>
-    );
-}
-
 const HistoryRow = ({ data }) => {
     const owner = data.owner;
 
@@ -56,7 +18,7 @@ const HistoryRow = ({ data }) => {
                 </p>
             case "sold":
                 return <p>
-                    <a href={`/profile/${owner?.wallet}`}>{`${getSummaryUsername(owner)}`}</a> sold <span>on {Number(data.amount) / 1000000} XRP</span>
+                    <a href={`/profile/${owner?.wallet}`}>{`${getSummaryUsername(owner)}`}</a> bought <span>on {Number(data.amount) / 1000000} XRP</span>
                 </p>
             case "mint":
                 return <p>
