@@ -30,6 +30,7 @@ const TermsCondition = () => {
                     </div>
                 </div>
             </div>
+            <div className="cs-height_120 cs-height_lg_40"></div>
         </ContentWrapper>
     );
 }
