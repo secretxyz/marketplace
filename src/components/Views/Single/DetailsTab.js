@@ -8,7 +8,7 @@ const DetailsTab = (props) => {
             <div className="cs-white_bg cs-box_shadow cs-general_box_5">
                 <ul className="cs-single_details_list">
                     <li>Issuer <a href={`${BITHOMP_URL}${props.issuer}`} target="_blank"><span>{getSummaryAddress(props.issuer)}</span></a></li>
-                    <li>Owner  <a href={`${BITHOMP_URL}${props.owner}`} target="_blank"><span>{getSummaryAddress(props.owner)}</span></a></li>
+                    {/* <li>Owner  <a href={`${BITHOMP_URL}${props.owner}`} target="_blank"><span>{getSummaryAddress(props.owner)}</span></a></li> */}
                     <li>Token ID <a href={`${BITHOMP_URL}${props.nft_tokenid}`} target="_blank"><span>{getSummaryTxID(props.nft_tokenid)}</span></a></li>
                     <li>Token Standard <span>{props.standard}</span></li>
                     <li>Creator Fee <span>{`${Number(props.creator_fee) / 1000} %`}</span></li>

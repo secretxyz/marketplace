@@ -5,10 +5,9 @@ import { getAccount, getAssetView1, getDateTimeWithFormat, getDifferenceTime, ge
 import { getSummaryAddress } from '../../Helpers/Utils';
 import LikeNft from '../../Common/LikeNft';
 
-const RaffleCard = ({ data, hiddenStatus }) => {
+const RaffleCard = ({ data }) => {
     const nft = data.nft?.data?.attributes;
-    const nft_link = `/nft/${nft?.nft_tokenid}`;
-    const raffle_link = `/nft/${nft?.nft_tokenid}/${data.id}`;
+    const raffle_link = `/raffle/${data.id}`;
     const raffler = data.raffler?.data?.attributes;
 
     const counter = new Date(data.raffle_end_datetime).getTime();
@@ -29,7 +28,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 {nft.likes}
             </span>} */}
             <LikeNft nft={{ id: data.nft?.data?.id, likes: nft?.likes }} />
-            <a href={nft_link} className="cs-card_thumb cs-zoom_effect">
+            <a href={raffle_link} className="cs-card_thumb cs-zoom_effect">
                 {getAssetView1(nft)}
             </a>
             {
@@ -69,7 +68,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                     <span>{raffler?.username ?? getSummaryAddress(raffler?.wallet)}</span>
                 </a>
                 <h3 className="cs-card_title">
-                    <a href={nft_link}>{data.name}</a>
+                    <a href={raffle_link}>{data.name}</a>
                 </h3>
                 <div className="cs-card_price">
                     Price/Ticket: <b className="cs-primary_color">{data.ticket_price} XRP</b>
@@ -83,7 +82,7 @@ const RaffleCard = ({ data, hiddenStatus }) => {
                 <div className="cs-card_footer cs-card_footer_center">
                     <a href={raffle_link} className="cs-btn cs-style1 cs-card_btn_3">
                         <span>View Raffle</span>
-                        {!hiddenStatus && <span className="cs-btn_small_text"> ({getRaffleStatus(data.status)})</span>}
+                        {/* {!hiddenStatus && <span className="cs-btn_small_text"> ({getRaffleStatus(data.status)})</span>} */}
                     </a>
                 </div>
             </div>

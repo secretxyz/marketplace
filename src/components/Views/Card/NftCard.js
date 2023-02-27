@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from "../Profile/Avatar";
 import { getAccount, getAssetView1 } from '../../Helpers/Utils';
 import { getSummaryAddress } from '../../Helpers/Utils';
 import LikeNft from '../../Common/LikeNft';
+import { SECRETMARKET_URL } from '../../Common/constants';
+import CreateRaffleModal from '../Single/CreateRaffleModal';
 
 const NftCard = ({ data }) => {
-    const nft_link = `/nft/${data.nft_tokenid}`;
+    const nft_link = `${SECRETMARKET_URL}/nft/${data.nft_tokenid}`;
     const owner = { id: data.owner?.data?.id, ...data.owner?.data?.attributes };
     const owner_link = `/profile/${owner.wallet}`;
 
+    const [raffling, setRaffling] = useState(false);
+
+    const onClickCreateRaffle = () => {
+        setRaffling(true);
+    }
+
+    useEffect(() => {
+        if (raffling) {
+            $("#create_raffle_modal").toggleClass("active");
+        }
+    }, [raffling])
+
+    const gotoRaffle = (raffleId) => {
+
+    }
+
     const getFooterButton = () => {
         if (owner.id == getAccount().id) {
-            if (!data.price) {
-                return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
-                    <span>List Now</span>
-                </a>;
-            } else {
-                return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
-                    <span>Unlist Now</span>
-                </a>;
-            }
+            return <a className="cs-btn cs-style1 cs-card_btn_3" onClick={onClickCreateRaffle}>
+                <span>Create Raffle</span>
+            </a>;
         } else {
-            if (!data.price) {
-                return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
-                    <span>Place Offer</span>
-                </a>;
-            } else {
-                return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
-                    <span>Buy Now</span>
-                </a>;
-            }
+            return <a href={nft_link} className="cs-btn cs-style1 cs-card_btn_3">
+                <span>Place Offer</span>
+            </a>;
         }
     }
 
@@ -50,12 +56,16 @@ const NftCard = ({ data }) => {
                 <h3 className="cs-card_title">
                     <a href={nft_link}>{data.name}</a>
                 </h3>
-                <div className="cs-card_price">{data.activity == "bid" ? "Best Offer:" : "Offer For:"} <b className="cs-primary_color">{data.price || 0} XRP</b></div>
                 <hr />
                 <div className="cs-card_footer">
                     {getFooterButton()}
                 </div>
             </div>
+
+            {raffling && <CreateRaffleModal nft={data}
+                refreshDetails={(raffleId) => { gotoRaffle(raffleId) }}
+                closeModal={() => { setRaffling(false) }} />}
+
         </div>
     );
 }

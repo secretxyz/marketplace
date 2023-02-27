@@ -48,41 +48,35 @@ export const useNfts = () => {
 }
 
 
-export const useNft = (tokenId, raffleId) => {
+export const useNft = (raffleId) => {
     const [loading, setLoading] = useState(true);
-    const [nft, setNft] = useState({});
+    const [item, setItem] = useState({});
 
-    const fetchNftDetails = async (tokenId, raffleId) => {
+    const fetchNftDetails = async () => {
         setLoading(true);
-        const res = await SecretApi.getNftWithTokenID(tokenId, raffleId);
+        const res = await SecretApi.getNftWithRaffleID(raffleId);
         if (res) {
-            setNft(res.data);
+            setItem(res.data);
             if (res.data) {
                 setLoading(false);
             }
         }
     }
 
-    useEffect(async () => {
-        if (tokenId) {
-            await fetchNftDetails(tokenId, raffleId);
-        }
-    }, [])
-
-    const refresh = async () => {
+    const refresh = async (tokenId) => {
         setLoading(true);
         const res = await SecretApi.refreshNft(tokenId);
         setLoading(false);
         return res;
     }
 
-    const like = async (id) => {
-        return await SecretApi.likeNft(id);
+    const like = async (tokenId) => {
+        return await SecretApi.likeNft(tokenId);
     }
 
     return {
         loading,
-        nft,
+        item,
         fetchNftDetails,
         refresh,
         like,

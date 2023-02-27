@@ -37,7 +37,7 @@ const SimilarItems = ({ tokenId, collection }) => {
                                             ...n.attributes.raffles.data[0].attributes,
                                             nft: { data: n },
                                         }
-                                    } hiddenStatus={true} />
+                                    } />
                                 </div>
                             ))}
                         </div>

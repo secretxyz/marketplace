@@ -39,7 +39,7 @@ const HomeBanner2 = () => {
                                 <div className="cs-slider_wrapper" >
                                     {items?.map(n => (
                                         <div className="cs-slide" key={n.id}>
-                                            <RaffleCard data={{ id: n.id, ...n.attributes }} hiddenStatus={true} />
+                                            <RaffleCard data={{ id: n.id, ...n.attributes }} />
                                         </div>
                                     ))}
                                 </div>

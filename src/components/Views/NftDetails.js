@@ -13,7 +13,6 @@ import { useNft } from "../../hooks/useNft";
 import { getAccount, getSummaryAddress, getDateTimeWithFormat, isLoggedIn, isVideoAsset, notify, getExpirationDateTime1, getImageLink } from "../Helpers/Utils";
 import PageLoader from "../Common/PageLoader";
 import CreateRaffleModal from "./Single/CreateRaffleModal";
-import CreateOfferModal from "./Single/CreateOfferModal";
 import BuyTicketModal from "./Single/BuyTicketModal";
 import RaffleInfoTabs from "./Single/RaffleInfoTabs";
 import NftInfoTabs from "./Single/NftInfoTabs";
@@ -21,33 +20,29 @@ import ConnectModal from "../Common/ConnectModal";
 import accountStore from "../../store/account.store";
 import DrawNftModal from "./Single/DrawNftModal";
 import DrawPrizeModal from "./Single/DrawPrizeModal";
-import { BITHOMP_URL } from "../Common/constants";
+import { BITHOMP_URL, SECRETMARKET_URL } from "../Common/constants";
 import LikeNft from "../Common/LikeNft";
 import ReportModal from '../Common/ReportModal';
 import { getReportedItems } from '../Helpers/Reports';
 
 const NftDetails = (props) => {
     const { auth_token } = accountStore;
-    const { tokenId, raffleId } = props.match.params;
+    const { raffleId } = props.match.params;
 
-    const { loading, nft, fetchNftDetails, refresh } = useNft(tokenId, raffleId);
+    const { loading, item, fetchNftDetails, refresh } = useNft(raffleId);
 
-    const [offer, setOffer] = useState();
+    const [nft, setNft] = useState();
     const [raffle, setRaffle] = useState();
     const [raffler, setRaffler] = useState();
     const [winner, setWinner] = useState();
     const [collection, setCollection] = useState();
-    const [owner, setOwner] = useState();
     const [ticket, setTicket] = useState({ ticket_count: 0 });
-    const [activity, setActivity] = useState();
     const [reported, setReported] = useState(false);
 
     const [connecting, setConnecting] = useState(false);
-    const [raffling, setRaffling] = useState(false);
     const [ticketing, setTicketing] = useState(false);
     const [drawing, setDrawing] = useState(false);
     const [prizing, setPrizing] = useState(false);
-    const [offering, setOffering] = useState(false);
     const [reporting, setReporting] = useState(false);
 
     const initPage = () => {
@@ -65,38 +60,52 @@ const NftDetails = (props) => {
     }
 
     useEffect(() => {
-        if (auth_token) {
-            fetchNftDetails(tokenId, raffleId);
-        }
+        fetchNftDetails(raffleId);
     }, [auth_token]);
 
     useEffect(() => {
-        if (!nft) {
+        if (!item) {
             window.location.replace("/not-found");
             return;
         }
-        setCollection(nft?.collection);
-        setOwner(nft?.owner);
-        if (nft?.raffles) {
-            setRaffle(nft.raffles[0] || null);
+
+        if (item != {} && item) {
+            setRaffle({
+                id: item.id,
+                ...item.attributes
+            })
+            const data = {
+                id: item.attributes?.nft.data?.id,
+                ...item.attributes?.nft.data?.attributes,
+            };
+            setNft(data);
+            setCollection({
+                id: data?.collection?.data?.id,
+                ...data?.collection?.data?.attributes,
+                creator: data?.collection?.data?.attributes.creator.data?.attributes
+            })
+            setRaffler({
+                id: item.attributes?.raffler.data?.id,
+                ...item.attributes?.raffler.data?.attributes,
+            })
+            if (item.attributes?.winner.data) {
+                setWinner({
+                    id: item.attributes?.winner.data?.id,
+                    ...item.attributes?.winner.data?.attributes,
+                })
+            }
+            setTicket({
+                ...ticket,
+                nft: { id: data?.id },
+                raffle: { id: item?.id }
+            })
         }
-        if (nft?.offers) {
-            setOffer(nft.offers[0] || null);
-        }
+
         if (isReportNft()) {
             setReported(true);
         }
-    }, [nft])
+    }, [item])
 
-    useEffect(() => {
-        setRaffler(raffle?.raffler);
-        setWinner(raffle?.winner);
-        setTicket({
-            ...ticket,
-            nft: { id: nft?.id },
-            raffle: { id: raffle?.id }
-        })
-    }, [raffle])
 
     useEffect(() => {
         if (!loading) {
@@ -150,16 +159,6 @@ const NftDetails = (props) => {
         </div>
     }
 
-    const getPriceView = () => {
-        return <div className="cs-single_product_head">
-            <p>
-                On sale for <span className="cs-accent_color"><strong>{offer?.price} XRP</strong></span>
-                {/* {nft?.highest_bid_price && <span> · Highest bid ~ <span className="cs-accent_color"><strong>{nft?.highest_bid_price} XRP</strong></span></span>} */}
-                {offer.expire_at && <span> · {getExpirationDateTime1(offer.expire_at)}</span>}
-            </p>
-        </div>
-    }
-
     const isOwner = () => {
         return nft?.owner?.id == getAccount()?.id || isRaffleOwner();
     }
@@ -173,92 +172,7 @@ const NftDetails = (props) => {
     }
 
     const getBuySellView = () => {
-        if (isLoggedIn() && getAccount().id == nft?.owner?.id && !raffle) {
-            if (!offer) {
-                return <div className="row">
-                    <div className="col-xl-12">
-                        <div className="cs-white_bg cs-box_shadow cs-general_box_5 cs-buy_sell_view">
-                            <div className="row">
-                                <div className="col-3">
-                                    <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickCreateRaffle}>
-                                        <span>Create Raffle</span>
-                                    </a>
-                                </div>
-                                <div className="col-3">
-                                    <a href={`https://secretmarket.xyz/nft/${nft.nft_tokenid}`} className="cs-btn cs-style1 cs-btn_lg w-100 text-center" target="_blank">
-                                        <span>List at Secret</span>
-                                    </a>
-                                </div>
-                                <div className="col-3">
-                                    <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                        <span>List at onXRP</span>
-                                    </a>
-                                </div>
-                                <div className="col-3">
-                                    <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                        <span>List at xrp.cafe</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cs-height_15 cs-height_lg_15"></div>
-                    </div>
-                </div>
-            } else {
-                return <div className="row">
-                    <div className="col-xl-7">
-                        <div className="cs-white_bg cs-box_shadow cs-general_box_5 cs-buy_sell_view">
-                            <div className="row">
-                                <div className="col-6">
-                                    <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                        <span>List at onXRP</span>
-                                    </a>
-                                </div>
-                                <div className="col-6">
-                                    <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                        <span>List at xrp.cafe</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="cs-height_15 cs-height_lg_15"></div>
-                    </div>
-                    <div className="col-xl-5">
-                        <div className="cs-author_card cs-white_bg cs-box_shadow cs-general_box_4">
-                            <a className="cs-btn cs-style1 cs-btn_lg text-center w-100" onClick={onClickUnlist}>
-                                <span>Unlist Sale</span>
-                            </a>
-                        </div>
-                        <div className="cs-height_15 cs-height_lg_15"></div>
-                    </div>
-                </div>
-            }
-        } else if (isLoggedIn() && !raffle && (!offer || (offer && offer.from.id != getAccount().id))) {
-            return <div className="row">
-                <div className="col-xl-12">
-                    <div className="cs-white_bg cs-box_shadow cs-general_box_5">
-                        <div className="row">
-                            <div className="col-4">
-                                <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickOffer}>
-                                    <span>Offer at Secret</span>
-                                </a>
-                            </div>
-                            <div className="col-4">
-                                <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                    <span>Offer at OnXRP</span>
-                                </a>
-                            </div>
-                            <div className="col-4">
-                                <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                    <span>Offer at XRP.cafe</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="cs-height_30 cs-height_lg_30"></div>
-                </div>
-            </div>
-        } else if (!isLoggedIn() && (!raffle || (raffle && raffle.status == "active"))) {
+        if (!isLoggedIn() && raffle && raffle.status == "active") {
             return <div className="row">
                 <div className="col-xl-12">
                     <div className="cs-white_bg cs-box_shadow cs-general_box_5">
@@ -468,61 +382,6 @@ const NftDetails = (props) => {
                 </div>
             }
         }
-
-        if (nft?.activity?.type == "auction") {
-            return <div className="row">
-                <div className="col-xl-7">
-                    <div className="cs-white_bg cs-box_shadow cs-general_box_5">
-                        <div className="row">
-                            <div className="col-6">
-                                <a href="#" className="cs-btn cs-style1 cs-btn_lg w-100 text-center">
-                                    <span>Buy Now</span>
-                                </a>
-                            </div>
-                            <div className="col-6">
-                                <a href="#" className="cs-btn cs-style1 cs-btn_lg w-100 text-center">
-                                    <span>Place Bid</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="cs-height_30 cs-height_lg_30"></div>
-                </div>
-                <div className="col-xl-5">
-                    <div className="cs-general_box_4 cs-box_shadow cs-white_bg cs-center">
-                        <div className="cs-countdown_style2" data-countdate="24 Feburary 2023">
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_days"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Days</h3>
-                            </div>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_hours"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Hours</h3>
-                            </div>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_minutes"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Min</h3>
-                            </div>
-                            <div className="cs-countdown_item">
-                                <div className="cs-countdown_number">
-                                    <div className="cs-count_seconds"></div>
-                                </div>
-                                <h3 className="cs-countdown_text">Sec</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="cs-height_30 cs-height_lg_30"></div>
-                </div>
-            </div>
-        }
-
-
     }
 
     const getOwnerView = () => {
@@ -541,16 +400,6 @@ const NftDetails = (props) => {
             </div>
         </div>
     }
-
-    const onClickCreateRaffle = () => {
-        setRaffling(true);
-    }
-
-    useEffect(() => {
-        if (raffling) {
-            $("#create_raffle_modal").toggleClass("active");
-        }
-    }, [raffling])
 
     const onClickBuyTickets = () => {
         if (Number(ticket.ticket_count) < 1) {
@@ -616,22 +465,20 @@ const NftDetails = (props) => {
     const onClickRefresh = () => {
         const res = refresh();
         if (res && res.status) {
-            fetchNftDetails(tokenId);
+            fetchNftDetails(raffleId);
         }
     }
 
     const onClickShare = () => {
         if (raffle) {
-            navigator.clipboard.writeText(`https://secretmarket.xyz/nft/${nft?.nft_tokenid}/${raffle?.id}`);
-        } else {
-            navigator.clipboard.writeText(`https://secretmarket.xyz/nft/${nft?.nft_tokenid}`);
+            navigator.clipboard.writeText(`https://secretmarket.xyz/raffle/${raffle?.id}`);
         }
-        notify("The NFT link has been copied.");
+        notify("The raffle link has been copied.");
     }
 
     const isReportNft = () => {
         let nfts = getReportedItems("nft");
-        if (nfts.includes(nft.id)) {
+        if (nfts.includes(nft?.id)) {
             return true;
         }
         return false;
@@ -648,59 +495,6 @@ const NftDetails = (props) => {
             return;
         }
         setReporting(true);
-    }
-
-    useEffect(() => {
-        if (offering) {
-            $("#create_offer_modal").toggleClass("active");
-        }
-    }, [offering])
-
-    useEffect(() => {
-        if (activity) {
-            setOffering(true);
-        }
-    }, [activity]);
-
-    const onClickTransfer = () => {
-        setActivity({
-            activity: "transfer",
-            nft: nft,
-        });
-    }
-
-    const onClickListOffer = () => {
-        setActivity({
-            activity: "list",
-            nft: nft,
-        });
-    }
-
-    const onClickUnlist = () => {
-        setActivity({
-            activity: "cancel",
-            offer_id: offer.offer_index,
-            nft: { id: nft.id, nft_tokenid: nft.nft_tokenid },
-        });
-    }
-
-    const onClickOffer = () => {
-        setActivity({
-            activity: "bid",
-            owner: { id: owner.id, wallet: owner.wallet },
-            nft: { id: nft.id, nft_tokenid: nft.nft_tokenid },
-        });
-    }
-
-    const submitOffer = (activity, offer) => {
-        setActivity({
-            activity,
-            offer_id: offer.offer_id,
-            offer_owner: { id: offer.owner.id, wallet: offer.owner.wallet },
-            destination: offer.destination?.wallet,
-            price: offer.amount,
-            nft: { id: nft.id, nft_tokenid: nft.nft_tokenid },
-        });
     }
 
     const onClickCopyHash = () => {
@@ -746,8 +540,8 @@ const NftDetails = (props) => {
                             <div className="cs-tab_content cs-tab_nft_detail_content">
                                 <AboutTab {...{ description: nft?.description }} />
                                 <DetailsTab {...{
-                                    issuer: collection?.issuer,
-                                    owner: owner?.wallet,
+                                    issuer: nft?.issuer,
+                                    // owner: owner?.wallet,
                                     nft_tokenid: nft?.nft_tokenid,
                                     standard: "XLS-20",
                                     creator_fee: nft?.transfer_fee,
@@ -769,24 +563,19 @@ const NftDetails = (props) => {
                                 <a id="nft_share" className="cs-style1 cs-btn" onClick={onClickShare}>
                                     <span><i className="fas fa-share-alt fa-fw"></i></span>
                                 </a>
-                                <ReactTooltip anchorId="nft_share" className="cs-modal_tooltip" place="bottom" content="Copy NFT link" />
+                                <ReactTooltip anchorId="nft_share" className="cs-modal_tooltip" place="bottom" content="Copy raffle link" />
                                 {!isOwner() && <a className="cs-style1 cs-btn" id="nft_report" onClick={onClickReport}>
                                     <span><i className={`${reported ? "fas" : "far"} fa-flag fa-fw`}></i></span>
                                 </a>}
                                 <ReactTooltip anchorId="nft_report" className="cs-modal_tooltip" place="bottom" content={reported ? "You have already reported this NFT" : "Report illegal material"} />
-                                {isOwner() && <a className="cs-style1 cs-btn" id="nft_transfer" onClick={onClickTransfer}>
-                                    <span><i className="fas fa-paper-plane fa-fw"></i></span>
-                                </a>}
-                                <ReactTooltip anchorId="nft_transfer" className="cs-modal_tooltip" place="bottom" content="Transfer NFT" />
                             </div>
                         </div>
                         {getRafflePriceView()}
-                        {offer && getPriceView()}
                         <div className="cs-height_15 cs-height_lg_15"></div>
                         <div className="row">
                             <div className="col-xl-7">
                                 <div className="cs-author_card cs-white_bg cs-box_shadow">
-                                    <a href={`/collection/${collection?.slug}`}>
+                                    <a href={`${SECRETMARKET_URL}/collection/${collection?.slug}`} target="blank">
                                         <div className="cs-author_img">
                                             <img src={getImageLink(collection?.picture_url)} alt="" />
                                         </div>
@@ -809,7 +598,6 @@ const NftDetails = (props) => {
                         </div>
                         {getBuySellView()}
                         {nft && raffle && <RaffleInfoTabs raffleId={raffle?.id} reservedCount={raffle?.reserved_count} status={raffle?.status} />}
-                        {nft && !raffle && <NftInfoTabs tokenId={tokenId} nftOwner={owner} submit={submitOffer} />}
                         <div className="cs-height_30 cs-height_lg_30"></div>
                     </div>
                 </div>
@@ -820,21 +608,15 @@ const NftDetails = (props) => {
 
             {connecting && <ConnectModal
                 closeModal={() => { setConnecting(false) }} />}
-            {raffling && <CreateRaffleModal nft={nft}
-                refreshDetails={() => { fetchNftDetails(tokenId) }}
-                closeModal={() => { setRaffling(false) }} />}
             {ticketing && <BuyTicketModal ticket={ticket}
-                refreshDetails={() => { fetchNftDetails(tokenId) }}
+                refreshDetails={() => { fetchNftDetails(raffleId) }}
                 closeModal={() => { setTicketing(false) }} />}
             {drawing && <DrawNftModal raffleId={raffle?.id}
-                refreshDetails={() => { fetchNftDetails(tokenId) }}
+                refreshDetails={() => { fetchNftDetails(raffleId) }}
                 closeModal={() => { setDrawing(false) }} />}
             {prizing && <DrawPrizeModal raffleId={raffle?.id}
-                refreshDetails={() => { fetchNftDetails(tokenId) }}
+                refreshDetails={() => { fetchNftDetails(raffleId) }}
                 closeModal={() => { setPrizing(false) }} />}
-            {offering && <CreateOfferModal activity={activity}
-                refreshDetails={() => { fetchNftDetails(tokenId) }}
-                closeModal={() => { setOffering(false); setActivity(); }} />}
             {reporting && <ReportModal data={{ nft: nft.id }}
                 closeModal={(res) => { setReporting(false); setReported(res); }} />}
         </ContentWrapper >

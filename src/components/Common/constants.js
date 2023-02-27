@@ -28,7 +28,8 @@ export const APP_MEDIAQUERY = {
     'mobile': 480
 };
 
-export const BITHOMP_URL = "https://bithomp.com/explorer/";
+export const BITHOMP_URL = "https://bithomp.com/explorer";
+export const SECRETMARKET_URL = "https://secretmarket.xyz";
 
 export const SECRET_BROKER = process.env.NODE_ENV === 'development' ? "rBGCuupZo3npQYK54kcUaejQpNe3mTmKnC" : "rseC4tmmcEPyT2Vav52hNMptNcgxHVGwM2";
 export const IMAGE_SERVER = process.env.NODE_ENV === 'development' ? "http://localhost:1337" : "https://secretmarket.xyz:2096";

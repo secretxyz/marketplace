@@ -383,10 +383,7 @@ class SecretApi {
                     "pagination[pageSize]": this.pageSize,
                     "filters[owner]": id,
                     "populate[owner]": true,
-                    "populate[raffles][count]": true,
                     "populate[likes][count]": true,
-                    "populate[offers][filters][status]": "active",
-                    "populate[offers][sort][0]": "price:desc",
                     ...filters
                 }
             });
@@ -452,9 +449,7 @@ class SecretApi {
                     "sort[0]": "raffle_end_datetime:asc",
                     "populate[nft]": true,
                     "populate[raffler]": true,
-                    "filters[status][$notIn][0]": "canceled",
-                    "filters[status][$notIn][1]": "raffling",
-                    "filters[status][$notIn][2]": "raffled",
+                    "filters[status]": "active",
                     ...filters
                 }
             });
@@ -542,6 +537,23 @@ class SecretApi {
     async getNftWithTokenID(tokenId, raffleId) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nft/${tokenId}?raffleid=${raffleId}`);
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async getNftWithRaffleID(raffleId) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffles/${raffleId}`, {
+                params: {
+                    "populate[nft][populate][collection][populate][creator]": true,
+                    "populate[raffler]": true,
+                    "populate[winner]": true,
+
+                }
+            });
             return res.data;
         } catch (error) {
             this.handleError(error);

@@ -93,12 +93,12 @@ const ActivityCard = ({ data, type }) => {
                 <i className={getCategoryIcon()}></i>
             </div>
             <div className="cs-activity_nft_thumb">
-                <a href={`/nft/${nft.nft_tokenid}`}>
+                <a href={`/raffle/${raffle?.id}`}>
                     {getAssetView(nft)}
                 </a>
             </div>
             <div className="cs-activity_right cs-activity_nft_name">
-                <div className="cs-activity_text"><h3><a href={`/nft/${nft.nft_tokenid}`}>{nft?.name}</a></h3></div>
+                <div className="cs-activity_text"><h3><a href={`/raffle/${raffle?.id}`}>{nft?.name}</a></h3></div>
                 {isRaffle() && <p className="cs-activity_price"><span>Ticket/Price</span> {raffle.ticket_price} XRP</p>}
             </div>
             <div className="cs-activity_right">
@@ -108,7 +108,7 @@ const ActivityCard = ({ data, type }) => {
                 </div>
                 <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
             </div>
-            <a href={`/nft/${nft.nft_tokenid}/${raffle?.id || ""}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
+            <a href={`/raffle/${raffle?.id}`} className="cs-activity_view cs-btn cs-style1 cs-card_btn_3">
                 <span>{(to?.id == getAccount().id && isLoggedIn()) ? "Claim" : "View"}</span>
             </a>
         </div>

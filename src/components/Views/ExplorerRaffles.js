@@ -77,7 +77,7 @@ const ExplorerRaffles = () => {
                 <div className="container cs-cards_area" onScroll={handleScroll}>
                     <div className="cs-grid_5 cs-gap_30">
                         {raffles.map(n => (
-                            <RaffleCard data={{ id: n.id, ...n.attributes }} key={n.id} hiddenStatus={true} />
+                            <RaffleCard data={{ id: n.id, ...n.attributes }} key={n.id} />
                         ))}
                     </div>
                     <div className="cs-height_20 cs-height_lg_20"></div>

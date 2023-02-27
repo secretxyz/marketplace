@@ -70,7 +70,7 @@ const Header = () => {
 							</a>
 						</div>
 						<div className="cs-main_header_right">
-							<div className="cs-search_wrap cs-toggle_box cs-profile_box">
+							{/* <div className="cs-search_wrap cs-toggle_box cs-profile_box">
 								<div className="cs-search">
 									<input type="text" className="cs-search_input" placeholder="Search" value={keyword || ""} onChange={onChangeKeyword} />
 									<button className="cs-search_btn">
@@ -83,7 +83,7 @@ const Header = () => {
 								<SearchBox keyword={keyword} clear={() => {
 									setKeyword("");
 								}} />
-							</div>
+							</div> */}
 							<div className="cs-nav_wrap">
 								<div className="cs-nav_out">
 									<div className="cs-nav_in">

@@ -37,7 +37,7 @@ const NotificationRow = ({ data }) => {
     }
 
     return (
-        <a href={`/nft/${nft?.nft_tokenid}/${raffle?.id || ""}`} className="cs-notification_item">
+        <a href={`/raffle/${raffle?.id || ""}`} className="cs-notification_item">
             <div className="cs-notification_thumb">
                 {getAssetView(nft)}
             </div>
