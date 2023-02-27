@@ -10,9 +10,8 @@ const RaffleCard = ({ data }) => {
     const raffle_link = `/raffle/${data.id}`;
     const raffler = data.raffler?.data?.attributes;
 
-    const counter = new Date(data.raffle_end_datetime).getTime();
     useEffect(() => {
-        CountLoader(`#${counter}`);
+        CountLoader(`#${data.id}`);
     }, [])
 
     return (
@@ -32,7 +31,7 @@ const RaffleCard = ({ data }) => {
                 {getAssetView1(nft)}
             </a>
             {
-                data.status == "active" ? <div id={counter} className="cs-countdown" data-countdate={data.raffle_end_datetime} data-key={counter}>
+                data.status == "active" ? <div id={data.id} className="cs-countdown" data-countdate={data.raffle_end_datetime} data-key={data.id}>
                     <div className="cs-countdown_item">
                         <div className="cs-countdown_number">
                             <div className="cs-count_days"></div>
