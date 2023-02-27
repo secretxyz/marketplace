@@ -24,8 +24,8 @@ const HomeBanner2 = () => {
                         <div className="cs-hero_text">
                             <h1 className="cs-hero_title cs-white_color">Welcome to the XRP Ledger's biggest secret.</h1>
                             <div className="cs-hero_subtitle cs-medium cs-white_color">
-                                Quickly trade NFTs on multiple marketplaces and enter or create raffles for unique digital assets.
-                                Join the exciting world of NFT trading and raffles on SecretMarket now!
+                                Quickly enter or create raffles for unique digital assets.
+                                Join the exciting world of NFT raffles on SecretRaffle now!
                             </div>
                             <div className="cs-hero_btns">
                                 <a href="/explorer-raffles" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
