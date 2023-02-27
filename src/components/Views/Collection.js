@@ -194,7 +194,6 @@ const Collection = (props) => {
         let key = event.target.name;
         let value;
         switch (key) {
-            case "in_raffle":
             case "buy_now":
             case "has_offers":
                 value = event.target.checked;
@@ -371,12 +370,12 @@ const Collection = (props) => {
                                 </h2>
                                 <div className="cs-filter_toggle_body">
                                     <ul>
-                                        <li>
+                                        {/* <li>
                                             <div className="form-check">
                                                 <input className="form-check-input" type="checkbox" id="in_raffle" name="in_raffle" checked={filter?.in_raffle || false} onChange={onChangeFilter} />
                                                 <label className="form-check-label" htmlFor="in_raffle">In Raffle</label>
                                             </div>
-                                        </li>
+                                        </li> */}
                                         <li>
                                             <div className="form-check">
                                                 <input className="form-check-input" type="checkbox" id="buy_now" name="buy_now" checked={filter?.buy_now || false} onChange={onChangeFilter} />
@@ -503,7 +502,7 @@ const Collection = (props) => {
                                         <option value={PRICE_LOW_TO_HIGH}>Price low to high</option>
                                         <option value={PRICE_HIGH_TO_LOW}>Price hight to low</option>
                                         <option value={LIKES}>Likes</option>
-                                        <option value={ENDING_SOON}>Ending soon</option>
+                                        {/* <option value={ENDING_SOON}>Ending soon</option> */}
                                         <option value={A_Z}>A-Z</option>
                                         <option value={Z_A}>Z-A</option>
                                     </select>
