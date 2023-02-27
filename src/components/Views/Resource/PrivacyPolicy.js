@@ -27,7 +27,7 @@ const PrivacyPolicy = () => {
                     </div>
                 </div>
             </div>
-            <div className="cs-height_70 cs-height_lg_40"></div>
+            <div className="cs-height_110 cs-height_lg_40"></div>
         </ContentWrapper >
     );
 }

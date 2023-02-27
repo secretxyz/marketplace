@@ -989,6 +989,10 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .cs-grid_4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .cs-grid_3 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1004,6 +1008,10 @@
 
 @media screen and (max-width: 767px) {
   .cs-grid_5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-grid_4 {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1029,6 +1037,10 @@
 @media screen and (max-width: 575px) {
   .cs-grid_5 {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cs-grid_4 {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .cs-grid_3 {

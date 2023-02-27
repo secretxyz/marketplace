@@ -37,7 +37,7 @@ const mainNav = () => {
 }
 
 const Header = () => {
-	const { auth_token, account } = accountStore;
+	const { auth_token, account, theme_mode } = accountStore;
 	const [keyword, setKeyword] = useState();
 
 	useEffect(() => {
@@ -65,7 +65,9 @@ const Header = () => {
 				<div className="container-fluid">
 					<div className="cs-main_header_in">
 						<div className="cs-main_header_left">
-							<a className="cs-site_branding" href="/"><img src="img/logo.png" alt="Logo" /></a>
+							<a className="cs-site_branding" href="/">
+								<img src={theme_mode ? "img/logo_dark.png" : "img/logo_light.png"} alt="Logo" />
+							</a>
 						</div>
 						<div className="cs-main_header_right">
 							<div className="cs-search_wrap cs-toggle_box cs-profile_box">

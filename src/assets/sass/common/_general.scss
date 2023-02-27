@@ -641,6 +641,12 @@ ul::-webkit-scrollbar-thumb {
   grid-template-columns: repeat(5, 1fr);
 }
 
+.cs-grid_4 {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .cs-grid_3 {
   display: grid;
   grid-auto-rows: 1fr;
@@ -1511,6 +1517,18 @@ ul::-webkit-scrollbar-thumb {
   max-width: 120px;
 }
 
+.cs-filter_head_title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  h3 {
+    font-size: 22px;
+    margin-bottom: 0px !important;
+    margin-left: 8px;
+  }
+}
+
 .cs-filter_head_left {
   display: flex;
   align-items: center;
@@ -2317,6 +2335,42 @@ ul::-webkit-scrollbar-thumb {
       right: 30px;
       top: 50%;
       transform: translateY(-50%);
+    }
+  }
+}
+
+.cs-leader_card {
+  padding: 10px 15px !important;
+
+  .cs-activity_text {
+    display: flex;
+    align-items: center;
+
+    i {
+      align-items: center;
+      display: flex;
+      margin-right: 8px;
+    }
+  }
+
+  .col-lg-8 {
+    display: flex;
+    justify-content: end;
+  }
+
+  .cs-leader_card_info {
+    display: flex;
+    min-width: 64px;
+  }
+
+  .cs-card_avatar {
+    height: 100%;
+    width: 100%;
+
+    img {
+      border-radius: 100% !important;
+      object-fit: cover;
+      border-radius: inherit;
     }
   }
 }
@@ -3586,4 +3640,27 @@ ul::-webkit-scrollbar-thumb {
 
 .ml-0 {
   margin-left: 0px !important;
+}
+
+.rdt {
+  .form-control {
+    height: 48px;
+    border-radius: 8px;
+  }
+}
+
+.rdtPicker {
+  width: auto !important;
+}
+
+.rdtSwitch:hover {
+  background: $accent !important;
+}
+
+.rdtPicker td.rdtDay:hover {
+  background: $accent !important;
+}
+
+.rdtTimeToggle:hover {
+  background: $accent !important;
 }

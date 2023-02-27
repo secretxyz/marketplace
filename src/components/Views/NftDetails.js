@@ -185,12 +185,12 @@ const NftDetails = (props) => {
                                     </a>
                                 </div>
                                 <div className="col-3">
-                                    <a className="cs-btn cs-style1 cs-btn_lg w-100 text-center" onClick={onClickListOffer}>
+                                    <a href={`https://secretmarket.xyz/nft/${nft.nft_tokenid}`} className="cs-btn cs-style1 cs-btn_lg w-100 text-center" target="_blank">
                                         <span>List at Secret</span>
                                     </a>
                                 </div>
                                 <div className="col-3">
-                                    <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}/`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
+                                    <a href={`https://nft.onxrp.com/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
                                         <span>List at onXRP</span>
                                     </a>
                                 </div>

@@ -24,29 +24,6 @@ export const useBannerCollections = () => {
     }
 }
 
-export const useTopRafflers = () => {
-    const [loading, setLoading] = useState(true);
-    const [rafflers, setRafflers] = useState([]);
-
-    const getTopRafflers = async () => {
-        setLoading(true);
-        const res = await SecretApi.getTopRafflers();
-        if (res) {
-            setRafflers(res);
-        }
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        getTopRafflers();
-    }, [])
-
-    return {
-        loading,
-        rafflers
-    }
-}
-
 export const useFaqs = () => {
     const [loading, setLoading] = useState(true);
     const [faqs, setFaqs] = useState([]);

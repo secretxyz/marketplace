@@ -5,11 +5,11 @@ import { APP_COLORS } from "../../Common/constants";
 import ContentWrapper from '../../Layout/ContentWrapper';
 import ActivityCard from "../Card/ActivityCard";
 
-const Claims = () => {
+const Claims = ({ accountId }) => {
     const { loading, items, fetchClaims } = useClaims();
 
     useEffect(() => {
-        fetchClaims();
+        fetchClaims(accountId);
     }, [])
 
     return (

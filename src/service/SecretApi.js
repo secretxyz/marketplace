@@ -134,9 +134,31 @@ class SecretApi {
         }
     }
 
-    async getTopRafflers() {
+    async getTopRafflers(pageSize, filter) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/top-rafflers`);
+            const res = await axios.get(`${this.baseUrl}/api/top-rafflers`, {
+                params: {
+                    "page": 0,
+                    "page_size": pageSize,
+                    "order": filter.order,
+                }
+            });
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async getTopBuyers(pageSize, filter) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/top-buyers`, {
+                params: {
+                    "page": 0,
+                    "page_size": pageSize,
+                    "order": filter.order,
+                }
+            });
             return res.data;
         } catch (error) {
             this.handleError(error);

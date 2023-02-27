@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 import { observer } from 'mobx-react';
 import { useRaffle } from '../../../hooks/useRaffle';
 import { getDateTimeWithFormat } from '../../Helpers/Utils';
 import xummStore from '../../../store/xumm.store';
+import { useRef } from 'react';
 
 const SellOptions = [
 	{ id: 1, label: "25%", isChecked: false },
@@ -47,6 +50,13 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 		if (step == Steps.Completed) {
 			refreshDetails();
 		}
+	}
+
+	const onChangeDateTime = (event) => {
+		setRaffle({
+			...raffle,
+			raffle_end_datetime: event
+		});
 	}
 
 	const onChangeInfo = (event) => {
@@ -100,10 +110,19 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 			setWarning("Invalid ticket count detected. Please confirm again.");
 			return;
 		}
-		if (Number(raffle.raffle_duration) < 1) {
-			setWarning("Invalid raffle duration detected. Please confirm again.");
+
+		if (!raffle.raffle_end_datetime) {
+			setWarning("Invalid raffle end datetime detected. Please confirm again.");
 			return;
 		}
+
+		const end = new Date(raffle.raffle_end_datetime);
+		const today = new Date();
+		if (today.getTime() > end.getTime()) {
+			setWarning("Invalid raffle end datetime detected. Please confirm again.");
+			return;
+		}
+
 		setWarning(null);
 
 		let data = { ...raffle, nft, featured }
@@ -206,15 +225,11 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 									<div className="cs-offer_form_field">
-										<span id="raffle_duration" className="cs-offer_field_title">Raffle Duration</span>
-										{/* <ReactTooltip
-											anchorId="raffle_duration"
-											place="bottom"
-											content="Duration to enter raffle"
-										/> */}
-										<input name="raffle_duration" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter duration" value={raffle?.raffle_duration || ""} onChange={onChangeInfo} min={1} />
-										<span className="cs-offer_field_description">{descriptions["raffle_duration"]}</span>
+										<span id="raffle_duration" className="cs-offer_field_title">Raffle End</span>
+										<Datetime name="raffle_end_datetime" value={raffle.raffle_end_datetime || ""} onChange={onChangeDateTime} />
+										{/* <input name="raffle_duration" type="number" className="cs-form_field cs-white_bg"
+											placeholder="Enter duration" value={raffle?.raffle_duration || ""} onChange={onChangeInfo} min={1} /> */}
+										<span className="cs-offer_field_description">Please select raffle end date & time</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>
 								</div>

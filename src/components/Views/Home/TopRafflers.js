@@ -1,7 +1,8 @@
 import React from 'react';
 import Avatar from "../Profile/Avatar";
-import { useTopRafflers } from '../../../hooks/useHomepage';
 import { getNumberFormat1, getSummaryAddress } from '../../Helpers/Utils';
+import { useTopRafflers } from '../../../hooks/useLeaderboard';
+import { useEffect } from 'react';
 
 const RafflerCard = ({ data }) => {
     return (
@@ -20,7 +21,7 @@ const RafflerCard = ({ data }) => {
                             </h4>
                         </a>
                         <div className="cs-card_media_info w-100">
-                            <div><i className="fas fa-ticket-alt fa-fw"></i> {getNumberFormat1(data.count)} Raffles</div>
+                            <div><i className="fas fa-ticket-alt fa-fw"></i> {getNumberFormat1(data.raffles)} Raffles</div>
                             <div><i className="fas fa-coins fa-fw"></i> {getNumberFormat1(data.volume)} XRP</div>
                         </div>
                     </div>
@@ -31,7 +32,11 @@ const RafflerCard = ({ data }) => {
 }
 
 const TopRafflers = () => {
-    const { loading, rafflers } = useTopRafflers();
+    const { loading, items, fetchRafflers } = useTopRafflers();
+
+    useEffect(() => {
+        fetchRafflers(8, { order: "volume" });
+    }, [])
 
     return (
         <section>
@@ -39,7 +44,7 @@ const TopRafflers = () => {
                 <h2 className="cs-section_heading cs-style1 text-center">Top Secret Rafflers</h2>
                 <div className="cs-height_45 cs-height_lg_45"></div>
                 <div className="row">
-                    {rafflers?.map(n => {
+                    {items?.map(n => {
                         return <div className="col-xl-3 col-lg-4 col-md-6" key={n.id}>
                             <RafflerCard data={n} />
                             <div className="cs-height_30 cs-height_lg_30"></div>

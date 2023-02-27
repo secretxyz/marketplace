@@ -5,18 +5,10 @@ import ContentWrapper from '../Layout/ContentWrapper';
 import Avatar from "./Profile/Avatar";
 import Claims from './Profile/Claims';
 import CollectedItems from './Profile/CollectedItems';
-import CreatedItems from './Profile/CreatedItems';
-import Collections from './Profile/Collections';
 import Raffles from './Profile/Raffles';
 import RaffleTickets from './Profile/RaffleTickets';
-import Offers from './Profile/Offers';
-import OffersMade from './Profile/OffersMade';
-import OffersReceived from './Profile/OffersReceived';
 import Activity from './Profile/Activity';
-import Favorites from './Profile/Favorites';
-import Follows from './Profile/Follows';
 import ProfileInfo from './Profile/ProfileInfo';
-import Hidden from './Profile/Hidden';
 import { useProfile } from '../../hooks/useProfile';
 import { getAccount, getSummaryAddress, notify, isLoggedIn, getImageLink } from '../Helpers/Utils';
 import PageLoader from '../Common/PageLoader';
@@ -60,7 +52,7 @@ const NavMenus = [
         self: true
     },
     {
-        label: "Collected",
+        label: "NFTs",
         icon: "fa-list-ul",
         key: "collected"
     },
