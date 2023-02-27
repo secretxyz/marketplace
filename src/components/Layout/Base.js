@@ -17,7 +17,6 @@ const Base = (props) => {
     return (
         <div className="main-content">
             <Helmet>
-                <meta charSet="utf-8" />
                 <title>SecretRaffles</title>
                 <meta name="description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
                 <meta property="og:url" content="https://secretraffles.xyz" />
