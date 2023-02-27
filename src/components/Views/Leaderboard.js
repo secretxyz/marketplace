@@ -14,20 +14,21 @@ const Leaderboard = () => {
 					</div>
 				</div>
 			</section>
-			<div className="cs-height_40 cs-height_lg_30"></div>
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-6">
+						<div className="cs-height_40 cs-height_lg_30"></div>
 						<TopRafflers />
 					</div>
 					<div className="col-lg-6">
+						<div className="cs-height_40 cs-height_lg_30"></div>
 						<TopBuyers />
 					</div>
 				</div>
 			</div>
 			<div className="cs-height_70 cs-height_lg_40"></div>
 
-			
+
 		</ContentWrapper>
 	);
 }
