@@ -16,7 +16,7 @@ const Base = (props) => {
 
     return (
         <div className="main-content">
-            <Helmet>
+            {/* <Helmet>
                 <title>SecretRaffles</title>
                 <meta name="description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
                 <meta property="og:url" content="https://secretraffles.xyz" />
@@ -30,7 +30,7 @@ const Base = (props) => {
                 <meta name="twitter:title" content="SecretRaffles" />
                 <meta name="twitter:description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
                 <meta name="twitter:image" content="https://secretraffles.xyz/img/secret_logo.png" />
-            </Helmet>
+            </Helmet> */}
 
             <Header />
 
