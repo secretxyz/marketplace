@@ -20,8 +20,17 @@ const Base = (props) => {
                 <meta charSet="utf-8" />
                 <title>SecretRaffles</title>
                 <meta name="description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
-                <link rel="canonical" href="https://secretraffles.xyz" />
+                <meta property="og:url" content="https://secretraffles.xyz" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="SecretRaffles" />
+                <meta property="og:description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
                 <meta property="og:image" content="https://secretraffles.xyz/img/secret_logo.png" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content="secretraffles.xyz" />
+                <meta property="twitter:url" content="https://secretraffles.xyz" />
+                <meta name="twitter:title" content="SecretRaffles" />
+                <meta name="twitter:description" content="Quickly enter or create raffles for unique digital assets. Join the exciting world of NFT raffles on SecretRaffle now!" />
+                <meta name="twitter:image" content="https://secretraffles.xyz/img/secret_logo.png" />
             </Helmet>
 
             <Header />
