@@ -489,10 +489,11 @@ class SecretApi {
             "pagination[page]": 1,
             "pagination[pageSize]": pageSize,
             "filters[nft_tokenid][$ne]": tokenId,
-            "populate[raffles][filters][status]": "active",
-            "populate[raffles][populate][raffler]": true,
+            "populate[offers][filters][status]": "active",
+            "populate[offers][filters][activity]": "list",
             "populate[owner]": true,
-            "filters[raffles][status]": "active",
+            "filters[offers][status]": "active",
+            "filters[offers][activity]": "list",
         }
 
         if (!reverse) {

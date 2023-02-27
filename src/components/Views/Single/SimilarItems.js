@@ -29,17 +29,16 @@ const SimilarItems = ({ tokenId, collection }) => {
                 <div className="cs-trend_nft_slider cs-style1 cs-gap-30">
                     <div className="cs-slider_container" data-autoplay="0" data-loop="0" data-speed="600" data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="4" data-lg-slides="4" data-add-slides="4">
                         <div className="cs-slider_wrapper">
-                            {nfts.map(n => (
-                                <div className="cs-slide" key={n.id}>
-                                    <RaffleCard data={
-                                        {
-                                            id: n.attributes.raffles.data[0].id,
-                                            ...n.attributes.raffles.data[0].attributes,
-                                            nft: { data: n },
-                                        }
-                                    } hiddenStatus={true} />
+                            {nfts.map(n => {
+                                let offers = n.attributes.offers.data;
+                                if (offers.length > 0) {
+                                    n.attributes.activity = offers[0].attributes.activity;
+                                    n.attributes.price = offers[0].attributes.price;
+                                }
+                                return <div className="cs-slide" key={n.id}>
+                                    <NftCard data={{ ...n.attributes, id: n.id }} />
                                 </div>
-                            ))}
+                            })}
                         </div>
                     </div>
                     <div className="cs-slider_arrows cs-style1 cs-center cs-hidden_mobile">

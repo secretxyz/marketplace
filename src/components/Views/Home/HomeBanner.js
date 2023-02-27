@@ -17,7 +17,6 @@ const HomeBanner = () => {
                             <div className="cs-hero_subtitle cs-medium cs-white_color">Secure and secret NFTs for gaming, entertainment, metaverse and data <br />management time capsules.</div>
                             <div className="cs-hero_btns">
                                 <a href="/explorer-collections" className="cs-hero_btn cs-style1 cs-color2"><span>Explore</span></a>
-                                <a href="/create" className="cs-hero_btn cs-style1 cs-color1"><span>Create</span></a>
                             </div>
                         </div>
                     </div>
