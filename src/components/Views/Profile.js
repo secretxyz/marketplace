@@ -25,9 +25,6 @@ import { getLikedItems, likeItem } from '../Helpers/Likes';
 import { getReportedItems } from '../Helpers/Reports';
 
 const NavComponents = {
-    "raffles": Raffles,
-    "raffle-tickets": RaffleTickets,
-    // "claims": Claims,
     "collected": CollectedItems,
     "created": CreatedItems,
     "collections": Collections,
@@ -43,26 +40,10 @@ const NavComponents = {
 
 const NavMenus = [
     {
-        label: "Raffles",
-        icon: "fa-award",
-        key: "raffles",
-        isChecked: true
-    },
-    {
-        label: "Raffle Tickets",
-        icon: "fa-ticket-alt",
-        key: "raffle-tickets"
-    },
-    // {
-    //     label: "Claims",
-    //     icon: "far fa-inbox",
-    //     key: "claims",
-    //     self: true
-    // },
-    {
-        label: "Collected",
+        label: "NFTs",
         icon: "fa-list-ul",
-        key: "collected"
+        key: "collected",
+        isChecked: true
     },
     {
         label: "Created",

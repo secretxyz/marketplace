@@ -12,7 +12,6 @@ import CreateOfferModal from "../Single/CreateOfferModal";
 const Categories = [
     { id: 0, label: "Listed", isChecked: true, key: "listed" },
     { id: 1, label: "Received", isChecked: false, key: "received" },
-    { id: 2, label: "Raffles", isChecked: false, key: "claims" },
 ];
 
 const Offers = ({ accountId }) => {
@@ -105,7 +104,7 @@ const Offers = ({ accountId }) => {
             </section>
             <div className="cs-height_15 cs-height_lg_10"></div>
 
-            {(category == "listed" || category == "received") && <ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
+            <ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
                 {items?.map(d => (
                     <li key={d.id} >
                         <OfferCard data={{ ...d.attributes, id: d.id }} key={d.id} submit={submitOffer} />
@@ -113,17 +112,7 @@ const Offers = ({ accountId }) => {
                 ))}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
                 {!loading && !items?.length && <div className="cs-center_line">There are no records to display</div>}
-            </ul>}
-
-            {category == "claims" && <ul className="cs-activity_list cs-mp0 cs-cards_area">
-                {claims?.map(d => (
-                    <li key={d.id} >
-                        <ActivityCard data={d} type="self" key={d.id} />
-                    </li>
-                ))}
-                <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={claimsLoading} size={15} />
-                {!claimsLoading && !claims?.length && <div className="cs-center_line">There are no records to display</div>}
-            </ul>}
+            </ul>
 
             {offering && <CreateOfferModal activity={activity}
                 refreshDetails={() => { fetchNext(1, filter) }}

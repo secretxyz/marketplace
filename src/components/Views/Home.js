@@ -29,12 +29,7 @@ class Home extends React.Component {
 		return (
 			<ContentWrapper>
 				<div className="cs-height_90 cs-height_lg_80"></div>
-				<HomeBanner2 />
-
-				<div className="cs-height_70 cs-height_lg_40"></div>
-				<TopRafflers />
-
-				<FeaturedRaffles />
+				<HomeBanner />
 
 				<div className="cs-height_70 cs-height_lg_40"></div>
 				<TrendingCollections />

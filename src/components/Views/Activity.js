@@ -72,37 +72,6 @@ const Activity = () => {
 									<ul>
 										<li>
 											<div className="form-check">
-												<input name="create" className="form-check-input" type="checkbox" id="raffle-create" checked={filter.create || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-create">Created Raffle</label>
-											</div>
-										</li>
-										<li>
-											<div className="form-check">
-												<input name="ticket" className="form-check-input" type="checkbox" id="raffle-ticket" checked={filter.ticket || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-ticket">Reserved Ticket</label>
-											</div>
-										</li>
-										{/* <li>
-											<div className="form-check">
-												<input name="winner" className="form-check-input" type="checkbox" id="raffle-winner" checked={filter.winner || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-winner">Pick Winner</label>
-											</div>
-										</li> */}
-										<li>
-											<div className="form-check">
-												<input name="end" className="form-check-input" type="checkbox" id="raffle-end" checked={filter.end || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-end">Completed Raffle</label>
-											</div>
-										</li>
-										<li>
-											<div className="form-check">
-												<input name="cancel" className="form-check-input" type="checkbox" id="raffle-cancel" checked={filter.cancel || false} onChange={onChangeStatus} />
-												<label className="form-check-label" htmlFor="raffle-cancel">Cancelled Raffle</label>
-											</div>
-										</li>
-										<hr />
-										<li>
-											<div className="form-check">
 												<input name="list" className="form-check-input" type="checkbox" id="listed-offer" checked={filter.list || false} onChange={onChangeStatus} />
 												<label className="form-check-label" htmlFor="listed-offer">Listed Offer</label>
 											</div>

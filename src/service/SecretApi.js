@@ -517,9 +517,9 @@ class SecretApi {
         }
     }
 
-    async getNftWithTokenID(tokenId, raffleId) {
+    async getNftWithTokenID(tokenId) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenId}?raffleid=${raffleId}`);
+            const res = await axios.get(`${this.baseUrl}/api/nft/${tokenId}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
@@ -833,66 +833,47 @@ class SecretApi {
 
     async getActivities(page, filter) {
         let filters;
-        if (filter.create) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][0]": "raffle-create"
-            }
-        }
-        if (filter.ticket) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][1]": "raffle-ticket"
-            }
-        }
-        if (filter.winner) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][2]": "raffle-winner"
-            }
-        }
-        if (filter.end) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][3]": "raffle-end"
-            }
-        }
-        if (filter.cancel) {
-            filters = {
-                ...filters,
-                "filters[activity][$in][4]": "raffle-cancel"
-            }
-        }
         if (filter.list) {
             filters = {
                 ...filters,
-                "filters[activity][$in][5]": "list"
+                "filters[activity][$in][0]": "list"
             }
         }
         if (filter.bid) {
             filters = {
                 ...filters,
-                "filters[activity][$in][6]": "bid"
+                "filters[activity][$in][1]": "bid"
             }
         }
         if (filter.accept) {
             filters = {
                 ...filters,
-                "filters[activity][$in][7]": "accept"
+                "filters[activity][$in][2]": "accept"
             }
         }
         if (filter.buy) {
             filters = {
                 ...filters,
-                "filters[activity][$in][8]": "buy"
+                "filters[activity][$in][3]": "buy"
             }
         }
         if (filter.transfer) {
             filters = {
                 ...filters,
-                "filters[activity][$in][9]": "transfer"
+                "filters[activity][$in][4]": "transfer"
             }
         }
+        if (!filter.list && !filter.bid && !filter.accept && !filter.buy && !filter.transfer) {
+            filters = {
+                ...filters,
+                "filters[activity][$in][0]": "list",
+                "filters[activity][$in][1]": "bid",
+                "filters[activity][$in][2]": "accept",
+                "filters[activity][$in][3]": "buy",
+                "filters[activity][$in][4]": "transfer"
+            }
+        }
+
         if (filter.keyword) {
             filters = {
                 ...filters,

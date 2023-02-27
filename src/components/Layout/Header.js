@@ -37,7 +37,7 @@ const mainNav = () => {
 }
 
 const Header = () => {
-	const { auth_token, account } = accountStore;
+	const { auth_token, account, theme_mode } = accountStore;
 	const [keyword, setKeyword] = useState();
 
 	useEffect(() => {
@@ -65,7 +65,9 @@ const Header = () => {
 				<div className="container-fluid">
 					<div className="cs-main_header_in">
 						<div className="cs-main_header_left">
-							<a className="cs-site_branding" href="/"><img src="img/logo.png" alt="Logo" /></a>
+							<a className="cs-site_branding" href="/">
+								<img src={theme_mode ? "img/logo_dark.png" : "img/logo_light.png"} alt="Logo" />
+							</a>
 						</div>
 						<div className="cs-main_header_right">
 							<div className="cs-search_wrap cs-toggle_box cs-profile_box">
@@ -88,25 +90,19 @@ const Header = () => {
 										<div className="cs-nav">
 											<ul className="cs-nav_list">
 												<li className="menu-item-has-children">
-													<a href="/explorer-raffles">Explorer</a>
+													<a href="/explorer-collections">Explorer</a>
 													<ul>
-														<li><a href="/explorer-raffles">Raffles</a></li>
 														<li><a href="/explorer-collections">Collections</a></li>
 														<li><a href="/explorer-nfts">NFTs</a></li>
 													</ul>
 												</li>
 												<li><a href="/drop">Drops</a></li>
-												<li className="menu-item-has-children">
-													<a href="/activity">Stats</a>
-													<ul>
-														<li><a href="/activity">Activity</a></li>
-														<li><a href="/leaderboard">Leaderboard</a></li>
-													</ul>
+												<li className="menu-item">
+													<a href="/activity">Activity</a>
 												</li>
 												<li className="menu-item-has-children">
 													<a href="/faq">Resources</a>
 													<ul>
-														<li><a href="/provably-fair">Provably Fair</a></li>
 														<li><a href="/contact">Contact Us</a></li>
 														<li><a href="/faq">FAQ</a></li>
 													</ul>
@@ -122,7 +118,7 @@ const Header = () => {
 													</form>
 													<div className="cs-footer_social_btns">
 														<a href="https://bearableguy.club" target="_blank"><i className="fas fa-mask fa-fw"></i></a>
-														<a href="https://twitter.com/BearableguyClub" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
+														<a href="https://twitter.com/SecretLabsXRPL" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
 														<a href="https://discord.gg/VnNGWAAj3Q" target="_blank"><i className="fab fa-discord fa-fw"></i></a>
 													</div>
 												</li>

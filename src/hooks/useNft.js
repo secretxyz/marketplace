@@ -48,13 +48,13 @@ export const useNfts = () => {
 }
 
 
-export const useNft = (tokenId, raffleId) => {
+export const useNft = (tokenId) => {
     const [loading, setLoading] = useState(true);
     const [nft, setNft] = useState({});
 
-    const fetchNftDetails = async (tokenId, raffleId) => {
+    const fetchNftDetails = async (tokenId) => {
         setLoading(true);
-        const res = await SecretApi.getNftWithTokenID(tokenId, raffleId);
+        const res = await SecretApi.getNftWithTokenID(tokenId);
         if (res) {
             setNft(res.data);
             if (res.data) {
@@ -65,7 +65,7 @@ export const useNft = (tokenId, raffleId) => {
 
     useEffect(async () => {
         if (tokenId) {
-            await fetchNftDetails(tokenId, raffleId);
+            await fetchNftDetails(tokenId);
         }
     }, [])
 

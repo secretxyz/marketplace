@@ -56,22 +56,16 @@ const Routes = ({ location }) => {
 								<Route path="/explorer-collections/:menu" component={waitFor(ExplorerCollections)} />
 								<Route path="/explorer-collections" component={waitFor(ExplorerCollections)} />
 								<Route path="/explorer-nfts" component={waitFor(ExplorerNfts)} />
-								<Route path="/explorer-raffles" component={waitFor(ExplorerRaffles)} />
-								<Route path="/nft/:tokenId/:raffleId" component={waitFor(NftDetails)} />
 								<Route path="/nft/:tokenId" component={waitFor(NftDetails)} />
 								<Route path="/drop" component={waitFor(Drop)} />
-								<Route path="/ranking" component={waitFor(Ranking)} />
 								<Route path="/activity" component={waitFor(Activity)} />
-								<Route path="/leaderboard" component={waitFor(Leaderboard)} />
 
 								<Route path="/my-profile/:menu" component={waitFor(Profile)} />
 								<Route path="/my-profile" component={waitFor(Profile)} />
 								<Route path="/profile/:wallet" component={waitFor(Profile)} />
-								<Route path="/create" component={waitFor(Create)} />
 
 								<Route path="/contact" component={waitFor(Contact)} />
 								<Route path="/faq" component={waitFor(Faq)} />
-								<Route path="/provably-fair" component={waitFor(ProvablyFair)} />
 								<Route path="/privacy-policy" component={waitFor(PrivacyPolicy)} />
 								<Route path="/terms-condition" component={waitFor(TermsCondition)} />
 								<Route path="/disclaimer" component={waitFor(Disclaimer)} />

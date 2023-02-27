@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Switch from "react-switch";
-import { getThemeMode, setThemeMode, setTheme } from '../Helpers/Utils';
+import accountStore from '../../store/account.store';
+import { setTheme } from '../Helpers/Utils';
 
 const SwitchMode = () => {
-	const [mode, setMode] = useState(getThemeMode());
+	const { theme_mode } = accountStore;
+	const [mode, setMode] = useState(theme_mode);
 
 	useEffect(() => {
 		setTheme(mode);
 	}, [mode]);
 
 	const onChangeMode = () => {
-		setThemeMode(!mode);
 		setMode(!mode);
+		accountStore.setThemeMode(!mode);
 	}
 
 	return (
