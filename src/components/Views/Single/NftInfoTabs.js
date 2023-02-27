@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import Avatar from "../Profile/Avatar";
-import { useRaffleHistory } from "../../../hooks/useRaffle";
 import { useNftHistory, useNftOffers } from "../../../hooks/useNft";
 import { APP_COLORS, BITHOMP_URL } from "../../Common/constants"
-import { getDateTimeWithFormat, getSummaryUsername, getTicketStatus, getExpirationDateTime, getMarketplaceByWallet, getDifferenceTime } from "../../Helpers/Utils";
+import { getDateTimeWithFormat, getSummaryUsername } from "../../Helpers/Utils";
 import OfferRow from "../Card/OfferRow";
 
 const HistoryRow = ({ data }) => {
