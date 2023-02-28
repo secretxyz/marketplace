@@ -513,15 +513,10 @@ const Collection = (props) => {
                         <div className="row cs-cards_area" onScroll={handleScroll}>
                             {nfts.map(n => (
                                 <div className="col-xl-3 col-lg-4 col-sm-6" key={n.id}>
-                                    {n.raffle_status == "active" ? <RaffleCard data={{
-                                        ...n.raffle,
-                                        raffle_end_datetime: `${n.raffle.raffle_end_datetime}Z`,
-                                        nft: { data: { attributes: n } },
-                                        raffler: { data: { attributes: n.raffler } }
-                                    }} hiddenStatus={true} /> : <NftCard data={{
+                                    <NftCard data={{
                                         ...n,
                                         owner: { data: { id: n.owner.id, attributes: n.owner } }
-                                    }} />}
+                                    }} />
                                     <div className="cs-height_20 cs-height_lg_20"></div>
                                 </div>
                             ))}

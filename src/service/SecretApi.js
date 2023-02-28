@@ -489,11 +489,9 @@ class SecretApi {
             "pagination[page]": 1,
             "pagination[pageSize]": pageSize,
             "filters[nft_tokenid][$ne]": tokenId,
-            "populate[offers][filters][status]": "active",
-            "populate[offers][filters][activity]": "list",
             "populate[owner]": true,
-            "filters[offers][status]": "active",
-            "filters[offers][activity]": "list",
+            "filters[sell_price][$gt]": 0,
+            "sort[0]":"sell_price:asc"
         }
 
         if (!reverse) {
@@ -541,6 +539,16 @@ class SecretApi {
     async getNftHistory(tokenId) {
         try {
             const res = await axios.get(`${this.baseUrl}/api/nft/history/${tokenId}`);
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async getNftDetails(tokenId) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/nft/details/${tokenId}`);
             return res.data;
         } catch (error) {
             this.handleError(error);

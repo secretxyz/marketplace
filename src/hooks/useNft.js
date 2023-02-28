@@ -200,3 +200,25 @@ export const useNftHistory = () => {
         fetchNftHistory
     }
 }
+
+
+export const useNftDetails= () => {
+    const [loading, setLoading] = useState(true);
+    const [history, setHistory] = useState([]);
+    const [offers, setOffers] = useState([]);
+
+    const fetchNftDetails = async (tokenId) => {
+        setLoading(true);
+        const res = await SecretApi.getNftDetails(tokenId);
+        setHistory(res.data.history);
+        setOffers(res.data.offers);
+        setLoading(false);
+    }
+
+    return {
+        loading,
+        history,
+        offers,
+        fetchNftDetails
+    }
+}

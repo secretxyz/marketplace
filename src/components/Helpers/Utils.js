@@ -38,13 +38,28 @@ export const getMarketplaceByWallet = (destination, nft_tokenid) => {
 	}
 
 	if (destination.wallet == ONXRP_BROKER) {
-		return <a href={`${ONXRP_URL}/${nft_tokenid}`} target="_blank"><span>at OnXRP</span></a>;
+		return <a href={`${ONXRP_URL}/${nft_tokenid}`} target="_blank"><span>at onXRP</span></a>;
 	}
 
 	if (destination.wallet == XRPCAFE_BROKER) {
 		return <a href={`${XRPCAFE_URL}/${nft_tokenid}`} target="_blank"><span>at xrp.cafe</span></a>;
 	}
 	return <a href={`profile/${destination.wallet}`} target="_blank"><span>to {getSummaryUsername(destination)}</span></a>;
+}
+
+export const getMarketplaceByWallet1 = (destination)=>{
+	if (destination == SECRET_BROKER) {
+		return <span className="cs-card_threshold cs-primary_color cs-box_shadow">Secret</span>;
+	}
+
+	if (destination == ONXRP_BROKER) {
+		return <span className="cs-card_threshold cs-primary_color cs-box_shadow">onXRP</span>;
+	}
+
+	if (destination == XRPCAFE_BROKER) {
+		return <span className="cs-card_threshold cs-primary_color cs-box_shadow">xrp.cafe</span>;
+	}
+	return null;
 }
 
 export const getExpirationDateTime = (value) => {

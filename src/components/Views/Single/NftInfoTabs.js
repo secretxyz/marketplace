@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import Avatar from "../Profile/Avatar";
-import { useNftHistory, useNftOffers } from "../../../hooks/useNft";
+import { useNftDetails, useNftHistory, useNftOffers } from "../../../hooks/useNft";
 import { APP_COLORS, BITHOMP_URL } from "../../Common/constants"
 import { getDateTimeWithFormat, getSummaryUsername } from "../../Helpers/Utils";
 import OfferRow from "../Card/OfferRow";
@@ -17,7 +17,7 @@ const HistoryRow = ({ data }) => {
                 </p>
             case "sold":
                 return <p>
-                    <a href={`/profile/${owner?.wallet}`}>{`${getSummaryUsername(owner)}`}</a> bought <span>on {Number(data.amount) / 1000000} XRP</span>
+                    <a href={`/profile/${owner?.wallet}`}>{`${getSummaryUsername(owner)}`}</a> bought <span>on {data.amount}</span>
                 </p>
             case "mint":
                 return <p>
@@ -64,13 +64,11 @@ const HistoryRow = ({ data }) => {
 }
 
 const NftInfoTabs = ({ tokenId, nftOwner, submit }) => {
-    const { loading, history, fetchNftHistory } = useNftHistory()
-    const { loading: offerLoading, offers, fetchNftOffers } = useNftOffers();
+    const { loading, offers, history, fetchNftDetails } = useNftDetails()
 
     useEffect(async () => {
         if (tokenId) {
-            await fetchNftHistory(tokenId);
-            await fetchNftOffers(tokenId);
+            await fetchNftDetails(tokenId);
         }
     }, [tokenId])
 
@@ -91,8 +89,8 @@ const NftInfoTabs = ({ tokenId, nftOwner, submit }) => {
                             <OfferRow key={id} data={{ ...d, nft_owner: nftOwner }} submit={submit} />
                         ))}
                     </ul>
-                    <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={offerLoading} size={15} />
-                    {!offerLoading && offers.length == 0 && <div className="cs-center_line">There are no records to display</div>}
+                    <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
+                    {!loading && offers.length == 0 && <div className="cs-center_line">There are no records to display</div>}
                 </div>
                 <div id="history" className="cs-tab">
                     <ul className="cs-activity_list cs-mp0">
