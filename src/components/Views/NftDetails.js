@@ -81,9 +81,9 @@ const NftDetails = (props) => {
     const getPriceView = () => {
         return <div className="cs-single_product_head">
             <p>
-                On sale for <span className="cs-accent_color"><strong>{offer?.price} XRP</strong></span>
+                On sale for <span className="cs-accent_color"><strong>{nft?.sell_price / 1000000} XRP</strong></span>
                 {/* {nft?.highest_bid_price && <span> · Highest bid ~ <span className="cs-accent_color"><strong>{nft?.highest_bid_price} XRP</strong></span></span>} */}
-                {offer.expire_at && <span> · {getExpirationDateTime1(offer.expire_at)}</span>}
+                {/* {offer.expire_at && <span> · {getExpirationDateTime1(offer.expire_at)}</span>} */}
             </p>
         </div>
     }
@@ -426,7 +426,7 @@ const NftDetails = (props) => {
                                 <ReactTooltip anchorId="nft_transfer" className="cs-modal_tooltip" place="bottom" content="Transfer NFT" />
                             </div>
                         </div>
-                        {offer && getPriceView()}
+                        {nft.sell_price && getPriceView()}
                         <div className="cs-height_15 cs-height_lg_15"></div>
                         <div className="row">
                             <div className="col-xl-7">
