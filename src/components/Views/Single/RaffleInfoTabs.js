@@ -54,7 +54,7 @@ const RaffleTxRow = ({ data, status }) => {
                         {getDateTimeWithFormat(status == "canceling" || status == "canceled" ? ticket.updatedAt : ticket.createdAt)}
                     </p>
                 </div>
-                <a href={`${BITHOMP_URL}${status == "canceling" || status == "canceled" ? ticket.cancel_tx_hash : ticket.create_tx_hash}`} className="cs-activity_icon cs-center cs-gray_bg cs-accent_color" target="_blank">
+                <a href={`${BITHOMP_URL}/${status == "canceling" || status == "canceled" ? ticket.cancel_tx_hash : ticket.create_tx_hash}`} className="cs-activity_icon cs-center cs-gray_bg cs-accent_color" target="_blank">
                     <i className="fas fa-arrow-right"></i>
                 </a>
             </div >
