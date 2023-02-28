@@ -103,7 +103,7 @@ const Header = () => {
 												<li className="menu-item">
 													<a href="/contact">Contact Us</a>
 												</li>
-												<li className="cs-menu_footer_widget">
+												{/* <li className="cs-menu_footer_widget">
 													<form className="cs-footer_newsletter">
 														<input type="text" placeholder="Subscribe to our newsletter" className="cs-newsletter_input" />
 														<button className="cs-newsletter_btn">
@@ -117,7 +117,7 @@ const Header = () => {
 														<a href="https://twitter.com/SecretLabsXRPL" target="_blank"><i className="fab fa-twitter fa-fw"></i></a>
 														<a href="https://discord.gg/VnNGWAAj3Q" target="_blank"><i className="fab fa-discord fa-fw"></i></a>
 													</div>
-												</li>
+												</li> */}
 											</ul>
 										</div>
 									</div>
