@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useProfileInfo } from '../../../hooks/useProfile';
 import { LIMIT_IMAGE_SIZE } from '../../Common/constants';
-import { getImageLink } from '../../Helpers/Utils';
+import { getImageLink, notify } from '../../Helpers/Utils';
 import ContentWrapper from '../../Layout/ContentWrapper';
 import Avatar from "./Avatar";
 
@@ -12,9 +12,10 @@ const ProfileInfo = ({ profile, refresh }) => {
     const [avatar, setAvatar] = useState();
     const [banner, setBanner] = useState();
 
-    const onClickUpdateProfile = () => {
+    const onClickUpdateProfile = async () => {
         setWarning(null);
-        update({ ...account, avatar, banner });
+        await update({ ...account, avatar, banner });
+        notify("Profile is updated correctly!");
     }
 
     const onChangeInfo = (event) => {
