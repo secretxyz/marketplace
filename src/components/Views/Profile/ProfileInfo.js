@@ -12,9 +12,10 @@ const ProfileInfo = ({ profile, refresh }) => {
     const [avatar, setAvatar] = useState();
     const [banner, setBanner] = useState();
 
-    const onClickUpdateProfile = () => {
+    const onClickUpdateProfile = async () => {
         setWarning(null);
-        update({ ...account, avatar, banner });
+        await update({ ...account, avatar, banner });
+        notify("Profile is updated correctly!");
     }
 
     const onChangeInfo = (event) => {
