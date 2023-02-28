@@ -33,7 +33,7 @@ const OfferRow = ({ data, submit }) => {
                     </button>
 
                 }
-            } else if (data.type == "buy" && (destination?.id == getAccount().id || (nft_owner?.id == getAccount().id && destination?.wallet == SECRET_BROKER))) {
+            } else if (data.type == "buy" && (!destination || destination?.id == getAccount().id || (nft_owner?.id == getAccount().id && destination?.wallet == SECRET_BROKER))) {
                 return <button className="cs-btn cs-style1 cs-card_btn_3 cs-width_75 cs-width_lg_75" onClick={() => onClickSubmit("accept")}>
                     <span>Accept</span>
                 </button>
@@ -57,7 +57,7 @@ const OfferRow = ({ data, submit }) => {
                             <a href={`/profile/${owner.wallet}`} target="_blank">{getSummaryUsername(owner)}</a> created <strong>{data.amount == "0" ? "transfer" : data.type}</strong> offer {getMarketplaceByWallet(destination, data.nft_tokenid)}
                         </p>
                         <p className="cs-activity_text">
-                            {getExpirationDateTime(data.expiration)}
+                            {getExpirationDateTime(data.expiration * 1000)}
                         </p>
                     </div>
                     <div className="col-xl-3">
