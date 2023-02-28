@@ -193,7 +193,7 @@ const Profile = (props) => {
     }
 
     const onClickShare = () => {
-        navigator.clipboard.writeText(`https://secretmarket.xyz/profile/${getAccount().wallet}`);
+        navigator.clipboard.writeText(`https://secretraffles.xyz/profile/${getAccount().wallet}`);
         notify("The profile link has been copied.");
     }
 

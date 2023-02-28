@@ -469,7 +469,7 @@ const NftDetails = (props) => {
 
     const onClickShare = () => {
         if (raffle) {
-            navigator.clipboard.writeText(`https://secretmarket.xyz/raffle/${raffle?.id}`);
+            navigator.clipboard.writeText(`https://secretraffles.xyz/raffle/${raffle?.id}`);
         }
         notify("The raffle link has been copied.");
     }
