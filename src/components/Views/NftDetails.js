@@ -165,7 +165,7 @@ const NftDetails = (props) => {
                             </div>
                             <div className="col-4">
                                 <a href={`https://xrp.cafe/nft/${nft.nft_tokenid}`} className="cs-btn cs-style2 cs-btn_lg w-100 text-center" target="_blank">
-                                    <span>Offer at XRP.cafe</span>
+                                    <span>Offer at xrp.cafe</span>
                                 </a>
                             </div>
                         </div>
