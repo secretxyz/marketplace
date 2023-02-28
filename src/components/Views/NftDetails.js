@@ -68,34 +68,15 @@ const NftDetails = (props) => {
         }
 
         if (item != {} && item) {
-            setRaffle({
-                id: item.id,
-                ...item.attributes
-            })
-            const data = {
-                id: item.attributes?.nft.data?.id,
-                ...item.attributes?.nft.data?.attributes,
-            };
-            setNft(data);
-            setCollection({
-                id: data?.collection?.data?.id,
-                ...data?.collection?.data?.attributes,
-                creator: data?.collection?.data?.attributes.creator.data?.attributes
-            })
-            setRaffler({
-                id: item.attributes?.raffler.data?.id,
-                ...item.attributes?.raffler.data?.attributes,
-            })
-            if (item.attributes?.winner.data) {
-                setWinner({
-                    id: item.attributes?.winner.data?.id,
-                    ...item.attributes?.winner.data?.attributes,
-                })
-            }
+            setRaffle(item)
+            setNft(item.nft);
+            setCollection(item.nft?.collection)
+            setRaffler(item.raffler)
+            setWinner(item.winner)
             setTicket({
                 ...ticket,
-                nft: { id: data?.id },
-                raffle: { id: item?.id }
+                nft: { id: item.nft?.id },
+                raffle: { id: item.id }
             })
         }
 

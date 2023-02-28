@@ -549,14 +549,7 @@ class SecretApi {
 
     async getNftWithRaffleID(raffleId) {
         try {
-            const res = await axios.get(`${this.baseUrl}/api/raffles/${raffleId}`, {
-                params: {
-                    "populate[nft][populate][collection][populate][creator]": true,
-                    "populate[raffler]": true,
-                    "populate[winner]": true,
-
-                }
-            });
+            const res = await axios.get(`${this.baseUrl}/api/raffle/${raffleId}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
