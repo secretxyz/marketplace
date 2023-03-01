@@ -491,7 +491,7 @@ class SecretApi {
             "filters[nft_tokenid][$ne]": tokenId,
             "populate[owner]": true,
             "filters[sell_price][$gt]": 0,
-            "sort[0]":"sell_price:asc"
+            "sort[0]": "sell_price:asc"
         }
 
         if (!reverse) {
@@ -825,6 +825,13 @@ class SecretApi {
                     "pagination[page]": page,
                     "pagination[pageSize]": 8,
                     "filters[confirmed]": false,
+                    "filters[activity][$in][0]": "follow",
+                    "filters[activity][$in][1]": "unfollow",
+                    "filters[activity][$in][2]": "transfer",
+                    "filters[activity][$in][3]": "list",
+                    "filters[activity][$in][4]": "bid",
+                    "filters[activity][$in][5]": "accept",
+                    "filters[activity][$in][6]": "buy",
                     "populate[raffle]": true,
                     "populate[raffle_ticket]": true,
                     "populate[from]": true,
