@@ -270,10 +270,10 @@ const NftDetails = (props) => {
         setConnecting(true);
     }
 
-    const onClickRefresh = () => {
+    const onClickRefresh = async () => {
         const res = refresh();
         if (res && res.status) {
-            fetchNftDetails(tokenId);
+            await fetchNftDetails(tokenId);
         }
     }
 
