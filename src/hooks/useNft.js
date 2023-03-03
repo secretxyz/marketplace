@@ -63,9 +63,9 @@ export const useNft = (raffleId) => {
         }
     }
 
-    const refresh = async (tokenId) => {
+    const refresh = async () => {
         setLoading(true);
-        const res = await SecretApi.refreshNft(tokenId);
+        const res = await SecretApi.refreshRaffle(raffleId);
         setLoading(false);
         return res;
     }

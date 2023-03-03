@@ -268,10 +268,10 @@ class SecretApi {
                 params: {
                     "pagination[page]": page,
                     "pagination[pageSize]": this.pageSize,
-                    "filters[nft_tokenid]": tokenId,                   
+                    "filters[nft_tokenid]": tokenId,
                     "filters[status][$notIn][0]": "active",
                     "filters[status][$notIn][1]": "canceling",
-                    "filters[status][$notIn][2]": "raffling",                    
+                    "filters[status][$notIn][2]": "raffling",
                     "sort[raffle_end_datetime]": "desc",
                     "populate[raffler]": true,
                 }
@@ -641,6 +641,16 @@ class SecretApi {
             const res = await axios.get(`${this.baseUrl}/api/raffle/draw-prize/${id}/${getAuthChannel()}`,
                 { headers: this.headers() }
             )
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
+
+    async refreshRaffle(id) {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/raffle/refresh/${id}`);
             return res.data;
         } catch (error) {
             this.handleError(error);
