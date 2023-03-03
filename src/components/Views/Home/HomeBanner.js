@@ -13,7 +13,7 @@ const HomeBanner = () => {
                 <div className="cs-hero_in">
                     <div className="cs-hero_in_left">
                         <div className="cs-hero_text">
-                            <h1 className="cs-hero_title cs-white_color">The Best Beneficial Place to Collect , Buy and Sell XRPL NFT Marketplace</h1>
+                            <h1 className="cs-hero_title cs-white_color">Welcome to the XRP Ledger's biggest secret.</h1>
                             <div className="cs-hero_subtitle cs-medium cs-white_color"> Quickly trade NFTs on multiple marketplaces for unique digital assets.
                                 Join the exciting world of NFT trading on SecretMarket now!</div>
                             <div className="cs-hero_btns">

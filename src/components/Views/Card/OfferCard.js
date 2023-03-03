@@ -48,7 +48,7 @@ const OfferCard = ({ data, submit }) => {
                     <div className="cs-activity_right">
                         <div className="cs-activity_text">
                             <div className="cs-activity_text_line">
-                                <>{isOwner(from)} {` created sell offer `}<span className="cs-activity_right_avatar"> on {data.price} XRP</span></>
+                                <>{isOwner(from)} {` created sell offer `}<span className="cs-activity_right_avatar"> for {data.price} XRP</span></>
                             </div>
                         </div >
                         <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>
@@ -66,7 +66,7 @@ const OfferCard = ({ data, submit }) => {
                     <div className="cs-activity_right">
                         <div className="cs-activity_text">
                             <div className="cs-activity_text_line">
-                                <>{isOwner(from)} {` created buy offer `}<span className="cs-activity_right_avatar"> on {data.price} XRP</span></>
+                                <>{isOwner(from)} {` created buy offer `}<span className="cs-activity_right_avatar"> for {data.price} XRP</span></>
                             </div>
                         </div >
                         <p className="cs-activity_date">{getDifferenceTime(data.createdAt)}</p>

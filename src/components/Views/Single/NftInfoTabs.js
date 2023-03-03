@@ -17,7 +17,7 @@ const HistoryRow = ({ data }) => {
                 </p>
             case "sold":
                 return <p>
-                    <a href={`/profile/${owner?.wallet}`}>{`${getSummaryUsername(owner)}`}</a> bought <span>on {data.amount}</span>
+                    <a href={`/profile/${owner?.wallet}`}>{`${getSummaryUsername(owner)}`}</a> bought <span>for {data.amount}</span>
                 </p>
             case "mint":
                 return <p>

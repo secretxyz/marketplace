@@ -21,40 +21,40 @@ const ActivityCard = ({ data, type }) => {
                 </p>
             case "list":
                 return <p>
-                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created sell offer <span>on {offer?.price} XRP</span>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created sell offer <span>for {offer?.price} XRP</span>
                 </p>
             case "accept":
                 return <p>
-                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> sold <span>on {offer?.price} XRP</span>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> sold <span>for {offer?.price} XRP</span>
                 </p>
             case "buy":
                 return <p>
-                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> bought <span>on {offer?.price} XRP</span>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> bought <span>for {offer?.price} XRP</span>
                 </p>
             case "bid":
                 return <p>
-                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created buy offer <span>on {offer?.price} XRP</span>
+                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created buy offer <span>for {offer?.price} XRP</span>
                 </p>
-            case "raffle-create":
-                return <p>
-                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created the raffle
-                </p>
-            case "raffle-winner":
-                return <p>
-                    <a href={`/profile/${to?.wallet}`}>{`${getSummaryUsername(to)}`}</a> was chosen as the winner
-                </p>
-            case "raffle-cancel":
-                return <>
-                    {`The raffle has cancelled`}
-                </>
-            case "raffle-end":
-                return <>
-                    {`The raffle has ended`}
-                </>
-            case "raffle-ticket":
-                return <p>
-                    <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`} </a> reserved <span>{raffle_ticket?.ticket_count} tickets</span>
-                </p>
+            // case "raffle-create":
+            //     return <p>
+            //         <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`}</a> created the raffle
+            //     </p>
+            // case "raffle-winner":
+            //     return <p>
+            //         <a href={`/profile/${to?.wallet}`}>{`${getSummaryUsername(to)}`}</a> was chosen as the winner
+            //     </p>
+            // case "raffle-cancel":
+            //     return <>
+            //         {`The raffle has cancelled`}
+            //     </>
+            // case "raffle-end":
+            //     return <>
+            //         {`The raffle has ended`}
+            //     </>
+            // case "raffle-ticket":
+            //     return <p>
+            //         <a href={`/profile/${from?.wallet}`}>{`${getSummaryUsername(from)}`} </a> reserved <span>{raffle_ticket?.ticket_count} tickets</span>
+            //     </p>
         }
     }
 

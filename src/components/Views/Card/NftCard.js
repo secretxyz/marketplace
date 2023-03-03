@@ -51,7 +51,7 @@ const NftCard = ({ data }) => {
                     <a href={nft_link}>{data.name}</a>
                 </h3>
                 <div className="cs-card_price">
-                    {!data.sell_price ? "Best Offer:" : "Offer For:"} <b className="cs-primary_color">{data.sell_price / 1000000 || (data.buy_price / 1000000 || 0)} XRP</b> {getMarketplaceByWallet1(data.sell_destination)}
+                    {!data.sell_price ? "On Sale:" : "Buy Offer:"} <b className="cs-primary_color">{data.sell_price / 1000000 || (data.buy_price / 1000000 || 0)} XRP</b> {getMarketplaceByWallet1(data.sell_destination)}
                 </div>
                 <hr />
                 <div className="cs-card_footer">

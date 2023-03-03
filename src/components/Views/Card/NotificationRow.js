@@ -16,6 +16,8 @@ const NotificationRow = ({ data }) => {
                 return <>{`Received from ${getSummaryUsername(from)}`}<br />{`Please Claim NFT.`}</>;
             case "accept":
                 return <>{`${getSummaryUsername(from)} accepted your offer`}</>;
+            // case "list":
+            //     return <>{`${getSummaryUsername(from)} created sell offer`}</>;
             case "bid":
                 return <>{`${getSummaryUsername(from)} created buy offer`}</>;
             case "raffle-create-follow":
