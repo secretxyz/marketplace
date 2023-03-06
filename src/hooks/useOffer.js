@@ -64,3 +64,21 @@ export const useOffers = () => {
         fetchNext
     }
 }
+
+export const useLedgerOffers = () => {
+    const [loading, setLoading] = useState(true);
+    const [offers, setOffers] = useState();
+
+    const fetchLedgerOffers = async () => {
+        setLoading(true);
+        const res = await SecretApi.getLedgerOffers();
+        setOffers(res.data);
+        setLoading(false);
+    }
+
+    return {
+        loading,
+        offers,
+        fetchLedgerOffers
+    }
+}

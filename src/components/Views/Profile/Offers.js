@@ -1,38 +1,54 @@
 import React, { useEffect, useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import { useClaims } from "../../../hooks/useActivity";
-import { useOffers } from "../../../hooks/useOffer";
+import { useLedgerOffers, useOffers } from "../../../hooks/useOffer";
 import { APP_COLORS, SECRET_BROKER } from "../../Common/constants";
 import { getAccount } from "../../Helpers/Utils";
 import ContentWrapper from '../../Layout/ContentWrapper';
 import ActivityCard from "../Card/ActivityCard";
 import OfferCard from "../Card/OfferCard";
+import OfferRow from "../Card/OfferRow";
 import CreateOfferModal from "../Single/CreateOfferModal";
 
 const Categories = [
     { id: 0, label: "Listed", isChecked: true, key: "listed" },
     { id: 1, label: "Received", isChecked: false, key: "received" },
+    { id: 2, label: "Claims", isChecked: false, key: "claims" },
 ];
 
 const Offers = ({ accountId }) => {
-    const { loading, items, meta, fetchNext } = useOffers();
-    const { loading: claimsLoading, items: claims, fetchClaims } = useClaims();
+    const { loading, offers, fetchLedgerOffers } = useLedgerOffers();
     const [categories, setCategories] = useState(Categories);
     const [category, setCategory] = useState("listed");
-    const [filter, setFilter] = useState({ from: accountId, status: "active" });
     const [activity, setActivity] = useState();
     const [offering, setOffering] = useState(false);
+    const [items, setItems] = useState();
 
-    const handleScroll = (e) => {
-        const bottom = (e.target.scrollHeight - e.target.scrollTop) - e.target.clientHeight;
-        if (bottom <= 1 && !loading) {
-            fetchNext(0, filter);
+    useEffect(() => {
+        fetchLedgerOffers();
+    }, [])
+
+    const onChangeItems = () => {
+        if (category == "listed") {
+            setItems(offers.list_offers);
+        } else if (category == "received") {
+            setItems(offers.receive_offers);
+        } else if (category == "claims") {
+            setItems(offers.transfer_offers);
         }
     }
 
     useEffect(() => {
-        fetchNext(1, filter);
-    }, [filter])
+        if (offers) {
+            onChangeItems();
+        }
+    }, [offers])
+
+    useEffect(() => {
+        if (offers) {
+            onChangeItems();
+        }
+    }, [category])
 
     useEffect(() => {
         if (offering) {
@@ -46,19 +62,13 @@ const Offers = ({ accountId }) => {
         }
     }, [activity]);
 
-    useEffect(() => {
-        if (category == "claims") {
-            fetchClaims(accountId)
-        }
-    }, [category])
-
     const submitOffer = (activity, offer) => {
         let data = {
             activity,
-            offer_id: offer.offer_index,
-            offer_owner: { id: offer.from.data.id, wallet: offer.from.data.attributes.wallet },
-            price: offer.price * 1000000,
-            nft: { id: offer.nft.data.id, nft_tokenid: offer.nft.data.attributes.nft_tokenid },
+            offer_id: offer.offer_id,
+            offer_owner: { id: offer.owner.id, wallet: offer.owner.wallet },
+            price: offer.price,
+            nft: { id: offer.nft.id, nft_tokenid: offer.nft.nft_tokenid },
         }
         if (activity != "claim") {
             data.destination = SECRET_BROKER
@@ -72,11 +82,6 @@ const Offers = ({ accountId }) => {
         let options = categories.map(f => {
             if (f.id === id) {
                 setCategory(f.key);
-                if (f.key == "listed") {
-                    setFilter({ from: accountId, status: "active" })
-                } else if (f.key == "received") {
-                    setFilter({ to: accountId, status: "active" })
-                }
                 return { ...f, isChecked: true };
             }
 
@@ -84,6 +89,20 @@ const Offers = ({ accountId }) => {
         })
         setCategories(options);
     };
+
+    const onClickCancelAll = () => {
+        if (!items.length) {
+            return;
+        }
+
+        const offer_ids = items.map(item => item.offer_id);
+        let data = {
+            activity: "cancel-all",
+            offer_ids,
+            offer_owner: { id: getAccount().id, wallet: getAccount().wallet },
+        }
+        setActivity(data);
+    }
 
     return (
         <ContentWrapper>
@@ -99,15 +118,17 @@ const Offers = ({ accountId }) => {
                                 ))
                             }
                         </ul>
+                        {category == "listed" && <button className="cs-activity_view cs-btn cs-style1 cs-card_btn_3 cs-cancel_all" onClick={() => onClickCancelAll()}>
+                            <span>Cancel All</span>
+                        </button>}
                     </div>
                 </div>
             </section>
             <div className="cs-height_15 cs-height_lg_10"></div>
-
-            <ul className="cs-activity_list cs-mp0 cs-cards_area" onScroll={handleScroll}>
+            <ul className="cs-activity_list cs-mp0 cs-cards_area">
                 {items?.map(d => (
-                    <li key={d.id} >
-                        <OfferCard data={{ ...d.attributes, id: d.id }} key={d.id} submit={submitOffer} />
+                    <li key={d.offer_id} >
+                        <OfferCard data={d} submit={submitOffer} />
                     </li>
                 ))}
                 <BeatLoader className="cs-loading" color={APP_COLORS.accent} loading={loading} size={15} />
@@ -115,8 +136,8 @@ const Offers = ({ accountId }) => {
             </ul>
 
             {offering && <CreateOfferModal activity={activity}
-                refreshDetails={() => { fetchNext(1, filter) }}
-                closeModal={() => { setOffering(false); setActivity(); }} />}
+                refreshDetails={() => { fetchLedgerOffers(); }}
+                closeModal={() => { setOffering(false); }} />}
         </ContentWrapper>
     );
 }

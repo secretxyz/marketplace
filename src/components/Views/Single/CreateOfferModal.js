@@ -36,6 +36,8 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 				return "Checkout";
 			case "accept":
 				return "Accept an Offer";
+			case "cancel-all":
+				return "Cancel all Offers";
 		}
 	}
 
@@ -263,7 +265,7 @@ const CreateOfferModal = ({ activity, refreshDetails, closeModal }) => {
 
 	useEffect(() => {
 		if (activity) {
-			if (activity.activity == "cancel" ||
+			if (activity.activity == "cancel" || activity.activity == "cancel-all" ||
 				(activity.activity == "buy" && activity.destination != SECRET_BROKER) ||
 				(activity.activity == "accept" && activity.destination != SECRET_BROKER)) {
 				createOffer({

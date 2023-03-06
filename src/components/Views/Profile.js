@@ -35,7 +35,7 @@ const NavComponents = {
     "favorites": Favorites,
     "follows": Follows,
     "profile-info": ProfileInfo,
-    "hidden": Hidden,
+    // "hidden": Hidden,
 }
 
 const NavMenus = [
@@ -58,18 +58,9 @@ const NavMenus = [
     {
         label: "Offers",
         icon: "fa-receipt",
-        key: "offers"
+        key: "offers",
+        self: true
     },
-    // {
-    //     label: "Offers Made",
-    //     icon: "fa-shopping-cart",
-    //     key: "offers-made"
-    // },
-    // {
-    //     label: "Offers Received",
-    //     icon: "fa-receipt",
-    //     key: "offers-received"
-    // },
     {
         label: "Activity",
         icon: "fa-running",
@@ -91,12 +82,12 @@ const NavMenus = [
         key: "profile-info",
         self: true
     },
-    {
-        label: "Hidden",
-        icon: "fa-eye",
-        key: "hidden",
-        self: true
-    }
+    // {
+    //     label: "Hidden",
+    //     icon: "fa-eye",
+    //     key: "hidden",
+    //     self: true
+    // }
 ]
 
 const Profile = (props) => {

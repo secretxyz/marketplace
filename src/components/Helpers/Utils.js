@@ -67,7 +67,7 @@ export const getExpirationDateTime = (value) => {
 		return "No Expiration";
 	}
 
-	return <>Expiration: <span>{getDifferenceTime(value)}</span></>;
+	return <p>Expiration: <span>{getDifferenceTime(value)}</span></p>;
 }
 
 export const getExpirationDateTime1 = (value) => {

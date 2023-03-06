@@ -45,6 +45,7 @@ ul::-webkit-scrollbar-thumb {
   padding-left: 15px;
   padding-right: 15px;
   max-width: 1350px;
+  position: relative;
 }
 
 .row {
@@ -185,7 +186,7 @@ ul::-webkit-scrollbar-thumb {
   line-height: 1.5em;
   color: #fff;
   font-weight: 500;
-  background-color: $accent;
+  background-color: $accent !important;
   border-radius: 1.6em;
   padding: 8px 16px;
   position: relative;
@@ -3568,6 +3569,19 @@ ul::-webkit-scrollbar-thumb {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cs-cancel_all {
+  position: absolute !important;
+  top: 8px;
+  right: 24px;
+}
+
+@media screen and (max-width: 575px) {
+  .cs-cancel_all {
+    position: unset !important;
+    margin-left: 12px;
+  }
 }
 
 .Toastify__toast-theme--dark {

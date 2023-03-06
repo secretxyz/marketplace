@@ -1090,6 +1090,18 @@ class SecretApi {
             return null;
         }
     }
+
+    async getLedgerOffers() {
+        try {
+            const res = await axios.get(`${this.baseUrl}/api/ledger-offers`, {
+                headers: this.headers()
+            });
+            return res.data;
+        } catch (error) {
+            this.handleError(error);
+            return null;
+        }
+    }
 }
 
 
