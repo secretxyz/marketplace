@@ -89,13 +89,7 @@ const Header = () => {
 									<div className="cs-nav_in">
 										<div className="cs-nav">
 											<ul className="cs-nav_list">
-												<li className="menu-item-has-children">
-													<a href="/explorer-collections">Explorer</a>
-													<ul>
-														<li><a href="/explorer-collections">Collections</a></li>
-														<li><a href="/explorer-nfts">NFTs</a></li>
-													</ul>
-												</li>
+												<li className="menu-item"><a href="/explorer-collections">Explorer</a></li>
 												<li className="menu-item"><a href="/drop">Drops</a></li>
 												<li className="menu-item">
 													<a href="/activity">Activity</a>

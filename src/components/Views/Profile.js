@@ -66,16 +66,16 @@ const NavMenus = [
         icon: "fa-running",
         key: "activity"
     },
-    {
-        label: "Favorites",
-        icon: "fa-heart",
-        key: "favorites"
-    },
-    {
-        label: "Follows",
-        icon: "fa-star",
-        key: "follows"
-    },
+    // {
+    //     label: "Favorites",
+    //     icon: "fa-heart",
+    //     key: "favorites"
+    // },
+    // {
+    //     label: "Follows",
+    //     icon: "fa-star",
+    //     key: "follows"
+    // },
     {
         label: "Profile Info",
         icon: "fa-user",
