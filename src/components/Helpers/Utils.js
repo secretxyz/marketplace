@@ -47,7 +47,7 @@ export const getMarketplaceByWallet = (destination, nft_tokenid) => {
 	return <a href={`profile/${destination.wallet}`} target="_blank"><span>to {getSummaryUsername(destination)}</span></a>;
 }
 
-export const getMarketplaceByWallet1 = (destination)=>{
+export const getMarketplaceByWallet1 = (destination) => {
 	if (destination == SECRET_BROKER) {
 		return <span className="cs-card_threshold cs-primary_color cs-box_shadow">Secret</span>;
 	}
@@ -202,7 +202,7 @@ export const getImageLink = (url) => {
 		return null;
 	}
 
-	if (url.startsWith("/collections") || url.startsWith("/profiles")) {
+	if (url.startsWith("/collections") || url.startsWith("/profiles") || url.startsWith("/nfts")) {
 		return `${IMAGE_SERVER}${url}`;
 	}
 
