@@ -198,6 +198,13 @@ export const getImageLink = (url) => {
 		return `https://ipfs.bithomp.com/image/${url.substring(12)}`;
 	}
 
+	if (url.startsWith("https://ipfs.io/ipfs/")) {
+		if (url.endsWith("mp4") || url.endsWith("avi")) {
+			return `https://ipfs.bithomp.com/video/${url.substring(21)}`;
+		}
+		return `https://ipfs.bithomp.com/image/${url.substring(21)}`;
+	}
+
 	if (url.startsWith("ipfs://")) {
 		if (url.endsWith("mp4") || url.endsWith("avi")) {
 			return `https://ipfs.bithomp.com/video/${url.substring(7)}`;
