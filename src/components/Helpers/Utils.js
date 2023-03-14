@@ -187,7 +187,7 @@ export const getImageLink = (url) => {
 		return null;
 	}
 
-	if (url.startsWith("/collections") || url.startsWith("/profiles")) {
+	if (url.startsWith("/collections") || url.startsWith("/profiles") || url.startsWith("/nfts")) {
 		return `${IMAGE_SERVER}${url}`;
 	}
 
