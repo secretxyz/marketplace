@@ -188,8 +188,16 @@ const CreateRaffleModal = ({ nft, refreshDetails, closeModal }) => {
 								<div className="col-lg-6">
 									<div className="cs-offer_form_field">
 										<span className="cs-offer_field_title">Ticket Price</span>
-										<input name="ticket_price" type="number" className="cs-form_field cs-white_bg"
-											placeholder="Enter price" value={raffle?.ticket_price} onChange={onChangeInfo} min={0} />
+										<div className="cs-form_field cs-modal_currency_box">
+											<select name="order" className="cs-form_field cs-white_bg " >
+												<option value={0}>XRP</option>
+												<option value={1}>AAX</option>
+												<option value={2}>CLUB</option>
+											</select>
+											<input name="ticket_price" type="number" className="cs-form_field cs-white_bg"
+												placeholder="Enter price" value={raffle?.ticket_price} onChange={onChangeInfo} min={0} />
+
+										</div>
 										<span className="cs-offer_field_description">{descriptions["ticket_price"]}</span>
 									</div>
 									<div className="cs-height_15 cs-height_lg_10"></div>

@@ -1072,6 +1072,22 @@ ul::-webkit-scrollbar-thumb {
   margin-bottom: 15px;
 }
 
+.cs-modal_currency_box {
+  display: flex;
+  padding: 0px;
+
+  select {
+    width: auto;
+    padding: 12px 0px 12px 20px;
+  }
+}
+
+.cs-modal {
+  hr {
+    margin: 1rem 0 !important;
+  }
+}
+
 .cs-modal_sub_link {
   margin-top: 15px;
   font-size: 14px;
